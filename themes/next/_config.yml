@@ -618,6 +618,10 @@ vendors:
   # https://github.com/ethantw/Han
   han:
 
+# 打赏功能
+# reward_comment: 坚持原创技术分享，您的支持将鼓励我继续创作！
+# wechatpay:
+# alipay:
 
 # Assets
 css: css
