@@ -98,24 +98,6 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
-live2d:
-  # model: koharu
-  enable: true
-  scriptFrom: local
-  pluginRootPath: live2dw/
-  pluginJsPath: lib/
-  pluginModelPath: assets/
-  tagMode: false
-  debug: true
-  model:
-    use: live2d-widget-model-koharu
-  display:
-    position: right
-    # width: 150
-    # height: 300
-  mobile:
-    show: true
-
 search:
   path: search.xml
   field: post
