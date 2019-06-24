@@ -412,6 +412,7 @@ leancloud_visitors:
   enable: true
   app_id: DMHBcPV7ehaAd3tWfu68ptb4-gzGzoHsz
   app_key: CTDYvjYqXfFIEvzDtmhPr4zH
+  api_url: https://avoscloud.com        # 自定义添加
 
 # Show PV/UV of the website/page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/

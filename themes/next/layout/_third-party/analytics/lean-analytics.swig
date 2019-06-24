@@ -12,10 +12,10 @@
       appId: "{{theme.leancloud_visitors.app_id}}",
       appKey: "{{theme.leancloud_visitors.app_key}}",
       serverURLs: {
-        push: 'https://avoscloud.com',
-        stats: 'https://avoscloud.com',
-        engine: 'https://avoscloud.com',
-        api: 'https://avoscloud.com',
+        push: "{{theme.leancloud_visitors.api_url}}",
+        stats: "{{theme.leancloud_visitors.api_url}}",
+        engine: "{{theme.leancloud_visitors.api_url}}",
+        api: "{{theme.leancloud_visitors.api_url}}",
       }
     });
     /*AV.useAVCloudUS();*/
