@@ -4,7 +4,7 @@ date: 2018-08-21 22:17:59
 id: encapsulate-setTimeout-with-promise
 categories: ["前端","JavaScript"]
 tags:
-  - javascript
+  - JavaScript
   - Promise
 keywords:
 description:

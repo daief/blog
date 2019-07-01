@@ -4,7 +4,7 @@ date: 2018-09-04 21:10:44
 id: declaration-files-of-typescript
 categories: ["前端", "TypeScript"]
 tags:
-  - typescript
+  - TypeScript
   - declaration-files
 keywords:
 description:

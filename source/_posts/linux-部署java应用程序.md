@@ -1,11 +1,11 @@
 ---
-title: linux-部署java应用程序
+title: Linux-部署 Java 应用程序
 date: 2017-9-17 18:50:38
 id: deploy-java-app-on-linux
 categories: ["Linux"]
 tags:
-  - linux
-  - java
+  - Linux
+  - Java
 description:
 ---
 

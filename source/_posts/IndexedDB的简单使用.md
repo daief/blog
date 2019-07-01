@@ -4,7 +4,7 @@ date: 2017-11-10 23:19:49
 id: html5-indexdb
 categories: ["前端","JavaScript"]
 tags:
-  - javascript
+  - JavaScript
 description:
 ---
 

@@ -4,7 +4,7 @@ date: 2017-7-20 16:52:48
 id: learn-webpack
 categories: ["前端"]
 tags:
-  - javascript
+  - JavaScript
   - webpack
 description:
 ---

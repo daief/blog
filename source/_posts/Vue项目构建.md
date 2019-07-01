@@ -4,10 +4,8 @@ date: 2017-7-20 16:48:54
 id: build-a-vue-project
 categories: ["前端"]
 tags:
-  - javascript
-  - vue
-  - vue-router
-  - vuex
+  - JavaScript
+  - Vue
 description:
 ---
 

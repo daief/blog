@@ -4,7 +4,7 @@ date: 2017-11-22 16:18:10
 id: js-watch-variable-change
 categories: ["前端","JavaScript"]
 tags:
-  - javascript
+  - JavaScript
 description:
 ---
 

@@ -4,7 +4,7 @@ id: catch-js-and-ajax-exception
 date: 2017-12-20 20:44:10
 categories: ["前端", "JavaScript"]
 tags:
-  - javascript
+  - JavaScript
   - 前端日志
 ---
 

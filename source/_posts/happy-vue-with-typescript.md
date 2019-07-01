@@ -4,11 +4,11 @@ date: 2019-02-12 17:25:59
 id: happy-vue-with-typescript
 categories: ["前端", "TypeScript"]
 tags:
-  - vue
-  - typescript
+  - Vue
+  - TypeScript
 keywords:
-  - vue
-  - typescript
+  - Vue
+  - TypeScript
 description:
 ---
 
