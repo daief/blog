@@ -33,7 +33,6 @@ body {
 .sidebar,
 .sidebar-inner {
   background-color: rgba(255, 255, 255, 0);
-
 }
 
 .site-title {
@@ -167,4 +166,54 @@ body {
     width: 100%;
     justify-content: center;
   }
+}
+
+/* 标签云页面，标签样式 */
+.tag-cloud a {
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 10px;
+  /* color: #fff; */
+  background-color: #66ccffbf;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 5px 0 10px;
+  position: relative;
+  border-radius: 0 5px 5px 0;
+  margin: 5px 9px 5px 8px;
+  font-family: Menlo, Monaco, Andale Mono, lucida console, Courier New,
+    monospace;
+  transition: all .4s;
+}
+.tag-cloud a::before {
+  content: " ";
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: -18px;
+  border: 9px solid transparent;
+  border-right-color: #66ccffbf;
+  transition: all .4s;
+}
+.tag-cloud a::after {
+  content: " ";
+  width: 4px;
+  height: 4px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 7px;
+  left: 2px;
+}
+.tag-cloud a:hover {
+  transform: scale(1.5);
+  background-color: #66ccff;
+  z-index: 5;
+  color: #fff !important;
+}
+.tag-cloud a:hover::before {
+  border-right-color: #66ccff;
 }
