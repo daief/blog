@@ -50,5 +50,5 @@ Class-Path: lib/gson-2.2.1.jar
 ## 部署应用
 
 1. 将 jar 上传到云主机
-2. 确认已安装 java 环境（{% post_link linux-java环境、Tomcat服务器的安装 安装jdk %}）
+2. 确认已安装 java 环境（{% post_link install-java-tomcat-on-linux %}）
 3. 运行项目，使用`java -jar xxx.jar`
