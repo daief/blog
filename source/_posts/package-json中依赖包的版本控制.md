@@ -2,7 +2,7 @@
 title: package.json 中依赖包的版本控制
 date: 2018-09-16 16:51:33
 id: version-control-of-dependencies-in-package-json
-categories: ["Nodejs", "npm"]
+categories: ["Node.js", "npm"]
 tags:
   - npm
   - package.json

@@ -4,7 +4,7 @@ date: 2018-1-4 22:29:17
 categories: ["前端", "JavaScript"]
 id: what-is-currying
 tags:
-  - javascript
+  - JavaScript
   - currying
 ---
 

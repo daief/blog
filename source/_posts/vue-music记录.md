@@ -4,11 +4,9 @@ date: 2017-9-4 19:39:02
 id: record-of-vue-music
 categories: ["前端"]
 tags:
-  - javascript
-  - typescript
-  - vue
-  - vue-router
-  - vuex
+  - JavaScript
+  - TypeScript
+  - Vue
 description:
 ---
 
@@ -33,7 +31,7 @@ description:
 
 ## 项目打包（npm run build）之后静态资源路径错误
 
-### js、css 等路径错误
+### JS、CSS 等路径错误
 
 webpack 配置：config/index.js
 
@@ -52,7 +50,7 @@ build: {
 }
 ```
 
-### 打包后 css 中的图片路径错误
+### 打包后 CSS 中的图片路径错误
 
 路径会出现 `/static/css/static/img` 这样的重复现象，在 `build/utils.js` 中添加一行
 

@@ -1,19 +1,19 @@
 ---
-title: linux-安装、部署node.js
+title: Linux-安装、部署 Node.js
 date: 2017-9-17 19:34:55
 id: install-nodejs-on-linux
 categories: ["Linux"]
 tags:
-  - linux
-  - nodejs
+  - Linux
+  - Node.js
 description:
 ---
 
-CentOS 云主机上安装 nodejs，部署 node 应用。
+CentOS 云主机上安装 Node.js，部署 node 应用。
 
 <!-- more -->
 
-## 安装 nodejs
+## 安装 Node.js
 
 访问[官网](https://nodejs.org/en/download/)下载对应的包，将其上传到云主机的目录，例如`/usr/local/src/nodejs`
 

@@ -1,24 +1,24 @@
 ---
-title: linux-java环境、Tomcat服务器的安装
+title: Linux-Java环境、Tomcat服务器的安装
 date: 2017-9-10 21:56:44
 id: install-java-tomcat-on-linux
 categories: ["Linux"]
 tags:
-  - linux
-  - jdk
-  - tomcat
+  - Linux
+  - JDK
+  - Tomcat
 description:
 ---
 
-CentOS 云主机上安装 java 环境和 Tomcat 服务器。
+CentOS 云主机上安装 Java 环境和 Tomcat 服务器。
 
 <!-- more -->
 
-## java 环境安装
+## Java 环境安装
 
 方式不唯一，只记录自己了自己的安装过程
 
-先到官网下载对应版本的 jdk 包，然后发送的云主机的`/usr/java`目录下
+先到官网下载对应版本的 JDK 包，然后发送的云主机的`/usr/java`目录下
 
 ```bash
 # 查看自己的系统
@@ -79,11 +79,11 @@ java -version
 
   ```
 
-5. 出现错误，因为我是先安装了 tomcat，所以报了 java 环境变量的错误，之后安装了 jdk 错误消失
+5. 出现错误，因为我是先安装了 tomcat，所以报了 Java 环境变量的错误，之后安装了 jdk 错误消失
    Neither the JAVA_HOME nor the JRE_HOME environment variable is defined
    At least one of these environment variable is needed to run this program
 
-6. 防火墙开放 8080 端口，我现在的操作时直接关了防火墙（不安全），因为我对于 linux 的防火墙还不熟悉，为了避免麻烦暂时的操作
+6. 防火墙开放 8080 端口，我现在的操作时直接关了防火墙（不安全），因为我对于 Linux 的防火墙还不熟悉，为了避免麻烦暂时的操作
 
 7. 记得添加`安全组规则`——阿里云
 

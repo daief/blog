@@ -4,7 +4,7 @@ date: 2017-12-11 22:26:18
 id: js-variable-promotion
 categories: ["前端","JavaScript"]
 tags:
-  - javascript
+  - JavaScript
 description:
 ---
 

@@ -4,13 +4,13 @@ date: 2019-02-01 15:58:47
 id: the-first-time-i-learn-ast
 categories: ["前端"]
 tags:
-  - javascript
-  - typescript
-  - ast
+  - JavaScript
+  - TypeScript
+  - AST
 keywords:
-  - javascript
-  - typescript
-  - ast
+  - JavaScript
+  - TypeScript
+  - AST
   - babel
   - compiler
   - react-hot-loader

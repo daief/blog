@@ -1,11 +1,11 @@
 ---
-title: Git学习的简单记录
+title: Git 学习的简单记录
 date: 2017-7-16 21:01:31
 id: git-general-knowledge
-categories: "git"
+categories: "Git"
 tags:
-     - git
-     - github
+  - Git
+  - GitHub
 description: #你對本頁的描述 可以省略
 ---
 回想自己最初接触git，先是在github上注册账号，接着是下载git bash，然后根据github的提示建了个仓库，最后就不知道干嘛了，克隆仓库都不会，当时也没有再继续学习了。现在学会用了一点点，做个记录加深印象。

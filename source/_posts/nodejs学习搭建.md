@@ -1,11 +1,11 @@
 ---
-title: nodejs学习搭建
+title: Node.js 学习搭建
 date: 2017-10-04
 id: learn-nodejs
-categories: ["Nodejs"]
+categories: ["Node.js"]
 tags:
-  - javascript
-  - nodejs
+  - JavaScript
+  - Node.js
 description:
 ---
 
