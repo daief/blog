@@ -14,8 +14,6 @@ description:
 
 本文不说明 webpack 的配置，简单介绍如何使用 TypeScript 来书写 Vue，阅读本文应同时对 TypeScript 和 Vue 有一定的了解。
 
-{% img https://img2.vipcn.com/img2016/6/21/2016062150586477.jpg Saber-阿尔托莉雅·潘德拉贡 %}
-
 <!-- more -->
 
 如果你在为如何搭建一个支持 Vue in TS 的环境而苦恼，在这里我推荐使用官方脚手架 [Vue CLI 3](https://cli.vuejs.org/)来生成一个项目；或是来试试我自己编写的脚手架，你可以直接拷贝[这个例子](https://github.com/daief/jugg/tree/master/examples/ts-vue)。这两种方式都不需要你介入配置，可以直接开始代码的编写，日后再研究环境的配置。
