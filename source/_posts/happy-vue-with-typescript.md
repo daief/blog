@@ -95,12 +95,12 @@ export default class Post extends Vue {
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator';
 
 @Component
 export default class Post extends Vue {
   // data 属性
-  src: string = 'https://img2.vipcn.com/img2016/6/21/2016062150586477.jpg'
+  src: string = 'https://ae01.alicdn.com/kf/HTB1hZDNdEuF3KVjSZK9762VtXXaK.png'
   count: number =  1
 
   // computed 实现
