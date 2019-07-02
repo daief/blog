@@ -124,9 +124,13 @@ $ docker container run \
 
 ## 使用 Dockerfile 构建 image
 
-现在来构建 image，首先引入 Dockerfile。
+本文记录了两种创建镜像的方式：
+  1. 直接通过 Dockerfile 进行构建
+  2. 通过现有容器生成新的镜像
 
-Dockerfile 是一个文本文件，用来配置 image。Docker 根据该文件生成二进制的 image 文件。
+本小节描述了第一种方式，第二种会在下节的内容中出现。
+
+现在开始用 Dockerfile 来构建 image。Dockerfile 是一个文本文件，用来配置 image。Docker 根据该文件生成二进制的 image 文件。
 
 进入 nginx-demo 目录，在根目录创建 `.dockerignore`、`Dockerfile`，目录结构参考如下：
 
@@ -232,9 +236,31 @@ root@53d51b734e3f:/usr/share/nginx/html$ exit
 
 退出容器、查看页面，能看到更新后的内容。
 
+**注意此时修改的是容器内的文件，当容器停止后修改的内容就会丢失。**
+
+接下来通过当前容器创建一个新的 image 以保存修改，使用 `docker commit` 命令。
+
+```bash
+# docker commit [容器ID]      [新镜像名] :[TAG]
+$ docker commit 53d51b734e3f nginx-demo:0.0.2
+```
+
+查看现在的镜像情况。
+
+```bash
+$ docker images
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+nginx-demo          0.0.2               be392c708cb9        3 seconds ago       109MB
+nginx-demo          0.0.1               fdd278ef340c        16 hours ago        109MB
+nginx-demo          latest              fdd278ef340c        16 hours ago        109MB
+nginx               latest              719cd2e3ed04        3 weeks ago         109MB
+```
+
+停止正在运行的容器，分别以不同的镜像启动、查看页面内容。
+
 ## 结语
 
-本文的描述十分简单，只包含了一些基本操作，更多详细的内容可参照文末链接。
+本文的描述十分简单，只包含了一些基本操作，更多详细的内容可参考文末链接。
 
 文章多有疏漏，还望读者斧正。
 
