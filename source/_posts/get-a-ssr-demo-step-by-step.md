@@ -16,7 +16,7 @@ description:
 
 实际上是打算先写那篇文章，但这里还是来写这个了，这样能先从零开始认识 SSR。
 
-先放上 demo 地址：<https://github.com/daief/react-ssr/packages/express-ssr-demo>。
+先放上 demo 地址：<https://github.com/daief/react-ssr/tree/master/packages/express-ssr-demo>。
 
 <!-- more -->
 
@@ -615,7 +615,7 @@ const serverCfg = {
 
 谨以此文帮助我们对 SSR 能有更好的理解。
 
-最后再放一遍 demo 地址：<https://github.com/daief/react-ssr/packages/express-ssr-demo>。
+最后再放一遍 demo 地址：<https://github.com/daief/react-ssr/tree/master/packages/express-ssr-demo>。
 
 完。
 
