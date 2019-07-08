@@ -6,6 +6,7 @@ categories: ["DevOps", "Docker"]
 tags:
   - Docker
 keywords:
+  - Docker
 description:
 ---
 
@@ -235,6 +236,8 @@ root@53d51b734e3f:/usr/share/nginx/html$ exit
 ```
 
 退出容器、查看页面，能看到更新后的内容。
+
+> 上述使用 `docker exec -it ID /bin/bash` 进入容器并执行 `/bin/bash`，很是在 alpine 中没有 `/bin/bash` 文件，不过改成 `docker exec -it ID sh` 就能进入并启动终端了。
 
 **注意此时修改的是容器内的文件，当容器停止后修改的内容就会丢失。**
 

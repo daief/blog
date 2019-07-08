@@ -1,13 +1,15 @@
 ---
-title: Next.js 使用小结
+title: GraphQL、Next.js 使用小结
 date: 2019-07-03 19:11:51
-id: use-summary-of-next-js
+id: use-summary-of-graphql-and-next-js
 categories: ["前端"]
 tags:
-  - 'Next.js'
   - SSR
   - GraphQL
 keywords:
+  - 'Next.js'
+  - SSR
+  - GraphQL
 description:
 ---
 
