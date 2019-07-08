@@ -495,7 +495,7 @@ Client 端没问题，这里只针对 Server 端。
 在 distServer 只会包含 src/ 的部分，因为在 webpack 明确排除了所有依赖。这一部分中的样式无论是内联还是如上文所述的拆离，都能正常使用。
 
 - 样式内联的情况，没有 `require less` 的情况
-- 样式拆离会，代码中也没有引用样式（因为这种情况往往在 Client，是需要在 HTML 额外使用 link 引入的）
+- 样式拆离后，代码中也没有引用样式（因为这种情况往往在 Client，是需要在 HTML 额外使用 link 引入的）
 
 这时候添加一些组件库，比如 antd，引入组件和样式。
 
@@ -509,7 +509,7 @@ import Button from "antd/lib/button";
 import "antd/lib/button/style";
 ```
 
-一跑就报错了，无论内联还是拆离，都出现了 `require less` 的情况。打包结果会是这样的。当 Server 端脚本运行、`require('../distServer')` 时，就发生了在 Node 层直接引用 less 的情况，接着就直接报错了。
+一跑就报错了，无论内联还是拆离，都出现了 `require less` 的情况。打包结果会是这样的。当 Server 端脚本运行、执行 `require('../distServer')` 时，就发生了在 Node 层直接引用 less 的情况，接着就直接报错了。
 
 - distServer/
   - ...
