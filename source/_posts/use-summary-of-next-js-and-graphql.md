@@ -15,7 +15,7 @@ description:
 
 近段时间里使用 [Next.js](https://github.com/zeit/next.js) 搭建了两个后台，同时还使用了 GraphQL。期间匆匆忙忙，而且项目都是另一个前端老哥搭建的。所以，自己又抽空从头开始搭建了几个 demo，回顾一下知识，同时整理了一下当时遇见的问题、梳理下其中缘由。
 
-本文主要内容包括三个 demo 的介绍，并记录一些在开发过程中遇到的问题和解决，本文对应 next 版本为 ~~v8.0.3~~。写的时候发现 Next.js 升级到 v9.0.0 了，自带 TS 支持了，果断把 demo 的版本也升级了。
+本文主要内容包括三个 demo 的介绍，并记录一些在开发过程中遇到的问题和解决，本文对应 Next.js 版本为 ~~v8.0.3~~。写的时候发现 Next.js 升级到 v9.0.0 了，自带 TypeScript 支持了，果断把 demo 的版本也升级了。
 
 上一篇文章（《{% post_link get-a-ssr-demo-step-by-step %}》）介绍了从零搭建 SSR 的过程，并且附带了一些问题的讲解，推荐结合阅读。
 
@@ -26,6 +26,20 @@ description:
 # 简介
 
 本节对三个 demo 作个简单介绍。
+
+正常运行该项目需要配置本地 hosts。
+
+```bash
+# hosts
+# 模拟 gql-server 的域名
+127.0.0.1			gql-server.example.com
+# 模拟应用 account 的域名（nextjs-ssr 或 nextjs-static）
+127.0.0.1			account.example.com
+# 模拟应用 customer 的域名（nextjs-ssr 或 nextjs-static）
+127.0.0.1			customer.example.com
+```
+
+或者在 `packages/shared/CONFIG.ts` 文件中修改成其他域名配置，然后通过域名 + 端口的形式访问本地开发环境。
 
 ## nextjs-ssr
 
