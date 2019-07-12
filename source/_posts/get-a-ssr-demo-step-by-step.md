@@ -12,7 +12,8 @@ keywords:
 description:
 ---
 
-在上一季度中接触并使用了 Next.js，实践了一把 SSR。期间遇见了不少问题，详情可见：{% post_link use-summary-of-graphql-and-next-js %}。
+在上一季度中接触并使用了 Next.js，实践了一把 SSR。期间遇见了不少问题，详情可见：
+{% post_link use-summary-of-next-js-and-graphql %}。
 
 实际上是打算先写那篇文章，但这里还是来写这个了，这样能先从零开始认识 SSR。
 
