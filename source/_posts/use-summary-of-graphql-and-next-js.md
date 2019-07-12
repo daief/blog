@@ -13,64 +13,75 @@ keywords:
 description:
 ---
 
-ssr & nodejs、graphql
+近段时间里使用 Next.js 搭建了两个后台，同时还使用了 GraphQL。期间匆匆忙忙，而且项目都是另一个前端老哥搭建的。所以，自己又抽空从头开始搭建了几个 demo，回顾一下知识，同时整理了一下当时遇见的问题、梳理下其中缘由。
 
-static export
+本文主要内容包括三个 demo 的介绍，并记录一些在开发过程中遇到的问题和解决，本文对应 next 版本为 ~~v8.0.3~~。写的时候发现 Next.js 升级到 v9.0.0 了，自带 TS 支持了，果断把 demo 的版本也升级了。
 
-开发中使用样式
+上一篇文章（《{% post_link get-a-ssr-demo-step-by-step %}》）介绍了从零搭建 SSR 的过程，并且附带了一些问题的讲解，推荐结合阅读。
 
-静态导出时的样式，子进程，antd/style/、动态路由
-
-workspaces 模式下 ts 文件解析
-
----
-
-这段时间新建了两个后台项目，都是基于 [Next.js](https://github.com/zeit/next.js) 搭建，Next.js 的介绍很简单。
-
-> Next.js 是一个轻量级的 React 服务端渲染应用框架。
-
-第一个项目上了 `SSR`（Server-Side Rendering，不过这里的 SSR 更多表示同构） + [GraphQL](https://graphql.org) 服务；第二个项目用了 `next export`（Next.js 页面预渲染、静态导出） + `GraphQL Client`。两者用词虽然差不多，但实际上并不是一回事，最明显的一个区别在于是否需要 `Nodejs 中间层`。
-
-本文主要内容包括两个项目的介绍，并记录一些在开发过程中遇到的问题和解决，本文对应 next 版本为 ~~v8.0.3~~。写的时候发现升级到 v9.0.0 了，自带 TS 支持了，果断把 demo 的版本也升级了。
-
-上一篇文章（《{% post_link get-a-ssr-demo-step-by-step %}》）介绍了从零搭建 SSR 的过程，并且附带了一些问题的讲解，推荐结合阅读。所以，类似问题该篇将不再赘述。
-
-<!-- TODO demo 地址 -->
+那么，按照惯例就先呈上 demo 地址：[react-ssr](https://github.com/daief/react-ssr)。
 
 <!-- more -->
 
-## 项目一
+# 简介
 
-### 简介
+本节对三个 demo 作个简单介绍。
 
-该项目是一个对内的、管理各种应用的后台（简称认证中心），其中的一个功能是实现各个应用间的[单点登录（SSO）](https://en.wikipedia.org/wiki/Single_sign-on)。
+## nextjs-ssr
 
-Java 端基于 [JWT（Json web token）](https://en.wikipedia.org/wiki/JSON_Web_Token) 实现授权认证，前端应用在请求时要把 token 加到请求头当中，同时也会将 token 缓存于 localStorage。这里的每个应用都有一个不同的二级域名（如 a.example.com、b.example.com），而 localStorage 由于跨域限制，前端应用之间不能共享 token，在这种情况打开新的应用时就会需要重新登录。
+> 地址：<https://github.com/daief/react-ssr/tree/master/packages/nextjs-ssr>
+
+这第一个 demo 对应业务开发中的第一个后台，该后台是一个对内的、管理各种应用的后台，其中一个功能需要实现各个应用间的[单点登录（SSO）](https://en.wikipedia.org/wiki/Single_sign-on)。
+
+Java 端基于 [JWT（Json web token）](https://en.wikipedia.org/wiki/JSON_Web_Token) 实现授权认证，前端应用在请求时需要把 token 加到请求头当中，同时也会将 token 缓存于 localStorage。
+
+这里的每个应用都有一个不同的二级域名（如 a.example.com、b.example.com），而 localStorage 由于跨域限制，前端应用之间不能共享 token，在这种情况打开新的应用时就会需要重新登录。
 
 因此，新的方案是把 token 存储在 cookie 里，并设置 Domain 为根域名（.example.com）。如此一来各个应用之间直接就共享 token，而且每个应用不再需要维护 token。
 
-因为这是一个对内的应用，同时出于对技术的追求，前端组表示添加 Node.js 中间层来做 cookie 的控制，而 Java 端一切保持不变。加上了 Node 层之后，又顺理成章地加上了 SSR、GraphQL Server。然而，也带来了一系列的坑。
+因为这是一个对内的应用，同时出于对技术的追求，该项目决定试用 SSR，选型 Next.js。同时前端组表示可以用中间层来做 cookie 的维护，而 Java 端一切保持不变。加上了 Node 层之后，又顺理成章地加上了 GraphQL Server。
 
-对于认证中心，整体时序图如下。
+## gql-server
 
-<!-- TODO 这里放个时序图 -->
+> 地址：<https://github.com/daief/react-ssr/tree/master/packages/gql-server>
 
-### 遇见的一些问题
+这是一个独立的中间层，主要作用是提供 GraphQL 服务、cookie 管理。
 
-主要框架：
+其实上面选择用 Next.js 做 SSR 的时候就已经添加了一个 Node 服务，但这里还是另外再起了一个服务，依我的想法出于两个原因：Next.js 服务专门负责 SSR，这边专门提供 GraphQL 服务，职责会比较清晰；两者同一个服务时，Next.js 会作为一个中间来件运作，开发调试时若修改服务端部分代码调试工具会自动重启服务，这就会导致 next 部分也重启了、而且得重新编译，很费时间。
 
-- TypeScript
-- Next.js
-- antd
-- apollo-\* 系列（fastify、apollo-server-fastify、apollo-client ……）
+该项目基于 [Apollo GraphQL](https://www.apollographql.com/docs/) 系列搭建。
 
-#### 引用样式文件时报错
+nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
-这个应该是使用 SSR 时候的经典问题了，不过有关样式文件在 SSR 中的问题在{% post_link get-a-ssr-demo-step-by-step %}有详细解读，这里只说明该问题在 Next.js 中的具体解决以及和 Next.js 有关的注意点。（官方貌似比较推崇 CSS-in-JS）
+![](https://imgur.com/W4BRM6U.jpg)
+
+## nextjs-static
+
+> 地址：<https://github.com/daief/react-ssr/tree/master/packages/nextjs-static>
+
+该 demo 也使用 Next.js 框架，但依赖的是 Prerender 的功能，最终是静态部署，所以项目中踢除、避免 Server 端的代码。（该 demo 对应第二个后台，只是个常规的管理后台）
+
+请求部分依旧使用了 GraphQL，不过该项目没有对应的 GraphQL 服务，API 是 REST 形式的。
+
+通过 [apollo-link](https://www.apollographql.com/docs/link/)（可看作是 apollo-client 的中间件）使得 GraphQL 变得十分灵活、不仅仅是依赖于 GraphQL 服务而使用。
+
+> apollo-client 是用于发起 GraphQL 请求的一种客户端框架。
+
+这里的主角是 [apollo-link-rest](https://www.apollographql.com/docs/link/links/rest/)，让我们很轻易地通过 GraphQL 调用 REST API。
+
+这样可以在前端实现接口聚合、字段查询（基于真实接口的返回）等 GraphQL 的特色功能。
+
+# Next.js 使用问题
+
+下面把和 Next.js 有关的问题聚合在这一节。
+
+## 样式文件的处理
+
+这个应该是使用 SSR 时候的经典问题了，不过有关样式文件在 SSR 中的问题在{% post_link get-a-ssr-demo-step-by-step %}有详细解读，这里只说明该问题在 Next.js 中的具体解决以及和 Next.js 有关的注意点。
 
 这个问题主要可概括为两点：一是缺少 webpack 对于 CSS、Less 的配置；二是 SSR 项目运行的特点。
 
-添加相应的 webpack 配置，如使用官方的配置扩展插件：[@zeit/next-css](https://github.com/zeit/next-plugins/tree/master/packages/next-css)、[@zeit/next-less](https://github.com/zeit/next-plugins/tree/master/packages/next-less)，然后在 `next.config.js` 中使用：
+添加相应的 webpack 配置，可使用官方的配置扩展插件：[@zeit/next-css](https://github.com/zeit/next-plugins/tree/master/packages/next-css)、[@zeit/next-less](https://github.com/zeit/next-plugins/tree/master/packages/next-less)，然后在 `next.config.js` 中使用：
 
 ```js
 // next.config.js
@@ -106,7 +117,7 @@ if (typeof require !== "undefined") {
 
 > 坑点：所有的样式文件都开启了 CSS modules；打包时样式依旧报错。
 
-尝试自定义 webpack 的样式配置，简单粗暴之处在于所有（Server & Client）样式都过一遍 loader，不足之处也是如此。在这样的配置下，只要在需要开启 CSS modules 的地方添加 `:local()` 即可。（以下配置基于 css-loader@^3，顺便一提官方插件所用的是 css-loader@1，两者配置之间会有差异）
+尝试自定义 webpack 的样式配置，简单粗暴之处在于所有（Server & Client）样式都过一遍 loader。在这样的配置下，只要在需要开启 CSS modules 的地方添加 `:local()` 即可。（以下配置基于 css-loader@^3，顺便一提官方插件所用的是 css-loader@1，两者配置之间会有差异）
 
 ```js
 // withStyle.js
@@ -164,8 +175,16 @@ module.exports = (nextConfig = {}) => {
 
       config.plugins.push(
         new MiniCssExtractPlugin({
-          filename: dev ? "[name].css" : "[name].[hash].css",
-          chunkFilename: dev ? "[id].css" : "[id].[hash].css"
+          // 要加上 static，否则打包后 404
+          filename: dev
+            ? "static/css/[name].css"
+            : "static/css/[name].[contenthash:8].css",
+          chunkFilename: dev
+            ? "static/css/[name].chunk.css"
+            : "static/css/[name].[contenthash:8].chunk.css"
+        }),
+        new (require("webpack-filter-warnings-plugin"))({
+          exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
         })
       );
 
@@ -215,7 +234,30 @@ module.exports = withStyle({
 });
 ```
 
-#### 引用图片等静态文件
+> 坑点：打包后，前端路由切换页面时样式丢失。
+
+这是因为样式在打包后，根据页面被拆分开来。而当第一打开页面时，SSR 渲染的 HTML 文档中只包含当前页面的 CSS 链接，此时在前端切换页面时也不会去加载缺失的样式文件。目前为止的解决方式是将所有的样式打包在一起，添加对应的如下配置。
+
+```js
+// withStyle.js
+
+// ...
+module.exports = () => ({
+  webpack() {
+    // 把所有 css 合并，因为前端路由切换页面的时候不会拉取对应的 css 文件
+    // 服务端配置走不走不影响
+    config.optimization.splitChunks.cacheGroups.styles = {
+      name: "styles",
+      test: /\.(css|less)$/,
+      chunks: "all",
+      enforce: true
+    };
+    // ...
+  }
+});
+```
+
+## 图片等静态文件处理
 
 Next.js 对 [`static/` 目录有特殊的支持](https://github.com/zeit/next.js#static-file-serving-eg-images)，推荐将静态资源放在这个目录，通过 `/static/some/target.png` 的形式进行引用。而且在 v9.0.0 版本在打包时还会自动对 `static/` 目录内的文件进行压缩。
 
@@ -239,5 +281,159 @@ config.module.rules.push({
     }
   ]
 });
+```
+
+## Monorepo 中的 Babel 配置
+
+当项目以 [Monorepo](https://en.wikipedia.org/wiki/Monorepo) 方式组织，同时引用其他子包内容时，引用的部分是不会经过 Babel 处理的。
+
+```js
+// Next.js 中 webpack 的 Babel 配置
+// https://github.com/zeit/next.js/blob/aac4e21d46f300d8433b0bd94a7a0f51e443b7d4/packages/next/build/webpack-config.ts#L394
+[
+  // ...
+  {
+    test: /\.(tsx|ts|js|mjs|jsx)$/,
+    include: [
+      dir,
+      /next-server[\\/]dist[\\/]lib/,
+      /next[\\/]dist[\\/]client/,
+      /next[\\/]dist[\\/]pages/,
+      /[\\/](strip-ansi|ansi-regex)[\\/]/
+    ],
+    exclude: (path: string) => {
+      if (
+        /next-server[\\/]dist[\\/]lib/.test(path) ||
+        /next[\\/]dist[\\/]client/.test(path) ||
+        /next[\\/]dist[\\/]pages/.test(path) ||
+        /[\\/](strip-ansi|ansi-regex)[\\/]/.test(path)
+      ) {
+        return false;
+      }
+
+      return /node_modules/.test(path);
+    },
+    use: defaultLoaders.babel
+  }
+  // ...
+];
+```
+
+插件 [next-transpile-modules](https://www.npmjs.com/package/next-transpile-modules) 可以很方便地解决这个问题。
+
+```js
+// next.config.js
+// https://github.com/zeit/next.js/blob/aac4e21d46f300d8433b0bd94a7a0f51e443b7d4/examples/with-yarn-workspaces/packages/web-app/next.config.js#L1
+
+const withTM = require("next-transpile-modules");
+
+module.exports = withTM({
+  // `@react-ssr/shared` 是 Monorepo 结构下的其他模块的包名
+  transpileModules: ["@react-ssr/shared"]
+});
+```
+
+> 坑点：虽然经过如上改造，Babel 会对其他子包进行编译，但是发现 Next.js 项目模块下的 Babel 插件配置（.babelrc）对子包范围内的代码并不生效。
+
+其实这一点来源 Babel 7 对于配置的变化，Babel 7 新增了根（root）的概念，默认是当前工作目录，也就是 Next.js 项目模块的级别（packages/nextjs-ssr/），此时 Babel 缺少、也不会去读取他子包的插件配置。
+
+Babel 推荐在所有 Monorepo 项目的根目录添加 `babel.config.js`，以此建立了 Babel 的核心概念。但这对于上述问题的解决还不够，在这里我通过设置 `rootMode: upward` 告诉 Babel 向上级寻找，Babel 会自动寻找 `babel.config.js` 并将其设置为 root 的值（[更多详细内容可查看官方文章 —— Config Files](https://babeljs.io/docs/en/config-files#project-wide-configuration)）。
+
+具体配置如下。
+
+```js
+// next.config.js
+
+module.exports = {
+  webpack(config) {
+    config.module.rules.forEach(rule => {
+      // 这里的改动比较暴力，因为 Next.js 没有直接暴露更改内建 loader 参数的地方
+      if (rule.use && rule.use.loader === "next-babel-loader") {
+        // 设置 babel 向上寻找 babel.config.js，然后将其所在的路径作为根（root）
+        // 否则编译其他 package 时不会加载 babel 插件
+        // https://babeljs.io/docs/en/config-files#project-wide-configuration
+        rule.use.options.rootMode = "upward";
+      }
+    });
+    // ...
+  }
+};
+```
+
+如此一来，再将 Babel 插件配置在 `babel.config.js`，那么 Babel 插件在其他模块也会起作用了。
+
+## 国际化语言渲染问题
+
+在 `nextjs-ssr` 中，项目以 SSR 方式运行，在页面请求来临的同时，读取 cookies 就能知晓当前浏览器的语言设置信息，接着就能渲染出对应语言的页面并返回。
+
+对于用户来说，当选择英文，首屏返回的页面就英文；选择了中文，返回的就是中文页面。
+
+而对于静态部署的 `nextjs-static`，并没有动态渲染的能力，页面只有在返回到浏览后才能从 cookies 中读取到语言设置信息，进而将页面切换成对应的语言。
+
+页面总有个初始语言，可是这样一来打开页面会有个语言切换的现象（默认语言与实际语言不符），但这个也不好避免。所以，`nextjs-static` 中的操作是一概将 Server 的国际化输出设置成 `...`，待脚本加载后会自动读取并切换成对应的语言。
+
+# 其他问题
+
+## SSR 部署期间的问题
+
+在部署期间发生了一个由 `host` 字段引发的问题，导致 SSR 层的请求发生错误。
+
+结合开头的时序图可以看到，发起 GraphQL 请求的角色有浏览器和 SSR 层，而 SSR 层发起请求时都来源于一个页面的访问。比如，访问主页 `/`（不是通过其他前端路由跳转来的），而且主页组件在 `getInitialProps` 生命周期中有请求，那么该请求会在 SSR 层发起。同样，这个请求需要携带 token、language 标识等信息，这些信息来源于页面请求的 Header，这步操作见代码。
+
+```ts
+// `packages/shared/src/layouts/ApolloWrap/index.tsx`
+
+const authLink = setContext((_, { headers }) => {
+  // 这里用于添加自定义的 headers 字段
+  const reqHeaders: any = process.browser
+    ? {}
+    : // 当在 Server 端的时候，将来自 browser 的 headers 携带过去
+      // host 也被包含在内。
+      getProp(() => ctx.req.headers, {});
+  return {
+    headers: {
+      ...headers,
+      ...reqHeaders
+    }
+  };
+});
+```
+
+这里的 `ctx.req` 具体指的就是 `访问主页 /` 这次请求。接着，请求被发往 gql-server。
+
+这里需要补充一下部署时候的具体情况，`nextjs-ssr` 和 `gql-server` 运行于 Docker 容器当中，同时在一个物理机上，通过 Nginx 转发请求。
+
+那么上述流程会是这样。
 
 ```
+1. 访问主页 `http://customer.example.com/`，发送请求到 `nextjs-ssr`
+    请求内容：
+      url: http://customer.example.com/
+      headers:
+        host:  http://customer.example.com/
+
+
+2. Nginx 将请求转发到 nextjs-ssr，nextjs-ssr 发出 `getInitialProps` 中的请求
+    请求内容：
+      url: http://gql-server.example.com/
+      headers:
+        host:  http://customer.example.com/
+
+3. Nginx 收到请求，发现 host 字段，又将请求转发到 `http://customer.example.com/`
+    Nginx 默认配置在请求 URL 和 host 字段之间会以 host 优先
+
+4. ... 死循环了，最终因为重定向过多，Nginx 返回对应错误码
+```
+
+上述问题的解决很简单，将 host 置空或设置成正确的值。关于 host 字段的作用，我的认识如下。
+
+一个域名会被解析成 IP 对应到一台服务器，但这一台服务器上可能存在多个服务，在内部可以通过端口来区分，但出于各种原因，这台服务器往往只对外暴露部分端口，外部访问者这时候就可以额外通过 host 字段告诉服务器想要访问的服务。
+
+# GraphQL 服务
+
+# 结语
+
+在老大哥基础上重新整理写了一遍，写得不对，多多包涵。
+
+- host <https://stackoverflow.com/questions/43156023/what-is-http-host-header>
+- host <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Host>
