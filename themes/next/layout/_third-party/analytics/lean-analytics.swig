@@ -119,3 +119,35 @@
   </script>
 
 {% endif %}
+
+
+{#
+<!-- 谷歌 Firebase 存储 -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCBrmeWtSmG90yKMojtkCKsxw-LjT815JM",
+    authDomain: "daief-blog.firebaseapp.com",
+    databaseURL: "https://daief-blog.firebaseio.com",
+    projectId: "daief-blog",
+    storageBucket: "",
+    messagingSenderId: "922569737905",
+    appId: "1:922569737905:web:bb079c88eadfa8e3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  var database = firebase.database();
+  var starCountRef = firebase.database().ref('posts/starCount');
+  starCountRef.once('value', function(snapshot) {
+    console.log('try firebase', snapshot)
+  }, err => {
+    console.log('try firebase error', err)
+  });
+</script>
+#}
