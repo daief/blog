@@ -96,6 +96,8 @@ scheme: Pisces
 social:
   #LinkLabel: Link
   GitHub: https://github.com/daief
+  WeChat: /images/wechat.jpg
+  Email: mailto:defeng_mail@163.com
   #Weibo: https://github.com/daief
 
 # Social Links Icons
@@ -110,6 +112,8 @@ social_icons:
   GitHub: github
   #Twitter: twitter
   Weibo: weibo
+  WeChat: weixin
+  Email: envelope
 
 # Blog rolls
 #links_title: Links
