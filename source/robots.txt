@@ -8,5 +8,5 @@ Allow: /js/
 Allow: /css/
 Allow: /lib/
 Disallow: /fonts/
-Sitemap: https://daief.github.io/sitemap.xml
-Sitemap: https://daief.github.io/baidusitemap.xml
+Sitemap: https://daief.tech/sitemap.xml
+Sitemap: https://daief.tech/baidusitemap.xml
