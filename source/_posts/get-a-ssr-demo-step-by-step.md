@@ -1,5 +1,5 @@
 ---
-title: 从零搭建 SRR
+title: 从零搭建 SSR
 date: 2019-07-02 17:10:37
 id: get-a-ssr-demo-step-by-step
 categories: ["前端"]
