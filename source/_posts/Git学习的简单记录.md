@@ -9,13 +9,13 @@ tags:
 description: #你對本頁的描述 可以省略
 ---
 
-回想自己最初接触 git，先是在 github 上注册账号，接着是下载 git bash，然后根据 github 的提示建了个仓库，最后就不知道干嘛了，克隆仓库都不会，当时也没有再继续学习了。现在学会用了一点点，做个记录加深印象。
+回想自己最初接触 git，先是在 GitHub 上注册账号，接着是下载 git bash，然后根据 GitHub 的提示建了个仓库，最后就不知道干嘛了，克隆仓库都不会，当时也没有再继续学习了。现在学会用了一点点，做个记录加深印象。
 
 <!-- more -->
 
 首先推荐教程：[廖雪峰 Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
-### Git 的一些使用（已经创建了 github 账号以及下载了[git 命令行工具](https://git-scm.com/downloads)）
+### Git 的一些使用（已经创建了 GitHub 账号以及下载了[git 命令行工具](https://git-scm.com/downloads)）
 
 ### 配置本机的用户名和 Email 地址
 
@@ -55,7 +55,7 @@ The key's randomart image is:
 ### 将 SSH 公钥添加到 git 服务器
 
 上一步会生成两个文件，ssh_file_name 和 ssh_file_name.pub，打开 ssh_file_name.pub 复制其中所有的内容；
-打开[github](https://github.com/)，登录自己的账号，找到 setting ==> SSH and GPG keys ==> New SSH key，将刚才复制的内容粘贴进去。
+打开[GitHub](https://github.com/)，登录自己的账号，找到 setting ==> SSH and GPG keys ==> New SSH key，将刚才复制的内容粘贴进去。
 其他 git 服务器类似，登录后找到 SSH 管理添加即可。
 
 ### 创建版本库（仓库、repository）
@@ -69,13 +69,13 @@ Initialized empty Git repository in C:/Users/Administrator/Desktop/ex/.git/
 
 ### 与远程仓库关联，关联的前提是已经添加了 SSH
 
-先在 github 上创建一个空仓库，然后选择一个空目录下进行 clone，关联的是空仓库，新开始的工作，没添加 SSH 的话只能克隆下来不能推送修改
+先在 GitHub 上创建一个空仓库，然后选择一个空目录下进行 clone，关联的是空仓库，新开始的工作，没添加 SSH 的话只能克隆下来不能推送修改
 
 ```bash
 $ git clone git@github.com:daief/daief.github.io.git
 ```
 
-在 github 建立 repository-name 仓库，然后将本地仓库添加到远程，本地仓库已经进行了一些工作，中途关联远程，没添加 SSH 的话不能添加
+在 GitHub 建立 repository-name 仓库，然后将本地仓库添加到远程，本地仓库已经进行了一些工作，中途关联远程，没添加 SSH 的话不能添加
 
 ```bash
 $ git remote add origin git@github.com:username/repository-name.git
@@ -495,9 +495,9 @@ $ git push origin master
 
 ### 更改关联的远程仓库
 
-#### 更改`/.git/config`中的`url`
+方式一，更改 `.git/config` 中的 `url`。
 
-#### 使用命令更改
+方式二，使用命令更改：
 
 ```bash
 $ git remote set-url origin <url>
@@ -509,5 +509,14 @@ $ git remote set-url origin <url>
 
 ```bash
 # --stat 是显示文件列表, 否则显示更改内容
-git diff branch1 branch2 --stat
+$ git diff branch1 branch2 --stat
+```
+
+### merge 部分文件？
+
+没有直接 merge 部分文件的功能，可通过以下方式实现。这条命令可理解为覆盖，将 `branch` 上的 `files` 文件覆盖到当前分支上。
+
+```bash
+$ git checkout <branch>  <files>
+
 ```
