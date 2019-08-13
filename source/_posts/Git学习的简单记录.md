@@ -2,30 +2,31 @@
 title: Git 学习的简单记录
 date: 2017-7-16 21:01:31
 id: git-general-knowledge
-categories: "Git"
+categories: 'Git'
 tags:
   - Git
   - GitHub
 description: #你對本頁的描述 可以省略
 ---
-回想自己最初接触git，先是在github上注册账号，接着是下载git bash，然后根据github的提示建了个仓库，最后就不知道干嘛了，克隆仓库都不会，当时也没有再继续学习了。现在学会用了一点点，做个记录加深印象。
+
+回想自己最初接触 git，先是在 github 上注册账号，接着是下载 git bash，然后根据 github 的提示建了个仓库，最后就不知道干嘛了，克隆仓库都不会，当时也没有再继续学习了。现在学会用了一点点，做个记录加深印象。
+
 <!-- more -->
 
-首先推荐教程：[廖雪峰Git教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
+首先推荐教程：[廖雪峰 Git 教程](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)
 
+### Git 的一些使用（已经创建了 github 账号以及下载了[git 命令行工具](https://git-scm.com/downloads)）
 
-### Git的一些使用（已经创建了github账号以及下载了[git命令行工具](https://git-scm.com/downloads)）
+### 配置本机的用户名和 Email 地址
 
-### 配置本机的用户名和Email地址
-
-``` bash
+```bash
 $ git config --global user.name "Your Name"
 $ git config --global user.email "email@example.com"
 ```
 
-### 生成SSH密钥
+### 生成 SSH 密钥
 
-``` bash
+```bash
 $ ssh-keygen -t rsa -C "email@example.com"
 Generating public/private rsa key pair.
 Enter file in which to save the key (/c/Users/Administrator/.ssh/id_rsa): ssh_file_name
@@ -51,31 +52,38 @@ The key's randomart image is:
 
 ```
 
-### 将SSH公钥添加到git服务器
-上一步会生成两个文件，ssh_file_name和ssh_file_name.pub，打开ssh_file_name.pub复制其中所有的内容；
-打开[github](https://github.com/)，登录自己的账号，找到setting ==> SSH and GPG keys ==> New SSH key，将刚才复制的内容粘贴进去。
-其他git服务器类似，登录后找到SSH管理添加即可。
+### 将 SSH 公钥添加到 git 服务器
+
+上一步会生成两个文件，ssh_file_name 和 ssh_file_name.pub，打开 ssh_file_name.pub 复制其中所有的内容；
+打开[github](https://github.com/)，登录自己的账号，找到 setting ==> SSH and GPG keys ==> New SSH key，将刚才复制的内容粘贴进去。
+其他 git 服务器类似，登录后找到 SSH 管理添加即可。
 
 ### 创建版本库（仓库、repository）
+
 选择一个空目录，建立本地仓库
-``` bash
+
+```bash
 $ git init
 Initialized empty Git repository in C:/Users/Administrator/Desktop/ex/.git/
 ```
 
-### 与远程仓库关联，关联的前提是已经添加了SSH
-先在github上创建一个空仓库，然后选择一个空目录下进行clone，关联的是空仓库，新开始的工作，没添加SSH的话只能克隆下来不能推送修改
-``` bash
+### 与远程仓库关联，关联的前提是已经添加了 SSH
+
+先在 github 上创建一个空仓库，然后选择一个空目录下进行 clone，关联的是空仓库，新开始的工作，没添加 SSH 的话只能克隆下来不能推送修改
+
+```bash
 $ git clone git@github.com:daief/daief.github.io.git
 ```
 
-在github建立repository-name仓库，然后将本地仓库添加到远程，本地仓库已经进行了一些工作，中途关联远程，没添加SSH的话不能添加
-``` bash
+在 github 建立 repository-name 仓库，然后将本地仓库添加到远程，本地仓库已经进行了一些工作，中途关联远程，没添加 SSH 的话不能添加
+
+```bash
 $ git remote add origin git@github.com:username/repository-name.git
 ```
 
-### 一次git推送的过程
-``` bash
+### 一次 git 推送的过程
+
+```bash
 $ git status	#查看状态，可以看到做出的改动
 On branch master
 Your branch is up-to-date with 'origin/master'.
@@ -99,9 +107,11 @@ $ git commit -m '描述做了什么改动'	#将改动提交
  1 file changed, 1 insertion(+), 1 deletion(-)
 $ git push origin master 	#推送到远端
 ```
+
 [工作区和暂存区详见](https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/0013745374151782eb658c5a5ca454eaa451661275886c6000)
 
 ### 推送冲突
+
 ```bash
 $ git push origin master    # 推送到远程仓库的master分支，被拒绝
 To git@git.oschina.net:defeng/graduation-project.git
@@ -114,8 +124,10 @@ hint: (e.g., 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.
 # git提示可以先pull下来处理后再push
 ```
-实际上，我模拟了一个双人合作的场景，有两个人对readme.md文件作出修改
-原来readme.md的内容：
+
+实际上，我模拟了一个双人合作的场景，有两个人对 readme.md 文件作出修改
+原来 readme.md 的内容：
+
 ```bash
 ---
 paper
@@ -125,6 +137,7 @@ test text
 ```
 
 另一个小伙伴对其进行修改：
+
 ```bash
 ---
 paper
@@ -136,6 +149,7 @@ add 22222
 ```
 
 我对其进行的修改：
+
 ```bash
 ---
 paper
@@ -146,7 +160,7 @@ test text
 add 111
 ```
 
-这时候，小伙伴先行将修改push到了远端，之后我也尝试push，这时候就出现了开始的情况，push失败了，因为跟小伙伴推送的修改产生了冲突，那么接下来解决冲突
+这时候，小伙伴先行将修改 push 到了远端，之后我也尝试 push，这时候就出现了开始的情况，push 失败了，因为跟小伙伴推送的修改产生了冲突，那么接下来解决冲突
 
 ```bash
 $ git pull  # 先pull，如果pull失败可能需要指定分支名，git pull origin master
@@ -160,7 +174,8 @@ CONFLICT (content): Merge conflict in readme.md
 Automatic merge failed; fix conflicts and then commit the result.
 ```
 
-现在查看readme.md的内容，冲突的部分git使用<<<<<<<、=======、>>>>>>>标出：
+现在查看 readme.md 的内容，冲突的部分 git 使用<<<<<<<、=======、>>>>>>>标出：
+
 ```bash
 <<<<<<< HEAD    # 从这里开始是我做出的修改
 ---
@@ -181,7 +196,8 @@ add 22222
 >>>>>>> 029e618cacf774f502e2d8b532b97d2b1b281d0d    # 小伙伴部分结束
 ```
 
-在冲突的文件中搜索<<<<<<<、>>>>>>>可快速找到冲突的部分，处理冲突后的readme.md：
+在冲突的文件中搜索<<<<<<<、>>>>>>>可快速找到冲突的部分，处理冲突后的 readme.md：
+
 ```bash
 ---
 paper
@@ -192,7 +208,8 @@ test text
 add 111,22222
 ```
 
-之后再次add、commit、push即可
+之后再次 add、commit、push 即可
+
 ```bash
 $ git add readme.md
 warning: LF will be replaced by CRLF in readme.md.
@@ -212,8 +229,11 @@ To git@git.oschina.net:defeng/graduation-project.git
 ```
 
 ### 撤销更改
-#### 修改了工作区的内容，但是还没有进行git add
-编辑readme.md：
+
+#### 修改了工作区的内容，但是还没有进行 git add
+
+编辑 readme.md：
+
 ```bash
 paper
 ===
@@ -224,7 +244,9 @@ add 111,22222
 
 add a new line
 ```
+
 查看状态：
+
 ```bash
 $ git status
 On branch master
@@ -237,7 +259,9 @@ Changes not staged for commit:
 
 no changes added to commit (use "git add" and/or "git commit -a")
 ```
-Git会告诉你，git checkout -- file可以丢弃工作区的修改
+
+Git 会告诉你，git checkout -- file 可以丢弃工作区的修改
+
 ```bash
 $ git checkout -- readme.md
 # 然后再查看状态
@@ -246,7 +270,9 @@ On branch master
 Your branch is up-to-date with 'origin/master'.
 nothing to commit, working directory clean
 ```
-现在查看readme.md的内容
+
+现在查看 readme.md 的内容
+
 ```bash
 ---
 paper
@@ -257,7 +283,8 @@ test text
 add 111,22222
 ```
 
-#### 修改了工作区的内容，执行了git add
+#### 修改了工作区的内容，执行了 git add
+
 ```bash
 $ git add readme.md
 $ git status
@@ -269,7 +296,9 @@ Changes to be committed:
         modified:   readme.md
 
 ```
-git同样提示可以使用`git reset HEAD <file>`来撤销
+
+git 同样提示可以使用`git reset HEAD <file>`来撤销
+
 ```bash
 $ git reset head readme.md
 Unstaged changes after reset:
@@ -282,8 +311,10 @@ nothing to commit, working directory clean
 
 ```
 
-#### 修改了工作区的内容，并且commit了
+#### 修改了工作区的内容，并且 commit 了
+
 使用`git log`或'git reflog`查看提交记录，然后也是使用`git reset <commit id>`来跳到指定commit版本，提交记录过长按`q`可以退出
+
 ```bash
 $ git log
 commit cc4de9b788bf3a23f035dc6f9d14b378d54e1569
@@ -312,16 +343,19 @@ M       readme.md
 ```
 
 ### 分支
+
 分支相当于平行的世界线，之间互不影响，特定的时候可以让世界线接触（分支合并）。
 
 使用`git branch`可以查看分支,`*`指向当前所在的分支
+
 ```bash
 $ git branch
 * master
 
 ```
 
-创建分支dev，然后切换到dev
+创建分支 dev，然后切换到 dev
+
 ```bash
 $ git branch dev    # 创建分支dev
 $ git checkout dev  # 切换到dev
@@ -332,9 +366,11 @@ $ git branch
   master
 
 ```
-也可以使用`git checkout -b dev`，创建dev的同时切换到dev，代替上述两条命令
 
-现在在dev分支修改readme.md：
+也可以使用`git checkout -b dev`，创建 dev 的同时切换到 dev，代替上述两条命令
+
+现在在 dev 分支修改 readme.md：
+
 ```bash
 ---
 paper
@@ -346,7 +382,9 @@ add 111,22222
 
 edit in dev
 ```
+
 然后提交修改
+
 ```bash
 $ git add readme.md
 $ git commit -m 'edit in dev'
@@ -355,13 +393,16 @@ $ git commit -m 'edit in dev'
 
 ```
 
-现在切回master分支:
+现在切回 master 分支:
+
 ```bash
 $ git checkout master
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
 ```
-查看readme.md：
+
+查看 readme.md：
+
 ```bash
 ---
 paper
@@ -372,7 +413,9 @@ test text
 add 111,22222
 
 ```
-可以看到在dev分支上的改动不会影响到master分支，现在让世界线碰撞一下，把dev上的内容合并到master上：
+
+可以看到在 dev 分支上的改动不会影响到 master 分支，现在让世界线碰撞一下，把 dev 上的内容合并到 master 上：
+
 ```bash
 $ git merge dev
 Updating feb9f4f..6b23c0d
@@ -381,7 +424,9 @@ Fast-forward
  1 file changed, 2 insertions(+)
 
 ```
-查看readme.md，可以看到与dev合并了`git merge dev`将指定分支合并到当前分支：
+
+查看 readme.md，可以看到与 dev 合并了`git merge dev`将指定分支合并到当前分支：
+
 ```bash
 ---
 paper
@@ -393,7 +438,9 @@ add 111,22222
 
 edit in dev
 ```
-接着可以删除dev分支：
+
+接着可以删除 dev 分支：
+
 ```bash
 $ git branch -d dev
 Deleted branch dev (was 6b23c0d).
@@ -402,33 +449,42 @@ $ git branch
 * master
 
 ```
-你在本地创建了新的分支，没有push到远端别人是看不见的。
-通常，协作的时候每个人都会在自己的分支上进行工作，然后将自己的修改统一推送到比如dev分支，所以这时候想要推送自己的修改的时候一般是`将本地修改commit`==>`将dev分支合并到自己的分支`==>`处理冲突`==>`提交修改`==>`推送到远端dev`
+
+你在本地创建了新的分支，没有 push 到远端别人是看不见的。
+通常，协作的时候每个人都会在自己的分支上进行工作，然后将自己的修改统一推送到比如 dev 分支，所以这时候想要推送自己的修改的时候一般是`将本地修改commit`==>`将dev分支合并到自己的分支`==>`处理冲突`==>`提交修改`==>`推送到远端dev`
 
 删除远程`dev`分支：
+
 ```bash
 $ git push origin --delete dev
 ```
 
-### .gitignore文件
-在仓库的根目录下创建.gitignore文件，可以告诉git哪些文件不需要追踪管理，使用`git add .`的时候也会自动忽略。
-.gitignore文件的内容参考如下，忽略日志、public目录下的文件：
+### .gitignore 文件
+
+在仓库的根目录下创建.gitignore 文件，可以告诉 git 哪些文件不需要追踪管理，使用`git add .`的时候也会自动忽略。
+.gitignore 文件的内容参考如下，忽略日志、public 目录下的文件：
+
 ```bash
 *.log
 public/
 ```
+
 当然我们可以使用`git add -f <file>`来强制添加指定的文件进行提交。
 
-### 让git取消对指定文件的管理
-有时候我们中途发现有些文件不需要让git管理，比如`node_modules/`，我们可以将其从git中移除，不会删除磁盘上的文件
+### 让 git 取消对指定文件的管理
+
+有时候我们中途发现有些文件不需要让 git 管理，比如`node_modules/`，我们可以将其从 git 中移除，不会删除磁盘上的文件
+
 ```bash
 $ git rm -r -n --cached <file>    # 加上-n可以查看将会移除的文件
 $ git rm -r --cached <file>       # 会真正执行移除跟踪操作
 $ git rm -r <file>                # 注意:删除磁盘上的文件
 ```
-移除之后在.gitignore文件中添加node_modules/，以后git就不会对其进行追踪修改。
+
+移除之后在.gitignore 文件中添加 node_modules/，以后 git 就不会对其进行追踪修改。
 
 移除版本跟踪并删除远程文件
+
 ```bash
 $ git rm -r --cached out/
 
@@ -438,15 +494,19 @@ $ git push origin master
 ```
 
 ### 更改关联的远程仓库
+
 #### 更改`/.git/config`中的`url`
 
 #### 使用命令更改
+
 ```bash
 $ git remote set-url origin <url>
 ```
 
 ### 比较更改
+
 比较两个分支的更改差异：
+
 ```bash
 # --stat 是显示文件列表, 否则显示更改内容
 git diff branch1 branch2 --stat
