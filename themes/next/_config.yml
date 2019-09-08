@@ -116,11 +116,11 @@ social_icons:
   Email: envelope
 
 # Blog rolls
-#links_title: Links
-#links_layout: block
-#links_layout: inline
-#links:
-  #Title: http://example.com/
+links_title: 友情链接
+# links_layout: block
+links_layout: inline
+links:
+  小马哥: http://www.vigoss18.com
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
