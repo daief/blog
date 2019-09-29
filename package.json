@@ -8,10 +8,10 @@
   "scripts": {
     "start": "hexo server",
     "clean": "hexo clean",
-    "build": "hexo generate",
-    "b:d": "hexo generate && hexo deploy",
+    "build": "cross-env NODE_ENV=production hexo generate",
     "deploy": "hexo deploy",
-    "new": "hexo new"
+    "new": "hexo new",
+    "b:d": "yarn build && yarn deploy"
   },
   "dependencies": {
     "hexo": "^3.7.1",
@@ -29,6 +29,7 @@
     "hexo-wordcount": "^6.0.1"
   },
   "devDependencies": {
+    "cross-env": "^6.0.0",
     "hexo-generator-search": "^2.3.0",
     "hexo-generator-searchdb": "^1.0.8"
   }
