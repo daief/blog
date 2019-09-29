@@ -29,7 +29,8 @@ i18n_dir: :lang
 skip_render: ['*.html', 'my_projects/**']
 
 # Writing
-new_post_name: :title.md # File name of new posts
+# File name of new posts 通过日期来管理文章
+new_post_name: :year:month:day-:title.md
 default_layout: post
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
