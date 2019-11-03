@@ -13,7 +13,7 @@ keywords:
 description:
 ---
 
-记录那些年，我们都在用的调试方法。第一部分主要是一些 Chrome 开发者工具的使用记录；剩余部分是一些其他的调试手段，包括移动端调试、代理内容的介绍。了解 Chrome 开发者的同学，甚至也可以跳过第一部分。
+记录那些年，我们都在用的调试方法。第一部分主要是一些 Chrome 开发者工具的使用记录；剩余部分是一些其他的调试手段，包括移动端调试、代理内容的介绍。了解 Chrome 开发者的同学，可以跳过第一部分。
 
 <img src="https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103000119.jpg" width="260">
 
@@ -83,7 +83,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 选中节点后右键：
 
-- Copy Js path。得到形如 `document.querySelector("#components-select-demo-basic")` 的结果
+- Copy JS path。得到形如 `document.querySelector("#components-select-demo-basic")` 的结果
 - Copy styles。得到该元素计算过后的 CSS 样式。
 - Break on。可设置 DOM 断点，监听子元素被`移除`或者`添加`的事件、选中的节点被`添加`，`移除`或者`被修改值`的事件、监听被选中的元素被`移除`的事件。
 
