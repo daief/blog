@@ -50,10 +50,10 @@ menu:
   home: /
   archives: /archives/
   categories: /categories/
-  #about: /about/
+  about: /about/
   tags: /tags/
   #sitemap: /sitemap.xml
-  square: /square/
+  # square: /square/
   #commonweal: /404.html
 
 
