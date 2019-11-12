@@ -6,14 +6,14 @@ comments: false
 
 <!-- https://github.com/geekcompany/ResumeSample/blob/master/web.md -->
 
-## 联系方式
+# 联系方式
 
 - 姓名：戴\*\*
 - 手机：177\*\*\*\*\*732
 - Email：<defeng_mail@163.com>
 - QQ / 微信号：1437931235 / defenghznu
 
-## 个人信息
+# 个人信息
 
 - 男 / 1996-10
 - 本科 / 杭州师范大学计算机科学与技术 / 2014.09 ~ 2018.06
@@ -23,11 +23,11 @@ comments: false
 - 期望职位：Web 前端工程师
 - 现居城市：杭州市
 
-## 工作经历
+# 工作经历
 
-### 杭州惠借科技有限公司（ 2018-01 ~ 至今 ）
+## 杭州惠借科技有限公司（ 2018-01 ~ 至今 ）
 
-#### 前端标准统一
+### 前端标准统一
 
 描述：此前，前端开发比较自由，没有完善的组件库、统一框架，久而久之导致了整体比较混乱的情形。针对前端现有问题的统一解决措施。
 
@@ -40,7 +40,7 @@ comments: false
 - Vue 组件封装
 - 开发辅助工具的编写
 
-#### 统一登录后台
+### 统一登录后台
 
 描述：这是一个相对系统的工程，对各种内部后台能有统一的用户、权限管理。
 
@@ -58,7 +58,7 @@ comments: false
 - 依旧使用 Next.js，但不以 SSR 形式部署，只做页面的静态预渲染，带来首屏加载的优化。同时，要求开发者有同构的意识、了解 SSR 的基本原理
 - 仅在前端范畴使用 GraphQL，使用 GraphQL 的语法、概念、工具在前端（客户端）做到 GraphQL 带来的字段查询、接口聚合等功能
 
-#### 移动端 APP 内页面 & 活动页
+### 移动端 APP 内页面 & 活动页
 
 描述：涉及各种内嵌在 APP 内的页面以及活动页的开发。
 
@@ -68,11 +68,11 @@ comments: false
 - 频繁涉及 Web 与原生交互的内容，熟悉常规调试方法
 - 期间了解到 TypeScript 并进行学习，后在公司内推广成功、熟练使用
 - 加深对 Webpack 的学习，能够自定义常规的配置
-- 了解到 Nginx、Jenkins 的存在，能协助运维解决部分相关问题
+- 了解到 Nginx、Jenkins 的存在，能协助运维进行相关问题的处理
 
-### 杭州和乐科技有限公司（ 2017-06 ~ 2018-01 ）
+## 杭州和乐科技有限公司（ 2017-06 ~ 2018-01 ）
 
-#### 母子健康手册 - pdf
+### 母子健康手册 - pdf
 
 [在线地址](http://muzi.heletech.cn:3003/mz/mz-health-hz/read-pdf/html/ReadHandbook/read-handbook.html)
 
@@ -84,7 +84,7 @@ comments: false
 - 整本手册有 130+ 页，图片加载的问题。预请求的思想，以如下顺序发起图片的请求 `当前页` > `后两页` > `前两页`，增强用户的翻页体验；同时释放内存中范围之外的图片缓存，避免内存爆炸。
 - 二次访问，图片加载的问题。图片第一次下载后，转换为 base64，通过 `IndexedDB` 来持久化存储。二次访问时，先尝试从 `IndexedDB` 获取再发起网络请求，加强用户二次访问体验的同时能节约不少流量。
 
-#### 小乐机器人
+### 小乐机器人
 
 描述：比较简单的一个表单提交、结果展示页面。
 
@@ -92,7 +92,7 @@ comments: false
 
 - 由此接触到现代编程的方式，了解到 Node.js、npm、Webpack、MVVM 等概念。
 
-## 个人作品
+# 个人作品
 
 - [jugg](https://github.com/daief/jugg)：前端脚手架工具，基于 Webpack 编写，内置常用的 Webpack 配置集合，方便前端项目的开发、构建。
 - [vue-music](https://github.com/daief/vue-music)：基于 Vue 的个人练习项目，根据网易云音乐 PC 页面进行仿造。
@@ -103,7 +103,7 @@ comments: false
   - [inject-code](https://github.com/daief/inject-code)：Chrome 扩展程序，可通过该插件往匹配的页面中注入 JS 脚本或 CSS 样式文件。
   - [espf](https://github.com/daief/espf)：Electron 应用程序，读取系统中 `.bash_profile`、`.zshrc` 等文件，方便对这类文件的编辑。
 
-## 技能清单
+# 技能清单
 
 - 熟悉 TypeScript、JavaScript / ES6+ 规范 / 偏爱 TS
 - 熟悉 React、Vue / React 使用更多 / 具备一定的组件开发能力
