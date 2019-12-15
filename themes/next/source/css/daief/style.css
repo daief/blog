@@ -1,5 +1,5 @@
 body {
-  background-image: url("../../images/body.jpg");
+  background-image: url('../../images/body.jpg');
   background-repeat: no-repeat;
   background-position: center;
   -webkit-background-size: cover;
@@ -10,7 +10,7 @@ body {
 
 /*文章背景*/
 .content-wrap {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.8);
 }
 
 .footer-inner {
@@ -133,7 +133,7 @@ body {
 
 @media (max-width: 767px) {
   body {
-    background-image: url("../../images/body-small.jpg");
+    background-image: url('../../images/body-small.jpg');
   }
 
   .sidebar {
@@ -184,10 +184,10 @@ body {
   margin: 5px 9px 5px 8px;
   font-family: Menlo, Monaco, Andale Mono, lucida console, Courier New,
     monospace;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 .tag-cloud a::before {
-  content: " ";
+  content: ' ';
   width: 0;
   height: 0;
   position: absolute;
@@ -195,10 +195,10 @@ body {
   left: -18px;
   border: 9px solid transparent;
   border-right-color: #66ccffbf;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 .tag-cloud a::after {
-  content: " ";
+  content: ' ';
   width: 4px;
   height: 4px;
   background-color: #fff;
