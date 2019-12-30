@@ -2,6 +2,13 @@
 title: 我的 2019
 id: year-end-summary-2019
 date: 2019-12-29 15:17:00
+categories: '生活'
+tags:
+  - 生活
+keywords:
+  - 2019 总结
+  - 年终
+  - daief
 ---
 
 距离 2019 结束只有不到三天，好好写完这份总结应该是今年最后一件事了。
