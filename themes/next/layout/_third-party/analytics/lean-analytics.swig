@@ -111,7 +111,12 @@
     $(function() {
       var Counter = AV.Object.extend("Counter");
       if ($('.leancloud_visitors').length === 1) {
-        addCount(Counter);
+        // 只在部署后再去增加计数
+        {% if env.env !== 'development' %}
+          addCount(Counter);
+        {% else %}
+          showTime(Counter);
+        {% endif %}
       } else if ($('.post-title-link').length > 1) {
         showTime(Counter);
       }

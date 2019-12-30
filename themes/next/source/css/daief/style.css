@@ -75,9 +75,9 @@ body {
   top: 30px;
 }
 
-.busuanzi-count,
-.leancloud_visitors {
-  /*display: none;*/
+/* leancloud 功能开启，显示隐藏 */
+.post-meta .leancloud_visitors {
+  display: none;
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
