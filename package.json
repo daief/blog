@@ -14,6 +14,7 @@
     "b:d": "yarn build && yarn deploy"
   },
   "dependencies": {
+    "cross-env": "^6.0.0",
     "hexo": "^3.7.1",
     "hexo-deployer-git": "^0.3.1",
     "hexo-generator-archive": "^0.1.5",
@@ -26,11 +27,9 @@
     "hexo-renderer-marked": "^0.3.2",
     "hexo-renderer-stylus": "^0.3.3",
     "hexo-server": "^0.3.2",
-    "hexo-wordcount": "^6.0.1"
-  },
-  "devDependencies": {
-    "cross-env": "^6.0.0",
+    "hexo-wordcount": "^6.0.1",
     "hexo-generator-search": "^2.3.0",
     "hexo-generator-searchdb": "^1.0.8"
-  }
+  },
+  "devDependencies": {}
 }
