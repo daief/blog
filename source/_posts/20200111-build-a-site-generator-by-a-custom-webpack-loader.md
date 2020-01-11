@@ -168,6 +168,6 @@ export default {
 
 # 结语
 
-因为，本篇内容在 [Github 上有具体的实现](https://github.com/daief/jugg/tree/master/packages/jugg-plugin-doc)，所以细节都没有展开。另外实现思路也比较简单，所以通篇可能表现得比较简略，不过事实也就是这样。
+因为，本篇内容在 [Github 上有具体的实现](https://github.com/daief/jugg/tree/master/packages/jugg-plugin-doc)，所以细节都没有展开。另外实现思路也比较简单，所以通篇表现得比较简略。
 
 ㊗ 新年快乐。
