@@ -1,9 +1,10 @@
+# 暂不触发
 name: Build Site
 
 on:
   push:
     branches:
-      - master
+      - aBranchNotExists
 
 jobs:
   build:
