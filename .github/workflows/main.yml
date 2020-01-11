@@ -9,10 +9,21 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
 
     steps:
-      - name: Checkout
-      - uses: actions/checkout@v1
+    - name: Checkout
+      uses: actions/checkout@v1
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
 
-      - name: Build
-        run: yarn && yarn b:d
+    - name: Build
+      uses: borales/actions-yarn@v2.0.0
+      with:
+        cmd: b:d # will run `yarn b:d` command
