@@ -35,6 +35,7 @@ jobs:
         # set git infomation
         git config --global user.name 'daief'
         git config --global user.email '1437931235@qq.com'
-        
+    
+    - run: yarn
     - run: yarn b:d
       
