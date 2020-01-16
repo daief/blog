@@ -94,18 +94,6 @@ body::before {
   display: none;
 }
 
-@media (min-width: 768px) and (max-width: 991px) {
-  .back-to-top {
-    display: block !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .back-to-top {
-    display: block !important;
-  }
-}
-
 @media (min-width: 992px) {
   .toggle-index {
     display: none !important;
@@ -113,24 +101,17 @@ body::before {
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
+  .back-to-top {
+    display: block !important;
+  }
+
   .sidebar {
     display: none !important;
   }
 
   .sidebar-inner.affix {
     width: 100%;
-
-    /*background: url(../../sidebar.jpg) no-repeat;*/
-    /*background: url(http://c.hiphotos.baidu.com/zhidao/pic/item/562c11dfa9ec8a13115ed2edff03918fa0ecc073.jpg) no-repeat;*/
     background: rgba(255, 255, 255, 0.95);
-    background-repeat: no-repeat;
-    background-size: auto auto;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 1;
   }
 
   .sidebar-inner {
@@ -156,18 +137,7 @@ body::before {
 
   .sidebar-inner.affix {
     width: 100%;
-
-    /*background: url(../../sidebar.jpg) no-repeat;*/
-    /*background: url(http://c.hiphotos.baidu.com/zhidao/pic/item/562c11dfa9ec8a13115ed2edff03918fa0ecc073.jpg) no-repeat;*/
     background: rgba(255, 255, 255, 0.95);
-    background-repeat: no-repeat;
-    background-size: auto auto;
-    background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 1;
   }
 
   .sidebar-inner {
@@ -179,6 +149,10 @@ body::before {
     margin-top: 88px;
     width: 100%;
     justify-content: center;
+  }
+
+  .back-to-top {
+    display: block !important;
   }
 }
 
