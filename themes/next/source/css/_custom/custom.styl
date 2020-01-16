@@ -57,12 +57,12 @@ body::before {
   /*background: rgba(249,249,249,0.5);*/
 }
 
-/* 小屏幕菜单展示按钮颜色 */
+// -------------------------------- 小屏幕菜单展示按钮颜色
 .btn-bar {
   background-color: #111;
 }
 
-/* 中小屏幕站点信息开关 */
+// -------------------------------- 中小屏幕站点信息开关
 .toggle-index {
   touch-action: none;
   box-sizing: border-box;
@@ -89,7 +89,7 @@ body::before {
   top: 30px;
 }
 
-/* leancloud 功能开启，显示隐藏 */
+// -------------------------------- leancloud 功能开启，显示隐藏
 .post-meta .leancloud_visitors {
   display: none;
 }
@@ -156,7 +156,7 @@ body::before {
   }
 }
 
-/* 标签云页面，标签样式 */
+// -------------------------------- 标签云页面，标签样式
 .tag-cloud a {
   display: inline-block;
   text-decoration: none;
@@ -204,4 +204,18 @@ body::before {
 }
 .tag-cloud a:hover::before {
   border-right-color: #66ccff;
+}
+
+// -------------------------------- hitokoto 一言样式
+#hitokoto {
+  margin-bottom 20px;
+  .hko-content, .hko-author {
+    font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, "sans-serif";
+    line-height: 1.35;
+    margin: 0;
+  }
+  .hko-author {
+    margin-top 5px
+    text-align right
+  }
 }

@@ -42,6 +42,15 @@
               <p class="site-description motion-element" itemprop="description">{{ theme.description }}</p>
           {% endif %}
         </div>
+
+        <!-- `一言` 展示容器 -->
+        <div id="hitokoto" from="https://hitokoto.cn/">
+          <!-- 内容 -->
+          <p class="hko-content"></p>
+          <!-- 作者 -->
+          <p class="hko-author"></p>
+        </div>
+
         <nav class="site-state motion-element">
 
           {% if config.archive_dir != '/' %}
