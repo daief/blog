@@ -2,7 +2,7 @@
  * @Author: daief
  * @LastEditors  : daief
  * @Date: 2018-07-15 20:09:26
- * @LastEditTime : 2020-01-16 16:04:09
+ * @LastEditTime : 2020-01-16 17:53:35
  * @Description:
  */
 !(function() {
@@ -24,7 +24,7 @@
   }
 
   /**
-   * 获取每日一言，并展示在副标题
+   * 获取每日一言
    */
   function getHitokoto() {
     $.get('https://v1.hitokoto.cn/?encode=json')
