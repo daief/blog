@@ -2,7 +2,7 @@
 title: webpack学习
 date: 2017-7-20 16:52:48
 id: learn-webpack
-categories: ["前端"]
+categories: ['前端']
 tags:
   - JavaScript
   - webpack
@@ -27,7 +27,7 @@ description:
 npm i -g webpack webpack-dev-server
 ```
 
-启动服务器，在http://127.0.0.1:8080查看运行效果
+启动服务器，在 <http://127.0.0.1:8080> 查看运行效果
 
 ```bash
 $ webpack-dev-server
@@ -46,10 +46,10 @@ Webpack 遵循 webpack.config.js 的配置来构建生成 bundle.js —— [demo
 ```javascript
 // webpack.config.js
 module.exports = {
-  entry: "./main.js",
+  entry: './main.js',
   output: {
-    filename: "bundle.js"
-  }
+    filename: 'bundle.js',
+  },
 };
 ```
 
@@ -59,12 +59,12 @@ webpack.config.js
 ```javascript
 module.exports = {
   entry: {
-    bundle1: "./main1.js",
-    bundle2: "./main2.js"
+    bundle1: './main1.js',
+    bundle2: './main2.js',
   },
   output: {
-    filename: "[name].js"
-  }
+    filename: '[name].js',
+  },
 };
 ```
 
@@ -76,19 +76,19 @@ webpack.config.js 暂时还不清楚 module 的写法
 
 ```javascript
 module.exports = {
-  entry: "./main.jsx",
+  entry: './main.jsx',
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js',
   },
   module: {
     loaders: [
       {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
-        loader: "babel-loader?presets[]=es2015&presets[]=react"
-      }
-    ]
-  }
+        loader: 'babel-loader?presets[]=es2015&presets[]=react',
+      },
+    ],
+  },
 };
 ```
 
@@ -109,12 +109,12 @@ webpack.config.js
 
 ```javascript
 module.exports = {
-  entry: "./main.js",
+  entry: './main.js',
   output: {
-    filename: "bundle.js"
+    filename: 'bundle.js',
   },
   module: {
-    loaders: [{ test: /\.css$/, loader: "style-loader!css-loader" }]
-  }
+    loaders: [{ test: /\.css$/, loader: 'style-loader!css-loader' }],
+  },
 };
 ```
