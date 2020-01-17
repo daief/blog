@@ -32,7 +32,9 @@
         if (data && data.hitokoto) {
           var content = data.hitokoto;
           $('#hitokoto .hko-content').text(content);
-          $('#hitokoto .hko-author').text('—— ' + data.from);
+          $('#hitokoto .hko-author').html(
+            '<span style="font-family:cursive;">—— </span>' + data.from,
+          );
         }
       })
       .fail(function() {
