@@ -2,7 +2,7 @@
 title: 也许有用的 Web 调试技能
 date: 2019-11-03 00:37:13
 id: some-web-debugging-skills
-categories: ["前端"]
+categories: ['前端']
 tags:
   - Chrome
 keywords:
@@ -15,7 +15,7 @@ description:
 
 记录那些年，我们都在用的调试方法。第一部分主要是一些 Chrome 开发者工具的使用记录；剩余部分是一些其他的调试手段，包括移动端调试、代理内容的介绍。了解 Chrome 开发者的同学，可以跳过第一部分。
 
-<img src="https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103000119.jpg" width="260">
+<img src="some-web-debugging-skills/chrome-chan.jpg" width="260">
 
 <!-- more -->
 
@@ -40,7 +40,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
   - Windows：`Ctrl` + `Shift` + `I`
   - `F12`
 
-![chrome devtools](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103000845.jpg)
+![chrome devtools](some-web-debugging-skills/chrome-devtools.jpg)
 
 之后，就可以看如图所示的 DevTools 面板，接下来的工作都将在这上面进行。
 
@@ -54,13 +54,13 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 点亮如图按钮即可进入设备模式。设备模式对于开发移动端页面时十分有帮助，在该模式下，可方便地查看页面在各种尺寸设备上的表现。
 
-![devices mode](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103001331.jpg)
+![devices mode](some-web-debugging-skills/devices-mode.jpg)
 
 当预设的型号不满足要求时，还可以自定义添加新的设备，设置宽高，**同时支持设置 userAgent 的值**，这让我们可以轻松模拟出一些特定环境的设置，如通过 UA 简单模拟微信。
 
 此处可限制设备的网速和 CPU 使用率，如只想单独限制网速，可在网络面板（Network）中设置。
 
-![devices throttling](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103001628.jpg)
+![devices throttling](some-web-debugging-skills/devices-throttling.jpg)
 
 右上角更多菜单（三个点）中还有一些快捷功能，比如开启显示标尺、显示媒体查询、页面截图等功能。
 
@@ -75,7 +75,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 - 使用左上角按钮（快捷键：`Command` + `Option` + `C`）
 - 在页面上元素右键 => 检查
 
-![elements panel](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103001812.jpg)
+![elements panel](some-web-debugging-skills/elements-panel.jpg)
 
 在 DOM 树区域，支持直接拖拉节点、复制粘贴大法（`Ctrl` + `C`、`V`）、编辑节点、编辑属性等等。
 
@@ -89,13 +89,13 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 在 CSS 区域中会按照权重高低列出所有元素命中的样式，还可以通过如下方式查看元素伪类的样式。
 
-![css](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002103.jpg)
+![css](some-web-debugging-skills/css.jpg)
 
 可以直接在在此编辑样式，并能实时反馈在页面当中，有助于调整。同时，对于颜色、阴影、贝塞尔曲线等参数，还提供了强大的 GUI 以供使用。
 
 例：点击颜色前的方块，即可打开 Color Picker。
 
-![color-picker](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002130.jpg)
+![color-picker](some-web-debugging-skills/color-picker.jpg)
 
 页面复杂时，此处的展示的样式会比较多，难以知晓具体生效的样式。一是通过前文提及的 `Copy styles` 获取样式，二则可以切换子 tab 到 `computed`，此处可以清晰看到最终计算后所生效的样式内容。
 
@@ -109,7 +109,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 在这里，可以查看日志，执行代码。看似简短的一句话，但却远远不止如此。
 
-![console panel](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002207.jpg)
+![console panel](some-web-debugging-skills/console-panel.jpg)
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/console>。
 
@@ -165,11 +165,11 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 
 `dir`。当在控制台输出 `$0` 时，我们看到的是一个 DOM 对象，无法点开查看属性，而使用 `dir($0)` 就能清晰地看到对象属性，同时 `dir` 是 `console.dir` 的别名。
 
-![dir](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002255.jpg)
+![dir](some-web-debugging-skills/dir.jpg)
 
 点击眼睛图标可创建“活”的表达式（Live Expressions），表达式的值会根据变化而变化，多次点击可创建多条表达式。
 
-![dir](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002310.jpg)
+![live-expressions](some-web-debugging-skills/live-expressions.jpg)
 
 ## 网络面板（Network）
 
@@ -182,7 +182,7 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 
 其他的各种开关、右键菜单都可以点点试试。
 
-![network panel](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002322.jpg)
+![network-panel](some-web-debugging-skills/network-panel.jpg)
 
 ### Tips - Network Overrides
 
@@ -195,7 +195,7 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 3. 在 `Network` 面板，选中一个请求右键，点击 `Save for overrides`
 4. DevTools 会在本地创建一个与请求内容相同的文件，并在 `Source` 面板中打开，编辑完刷新页面以查看效果
 
-![Network Overrides](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103002337.gif)
+![Network Overrides](some-web-debugging-skills/network-overrides.gif)
 
 ## 资源面板（Source）
 
@@ -209,7 +209,7 @@ Source 面板大体分为三部分
 - 中间的 `Code Editor` 窗格，可进行代码编辑，设置断点
 - 右边的 `JavaScript Debugging` 窗格，包含调试所用的常用选项
 
-![Source panel](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003131.jpg)
+![Source panel](some-web-debugging-skills/source-panel.jpg)
 
 ### 断点
 
@@ -268,7 +268,7 @@ Source 面板大体分为三部分
 - 右键代码片段，点击 `run`。
 - 使用 `Command Menu`。快捷键（Mac：`Command` + `P`）呼出，使用 `!` + 代码片段（文件）名搜索，回车执行。
 
-![run snippet](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003158.jpg)
+![run snippet](some-web-debugging-skills/run-snippet.jpg)
 
 ## 应用面板（Application）
 
@@ -276,13 +276,13 @@ Source 面板大体分为三部分
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/manage-data/local-storage>。
 
-![application panel](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003212.jpg)
+![application panel](some-web-debugging-skills/application-panel.jpg)
 
 ## 命令菜单（Command Menu）
 
 使用命令菜单可以很方便地唤起 DevTools 的各种功能，因为命令菜单可以在任何面板中呼出，且同样有着丰富的功能。可以通过快捷键（Mac: `Command` + `Shift` + `P`）快速打开，或在此处菜单栏中寻得。值得一提的是，此处命令菜单的用法与 VScode 中的十分相似。
 
-![run command menu](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003232.jpg)
+![run command menu](some-web-debugging-skills/run-command-menu.jpg)
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/command-menu>。
 
@@ -293,11 +293,11 @@ Source 面板大体分为三部分
 - Switch to light theme。设置 DevTools 的主题为亮色风格。
 - ...
 
-![dark theme](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003248.jpg)
+![dark theme](some-web-debugging-skills/dark-theme.jpg)
 
 仔细观察，当输入框中以 `>` 开头时表示执行某条命令。输入 `?` 可以查看各种前缀所代表的意思。
 
-![command menu perfix](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003300.jpg)
+![command menu perfix](some-web-debugging-skills/cmd-menu-perfix.jpg)
 
 - `...`开头或没有前缀的时候，则是作为文件搜索工具，也可以使用 `Command` + `P` 快速打开。
 - `:` 开头快速定位行。
@@ -317,11 +317,11 @@ Source 面板大体分为三部分
 
 正常抓取[必应](https://cn.bing.com/)页面的加载情况，选中一个脚本请求右键 => `Map Remote ...`。
 
-![biying charles](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003334.jpg)
+![biying charles](some-web-debugging-skills/biying-charles.jpg)
 
 配置 Map，将 `https://cn.bing.com/rb/G/cj,nj/2a4e724b/68bee66e.js` Map 到 `http://127.0.0.1:55555/public/test.js`。
 
-![biying charles](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003343.jpg)
+![charles mapping](some-web-debugging-skills/charles-mapping.jpg)
 
 本地测试脚本内容。
 
@@ -332,11 +332,11 @@ console.log('JS from mapped');
 
 保存后，刷新页面。可以看到 Charles 中多了本地脚本的请求，并且有特殊字段标明资源来源于 Mapped。
 
-![biying charles](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003401.jpg)
+![charles-mapped-js](some-web-debugging-skills/charles-mapped-js.jpg)
 
 同时在页面中可以看到脚本被运行。
 
-![biying charles](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003410.jpg)
+![proxy-js](some-web-debugging-skills/proxy-js.jpg)
 
 # 调试移动端的 webview
 
@@ -348,7 +348,7 @@ console.log('JS from mapped');
 
 `eruda` 运行效果，可以看到熟悉的几个面板，功能虽然不及 DevTools，但很多情况下足够用的。
 
-![eruda](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003423.jpg)
+![eruda](some-web-debugging-skills/eruda.jpg)
 
 ## DevTools
 
@@ -364,9 +364,9 @@ console.log('JS from mapped');
 2. 使用 Android 自带浏览器打开需要调试的页面；如果是其他 APP 中的 webview，需要客户端同学打开可调试的选项
 3. 使用 USB 连接手机与 PC，在移动设备上授权信任 PC，在 PC 中打开 Chrome，
 4. 在 Chrome 中输入 `chrome://inspect/#devices`，顺利的话可以看到如下的页面。
-   ![chrome-inspect-devices](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003434.jpg)
+   ![chrome-inspect-devices](some-web-debugging-skills/chrome-inspect-devices.jpg)
 5. 点击相应页面的 `inspect`，即可调出相应页面的 DevTools，**如果打开后是空白的，请确保 Chrome 处于能翻墙的条件**（以前的时候，我记得只要 Chrome 没更新，只需要翻一次，但现在感觉每次打开都要挂代理才成功），如果顺利的话，就能看到这样的页面，可以直接使用 DevTools 的功能。
-   ![devtools-on-android](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003444.jpg)
+   ![devtools-on-android](some-web-debugging-skills/devtools-on-android.jpg)
 
 > 我自己电脑时常连接 USB 后检测不到设备，空闲时 adb 服务貌似不会开启，需要手动激活一下，如输入一下 `adb devices`
 >
@@ -387,7 +387,7 @@ console.log('JS from mapped');
 4. 在 Safari 的开发选项中找到对应的 iOS 设备，第一次的话需要选择作为开发，之后选择需要调试的页面即可（设备子菜单下会有一个链接的列表）
 5. 点击后就能调起 Safari 的调试工具
 
-![safari-devices](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003457.jpg)
+![safari-devices](some-web-debugging-skills/safari-devices.jpg)
 
 > Mac Safari 默认是没有 `开发` 菜单的，需要在设置中开启。
 
@@ -401,11 +401,11 @@ console.log('JS from mapped');
 
 如，选中根节点（或是其他组件节点），可通过 DOM 的 `__vue__` 获取到 Vue 的实例对象。
 
-![vue-instance-by__vue__](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003508.jpg)
+![vue-instance-by__vue__](some-web-debugging-skills/vue-instance-by__vue__.jpg)
 
 通过这个实例对象，就可以做很多事情了，比如直接更新组件的 `data`、更新国际化语言为英语。
 
-![vue-instance-by__vue__](https://cdn.statically.io/img/raw.githubusercontent.com/daief/blog-assets/static/imgs/20191103003523.jpg)
+![update-data-by__vue__](some-web-debugging-skills/update-data-by__vue__.jpg)
 
 # 结语
 
