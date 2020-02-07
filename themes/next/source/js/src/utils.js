@@ -11,11 +11,6 @@ NexT.utils = NexT.$u = {
       .each(function() {
         var $image = $(this);
 
-        // 图片加载失败时显示占位图
-        $image.on('error', function() {
-          $image.attr('src', '/images/image-error.jpg');
-        });
-
         var imageTitle = $image.attr('title');
         var $imageWrapLink = $image.parent('a');
 

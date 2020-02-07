@@ -551,7 +551,8 @@ vendors:
 
   # Internal version: 1.9.7
   # See: https://github.com/tuupola/jquery_lazyload
-  lazyload:
+  # ! 该库不支持通过这种方式修改，因为自行编辑了 lib/ 下的源码
+  # lazyload:
 
   # Internal version: 1.2.1
   # See: http://VelocityJS.org
