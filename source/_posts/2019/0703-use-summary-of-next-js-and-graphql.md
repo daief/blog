@@ -2,7 +2,7 @@
 title: Next.js、GraphQL 使用小结
 date: 2019-07-03 19:11:51
 id: use-summary-of-next-js-and-graphql
-categories: ["前端"]
+categories: ['前端']
 tags:
   - SSR
   - GraphQL
@@ -67,7 +67,7 @@ Java 端基于 [JWT（Json web token）](https://en.wikipedia.org/wiki/JSON_Web_
 
 nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
-![](https://imgur.com/W4BRM6U.jpg)
+![](use-summary-of-next-js-and-graphql/sequence-chart.jpg)
 
 ## nextjs-static
 
@@ -99,19 +99,19 @@ nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
 ```js
 // next.config.js
-const withCSS = require("@zeit/next-css");
+const withCSS = require('@zeit/next-css');
 module.exports = withCSS(
   withLess({
     /* config options here */
     cssModules: /* 开启 cssModules */ true,
     lessLoaderOptions: {
-      javascriptEnabled: true
+      javascriptEnabled: true,
     },
     cssLoaderOptions: {
       importLoaders: 1,
-      localIdentName: "[local]_[hash:base64:5]"
-    }
-  })
+      localIdentName: '[local]_[hash:base64:5]',
+    },
+  }),
 );
 ```
 
@@ -123,9 +123,9 @@ module.exports = withCSS(
 
 ```js
 // next.config.js
-if (typeof require !== "undefined") {
-  require.extensions[".css"] = file => {};
-  require.extensions[".less"] = file => {};
+if (typeof require !== 'undefined') {
+  require.extensions['.css'] = file => {};
+  require.extensions['.less'] = file => {};
 }
 ```
 
@@ -135,8 +135,8 @@ if (typeof require !== "undefined") {
 
 ```js
 // withStyle.js
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 module.exports = (nextConfig = {}) => {
   return Object.assign({}, nextConfig, {
@@ -145,73 +145,73 @@ module.exports = (nextConfig = {}) => {
       const {
         cssLoaderOptions,
         postcssLoaderOptions,
-        lessLoaderOptions = {}
+        lessLoaderOptions = {},
       } = nextConfig;
 
       options.defaultLoaders.css = [
         {
-          loader: MiniCssExtractPlugin.loader
+          loader: MiniCssExtractPlugin.loader,
         },
         {
-          loader: "css-loader",
+          loader: 'css-loader',
           options: {
             sourceMap: dev,
             modules: {
-              mode: "global",
-              localIdentName: "[local]--[hash:base64:5]"
+              mode: 'global',
+              localIdentName: '[local]--[hash:base64:5]',
             },
-            ...cssLoaderOptions
-          }
-        }
+            ...cssLoaderOptions,
+          },
+        },
       ];
 
       options.defaultLoaders.less = [
         ...options.defaultLoaders.css,
         {
-          loader: "less-loader",
+          loader: 'less-loader',
           options: {
             javascriptEnabled: true,
-            ...lessLoaderOptions
-          }
-        }
+            ...lessLoaderOptions,
+          },
+        },
       ];
 
       config.module.rules.push(
         {
           test: /\.css$/,
-          use: options.defaultLoaders.css
+          use: options.defaultLoaders.css,
         },
         {
           test: /\.less$/,
-          use: options.defaultLoaders.less
-        }
+          use: options.defaultLoaders.less,
+        },
       );
 
       config.plugins.push(
         new MiniCssExtractPlugin({
           // 要加上 static，否则打包后 404
           filename: dev
-            ? "static/css/[name].css"
-            : "static/css/[name].[contenthash:8].css",
+            ? 'static/css/[name].css'
+            : 'static/css/[name].[contenthash:8].css',
           chunkFilename: dev
-            ? "static/css/[name].chunk.css"
-            : "static/css/[name].[contenthash:8].chunk.css"
+            ? 'static/css/[name].chunk.css'
+            : 'static/css/[name].[contenthash:8].chunk.css',
         }),
-        new (require("webpack-filter-warnings-plugin"))({
-          exclude: /mini-css-extract-plugin[^]*Conflicting order between:/
-        })
+        new (require('webpack-filter-warnings-plugin'))({
+          exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+        }),
       );
 
       if (!dev && !isServer) {
         // 构建模式 & Client 才开启压缩
         config.optimization.minimizer = [
           ...config.optimization.minimizer,
-          new OptimizeCSSAssetsPlugin({})
+          new OptimizeCSSAssetsPlugin({}),
         ];
       }
 
       // ......
-    }
+    },
   });
 };
 ```
@@ -221,7 +221,7 @@ module.exports = (nextConfig = {}) => {
 ```js
 // next.config.js
 // 这种配置下就不需要在顶部添加对 require 的处理了
-const withStyle = require("@react-ssr/shared/next-config/withStyle");
+const withStyle = require('@react-ssr/shared/next-config/withStyle');
 
 module.exports = withStyle({
   webpack(config, options) {
@@ -233,18 +233,18 @@ module.exports = withStyle({
       config.externals = [
         (context, request, callback) => {
           if (request.match(antStyles)) return callback();
-          if (typeof origExternals[0] === "function") {
+          if (typeof origExternals[0] === 'function') {
             origExternals[0](context, request, callback);
           } else {
             callback();
           }
         },
-        ...(typeof origExternals[0] === "function" ? [] : origExternals)
+        ...(typeof origExternals[0] === 'function' ? [] : origExternals),
       ];
     }
 
     return config;
-  }
+  },
 });
 ```
 
@@ -261,13 +261,13 @@ module.exports = () => ({
     // 把所有 css 合并，因为前端路由切换页面的时候不会拉取对应的 css 文件
     // 服务端配置走不走不影响
     config.optimization.splitChunks.cacheGroups.styles = {
-      name: "styles",
+      name: 'styles',
       test: /\.(css|less)$/,
-      chunks: "all",
-      enforce: true
+      chunks: 'all',
+      enforce: true,
     };
     // ...
-  }
+  },
 });
 ```
 
@@ -284,16 +284,16 @@ config.module.rules.push({
   test: /\.(jpe?g|png|svg|gif|ico|webp)$/,
   use: [
     {
-      loader: "url-loader",
+      loader: 'url-loader',
       options: {
         limit: 8192,
-        fallback: "file-loader",
+        fallback: 'file-loader',
         publicPath: `/_next/static/images/`,
-        outputPath: `${isServer ? "../" : ""}static/images/`,
-        name: "[name]-[hash].[ext]"
-      }
-    }
-  ]
+        outputPath: `${isServer ? '../' : ''}static/images/`,
+        name: '[name]-[hash].[ext]',
+      },
+    },
+  ],
 });
 ```
 
@@ -313,7 +313,7 @@ config.module.rules.push({
       /next-server[\\/]dist[\\/]lib/,
       /next[\\/]dist[\\/]client/,
       /next[\\/]dist[\\/]pages/,
-      /[\\/](strip-ansi|ansi-regex)[\\/]/
+      /[\\/](strip-ansi|ansi-regex)[\\/]/,
     ],
     exclude: (path: string) => {
       if (
@@ -327,8 +327,8 @@ config.module.rules.push({
 
       return /node_modules/.test(path);
     },
-    use: defaultLoaders.babel
-  }
+    use: defaultLoaders.babel,
+  },
   // ...
 ];
 ```
@@ -339,11 +339,11 @@ config.module.rules.push({
 // next.config.js
 // https://github.com/zeit/next.js/blob/aac4e21d46f300d8433b0bd94a7a0f51e443b7d4/examples/with-yarn-workspaces/packages/web-app/next.config.js#L1
 
-const withTM = require("next-transpile-modules");
+const withTM = require('next-transpile-modules');
 
 module.exports = withTM({
   // `@react-ssr/shared` 是 Monorepo 结构下的其他模块的包名
-  transpileModules: ["@react-ssr/shared"]
+  transpileModules: ['@react-ssr/shared'],
 });
 ```
 
@@ -362,15 +362,15 @@ module.exports = {
   webpack(config) {
     config.module.rules.forEach(rule => {
       // 这里的改动比较暴力，因为 Next.js 没有直接暴露更改内建 loader 参数的地方
-      if (rule.use && rule.use.loader === "next-babel-loader") {
+      if (rule.use && rule.use.loader === 'next-babel-loader') {
         // 设置 babel 向上寻找 babel.config.js，然后将其所在的路径作为根（root）
         // 否则编译其他 package 时不会加载 babel 插件
         // https://babeljs.io/docs/en/config-files#project-wide-configuration
-        rule.use.options.rootMode = "upward";
+        rule.use.options.rootMode = 'upward';
       }
     });
     // ...
-  }
+  },
 };
 ```
 
@@ -407,8 +407,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      ...reqHeaders
-    }
+      ...reqHeaders,
+    },
   };
 });
 ```
