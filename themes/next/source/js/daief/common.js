@@ -27,6 +27,10 @@
    * 获取每日一言
    */
   function getHitokoto() {
+    if (getHitokoto.loading) {
+      return;
+    }
+    getHitokoto.loading = true;
     $.get('https://v1.hitokoto.cn/?encode=json')
       .done(function(data) {
         if (data && data.hitokoto) {
@@ -39,11 +43,17 @@
       })
       .fail(function() {
         // ...
+      })
+      .always(function() {
+        // ...
+        getHitokoto.loading = false;
       });
   }
 
   $(document).ready(function() {
     registerTitleChange();
+
     getHitokoto();
+    $('#hitokoto').on('click', getHitokoto);
   });
 })();
