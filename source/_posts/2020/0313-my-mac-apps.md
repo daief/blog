@@ -52,3 +52,5 @@ description:
   - 微信小助手：<https://github.com/MustangYM/WeChatExtension-ForMac/>
 - nvm
   - <https://github.com/nvm-sh/nvm>，Node.js 版本管理器
+- Folx
+  - 下载管理器（windows 上据说有个 IDM - Internet Download Manager）
