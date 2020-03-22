@@ -91,9 +91,6 @@ export default function HOC<T>(
     const start = () => {
       reset();
       timer.current = setInterval(() => {
-        if (current <= 0) {
-          reset();
-        }
         setCurrent(pre => pre - 1);
       }, 1000);
     };
@@ -102,6 +99,12 @@ export default function HOC<T>(
       timer.current && clearInterval(timer.current);
       setCurrent(60);
     };
+
+    React.useEffect(() => {
+      if (current < 0) {
+        reset();
+      }
+    }, [current]);
 
     return React.createElement(Component, {
       current,
@@ -210,9 +213,6 @@ const RenderProps = (props: {
   const start = () => {
     reset();
     timer.current = setInterval(() => {
-      if (current <= 0) {
-        reset();
-      }
       setCurrent(pre => pre - 1);
     }, 1000);
   };
@@ -221,6 +221,13 @@ const RenderProps = (props: {
     timer.current && clearInterval(timer.current);
     setCurrent(60);
   };
+
+  React.useEffect(() => {
+    if (current < 0) {
+      reset();
+    }
+  }, [current]);
+
   return props.render({
     current,
     start,
@@ -264,9 +271,6 @@ export default function useCountDown() {
   const start = () => {
     reset();
     timer.current = setInterval(() => {
-      if (current <= 0) {
-        reset();
-      }
       setCurrent(pre => pre - 1);
     }, 1000);
   };
@@ -275,6 +279,12 @@ export default function useCountDown() {
     timer.current && clearInterval(timer.current);
     setCurrent(60);
   };
+
+  React.useEffect(() => {
+    if (current < 0) {
+      reset();
+    }
+  }, [current]);
 
   return {
     current,
