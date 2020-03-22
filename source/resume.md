@@ -31,9 +31,9 @@ comments: false
 
 ### 前端标准统一
 
-描述：此前，前端开发比较自由，没有完善的组件库、统一框架，久而久之导致了整体比较混乱的情形。针对前端现有问题的统一解决措施。
+描述：此前，前端开发比较自由，没有完善的组件库、统一框架，久而久之导致了整体比较混乱的情形。针对前端现有问题进行统一的解决措施。
 
-职责：参与问题的整合，主导前端公用库的设计与开发，同时维护良好的说明、使用文档以及变更日志。所有模块以 npm 模块形式托管于私仓。
+职责：参与问题的整合，主导前端公共库的设计与开发，同时维护良好的说明、使用文档以及变更日志。所有模块以 npm 模块形式托管于私仓。
 
 <!--
 - 统一中后台技术选型为 Next.js 预渲染的模式
@@ -49,7 +49,7 @@ comments: false
 
 描述：这是一个相对系统的工程，对各种内部后台能有统一的用户、权限、应用管理。
 
-职责：前后端分离，负责前端部分的技术选型及开发，所用技术栈为 Next.js、Ant Design、GraphQL。
+职责：前后端分离，负责前端部分的技术选型及开发，所用技术栈为 Next.js、Ant Design 3、GraphQL。
 
 <!--
 初期企图实行 SSR 同构方案，硬着头皮开始 Node.js 服务端方向的编写，调研试用了 Next.js + Fastify + GraphQL，在 Java 后端 JWT 的基础上，由 Node.js 中间层通过 cookie 实现了单点登录的功能。
@@ -74,7 +74,7 @@ comments: false
 - 期间开始学习 React 并进行实际运用，熟练进行页面编写
 - 频繁涉及 Web 与原生交互的内容，熟悉常规的调试方法
 - 期间了解到 TypeScript 并进行学习，后在公司内推广成功、熟练使用
-- 加深对 Webpack 的学习，能够自定义常规的配置
+- 加深对 Webpack 的学习，能够进行自定义配置
 - 认识了 Nginx、Jenkins，能处理一些简单问题
 
 ## 杭州和乐科技有限公司（ 2017-06 ~ 2018-01 ）-前端实习
@@ -107,8 +107,9 @@ comments: false
 
 # 个人作品
 
-- [jugg](https://github.com/daief/jugg)：前端脚手架工具，基于 Webpack 编写，内置常用的 Webpack 配置集合，方便前端项目的开发、构建。
-- [vue-music](https://github.com/daief/vue-music)：基于 Vue 的个人练习项目，根据网易云音乐 PC 页面进行仿造。
+<!-- - [vue-music](https://github.com/daief/vue-music)：基于 Vue 的个人练习项目，根据网易云音乐 PC 页面进行仿造。 -->
+
+- [jugg](https://daief.tech/jugg)：前端脚手架工具，基于 Webpack 编写，内置常用的 Webpack 配置集合，方便前端项目的开发、构建。
 - 组件类：
   - [rc-if](https://github.com/daief/rc-if)：React 简单组件，实现 Vue 中与 `v-if`、`v-else` 相似的行为。
   - [toast](https://github.com/daief/axew-toast)：简单泛用的 toast 组件。
@@ -121,8 +122,8 @@ comments: false
 - 熟悉 TypeScript、JavaScript / ES6+ 规范 / 偏爱 TS
 - 熟悉 React、Vue / React 使用更多 / 具备一定的组件开发能力
 - 熟悉 npm、Webpack、Git 等工具的使用
-- 熟悉 Chrome DevTools、Charles 的使用
-- 能使用 Node.js 编写脚本工具
+- 熟悉 Chrome DevTools、Charles 等调试工具的使用
 - 熟悉 HTML、CSS
+- 能使用 Node.js 编写一些脚本和工具
 - 了解常用 Linux 命令
 - 了解 Jenkins、Nginx 的配置及使用
