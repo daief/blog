@@ -28,10 +28,11 @@
     "hexo-generator-sitemap": "^1.2.0",
     "hexo-generator-tag": "^1.0.0",
     "hexo-renderer-ejs": "^1.0.0",
-    "hexo-renderer-marked": "^2.0.0",
+    "hexo-renderer-marked": "https://github.com/hexojs/hexo-renderer-marked#40d8ca4532363dba74da7661335bbd8eea689cea",
     "hexo-renderer-stylus": "^1.0.0",
     "hexo-server": "^1.0.0",
-    "hexo-wordcount": "^6.0.1"
+    "hexo-wordcount": "^6.0.1",
+    "prismjs": "^1.19.0"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

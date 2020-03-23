@@ -39,8 +39,9 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
+# 自定义 highlight，themes/next/scripts/daief/highlight.js
 highlight:
-  enable: true
+  enable: false
   line_number: true
   auto_detect: false
   tab_replace:
