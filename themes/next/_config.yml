@@ -622,3 +622,7 @@ images: images
 
 # Theme version
 version: 5.1.1
+
+# ------------------------------------------------------- 自定义添加
+# prismjs cdn
+prismjs: https://cdn.jsdelivr.net/npm/prismjs@1.19.0

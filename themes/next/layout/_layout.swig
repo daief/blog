@@ -85,6 +85,7 @@
   {% include '_third-party/mathjax.swig' %}
   {% include '_third-party/scroll-cookie.swig' %}
   {% include '_third-party/exturl.swig' %}
-  <script type="text/javascript" src="/js/daief/common.js"></script>
+
+  {% include '_custom/page-tail.swig' %}
 </body>
 </html>
