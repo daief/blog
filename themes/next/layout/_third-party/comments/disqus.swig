@@ -2,7 +2,7 @@
   {% if theme.disqus.enable %}
 
     {% if theme.disqus.count  %}
-      <script id="dsq-count-scr" src="https://{{theme.disqus.shortname}}.disqus.com/count.js" async></script>
+      <script id="dsq-count-scr" async defer src="https://{{theme.disqus.shortname}}.disqus.com/count.js"></script>
     {% endif %}
 
     {% if page.comments %}
@@ -12,10 +12,12 @@
           this.page.identifier = '{{ page.path }}';
           this.page.title = '{{ page.title| addslashes }}';
         };
-        var d = document, s = d.createElement('script');
-        s.src = 'https://{{theme.disqus.shortname}}.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', '' + +new Date());
-        (d.head || d.body).appendChild(s);
+        $(document).ready(function() {
+          var d = document, s = d.createElement('script');
+          s.src = 'https://{{theme.disqus.shortname}}.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', '' + +new Date());
+          (d.head || d.body).appendChild(s);
+        });
       </script>
     {% endif %}
 
