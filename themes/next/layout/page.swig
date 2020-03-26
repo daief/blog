@@ -29,7 +29,8 @@
           {# https://hexo.io/zh-cn/docs/helpers.html#tagcloud #}
           {# node_modules/hexo/lib/plugins/helper/tagcloud.js #}
           {#{ tagcloud({min_font: 12, max_font: 30, amount: 200, color: true, start_color: '#ccc', end_color: '#111'}) }#}
-          {{ tagcloud({min_font: 10, max_font: 10, amount: 200, color: true, start_color: '#fefefe', end_color: '#fefefe'}) }}
+          {# 自定义标签云 #}
+          {{ def_tagcloud() }}
         </div>
       </div>
     {% elif page.type === 'categories' %}

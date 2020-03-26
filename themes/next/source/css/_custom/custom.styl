@@ -1,51 +1,44 @@
 // Custom styles.
-
 body {
   position: relative;
 }
 
 body::before {
-  content: '';
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: -1;
-
-  filter: opacity(0.7) blur(2px) brightness(0.95);
-
+  filter: opacity(.7) blur(2px) brightness(.95);
   background-image: url('../../images/body.jpg');
-  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  background-attachment: fixed;
+  background-repeat: no-repeat;
+  content: '';
 }
 
-/*文章背景*/
+/* 文章背景 */
 .content-wrap {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, .5);
 }
 
 .footer-inner {
   color: #000;
 }
 
-/*顶部线条*/
+/* 顶部线条 */
 .headband {
   display: none;
 }
 
-/*文章间分割线*/
+/* 文章间分割线 */
 .posts-expand .post-eof {
   width: 75%;
 }
 
-.site-meta,
-.site-brand-wrapper,
-.header-inner,
-.sidebar,
-.sidebar-inner {
+.site-meta, .site-brand-wrapper, .header-inner, .sidebar, .sidebar-inner {
   background-color: rgba(255, 255, 255, 0);
 }
 
@@ -54,7 +47,7 @@ body::before {
 }
 
 .menu-item-active a {
-  /*background: rgba(249,249,249,0.5);*/
+  /* background: rgba(249,249,249,0.5); */
 }
 
 // -------------------------------- 小屏幕菜单展示按钮颜色
@@ -64,25 +57,25 @@ body::before {
 
 // -------------------------------- 中小屏幕站点信息开关
 .toggle-index {
-  touch-action: none;
-  box-sizing: border-box;
   position: fixed;
   top: -100px;
   right: 30px;
   z-index: 1050;
+  box-sizing: border-box;
   padding: 0 6px;
   width: initial;
   background: #222;
-  font-size: 12px;
-  opacity: 0.6;
   color: #fff;
-  cursor: pointer;
   text-align: center;
-  transform: translateZ(0);
-  transition-property: top;
-  transition-duration: 0.2s;
-  transition-timing-function: ease-in-out;
+  font-size: 12px;
+  opacity: .6;
+  cursor: pointer;
   transition-delay: 0s;
+  transition-timing-function: ease-in-out;
+  transition-duration: .2s;
+  transition-property: top;
+  transform: translateZ(0);
+  touch-action: none;
 }
 
 .toggle-index.toggle-index-on {
@@ -111,7 +104,7 @@ body::before {
 
   .sidebar-inner.affix {
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, .95);
   }
 
   .sidebar-inner {
@@ -120,9 +113,9 @@ body::before {
 
   .sidebar.sidebar-on {
     display: flex !important;
+    justify-content: center;
     margin-top: 88px;
     width: 100%;
-    justify-content: center;
   }
 }
 
@@ -137,7 +130,7 @@ body::before {
 
   .sidebar-inner.affix {
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, .95);
   }
 
   .sidebar-inner {
@@ -146,9 +139,9 @@ body::before {
 
   .sidebar.sidebar-on {
     display: flex !important;
+    justify-content: center;
     margin-top: 88px;
     width: 100%;
-    justify-content: center;
   }
 
   .back-to-top {
@@ -159,68 +152,44 @@ body::before {
 // -------------------------------- 标签云页面，标签样式
 .tag-cloud a {
   display: inline-block;
+  height: 18px;
+  border: 0;
   text-decoration: none;
   font-weight: 400;
-  font-size: 10px;
-  /* color: #fff; */
-  background-color: #66ccffbf;
-  height: 18px;
+  font-size: 14px;
+  font-family: Menlo, Monaco, 'Andale Mono', 'lucida console', 'Courier New', monospace, sans-serif;
   line-height: 18px;
-  padding: 0 5px 0 10px;
-  position: relative;
-  border-radius: 0 5px 5px 0;
-  margin: 5px 9px 5px 8px;
-  font-family: Menlo, Monaco, Andale Mono, lucida console, Courier New,
-    monospace;
-  transition: all 0.4s;
-}
-.tag-cloud a::before {
-  content: ' ';
-  width: 0;
-  height: 0;
-  position: absolute;
-  top: 0;
-  left: -18px;
-  border: 9px solid transparent;
-  border-right-color: #66ccffbf;
-  transition: all 0.4s;
-}
-.tag-cloud a::after {
-  content: ' ';
-  width: 4px;
-  height: 4px;
-  background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3);
-  position: absolute;
-  top: 7px;
-  left: 2px;
-}
-.tag-cloud a:hover {
-  transform: scale(1.5);
-  background-color: #66ccff;
-  z-index: 5;
-  color: #fff !important;
-}
-.tag-cloud a:hover::before {
-  border-right-color: #66ccff;
+  transition: all .4s;
+
+  & > small {
+    color: #a9a9b3;
+    font-size: 12px;
+  }
+
+  &:hover {
+    color: orange;
+    transform: scale(1.2);
+  }
 }
 
 // -------------------------------- hitokoto 一言样式
 #hitokoto {
-  margin-bottom 20px;
-  cursor pointer;
+  margin-bottom: 20px;
+  cursor: pointer;
   transition: all .3s;
+
   &:hover {
     color: #e44b12;
   }
+
   .hko-content, .hko-author {
-    font-family: tahoma, arial, "Hiragino Sans GB", "宋体", sans-serif;
-    line-height: 1.35;
     margin: 0;
+    font-family: tahoma, arial, 'Hiragino Sans GB', '宋体', sans-serif;
+    line-height: 1.35;
   }
+
   .hko-author {
-    margin-top 5px
-    text-align right
+    margin-top: 5px;
+    text-align: right;
   }
 }
