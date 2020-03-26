@@ -12,12 +12,12 @@
           this.page.identifier = '{{ page.path }}';
           this.page.title = '{{ page.title| addslashes }}';
         };
-        $(document).ready(function() {
+        setTimeout(function() {
           var d = document, s = d.createElement('script');
           s.src = 'https://{{theme.disqus.shortname}}.disqus.com/embed.js';
           s.setAttribute('data-timestamp', '' + +new Date());
           (d.head || d.body).appendChild(s);
-        });
+        }, 1000); // wait 1s
       </script>
     {% endif %}
 

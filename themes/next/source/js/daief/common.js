@@ -5,7 +5,7 @@
  * @LastEditTime : 2020-01-16 17:53:35
  * @Description:
  */
-!(function() {
+setTimeout(() => {
   /**
    * 页面 title 根据 tab 可见性变化而变化
    */
@@ -50,10 +50,7 @@
       });
   }
 
-  $(document).ready(function() {
-    registerTitleChange();
-
-    getHitokoto();
-    $('#hitokoto').on('click', getHitokoto);
-  });
-})();
+  registerTitleChange();
+  getHitokoto();
+  $('#hitokoto').on('click', getHitokoto);
+});
