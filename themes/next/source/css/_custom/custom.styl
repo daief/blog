@@ -193,3 +193,23 @@ body::before {
     text-align: right;
   }
 }
+
+// 头像部分
+.site-author-image {
+  &:hover {
+    animation-name: avatar-hvr-buzz;
+    animation-duration: .15s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+
+  @keyframes avatar-hvr-buzz {
+    50% {
+      transform: translateX(3px) rotate(2deg);
+    }
+
+    100% {
+      transform: translateX(-3px) rotate(-2deg);
+    }
+  }
+}
