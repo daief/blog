@@ -44,7 +44,7 @@
         </div>
 
         <!-- `一言` 展示容器 -->
-        <div id="hitokoto" from="https://hitokoto.cn/">
+        <div id="hitokoto" title="Hitokoto 一言，点击更换，by https://hitokoto.cn/">
           <!-- 内容 -->
           <p class="hko-content"></p>
           <!-- 作者 -->

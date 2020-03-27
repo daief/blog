@@ -175,8 +175,16 @@ body::before {
 // -------------------------------- hitokoto 一言样式
 #hitokoto {
   margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, .8);
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, .4);
   cursor: pointer;
   transition: all .3s;
+
+  &.kto-br {
+    padding: 20px 10px;
+    border-width: 2px 4px 4px 3px;
+    border-style: solid;
+  }
 
   &:hover {
     color: #e44b12;
@@ -184,8 +192,12 @@ body::before {
 
   .hko-content, .hko-author {
     margin: 0;
-    font-family: tahoma, arial, 'Hiragino Sans GB', '宋体', sans-serif;
-    line-height: 1.35;
+    font-family: '-apple-system', 'Helvetica Neue', 'Helvetica', 'Tahoma', 'Arial', 'PingFang SC', 'Microsoft Yahei', tahoma, arial, 'Hiragino Sans GB', '宋体', sans-serif;
+    line-height: 1.5;
+  }
+
+  .hko-content strong {
+    font-size: 1.5em;
   }
 
   .hko-author {
