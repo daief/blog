@@ -33,7 +33,7 @@ canonical: false
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
 seo: true
-signature:
+signature: 遇见幸运💫 # 遇见你，遇见幸运
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
