@@ -86,7 +86,6 @@ setTimeout(() => {
               borderTopRightRadius: generateBorderRadius(),
               borderBottomRightRadius: generateBorderRadius(),
               borderBottomLeftRadius: generateBorderRadius(),
-              borderColor: getRandomColor(),
             });
           $('#hitokoto .hko-content').html(
             '<strong>' +
