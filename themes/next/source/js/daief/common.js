@@ -107,7 +107,26 @@ setTimeout(() => {
       });
   }
 
+  /**
+   * 注册全局样式
+   */
+  function registerStyle() {
+    var now = +new Date();
+    if (now < 1585929600000 || now > 1586015999000) {
+      return;
+    }
+    // 在北京时间 2020.4.4 0:0:0 ~ 2020.4.4 23:59:59
+    // 哀悼日，黑白
+    $('html').css('filter', 'grayscale(1)');
+  }
+
+  // TODO favicon 动画
+  // TODO 背景动画
+
+  // ------------------------------------ bootstrap ------------------------------------
+
   registerTitleChange();
   getHitokoto();
   $('#hitokoto').on('click', getHitokoto);
+  registerStyle();
 });
