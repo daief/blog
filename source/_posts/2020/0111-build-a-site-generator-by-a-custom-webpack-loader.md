@@ -127,6 +127,8 @@ export default {
 只要对每种类型分别配置完即可生效：
 
 ```js
+import path from 'path';
+
 // webpack.config.js
 export default {
   // ...
@@ -134,7 +136,7 @@ export default {
     rules: [
       {
         test: /\.md$/,
-        use: ['ts-loader'],
+        use: [path.resolve(__dirname, './loader/md')],
       },
       {
         test: /\.tsx?$/,
