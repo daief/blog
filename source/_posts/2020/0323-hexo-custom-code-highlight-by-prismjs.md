@@ -60,10 +60,10 @@ const prism = require('prismjs');
 const loadLanguages = require('prismjs/components/index');
 loadLanguages();
 
-const escapeHtml = str =>
+const escapeHtml = (str) =>
   str.replace(
     /[&<>'"]/g,
-    tag =>
+    (tag) =>
       ({
         '&': '&amp;',
         '<': '&lt;',
@@ -73,7 +73,7 @@ const escapeHtml = str =>
       }[tag] || tag),
   );
 
-hexo.extend.filter.register('marked:renderer', function(renderer) {
+hexo.extend.filter.register('marked:renderer', function (renderer) {
   // 定义 renderer.code 来自定义代码块的解析行为
   renderer.code = (sourceCode, language) => {
     const codeResult =
@@ -102,9 +102,12 @@ hexo.extend.filter.register('marked:renderer', function(renderer) {
 <!-- prismjs style -->
 <link
   rel="stylesheet"
-  href="{{ theme.prismjs }}/plugins/line-numbers/prism-line-numbers.css"
+  href="{% raw %}{{ theme.prismjs }}{% endraw %}/plugins/line-numbers/prism-line-numbers.css"
 />
-<link rel="stylesheet" href="{{ theme.prismjs }}/themes/prism.css" />
+<link
+  rel="stylesheet"
+  href="{% raw %}{{ theme.prismjs }}{% endraw %}/themes/prism.css"
+/>
 <style>
   .code[class*='language-'],
   pre[class*='language-'] {
@@ -131,10 +134,8 @@ hexo.extend.filter.register('marked:renderer', function(renderer) {
 
 同样本着自定义内容分离的原则，先在 `themes/next/layout/_layout.swig` 中新增：
 
-> 使用时需去除转义字符 `\`
-
 ```diff
-+  \{\% include '_custom/page-tail.swig' \%\}
++  {% raw %}{% include '_custom/page-tail.swig' %}{% endraw %}
 </body>
 </html>
 ```
@@ -151,9 +152,9 @@ ref：https://prismjs.com/#basic-usage
   // 打开注释的话就不会自动处理了
   // window.Prism.manual = true;
 </script>
-<script src="{{ theme.prismjs }}/components/prism-core.min.js"></script>
-<script src="{{ theme.prismjs }}/plugins/autoloader/prism-autoloader.min.js"></script>
-<script src="{{ theme.prismjs }}/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="{% raw %}{{ theme.prismjs }}{% endraw %}/components/prism-core.min.js"></script>
+<script src="{% raw %}{{ theme.prismjs }}{% endraw %}/plugins/autoloader/prism-autoloader.min.js"></script>
+<script src="{% raw %}{{ theme.prismjs }}{% endraw %}/plugins/line-numbers/prism-line-numbers.min.js"></script>
 ```
 
 ## 结语
