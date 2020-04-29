@@ -137,7 +137,7 @@ comments: false
 - 了解常用 Linux 命令
 - 了解 Jenkins、Nginx 的配置及使用 -->
 
-![skills](/images/skills.png)
+![skills](/images/skills.png?t=20200429)
 
 # 个人作品
 
