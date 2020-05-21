@@ -15,6 +15,7 @@
       <div id="vk_comments"></div>
     {% elseif theme.disqus.enable %}
       <div id="disqus_thread">
+        <img src="/images/loading.gif">
         <noscript>
           Please enable JavaScript to view the
           <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
