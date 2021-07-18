@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "hexo server --draft",
-    "dev": "gugu"
+    "dev": "gugu dev"
   },
   "workspaces": [
     "packages/*"
