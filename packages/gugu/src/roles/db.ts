@@ -34,7 +34,6 @@ export class DB<T extends {}> {
   }
 
   writeSync() {
-    fs.mkdirpSync(dirname(this.filename));
-    fs.writeJSONSync(this.filename, this._.value(), {});
+    fs.outputFileSync(this.filename, this._.value(), {});
   }
 }

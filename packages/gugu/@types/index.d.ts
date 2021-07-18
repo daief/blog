@@ -1,1 +1,3 @@
-declare module '*.vue';
+export interface IUserConfig {
+  outDir?: string;
+}

@@ -3,6 +3,7 @@ import { ICreateServerOptions, createServer } from './createServer';
 import { init } from './index';
 import { build } from './build';
 import { generate } from './generate';
+import chokidar, { FSWatcher } from 'chokidar';
 
 const cli = cac('gugu');
 

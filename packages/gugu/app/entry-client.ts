@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { createApp } from './main';
 import { createSiteContext } from './utils/siteContext';
+import './styles';
 
 const { app, router, store } = createApp();
 const site = createSiteContext({

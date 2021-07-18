@@ -8,7 +8,9 @@
     "noImplicitAny": false,
     "baseUrl": ".",
     "paths": {
-      "@t/*": ["@types/*"]
+      "@t": ["@types/index"],
+      "@t/*": ["@types/*"],
+      "@app/*": ["app/*"]
     },
     "importsNotUsedAsValues": "remove",
     "experimentalDecorators": true,
