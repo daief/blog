@@ -9,8 +9,17 @@ import fs from 'fs-extra';
 import { md5 } from './utils/helper';
 import { CollectionChain } from 'lodash';
 
+export type ICommandType = 'dev' | 'build' | 'serve' | 'generate';
+
+export interface IGContextOptions {
+  command: ICommandType;
+  emitterOptions?: any;
+}
+
 export class GContext extends EventEmitter {
   context = process.cwd();
+
+  command: ICommandType;
 
   dirs = {
     guguRoot: '',
@@ -23,8 +32,10 @@ export class GContext extends EventEmitter {
   db: DB<ggDB.IDB>;
   renderer: marked.Renderer;
 
-  constructor(opts?) {
-    super(opts);
+  constructor(opts: IGContextOptions) {
+    super(opts.emitterOptions);
+
+    this.command = opts.command;
 
     const guguRoot = resolve(__dirname, '..');
     const appDir = resolve(guguRoot, 'app');
@@ -61,7 +72,7 @@ export class GContext extends EventEmitter {
       }
       const codeResult = !hljs.getLanguage(language)
         ? escapeHtml(sourceCode)
-        : hljs.highlight(language, sourceCode).value;
+        : hljs.highlight(sourceCode, { language }).value;
       return `<pre class="hljs language-${language}"><code style="display:block;">${codeResult}</code></pre>`;
     };
     this.renderer.heading = (text: string, level) => {

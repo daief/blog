@@ -119,11 +119,12 @@ export async function createServer(
     app.use('*', async (req, res) => {
       // 服务 index.html - 下面我们来处理这个问题
       const url = req.originalUrl;
-      const manifest = require(ctx.resolveGuguRoot(
-        'dist/client/manifest.json',
-      ));
 
       try {
+        const manifest = require(ctx.resolveGuguRoot(
+          'dist/client/manifest.json',
+        ));
+
         const template = fs.readFileSync(
           ctx.resolveGuguRoot('dist/client/index.html'),
           'utf-8',
@@ -161,9 +162,13 @@ export async function createServer(
     });
   }
 
-  app.listen(options.port);
+  const server = app.listen(options.port);
 
   console.log(`Server at: ${LOCAL_ADDRESS}`);
 
-  return app;
+  return {
+    express: app,
+    server,
+    serverAddress: LOCAL_ADDRESS,
+  };
 }
