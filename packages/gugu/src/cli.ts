@@ -2,45 +2,50 @@ import cac from 'cac';
 import { ICreateServerOptions, createServer } from './createServer';
 import { init } from './index';
 import { build } from './build';
+import { generate } from './generate';
 
 const cli = cac('gugu');
+
+async function wrapAction(isProd: boolean, logic: () => void) {
+  process.env.NODE_ENV = isProd ? 'production' : 'development';
+  try {
+    await logic();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
+}
 
 cli
   .command('[root]') // default command
   .alias('dev')
   .option('--port <port>', `[number] specify port`)
   .action(async (root: string, options: ICreateServerOptions) => {
-    process.env.NODE_ENV = 'development';
-    try {
-      const gCtx = await init();
+    wrapAction(false, async () => {
+      const gCtx = await init({ command: 'dev' });
       await createServer(gCtx, options);
-    } catch (e) {
-      console.error(e);
-      process.exit(1);
-    }
+    });
   });
 
 cli.command('build').action(async (root: string, options: {}) => {
-  process.env.NODE_ENV = 'production';
-
-  try {
-    const gCtx = await init();
+  wrapAction(true, async () => {
+    const gCtx = await init({ command: 'build' });
     await build(gCtx, options);
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
+  });
 });
 
 cli.command('serve').action(async (root: string, options: {}) => {
-  process.env.NODE_ENV = 'production';
-  try {
-    const gCtx = await init();
+  wrapAction(true, async () => {
+    const gCtx = await init({ command: 'serve' });
     await createServer(gCtx, options);
-  } catch (e) {
-    console.error(e);
-    process.exit(1);
-  }
+  });
+});
+
+cli.command('generate').action(async (root: string) => {
+  wrapAction(true, async () => {
+    const gCtx = await init({ command: 'generate' });
+    await generate(gCtx);
+  });
 });
 
 cli.help();
