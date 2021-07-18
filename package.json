@@ -7,39 +7,15 @@
   },
   "scripts": {
     "start": "hexo server --draft",
-    "clean": "hexo clean",
-    "build": "cross-env NODE_ENV=production hexo generate",
-    "deploy": "hexo deploy",
-    "new": "hexo new",
-    "minify": "gulp",
-    "b:d": "yarn clean && yarn build && yarn minify && yarn deploy"
+    "dev": "gugu"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "resolutions": {
+    "@blog/gugu": "portal:/Users/daief/Documents/fe/mime/blog-v2/packages/gugu"
   },
   "dependencies": {
-    "cross-env": "^6.0.0",
-    "hexo": "~4.2.0",
-    "hexo-deployer-git": "^0.3.1",
-    "hexo-generator-archive": "^1.0.0",
-    "hexo-generator-baidu-sitemap": "^0.1.2",
-    "hexo-generator-category": "^1.0.0",
-    "hexo-generator-feed": "^2.0.0",
-    "hexo-generator-index": "^1.0.0",
-    "hexo-generator-search": "^2.3.0",
-    "hexo-generator-searchdb": "^1.0.8",
-    "hexo-generator-sitemap": "^1.2.0",
-    "hexo-generator-tag": "^1.0.0",
-    "hexo-renderer-ejs": "^1.0.0",
-    "hexo-renderer-marked": "https://github.com/hexojs/hexo-renderer-marked#40d8ca4532363dba74da7661335bbd8eea689cea",
-    "hexo-renderer-stylus": "^1.0.0",
-    "hexo-server": "^1.0.0",
-    "hexo-wordcount": "^6.0.1",
-    "prismjs": "^1.19.0"
-  },
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-clean-css": "^4.2.0",
-    "gulp-cli": "^2.2.0",
-    "gulp-htmlmin": "^5.0.1",
-    "gulp-terser": "^1.2.0",
-    "terser": "^4.6.3"
+    "@blog/gugu": "workspace:packages/gugu"
   }
 }
