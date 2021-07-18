@@ -158,4 +158,8 @@ export class GContext extends EventEmitter {
       (this.db._.get(type) as CollectionChain<any>).push(...data).commit();
     });
   }
+
+  public resolveGuguRoot(...p: string[]) {
+    return resolve(this.dirs.guguRoot, ...p);
+  }
 }
