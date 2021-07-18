@@ -6,6 +6,7 @@ import vuePlugin from '@vitejs/plugin-vue';
 import { GContext } from './ctx';
 import { createJsonApi } from './middlewares/jsonApi';
 import serveStatic from 'serve-static';
+import { merge } from 'lodash';
 
 export interface ICreateServerOptions {
   port?: number;
@@ -16,10 +17,6 @@ export async function createServer(
   options: ICreateServerOptions = {},
 ) {
   const isProd = process.env.NODE_ENV === 'production';
-
-  console.log({
-    isProd,
-  });
 
   const app = express();
 
@@ -46,6 +43,11 @@ export async function createServer(
       plugins: [vuePlugin()],
       define: {
         __PROD__: false,
+      },
+      resolve: {
+        alias: {
+          '@app': ctx.resolveGuguRoot('app'),
+        },
       },
     });
 
@@ -86,7 +88,18 @@ export async function createServer(
 
         const headPartial = [
           `<script>window.__INITIAL_STATE__=${JSON.stringify(
-            initialState,
+            merge(
+              {
+                global: {
+                  site: {
+                    postCount: ctx.db._.get('posts').size(),
+                    tagCount: ctx.db._.get('tags').size(),
+                    categoryCount: ctx.db._.get('categories').size(),
+                  },
+                },
+              },
+              initialState,
+            ),
           )}</script>`,
           // TODO 普通页面
           // `<script>window.__PLAIN_PAGES__=${JSON.stringify(

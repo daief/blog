@@ -1,3 +1,5 @@
+declare module '*.vue';
+
 declare const __PROD__: boolean;
 
 interface Window {

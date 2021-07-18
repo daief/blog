@@ -13,18 +13,7 @@ function paginationUtil(length: number, pathPattern: string, perPage = 10) {
 
 export async function generate(ctx: GContext) {
   const { db } = ctx;
-  const outDir = path.resolve(ctx.dirs.userRoot, 'dist');
-
-  const manifest = require(ctx.resolveGuguRoot('dist/client/manifest.json'));
-
-  const template = fs.readFileSync(
-    ctx.resolveGuguRoot('dist/client/index.html'),
-    'utf-8',
-  );
-
-  const { render } = require(ctx.resolveGuguRoot(
-    'dist/server/entry-server.js',
-  ));
+  const outDir = ctx.userConfig.outDir;
 
   const routes = [
     '/',
@@ -45,8 +34,7 @@ export async function generate(ctx: GContext) {
       outDir,
       `${url === '/' ? '' : url}/index.html`.replace(/^\/?/, ''),
     );
-    fs.mkdirpSync(path.dirname(filePath));
-    fs.writeFileSync(filePath, html, {
+    fs.outputFileSync(filePath, html, {
       encoding: 'utf-8',
     });
     console.log('pre-rendered:', filePath);

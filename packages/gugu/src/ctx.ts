@@ -7,7 +7,9 @@ import hljs from 'highlight.js';
 import { escapeHtml, parseMarkdown } from './utils/parseMarkdown';
 import fs from 'fs-extra';
 import { md5 } from './utils/helper';
-import { CollectionChain } from 'lodash';
+import { CollectionChain, merge } from 'lodash';
+import yml from 'js-yaml';
+import { IUserConfig } from '@t';
 
 export type ICommandType = 'dev' | 'build' | 'serve' | 'generate';
 
@@ -20,6 +22,7 @@ export class GContext extends EventEmitter {
   context = process.cwd();
 
   command: ICommandType;
+  userConfig: IUserConfig;
 
   dirs = {
     guguRoot: '',
@@ -53,6 +56,8 @@ export class GContext extends EventEmitter {
   }
 
   async init() {
+    await this.resolveConfig();
+
     // ----------- db
     const db = new DB<ggDB.IDB>(resolve(this.dirs.cacheDir, 'db.json'));
     db.readSync({
@@ -168,6 +173,28 @@ export class GContext extends EventEmitter {
     ].forEach(([type, data]: [string, any[]]) => {
       (this.db._.get(type) as CollectionChain<any>).push(...data).commit();
     });
+  }
+
+  private async resolveConfig() {
+    let userConfig: IUserConfig;
+    try {
+      userConfig = yml.load(
+        fs.readFileSync(resolve(this.dirs.userRoot, '.gugurc.yml'), 'utf-8'),
+      );
+    } catch (error) {
+      userConfig = {};
+    }
+    this.userConfig = merge<IUserConfig, IUserConfig>(
+      {
+        outDir: 'dist',
+      },
+      userConfig,
+    );
+
+    this.userConfig.outDir = resolve(
+      this.dirs.userRoot,
+      this.userConfig.outDir,
+    );
   }
 
   public resolveGuguRoot(...p: string[]) {

@@ -1,0 +1,39 @@
+:root {
+  --base-primary: 255, 140, 22;
+  --primary: rgba(var(var(--base-primary)));
+}
+
+html {
+  @apply bg-primary;
+  @apply bg-opacity-5;
+  @apply text-c-text;
+}
+
+a {
+  @apply text-primary;
+
+  &:hover {
+    @apply text-primary;
+    @apply text-opacity-75;
+  }
+}
+
+a.unset {
+  color: currentColor;
+
+  &:hover {
+    @apply text-primary;
+    @apply text-opacity-75;
+  }
+}
+
+// vue transition
+// fade
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
