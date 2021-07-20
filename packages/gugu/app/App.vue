@@ -12,7 +12,7 @@
         <p class="mt-2 text-sm text-c-placeholder break-words">
           可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。
         </p>
-        <div class="mt-3 text-sm flex justify-center">
+        <div class="mt-3 text-xs flex justify-center">
           <router-link to="" class="unset">
             <Icon name="wenzhang" />({{ site.postCount }})
           </router-link>

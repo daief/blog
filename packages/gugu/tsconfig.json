@@ -14,7 +14,12 @@
     },
     "importsNotUsedAsValues": "remove",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "plugins": [
+      {
+        "name": "@vuedx/typescript-plugin-vue"
+      }
+    ]
   },
   "include": ["src/**/*", "@types/**/*", "app"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]

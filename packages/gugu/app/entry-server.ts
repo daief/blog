@@ -2,15 +2,20 @@ import { createApp } from './main';
 import { renderToString } from '@vue/server-renderer';
 import { createSiteContext } from './utils/siteContext';
 import axios from 'axios';
+import { merge } from 'lodash';
 
 export async function render(
   url,
   manifest,
   options: {
     serverAddress: string;
+    serverState: any;
   },
 ) {
   const { app, router, store } = createApp();
+
+  store.replaceState(merge({}, store.state, options.serverState));
+
   const site = createSiteContext({
     axios: axios.create(),
   });
