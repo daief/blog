@@ -17,12 +17,6 @@ if (!import.meta.env.SSR) {
 
 export default defineComponent({
   name: 'Icon',
-  props: {
-    name: {
-      type: String as any as IName,
-      required: true,
-    },
-  },
 });
 
 type IName =
@@ -44,6 +38,15 @@ type IName =
   | 'person'
   | 'archive'
   | 'category';
+</script>
+
+<script lang="ts" setup>
+defineProps({
+  name: {
+    type: String as () => IName,
+    required: true,
+  },
+});
 </script>
 
 <style scoped lang="less">

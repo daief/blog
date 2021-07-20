@@ -13,6 +13,7 @@ export function createApp() {
   const app = createSSRApp(App);
   const router = createRouterIns();
   const store = createStoreIns();
+
   app.use(store);
   app.use(router);
   return { app, router, store };

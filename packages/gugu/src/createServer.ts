@@ -75,6 +75,16 @@ export async function createServer(
         //    并提供类似 HMR 的根据情况随时失效。
         const { render } = await vite.ssrLoadModule('/entry-server.ts');
 
+        const serverState = {
+          global: {
+            site: {
+              postCount: ctx.db._.get('posts').size(),
+              tagCount: ctx.db._.get('tags').size(),
+              categoryCount: ctx.db._.get('categories').size(),
+            },
+          },
+        };
+
         // 4. 渲染应用的 HTML。这假设 entry-server.js 导出的 `render`
         //    函数调用了适当的 SSR 框架 API。
         //    例如 ReactDOMServer.renderToString()
@@ -82,24 +92,14 @@ export async function createServer(
           url,
           {},
           {
+            serverState,
             serverAddress: LOCAL_ADDRESS,
           },
         );
 
         const headPartial = [
           `<script>window.__INITIAL_STATE__=${JSON.stringify(
-            merge(
-              {
-                global: {
-                  site: {
-                    postCount: ctx.db._.get('posts').size(),
-                    tagCount: ctx.db._.get('tags').size(),
-                    categoryCount: ctx.db._.get('categories').size(),
-                  },
-                },
-              },
-              initialState,
-            ),
+            initialState,
           )}</script>`,
           // TODO 普通页面
           // `<script>window.__PLAIN_PAGES__=${JSON.stringify(
