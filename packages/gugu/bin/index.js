@@ -1,6 +1,13 @@
 #!/usr/bin/env node
 
-require('esbuild-register');
+const { register } = require('esbuild-register/dist/node');
+
+register({
+  target: `node${process.version.slice(1)}`,
+  define: {
+    'import.meta.env.SSR': 'true',
+  },
+});
 require('../src/cli');
 
 // const { init, dev } = require('../src/cli');

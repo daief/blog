@@ -12,13 +12,10 @@ function paginationUtil(length: number, pathPattern: string, perPage = 10) {
 }
 
 export async function generate(ctx: GContext) {
-  const { db } = ctx;
+  const { dao } = ctx;
   const outDir = ctx.userConfig.outDir;
 
-  const routes = [
-    '/',
-    ...paginationUtil(db._.get('posts').size().value(), '/page/%d'),
-  ];
+  const routes = ['/', ...paginationUtil(43, '/page/%d')];
 
   const { server, serverAddress } = await createServer(ctx, {});
 

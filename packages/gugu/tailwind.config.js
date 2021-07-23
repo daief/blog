@@ -19,7 +19,7 @@ module.exports = {
         },
         'c-title': colors.gray[800], // 标题
         'c-text': colors.gray[700], // 文本
-        'c-placeholder': colors.gray[400], // 浅灰
+        'c-secondary': colors.gray[400], // 浅灰
         danger: colors.red[600], // 危险
         success: colors.green[400], // 成功
         warn: colors.yellow[500], // 警告

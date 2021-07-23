@@ -20,8 +20,7 @@ declare namespace ggDB {
     slug: string;
     title: string;
     comments: boolean;
-    link: string;
-    path: string;
+    // link: string;
     published: boolean;
     date: string;
     updated: string;
