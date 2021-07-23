@@ -3,9 +3,11 @@ import { createApp } from './main';
 import { createSiteContext } from './utils/siteContext';
 import './styles';
 
+const axiosIns = axios.create();
+
 const { app, router, store } = createApp();
 const site = createSiteContext({
-  axios: axios.create(),
+  axios: axiosIns,
 });
 app.use(site);
 

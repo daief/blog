@@ -7,6 +7,7 @@ import { GContext } from './ctx';
 import { createJsonApi } from './middlewares/jsonApi';
 import serveStatic from 'serve-static';
 import { merge } from 'lodash';
+import { getViteConfig } from './utils/viteConfig';
 
 export interface ICreateServerOptions {
   port?: number;
@@ -17,7 +18,6 @@ export async function createServer(
   options: ICreateServerOptions = {},
 ) {
   const isProd = process.env.NODE_ENV === 'production';
-
   const app = express();
 
   options = {
@@ -29,7 +29,7 @@ export async function createServer(
 
   const jsonApi = createJsonApi(ctx);
 
-  app.use('/api', jsonApi);
+  app.use('/blog-api', jsonApi);
 
   if (!isProd) {
     // 以中间件模式创建 vite 应用，这将禁用 Vite 自身的 HTML 服务逻辑
@@ -37,19 +37,11 @@ export async function createServer(
     //
     // 如果你想使用 Vite 自己的 HTML 服务逻辑（将 Vite 作为
     // 一个开发中间件来使用），那么这里请用 'html'
-    const vite = await createViteServer({
-      root: ctx.dirs.appDir,
-      server: { middlewareMode: 'ssr' },
-      plugins: [vuePlugin()],
-      define: {
-        __PROD__: false,
-      },
-      resolve: {
-        alias: {
-          '@app': ctx.resolveGuguRoot('app'),
-        },
-      },
-    });
+    const vite = await createViteServer(
+      getViteConfig(ctx, false, {
+        server: { middlewareMode: 'ssr' },
+      }),
+    );
 
     // 使用 vite 的 Connect 实例作为中间件
     app.use(vite.middlewares);
@@ -77,11 +69,7 @@ export async function createServer(
 
         const serverState = {
           global: {
-            site: {
-              postCount: ctx.db._.get('posts').size(),
-              tagCount: ctx.db._.get('tags').size(),
-              categoryCount: ctx.db._.get('categories').size(),
-            },
+            site: ctx.dao.getSiteInfo(),
           },
         };
 

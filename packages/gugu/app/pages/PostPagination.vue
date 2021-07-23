@@ -14,10 +14,14 @@ import { useStore } from 'vuex';
 export default defineComponent({
   methods: {},
   asyncData({ store, route, site }) {
-    return site.axios.get('/api/aaa').then((resp) => {
-      console.log('\n--------fetch------', resp.data, '\n');
-      return store.commit('global/setState', { count: resp.data });
-    });
+    return site.axios
+      .get(`/blog-api/post/detail/install-nodejs-on-linux.json`)
+      .then((resp) => {
+        console.log(111111111, resp.data);
+      })
+      .catch((ee) => {
+        console.log({ ee });
+      });
   },
 });
 </script>
