@@ -3,6 +3,7 @@ import { InlineConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import { merge } from 'lodash';
+import { IUserConfig } from '@t';
 
 export function getViteConfig(
   ctx: GContext,
@@ -36,6 +37,10 @@ export function getViteConfig(
       configFile: false,
       define: {
         __PROD__: isProd,
+        __INJECTED_USER_CONFIG__: JSON.stringify({
+          ...ctx.userConfig,
+          outDir: '',
+        } as IUserConfig),
       },
       resolve: {
         alias: {

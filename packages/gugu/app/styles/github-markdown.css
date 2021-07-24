@@ -977,7 +977,7 @@
   vertical-align: middle;
 }
 
-/* --------------------- 自定义 --------------------- */
+/* ------------------------------------------ 自定义 ------------------------------------------ */
 
 .markdown-body h1 {
   font-size: 1.75em;
@@ -1019,4 +1019,9 @@
 
 .markdown-body {
   @apply text-sm;
+}
+
+.markdown-body img {
+  display: block;
+  @apply mx-auto;
 }

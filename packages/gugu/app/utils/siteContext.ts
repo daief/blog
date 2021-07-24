@@ -8,10 +8,7 @@ export function createSiteContext(): ISiteContext & {
 } {
   const siteCtx: ISiteContext = {
     axios: axios.create(),
-    blogConfig: {
-      url: 'https://xxx.com',
-      base: '/',
-    },
+    blogConfig: __INJECTED_USER_CONFIG__,
   };
 
   Object.defineProperty(siteCtx, 'install', {

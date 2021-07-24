@@ -1,49 +1,36 @@
 <template>
-  <div class="mx-auto my-6 max-w-screen-xl flex">
+  <div class="mx-6 m-6 xl:mx-auto max-w-screen-xl flex">
     <div class="blog-base-area-box w-48 py-6 sticky top-6">
       <img
         class="block w-24 h-24 rounded-full mx-auto"
-        src="https://avatars.githubusercontent.com/u/19222089?v=4"
+        :src="siteCtx.blogConfig.avatar"
       />
       <div class="mt-5 px-3 text-center">
         <h1 class="text-c-title font-normal">
-          <a href="" class="unset"> 个人博客站点 </a>
+          <a href="" class="unset">{{ siteCtx.blogConfig.title }}</a>
         </h1>
-        <p class="mt-2 text-sm text-c-secondary break-words">
-          可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。可以随便写一点描述，也可以长一点试试。
+        <p
+          class="mt-2 text-sm text-c-secondary break-words"
+          v-if="!!siteCtx.blogConfig.description"
+        >
+          {{ siteCtx.blogConfig.description }}
         </p>
         <div class="mt-3 text-xs flex justify-center">
           <router-link to="" class="unset">
-            <Icon name="wenzhang" />({{ site.postCount }})
+            <Icon name="wenzhang" />({{ blogBrief.postCount }})
           </router-link>
           <span class="mx-1 text-c-secondary">|</span>
           <router-link to="" class="unset">
-            <Icon name="tag" />({{ site.tagCount }})
+            <Icon name="tag" />({{ blogBrief.tagCount }})
           </router-link>
           <span class="mx-1 text-c-secondary">|</span>
           <router-link to="" class="unset">
-            <Icon name="category" />({{ site.categoryCount }})
+            <Icon name="category" />({{ blogBrief.categoryCount }})
           </router-link>
         </div>
       </div>
-      <div class="mt-6 text-center">
-        <ALink
-          v-for="(item, index) in menus"
-          :key="index"
-          :to="item.link"
-          class="
-            unset
-            h-10
-            flex
-            items-center
-            justify-center
-            border-b border-t border-gray-100
-            text-sm text-c-text
-            menu-link
-          "
-        >
-          {{ item.label }}
-        </ALink>
+      <div class="mt-6">
+        <Menus />
       </div>
     </div>
     <div class="w-0 flex-grow mx-5">
@@ -55,51 +42,31 @@
         </div>
       </router-view>
     </div>
-    <div class="blog-base-area-box w-48 sticky top-6 p-3">
+    <div class="blog-base-area-box w-48 sticky top-6">
       <Toc />
     </div>
   </div>
+  <BottomActions />
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref, useSSRContext } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
-export default defineComponent({});
+export default defineComponent({
+  name: 'App',
+});
 </script>
 
 <script lang="ts" setup>
 import Icon from '@app/components/Icon.vue';
-import ALink from './components/ALink.vue';
 import Toc from './components/Site/Toc.vue';
+import Menus from './components/Site/Menus.vue';
+import { useSiteContext } from './utils/siteContext';
+import BottomActions from './components/Site/BottomActions.vue';
 const store = useStore();
-const site = computed(() => store.state.global.site);
-
-const menus = [
-  {
-    link: '/',
-    label: '首页',
-  },
-  {
-    link: '/archives',
-    label: '归档',
-  },
-  {
-    link: '/about',
-    label: '关于',
-  },
-];
+const blogBrief = computed(() => store.state.global.site);
+const siteCtx = useSiteContext();
 </script>
 
-<style lang="less">
-.blog-base-area-box {
-  @apply bg-white shadow-md rounded-lg flex-shrink-0 self-start;
-}
-</style>
-
-<style scoped lang="less">
-.menu-link.router-link-active {
-  color: #fff;
-  @apply bg-primary bg-opacity-50;
-}
-</style>
+<style scoped lang="less"></style>

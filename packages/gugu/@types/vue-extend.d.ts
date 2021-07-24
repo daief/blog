@@ -1,3 +1,4 @@
+import { IUserConfig } from '@t';
 import { AxiosInstance } from 'axios';
 import { RouteLocationNormalized } from 'vue-router';
 import { Store } from 'vuex';
@@ -16,10 +17,7 @@ declare global {
 
   interface ISiteContext {
     axios: AxiosInstance;
-    blogConfig: {
-      url: string;
-      base: string;
-    };
+    blogConfig: IUserConfig;
   }
 }
 
