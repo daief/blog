@@ -1,6 +1,6 @@
 import glob from 'glob-promise';
 import { CollectionChain } from 'lodash';
-import { relative, resolve } from 'path';
+import { relative, resolve, join } from 'path';
 import type { GContext } from '../ctx';
 import { md5 } from '../utils/helper';
 import { parseMarkdown } from '../utils/parseMarkdown';
@@ -12,6 +12,11 @@ import dayjs from 'dayjs';
 export class GuDao {
   private db: DB<ggDB.IDB>;
   private gg: GContext;
+
+  resolvingMarkdown: {
+    filename: string;
+    id: string;
+  };
 
   constructor(ctx: GContext) {
     this.gg = ctx;
@@ -27,6 +32,7 @@ export class GuDao {
 
   async init() {
     await this.loadMarkdownFiles();
+    await this.loadAssets();
     this.db.writeSync();
   }
 
@@ -138,7 +144,16 @@ export class GuDao {
       for await (const mdPath of results) {
         const content = await fs.readFile(mdPath, 'utf-8');
         const hash = md5(content);
-        const parsedResult = parseMarkdown(content, this.gg.renderer);
+
+        this.resolvingMarkdown = {
+          filename: mdPath,
+          id: '',
+        };
+        // id 在 parseMarkdown 方法中赋值
+        const parsedResult = this.gg.parseMarkdown(content);
+
+        this.resolvingMarkdown = null;
+
         p.push({
           ...parsedResult,
           date: parsedResult.date || dayjs().format(),
@@ -229,5 +244,19 @@ export class GuDao {
     ].forEach(([type, data]: [string, any[]]) => {
       (this.db._.get(type) as CollectionChain<any>).push(...data).commit();
     });
+  }
+
+  private async loadAssets() {
+    for (const [id, assetInfoLs] of this.gg.assets) {
+      for (const ass of assetInfoLs) {
+        try {
+          fs.copySync(
+            ass.assetFilePath,
+            join(this.gg.dirs.guguRoot, 'dist/client/post', ass.relativePath),
+            { overwrite: true, recursive: true },
+          );
+        } catch (error) {}
+      }
+    }
   }
 }

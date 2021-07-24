@@ -21,7 +21,7 @@ export interface IUserConfig {
   highlight?: {
     theme?: string;
   };
-  siteMenus: Record<
+  siteMenus?: Record<
     string,
     {
       link: string;
