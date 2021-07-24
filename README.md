@@ -1,12 +1,16 @@
 # TODO
 
-- [x] webpack dev 优化
-- [ ] page title
-- [x] about, others page, simple pages
-- [ ] 404 page
+- [ ] 页面 meta
+- [ ] 图片资源
+  - [ ] 懒加载？
+  - [ ] 裂图
+- [ ] 404 page、老链接跳转兼容
 - [ ] 文章置顶 sticky
 - [ ] 文章草稿/发布/置顶状态区分
-- ~~[ ] try esbuild or vite~~
+- [ ] 站内链接处理
+- [ ] 移动端、响应式
+- [ ] 启动时的缓存处理、写文时的更新
+- [ ] 封面图
 
 # Usage
 
