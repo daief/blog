@@ -26,5 +26,4 @@ router.isReady().then(() => {
   });
 
   app.mount('#app');
-  console.log(router.currentRoute.value.matched);
 });

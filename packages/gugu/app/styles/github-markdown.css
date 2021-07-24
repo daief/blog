@@ -209,17 +209,9 @@
   margin-bottom: 0;
 }
 
-.markdown-body h1 {
-  font-size: 32px;
-}
-
 .markdown-body h1,
 .markdown-body h2 {
   font-weight: 600;
-}
-
-.markdown-body h2 {
-  font-size: 24px;
 }
 
 .markdown-body h3 {
@@ -690,10 +682,6 @@
   border-bottom: 1px solid #eaecef;
 }
 
-.markdown-body h2 {
-  font-size: 1.5em;
-}
-
 .markdown-body h3 {
   font-size: 1.25em;
 }
@@ -990,6 +978,26 @@
 }
 
 /* --------------------- 自定义 --------------------- */
+
+.markdown-body h1 {
+  font-size: 1.75em;
+  margin: 0.6em 0;
+}
+.markdown-body h2 {
+  font-size: 1.5em;
+}
+.markdown-body h3 {
+  font-size: 1.25em;
+}
+.markdown-body h4 {
+  font-size: 1em;
+}
+.markdown-body h5 {
+  font-size: 0.875em;
+}
+.markdown-body h6 {
+  font-size: 0.75em;
+}
 
 .markdown-body .mermaid {
   margin-top: 0.5em;

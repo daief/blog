@@ -55,7 +55,9 @@
         </div>
       </router-view>
     </div>
-    <div class="blog-base-area-box w-48 sticky top-6">asd</div>
+    <div class="blog-base-area-box w-48 sticky top-6 p-3">
+      <Toc />
+    </div>
   </div>
 </template>
 
@@ -69,12 +71,13 @@ export default defineComponent({});
 <script lang="ts" setup>
 import Icon from '@app/components/Icon.vue';
 import ALink from './components/ALink.vue';
+import Toc from './components/Site/Toc.vue';
 const store = useStore();
 const site = computed(() => store.state.global.site);
 
 const menus = [
   {
-    link: 'https://baidu.com',
+    link: '/',
     label: '首页',
   },
   {

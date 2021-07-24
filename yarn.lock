@@ -426,6 +426,7 @@ __metadata:
     "@types/lodash": ^4.14.170
     "@types/marked": ^2.0.4
     "@types/node": ^16.0.0
+    "@vant/use": ^1.2.2
     "@vitejs/plugin-vue": ^1.2.4
     "@vitejs/plugin-vue-jsx": ^1.1.6
     "@vue/compiler-sfc": ^3.0.8
@@ -845,6 +846,13 @@ __metadata:
     "@types/mime": ^1
     "@types/node": "*"
   checksum: 3ee9adfd05f8b2af942e26afe9ff3993e723e1af70718aa8c2b1c0f72fe5f45be69ac20aa7ee5859d1c18f2397d5fcf4eafcb30890d88e6836a98aa7a3adb6c3
+  languageName: node
+  linkType: hard
+
+"@vant/use@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "@vant/use@npm:1.2.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vant%2Fuse%2Fdownload%2F%40vant%2Fuse-1.2.2.tgz"
+  checksum: efbb33ae95fa2c6a49715165197c6e067959ef35db569300d9e776cdb161dff065fa69fe05737d1d449c1863d416f42a2168310b06d8fa673202406ff65fc958
   languageName: node
   linkType: hard
 

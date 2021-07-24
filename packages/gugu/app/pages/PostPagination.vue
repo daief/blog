@@ -2,7 +2,7 @@
   <div class="blog-base-area-box p-8">
     <PostItem v-for="item in data.result" :key="item.id" :post="item" />
   </div>
-  <div class="">
+  <div class="my-8">
     <Pagination
       :total="data.totalPages"
       :current="data.current"
@@ -15,7 +15,6 @@
 import { getPostList } from '@app/api';
 import type { IListResponse } from '@t/common';
 import { computed, ComputedRef, defineComponent, ref } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 import PostItem from '@app/components/PostPagination/PostItem.vue';
 import Pagination from '@app/components/Pagination.vue';
@@ -41,26 +40,13 @@ export default defineComponent({
     });
   },
   setup(_) {
-    const route = useRoute();
-    const r = useRouter();
-
     const store = useStore();
 
     const data: ComputedRef<IListResponse<ggDB.IPost>> = computed(
       () => store.state.global.indexPostPagination,
     );
 
-    function go() {
-      // console.log(111);
-      // r.push({
-      //   params: {
-      //     no: unref(aa),
-      //   },
-      // });
-    }
-
     return {
-      go,
       data,
     };
   },

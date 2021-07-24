@@ -13,25 +13,25 @@ export default defineComponent({
     },
     center: Boolean,
   },
-  setup({ post, center }) {
+  setup(props) {
     return () => (
       <div
         class={[
           'post-item border-b border-gray-200 pb-6 mb-6',
-          center && 'justify-center',
+          props.center && 'justify-center',
         ]}
       >
         <h1 class="text-lg font-normal break-words">
-          <ALinkVue class="unset hover:border-b" to={post.path}>
-            {post.title}
+          <ALinkVue class="unset post-title" to={props.post.path}>
+            {props.post.title}
           </ALinkVue>
         </h1>
         <div class="my-4 break-words">
-          <RichTextVue htmlText={post.excerpt} />
+          <RichTextVue htmlText={props.post.excerpt} disabledAnchor />
         </div>
         <div class="text-xs flex justify-between">
-          <PostMetaVue post={post} />
-          <ALinkVue class="unset" to={post.path}>
+          <PostMetaVue post={props.post} />
+          <ALinkVue class="unset" to={props.post.path}>
             查看全文{'>>'}
           </ALinkVue>
         </div>
@@ -45,6 +45,22 @@ export default defineComponent({
 .post-item {
   &:last-of-type {
     @apply border-b-0 mb-0;
+  }
+
+  .post-title {
+    @apply relative;
+
+    &::after {
+      content: '';
+      @apply absolute -bottom-1 left-0 right-0 bg-primary transform scale-0 transition;
+      height: 2px;
+    }
+
+    &:hover {
+      &::after {
+        @apply transform scale-x-100;
+      }
+    }
   }
 }
 </style>

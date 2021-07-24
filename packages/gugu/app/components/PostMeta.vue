@@ -9,9 +9,9 @@ export default defineComponent({
   props: {
     post: Object as PropType<ggDB.IPost>,
   },
-  setup: ({ post }) => {
-    const hasCats = !!post.categories.length;
-    const formated = computed(() => formatTime(post.date));
+  setup: (props) => {
+    const hasCats = !!props.post.categories.length;
+    const formated = computed(() => formatTime(props.post.date));
     return () => (
       <div class="flex items-center">
         <div>
@@ -23,12 +23,12 @@ export default defineComponent({
             <span class="mx-1">|</span>
             <div>
               <IconVue name="folder" class="text-c-secondary mx-1" />
-              {post.categories.map((cat, i) => (
+              {props.post.categories.map((cat, i) => (
                 <Fragment key={cat.name}>
                   <ALinkVue to={cat.path} class="unset">
                     {cat.name}
                   </ALinkVue>
-                  {i !== post.categories.length - 1 ? '，' : ''}
+                  {i !== props.post.categories.length - 1 ? '，' : ''}
                 </Fragment>
               ))}
             </div>
