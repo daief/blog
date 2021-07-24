@@ -16,6 +16,10 @@ declare global {
 
   interface ISiteContext {
     axios: AxiosInstance;
+    blogConfig: {
+      url: string;
+      base: string;
+    };
   }
 }
 

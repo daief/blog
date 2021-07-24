@@ -7,6 +7,7 @@ import { parseMarkdown } from '../utils/parseMarkdown';
 import { DB } from './db';
 import fs from 'fs-extra';
 import { IListResponse } from '@t/common';
+import dayjs from 'dayjs';
 
 export class GuDao {
   private db: DB<ggDB.IDB>;
@@ -66,23 +67,33 @@ export class GuDao {
       totalPages: Math.ceil(posts.length / pageSize),
       result: posts
         .slice((current - 1) * pageSize, current * pageSize)
-        .map((it) => this.sorPostVO(it)),
+        .map((it) => this.sortPostVO(it)),
     };
   }
 
   getPostDetail(data: { id: string }) {
-    const post = this.db._.get('posts')
-      .find((it) => it.id === data.id)
+    const posts = this.db._.get('posts')
+      .filter((it) => it.published)
       .value();
-    return {
-      post: post && post.published ? this.sorPostVO(post, false) : null,
-    };
+
+    const index = posts.findIndex((it) => it.id === data.id);
+
+    if (index < 0) {
+      return null;
+    }
+
+    const post = this.sortPostVO(posts[index], false);
+    post.next = posts[index - 1] ? this.sortPostVO(posts[index - 1]) : null;
+    post.prev = posts[index + 1] ? this.sortPostVO(posts[index + 1]) : null;
+
+    return post;
   }
 
-  private sorPostVO(post: ggDB.IPost, isSimple = true): ggDB.IPost {
+  private sortPostVO(post: ggDB.IPost, isSimple = true): ggDB.IPost {
     const result: ggDB.IPost = {
       id: post.id,
       slug: post.slug,
+      path: post.path,
       title: post.title,
       comments: post.comments,
       published: post.published,
@@ -95,6 +106,7 @@ export class GuDao {
       excerpt: post.excerpt,
       more: post.more,
       tocHtml: post.tocHtml,
+      hash: post.hash,
       filename: '',
       raw: '',
       prev: null,
@@ -112,7 +124,7 @@ export class GuDao {
   }
 
   private async loadMarkdownFiles() {
-    const getPosts = async (type: string) => {
+    const getPosts = async (type: 'posts' | 'pages') => {
       const results = await glob(
         `${this.gg.dirs.sourceDir}/${type}/**/*.md`,
         {},
@@ -125,8 +137,17 @@ export class GuDao {
       > = [];
       for await (const mdPath of results) {
         const content = await fs.readFile(mdPath, 'utf-8');
+        const hash = md5(content);
+        const parsedResult = parseMarkdown(content, this.gg.renderer);
         p.push({
-          ...(parseMarkdown(content, this.gg.renderer) as any),
+          ...parsedResult,
+          date: parsedResult.date || dayjs().format(),
+          hash,
+          slug: '',
+          path: '',
+          updated: '',
+          tags: [],
+          categories: [],
           published: true,
           isPost: type === 'posts',
           filename: mdPath,
@@ -136,7 +157,13 @@ export class GuDao {
     };
 
     const [posts, pages] = await Promise.all(
-      ['posts', 'pages'].map((type) => getPosts(type)),
+      ['posts', 'pages'].map((type) =>
+        getPosts(type as any).then((ls) => {
+          return ls.sort(
+            (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf(),
+          );
+        }),
+      ),
     );
 
     const all = [...posts, ...pages];
@@ -154,40 +181,39 @@ export class GuDao {
         return;
       }
 
-      post.slug = `/post/${post.id}`;
+      post.slug = `post/${post.id}`;
+      post.path = '/' + post.slug;
 
       // 下面仅针对文章进行标签、分类处理
       // handle tags
       post.tags = strTags.map((tagName) => {
-        let newItem: ggDB.ITag = allTags.find((it) => it.name === tagName);
-        if (!newItem) {
-          newItem = {
-            id: md5(tagName),
-            name: tagName,
-            slug: '/tags/' + tagName,
-            postIds: [],
-          };
-          allTags.push(newItem);
-        }
+        const newItem: ggDB.ITag = allTags.find(
+          (it) => it.name === tagName,
+        ) || {
+          id: md5(tagName),
+          name: tagName,
+          slug: 'tags/' + tagName,
+          path: '/tags/' + tagName,
+          postIds: [],
+        };
+        allTags.push(newItem);
         newItem.postIds.push(post.id);
         return newItem;
       });
 
       // handle Categories
       post.categories = strCategories.map((cName, i) => {
-        let item = allCategories.find((it) => it.name === cName);
-        if (!item) {
-          item = {
-            id: md5(cName),
-            name: cName,
-            slug: '/categories/' + cName,
-            parentId: i === 0 ? '' : md5(strCategories[i - 1]),
-            postIds: [],
-          };
-          allCategories.push(item);
-          item.postIds.push(post.id);
-          return item;
-        }
+        const item = allCategories.find((it) => it.name === cName) || {
+          id: md5(cName),
+          name: cName,
+          slug: 'categories/' + cName,
+          path: '/categories/' + cName,
+          parentId: i === 0 ? '' : md5(strCategories[i - 1]),
+          postIds: [],
+        };
+        allCategories.push(item);
+        item.postIds.push(post.id);
+        return item;
       });
     });
 

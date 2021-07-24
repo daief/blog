@@ -989,6 +989,8 @@
   vertical-align: middle;
 }
 
+/* --------------------- 自定义 --------------------- */
+
 .markdown-body .mermaid {
   margin-top: 0.5em;
   margin-bottom: 0.5em;
@@ -996,4 +998,17 @@
 
 .markdown-body blockquote {
   @apply border-primary;
+}
+
+.markdown-body,
+.markdown-body .pl-s .pl-s1,
+.markdown-body .pl-smi,
+.markdown-body .pl-mi,
+.markdown-body .pl-mb,
+.markdown-body .blob-code-inner {
+  @apply text-c-text;
+}
+
+.markdown-body {
+  @apply text-sm;
 }

@@ -28,18 +28,16 @@ const strToArray = (s: string | string[] | null) => {
 };
 
 export function parseMarkdown(source: string, renderer: marked.Renderer) {
-  const { attributes: metadata, body: markdownBody } = fm<
-    Partial<{
-      title: string;
-      date: string;
-      published: boolean;
-      id: string;
-      categories: string | string[];
-      tags: string | string[];
-      description: string;
-      comments: boolean;
-    }>
-  >(source);
+  const { attributes: metadata, body: markdownBody } = fm<{
+    title: string;
+    date: string;
+    published: boolean;
+    id: string;
+    categories: string | string[];
+    tags: string | string[];
+    description: string;
+    comments: boolean;
+  }>(source);
 
   const [excerpt, more = ''] = marked(markdownBody, {
     renderer,

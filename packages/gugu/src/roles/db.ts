@@ -34,6 +34,6 @@ export class DB<T extends {}> {
   }
 
   writeSync() {
-    fs.outputFileSync(this.filename, this._.value(), {});
+    fs.outputFileSync(this.filename, JSON.stringify(this._.value()), {});
   }
 }

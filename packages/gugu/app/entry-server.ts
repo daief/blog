@@ -16,9 +16,7 @@ export async function render(
 
   store.replaceState(merge({}, store.state, options.serverState));
 
-  const site = createSiteContext({
-    axios: axios.create(),
-  });
+  const site = createSiteContext();
   site.axios.defaults.baseURL = options.serverAddress;
   app.use(site);
 

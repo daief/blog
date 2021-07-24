@@ -1,47 +1,70 @@
 <template>
-  <div>
-    PostPagination - {{ route.params.no }} - {{ count }}
-
-    <input v-model="aa" @keydown.enter="go" />
+  <div class="blog-base-area-box p-8">
+    <PostItem v-for="item in data.result" :key="item.id" :post="item" />
+  </div>
+  <div class="">
+    <Pagination
+      :total="data.totalPages"
+      :current="data.current"
+      link-pattern="/page/%d"
+    />
   </div>
 </template>
 
-<script lang="ts">
-import { computed, defineComponent, ref, unref } from 'vue';
+<script lang="tsx">
+import { getPostList } from '@app/api';
+import type { IListResponse } from '@t/common';
+import { computed, ComputedRef, defineComponent, ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex';
+import PostItem from '@app/components/PostPagination/PostItem.vue';
+import Pagination from '@app/components/Pagination.vue';
 
 export default defineComponent({
-  methods: {},
-  asyncData({ store, route, site }) {
-    return site.axios
-      .get(`/blog-api/post/detail/install-nodejs-on-linux.json`)
-      .then((resp) => {
-        console.log(111111111, resp.data);
-      })
-      .catch((ee) => {
-        console.log({ ee });
-      });
+  name: 'PostPagination',
+  components: {
+    PostItem,
+    Pagination,
+  },
+  async asyncData({ store, route, site }) {
+    const current = +route.params.no || 1;
+    const { indexPostPagination } = store.state.global;
+    if (
+      current === indexPostPagination.current &&
+      !!indexPostPagination.result.length
+    ) {
+      return;
+    }
+    const resp = await getPostList(site.axios, { current });
+    await store.commit('global/setState', {
+      indexPostPagination: resp,
+    });
+  },
+  setup(_) {
+    const route = useRoute();
+    const r = useRouter();
+
+    const store = useStore();
+
+    const data: ComputedRef<IListResponse<ggDB.IPost>> = computed(
+      () => store.state.global.indexPostPagination,
+    );
+
+    function go() {
+      // console.log(111);
+      // r.push({
+      //   params: {
+      //     no: unref(aa),
+      //   },
+      // });
+    }
+
+    return {
+      go,
+      data,
+    };
   },
 });
-</script>
-
-<script lang="ts" setup>
-const route = useRoute();
-const r = useRouter();
-
-const count = computed(() => useStore().state.global.count);
-
-const aa = ref(count.value);
-
-function go() {
-  console.log(111);
-  r.push({
-    params: {
-      no: unref(aa),
-    },
-  });
-}
 </script>
 
 <style scoped lang="less"></style>
