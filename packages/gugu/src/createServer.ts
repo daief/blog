@@ -25,6 +25,12 @@ export async function createServer(
     ...options,
   };
 
+  app.use(
+    serveStatic(ctx.resolveGuguRoot('dist/client'), {
+      index: false,
+    }),
+  );
+
   const LOCAL_ADDRESS = `http://localhost:${options.port}`;
 
   const jsonApi = createJsonApi(ctx);
@@ -111,12 +117,6 @@ export async function createServer(
       }
     });
   } else {
-    app.use(
-      serveStatic(ctx.resolveGuguRoot('dist/client'), {
-        index: false,
-      }),
-    );
-
     app.use('*', async (req, res) => {
       // 服务 index.html - 下面我们来处理这个问题
       const url = req.originalUrl;

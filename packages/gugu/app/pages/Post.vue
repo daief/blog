@@ -23,7 +23,12 @@
       class="w-0 flex-grow break-words"
       v-for="(item, index) in linkedPosts"
       :key="index"
-      :class="{ 'w-0': !item, 'text-right': index === 1 }"
+      :class="{
+        'w-0': !item,
+        'text-right': index === 1,
+        'pr-3': index === 0,
+        'pl-3': index === 1,
+      }"
     >
       <template v-if="!!item">
         <div class="text-c-secondary text-xs mb-1">
@@ -73,15 +78,17 @@ const store = useStore();
 const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
 
 const postContent = computed(() =>
-  [
-    post.value.excerpt,
-    post.value.excerpt && post.value.more
-      ? '<a id="more" class="h-0 mt-3 block"></a>'
-      : '',
-    post.value.more,
-  ]
-    .filter(Boolean)
-    .join('\n'),
+  post.value
+    ? [
+        post.value.excerpt,
+        post.value.excerpt && post.value.more
+          ? '<a id="more" class="h-0 mt-3 block"></a>'
+          : '',
+        post.value.more,
+      ]
+        .filter(Boolean)
+        .join('\n')
+    : '',
 );
 
 const linkedPosts = computed(() =>
@@ -94,7 +101,7 @@ watch(
   () => postContent.value,
   () => {
     nextTick(() => {
-      if (!import.meta.env.SSR || !!contentRef.value)
+      if (!import.meta.env.SSR && !!contentRef.value)
         store.commit('global/setState', {
           tocHtml: createTocHtmlStrByList(
             getContentTocFromEl(contentRef.value.$el),
