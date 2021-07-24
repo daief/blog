@@ -69,7 +69,7 @@ export class GContext extends EventEmitter {
       const codeResult = !hljs.getLanguage(language)
         ? escapeHtml(sourceCode)
         : hljs.highlight(sourceCode, { language }).value;
-      return `<pre class="hljs language-${language}"><code style="display:block;">${codeResult}</code></pre>`;
+      return `<pre class="hljs language-${language}" hljs-language="${language}"><code style="display:block;">${codeResult}</code></pre>`;
     };
     this.renderer.heading = (text: string, level) => {
       const anchorText = `${text}`;

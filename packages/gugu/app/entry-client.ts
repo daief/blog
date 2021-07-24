@@ -1,14 +1,11 @@
-import axios from 'axios';
 import { createApp } from './main';
 import { createSiteContext } from './utils/siteContext';
+import '@gugu-highlight-theme';
 import './styles';
 
-const axiosIns = axios.create();
-
+const site = createSiteContext();
 const { app, router, store } = createApp();
-const site = createSiteContext({
-  axios: axiosIns,
-});
+
 app.use(site);
 
 if (window.__INITIAL_STATE__) {

@@ -4,17 +4,23 @@
 }
 
 html {
-  @apply bg-primary;
-  @apply bg-opacity-5;
-  @apply text-c-text;
+  @apply bg-primary bg-opacity-5 text-c-text;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply text-c-title;
 }
 
 a {
   @apply text-primary;
 
   &:hover {
-    @apply text-primary;
-    @apply text-opacity-75;
+    @apply text-primary text-opacity-75;
   }
 }
 
@@ -22,8 +28,7 @@ a.unset {
   color: currentColor;
 
   &:hover {
-    @apply text-primary;
-    @apply text-opacity-75;
+    @apply text-primary text-opacity-75;
   }
 }
 

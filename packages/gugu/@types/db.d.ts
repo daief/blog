@@ -3,6 +3,7 @@ declare namespace ggDB {
     name: string;
     id: string;
     slug: string;
+    path: string;
     postIds: string[];
   }
 
@@ -10,6 +11,7 @@ declare namespace ggDB {
     name: string;
     id: string;
     slug: string;
+    path: string;
     parentId: string;
     postIds: string[];
   }
@@ -18,6 +20,7 @@ declare namespace ggDB {
     raw: string;
     id: string;
     slug: string;
+    path: string;
     title: string;
     comments: boolean;
     // link: string;
@@ -34,6 +37,7 @@ declare namespace ggDB {
     more: string;
     tocHtml?: string;
     filename: string;
+    hash: string;
   }
 
   export interface IDB {

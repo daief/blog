@@ -18,7 +18,7 @@ module.exports = {
           return `rgb(var(--base-primary))`;
         },
         'c-title': colors.gray[800], // 标题
-        'c-text': colors.gray[700], // 文本
+        'c-text': colors.gray[600], // 文本
         'c-secondary': colors.gray[400], // 浅灰
         danger: colors.red[600], // 危险
         success: colors.green[400], // 成功

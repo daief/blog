@@ -380,15 +380,17 @@ __metadata:
     "@types/marked": ^2.0.4
     "@types/node": ^16.0.0
     "@vitejs/plugin-vue": ^1.2.4
-    "@vitejs/plugin-vue-jsx": ^1.1.2
+    "@vitejs/plugin-vue-jsx": ^1.1.6
     "@vue/compiler-sfc": ^3.0.8
     "@vue/server-renderer": ^3.0.6
+    "@vuedx/typescript-plugin-vue": ^0.7.4
     autoprefixer: ^10.3.1
     axios: ^0.21.1
     cac: ^6.7.3
     chokidar: ^3.5.2
     compression: ^1.7.4
     cross-env: ^6.0.0
+    dayjs: ^1.10.6
     esbuild-register: ^2.6.0
     express: ^4.17.1
     front-matter: ^4.0.2
@@ -400,6 +402,7 @@ __metadata:
     less: ^4.1.1
     lodash: ^4.17.21
     marked: ^2.1.3
+    mermaid: ^8.11.0
     postcss: ^8.3.5
     prismjs: ^1.19.0
     serve-static: ^1.14.1
@@ -424,7 +427,7 @@ __metadata:
     "@types/marked": ^2.0.4
     "@types/node": ^16.0.0
     "@vitejs/plugin-vue": ^1.2.4
-    "@vitejs/plugin-vue-jsx": ^1.1.2
+    "@vitejs/plugin-vue-jsx": ^1.1.6
     "@vue/compiler-sfc": ^3.0.8
     "@vue/server-renderer": ^3.0.6
     "@vuedx/typescript-plugin-vue": ^0.7.4
@@ -434,6 +437,7 @@ __metadata:
     chokidar: ^3.5.2
     compression: ^1.7.4
     cross-env: ^6.0.0
+    dayjs: ^1.10.6
     esbuild-register: ^2.6.0
     express: ^4.17.1
     front-matter: ^4.0.2
@@ -445,6 +449,7 @@ __metadata:
     less: ^4.1.1
     lodash: ^4.17.21
     marked: ^2.1.3
+    mermaid: ^8.11.0
     postcss: ^8.3.5
     prismjs: ^1.19.0
     serve-static: ^1.14.1
@@ -457,6 +462,13 @@ __metadata:
     gugu: bin/index.js
   languageName: unknown
   linkType: soft
+
+"@braintree/sanitize-url@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "@braintree/sanitize-url@npm:3.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40braintree%2Fsanitize-url%2Fdownload%2F%40braintree%2Fsanitize-url-3.1.0.tgz"
+  checksum: d7252475cc81ecc38d67a1c7e565eb80fc103edbb7feb1d7245d14cb04f54e53f6438981563606d61e776d9e508551214937d8498ac665d8e3b8e632f94db8b0
+  languageName: node
+  linkType: hard
 
 "@fullhuman/postcss-purgecss@npm:^4.0.3":
   version: 4.0.3
@@ -836,7 +848,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitejs/plugin-vue-jsx@npm:^1.1.2":
+"@vitejs/plugin-vue-jsx@npm:^1.1.6":
   version: 1.1.6
   resolution: "@vitejs/plugin-vue-jsx@npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vitejs%2Fplugin-vue-jsx%2Fdownload%2F%40vitejs%2Fplugin-vue-jsx-1.1.6.tgz"
   dependencies:
@@ -1643,6 +1655,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"commander@npm:2":
+  version: 2.20.3
+  resolution: "commander@npm:2.20.3::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-2.20.3.tgz"
+  checksum: b73428e97de7624323f81ba13f8ed9271de487017432d18b4da3f07cfc528ad754bbd199004bd5d14e0ccd67d1fdfe0ec8dbbd4c438b401df3c4cc387bfd1daa
+  languageName: node
+  linkType: hard
+
 "commander@npm:^6.0.0, commander@npm:^6.1.0":
   version: 6.2.1
   resolution: "commander@npm:6.2.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fcommander%2Fdownload%2Fcommander-6.2.1.tgz"
@@ -1818,6 +1837,357 @@ __metadata:
   languageName: node
   linkType: hard
 
+"d3-array@npm:1, d3-array@npm:^1.1.1, d3-array@npm:^1.2.0":
+  version: 1.2.4
+  resolution: "d3-array@npm:1.2.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-array%2Fdownload%2Fd3-array-1.2.4.tgz"
+  checksum: ab114c72ccdcb3f53807574c003816ad6ac65c2c2db2b17b18e2678f1141881dfa0ddab60af63d73e428c826e4580b6cb9e93cb776c777c79fec9f75057d8fbd
+  languageName: node
+  linkType: hard
+
+"d3-axis@npm:1":
+  version: 1.0.12
+  resolution: "d3-axis@npm:1.0.12::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-axis%2Fdownload%2Fd3-axis-1.0.12.tgz"
+  checksum: 4d6eeef909a86aac8b1fe413bf2120ceb0b8b91edeea3a2d128aa5a553835ab308eb0f79ade662ab89f6bc5924cee0f61de81b33d6e883935556a0e3e1754ff8
+  languageName: node
+  linkType: hard
+
+"d3-brush@npm:1":
+  version: 1.1.6
+  resolution: "d3-brush@npm:1.1.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-brush%2Fdownload%2Fd3-brush-1.1.6.tgz"
+  dependencies:
+    d3-dispatch: 1
+    d3-drag: 1
+    d3-interpolate: 1
+    d3-selection: 1
+    d3-transition: 1
+  checksum: d24893a88a61800c0a0697b33b3026ff2a28e6d56405c32af8f7c19bded543deab485b05de638dca5de82cf01788746a963998834e709985a3d5f9ebaa75e2d6
+  languageName: node
+  linkType: hard
+
+"d3-chord@npm:1":
+  version: 1.0.6
+  resolution: "d3-chord@npm:1.0.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-chord%2Fdownload%2Fd3-chord-1.0.6.tgz"
+  dependencies:
+    d3-array: 1
+    d3-path: 1
+  checksum: e6ccb89c6ed10881202763d161eb372158c8cfe7a439c0b6b08634c5ec68603f51d2028983706f5b4aefcad64e2a99f222f8f5ce58eb6b2d7c6851a07349f70f
+  languageName: node
+  linkType: hard
+
+"d3-collection@npm:1":
+  version: 1.0.7
+  resolution: "d3-collection@npm:1.0.7::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-collection%2Fdownload%2Fd3-collection-1.0.7.tgz"
+  checksum: c26d13e9bb06945c439d39e66eb905aa94e0cb9a0d6d6a17e1f74f3d6fdfe06978479b1eb1d08a431cfa4bc344607aa8c30ca2aa3ad3be152d0ca45c9a765da7
+  languageName: node
+  linkType: hard
+
+"d3-color@npm:1":
+  version: 1.4.1
+  resolution: "d3-color@npm:1.4.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-color%2Fdownload%2Fd3-color-1.4.1.tgz"
+  checksum: a579fdc2f4ec50980e32d0ac5212c3023ee9c6a7555ae698278f05c9f7d06322f83dde01253f672f9f9fd05d8860f0256d25aee999a0d32cf4111d731413f5da
+  languageName: node
+  linkType: hard
+
+"d3-contour@npm:1":
+  version: 1.3.2
+  resolution: "d3-contour@npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-contour%2Fdownload%2Fd3-contour-1.3.2.tgz"
+  dependencies:
+    d3-array: ^1.1.1
+  checksum: 497c87ad92dfc7af29f63a3180fc94986cbe83b5d4a3374fc3a73608d9a5815af03a8893126b38c2f92a1a796d4f364b9c551e52ff929bd70935a37e2fac7013
+  languageName: node
+  linkType: hard
+
+"d3-dispatch@npm:1":
+  version: 1.0.6
+  resolution: "d3-dispatch@npm:1.0.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-dispatch%2Fdownload%2Fd3-dispatch-1.0.6.tgz"
+  checksum: 2bec4b1395b167974d8fc6b2d5b2a843efd90c377e1749202cf2241557a0bfc7e5eaa465de0f39b5d977d2ae60c5ac982d2f043482bbfb49df53028b53769c98
+  languageName: node
+  linkType: hard
+
+"d3-drag@npm:1":
+  version: 1.2.5
+  resolution: "d3-drag@npm:1.2.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-drag%2Fdownload%2Fd3-drag-1.2.5.tgz"
+  dependencies:
+    d3-dispatch: 1
+    d3-selection: 1
+  checksum: a924f590fc5cea7bb0358fee70719d8c58db12e5a3cab4cd3c3848c60ad337ef89ff4248846d75b33422d47a9f122718ce54c5bdc504d5c141b689412dcf05a7
+  languageName: node
+  linkType: hard
+
+"d3-dsv@npm:1":
+  version: 1.2.0
+  resolution: "d3-dsv@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-dsv%2Fdownload%2Fd3-dsv-1.2.0.tgz"
+  dependencies:
+    commander: 2
+    iconv-lite: 0.4
+    rw: 1
+  bin:
+    csv2json: bin/dsv2json
+    csv2tsv: bin/dsv2dsv
+    dsv2dsv: bin/dsv2dsv
+    dsv2json: bin/dsv2json
+    json2csv: bin/json2dsv
+    json2dsv: bin/json2dsv
+    json2tsv: bin/json2dsv
+    tsv2csv: bin/dsv2dsv
+    tsv2json: bin/dsv2json
+  checksum: 2957ab4b1a7e5287f20072591119460264b75da86481a45e454e4f276586f1e52f1da99e0853bdf3b84ebaf47682981e2cff8431c2243efb09cef794f6b624a6
+  languageName: node
+  linkType: hard
+
+"d3-ease@npm:1":
+  version: 1.0.7
+  resolution: "d3-ease@npm:1.0.7::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-ease%2Fdownload%2Fd3-ease-1.0.7.tgz"
+  checksum: c35f083c586421cb49da5789ee13a250e8f34638484be4ed2b15f7079acd40b19dc858c0969d0004734847ec0dca8484ad1611726b8cb06587e28f7031d9160a
+  languageName: node
+  linkType: hard
+
+"d3-fetch@npm:1":
+  version: 1.2.0
+  resolution: "d3-fetch@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-fetch%2Fdownload%2Fd3-fetch-1.2.0.tgz"
+  dependencies:
+    d3-dsv: 1
+  checksum: 527eaabc68ec831835ba570957e02bfabe15d88ba278d3c6cddf5c1e159609be25287873dca738d964a39666c56425aa667c0fb10aa0950a3c37e65d03ee5da3
+  languageName: node
+  linkType: hard
+
+"d3-force@npm:1":
+  version: 1.2.1
+  resolution: "d3-force@npm:1.2.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-force%2Fdownload%2Fd3-force-1.2.1.tgz"
+  dependencies:
+    d3-collection: 1
+    d3-dispatch: 1
+    d3-quadtree: 1
+    d3-timer: 1
+  checksum: 4f56c466805863482e229e9b674a1aa7215e73e8cff3571a6152f4523d7eba70235ca2cfd24a58966a7563c957388aff3fd73acb3b430666e39c91683b20b0d6
+  languageName: node
+  linkType: hard
+
+"d3-format@npm:1":
+  version: 1.4.5
+  resolution: "d3-format@npm:1.4.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-format%2Fdownload%2Fd3-format-1.4.5.tgz"
+  checksum: ba111c97fc96c902c27e9fded2c9c75d3624d24d490965334ecfbd10783dca15b9a428a7baf303329abdb9516191304d4ae5e2b3bd03e9edccc1e1d75e35be16
+  languageName: node
+  linkType: hard
+
+"d3-geo@npm:1":
+  version: 1.12.1
+  resolution: "d3-geo@npm:1.12.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-geo%2Fdownload%2Fd3-geo-1.12.1.tgz"
+  dependencies:
+    d3-array: 1
+  checksum: e0fe99d832e574d438db4638df11f726a85942e48f520d01074d2e3132ef07b3a60ffcb4ea8d41a70b089c6d4c70dc818237974621a6dec3db92908d1193441c
+  languageName: node
+  linkType: hard
+
+"d3-hierarchy@npm:1":
+  version: 1.1.9
+  resolution: "d3-hierarchy@npm:1.1.9::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-hierarchy%2Fdownload%2Fd3-hierarchy-1.1.9.tgz"
+  checksum: 51b81657fff1a17eae4d03ad47f692669d4b7e14b27a2c432c119b32760679c07f55a19e35acacf0f78de0efdc3e55d053166f4d069f4cdcf5b6e88f00076a75
+  languageName: node
+  linkType: hard
+
+"d3-interpolate@npm:1":
+  version: 1.4.0
+  resolution: "d3-interpolate@npm:1.4.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-interpolate%2Fdownload%2Fd3-interpolate-1.4.0.tgz"
+  dependencies:
+    d3-color: 1
+  checksum: beea08fb3a712ccb992082c058a96a108f31692bbcecbf8029539ff378747b666fd0f33798b313835a2cb019e399a30fd1f5b643822f1cc0be3c86b4fe4730c7
+  languageName: node
+  linkType: hard
+
+"d3-path@npm:1":
+  version: 1.0.9
+  resolution: "d3-path@npm:1.0.9::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-path%2Fdownload%2Fd3-path-1.0.9.tgz"
+  checksum: 48492b1a4218bdfee93bed5bcb59f5e3ff6d3c66bffba82ddbb8e4007515ca517fc59b8ec7023c2387506ec25502ff7797f9a59274b6efec8b7652bc839a0be3
+  languageName: node
+  linkType: hard
+
+"d3-polygon@npm:1":
+  version: 1.0.6
+  resolution: "d3-polygon@npm:1.0.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-polygon%2Fdownload%2Fd3-polygon-1.0.6.tgz"
+  checksum: 8013ffde272ae018a654e26d7c08d89753e00ed563add52c188546ec907f6ebf87bc85c54a6710fccde9c7c9c1cfee788be3741b38cca0fa9072960f0427391f
+  languageName: node
+  linkType: hard
+
+"d3-quadtree@npm:1":
+  version: 1.0.7
+  resolution: "d3-quadtree@npm:1.0.7::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-quadtree%2Fdownload%2Fd3-quadtree-1.0.7.tgz"
+  checksum: ec3d02c75d75ac587ef7e00bfb55bfe0313aa84960f01a3d39f19d28277acae158c5b13bddd6612c82071981639fd08d07b51521cb669d9a44a51a0232827a19
+  languageName: node
+  linkType: hard
+
+"d3-random@npm:1":
+  version: 1.1.2
+  resolution: "d3-random@npm:1.1.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-random%2Fdownload%2Fd3-random-1.1.2.tgz"
+  checksum: 885fed0e02eb46f6793e4e8f8cd30d24960e8062b519419ee2952c9b67b1f7baa232f7f17e2f14b00b8e304d8cc67a4d61ae95dd995d058bb670c7861151f0ac
+  languageName: node
+  linkType: hard
+
+"d3-scale-chromatic@npm:1":
+  version: 1.5.0
+  resolution: "d3-scale-chromatic@npm:1.5.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-scale-chromatic%2Fdownload%2Fd3-scale-chromatic-1.5.0.tgz"
+  dependencies:
+    d3-color: 1
+    d3-interpolate: 1
+  checksum: 12f786b1b1d4c5eaa3f56f38b63832989f40f48d5ed0476325a0443af75d46824cab71b5b975e37cdd2f47a048d7db356f09364a7a5eea641cc81e3825ef996e
+  languageName: node
+  linkType: hard
+
+"d3-scale@npm:2":
+  version: 2.2.2
+  resolution: "d3-scale@npm:2.2.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-scale%2Fdownload%2Fd3-scale-2.2.2.tgz"
+  dependencies:
+    d3-array: ^1.2.0
+    d3-collection: 1
+    d3-format: 1
+    d3-interpolate: 1
+    d3-time: 1
+    d3-time-format: 2
+  checksum: 4311d8c608c3690cb678ec5064009cf6e94f3e6ae83cac7135852147c4933c2f9dd7c62b6717f09808b2c3ffac1abb47ccfb2ba0465e2c34b6a28493f24adc36
+  languageName: node
+  linkType: hard
+
+"d3-selection@npm:1, d3-selection@npm:^1.1.0":
+  version: 1.4.2
+  resolution: "d3-selection@npm:1.4.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-selection%2Fdownload%2Fd3-selection-1.4.2.tgz"
+  checksum: 5b0df1824a0aab04eb9a31ee48f64ce88a6fcf3052c103da4cd7da3171e6464573017c1c7ac20eaf2c2fe7caedf4ad280d61f32e5edcd6a22b6c5a241eeb5b77
+  languageName: node
+  linkType: hard
+
+"d3-shape@npm:1":
+  version: 1.3.7
+  resolution: "d3-shape@npm:1.3.7::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-shape%2Fdownload%2Fd3-shape-1.3.7.tgz"
+  dependencies:
+    d3-path: 1
+  checksum: 90c1e7d773b3586da88f90bd5592d57eb5dade5b26088cddbb9828dd9f86c63f84c609b41051d695626c8acce21f041c61e189071939d45a2511585a87dd7151
+  languageName: node
+  linkType: hard
+
+"d3-time-format@npm:2":
+  version: 2.3.0
+  resolution: "d3-time-format@npm:2.3.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-time-format%2Fdownload%2Fd3-time-format-2.3.0.tgz"
+  dependencies:
+    d3-time: 1
+  checksum: 88fb8b929229deffbcfdce4dccca9da1d8930079f9a7b302184bf7e7c5dc358c4ad2367013ef54b9e53c8cc932519ae69d1f98d53f9f2d4f102d93ad99208e33
+  languageName: node
+  linkType: hard
+
+"d3-time@npm:1":
+  version: 1.1.0
+  resolution: "d3-time@npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-time%2Fdownload%2Fd3-time-1.1.0.tgz"
+  checksum: d083c2181bbd1207f5fc8a0bfc2a8c1a44a56b3781dd6ef73a70f1d82aa74f49d1b410d4afc8e1a10db459fd60fdc75191ac89b8cdf4ee2705d7f3a1f0034fac
+  languageName: node
+  linkType: hard
+
+"d3-timer@npm:1":
+  version: 1.0.10
+  resolution: "d3-timer@npm:1.0.10::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-timer%2Fdownload%2Fd3-timer-1.0.10.tgz"
+  checksum: e302132e1fc8989a5693fc7d265a034d7634ec87a1a8ed85e5959715d9da413971d9289f0ef304c67397d2acb4ebebd99f5adf0c8819929b8f6c588a1fd01d36
+  languageName: node
+  linkType: hard
+
+"d3-transition@npm:1":
+  version: 1.3.2
+  resolution: "d3-transition@npm:1.3.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-transition%2Fdownload%2Fd3-transition-1.3.2.tgz"
+  dependencies:
+    d3-color: 1
+    d3-dispatch: 1
+    d3-ease: 1
+    d3-interpolate: 1
+    d3-selection: ^1.1.0
+    d3-timer: 1
+  checksum: 13bbe22b0e5c1aca610483dfa6c4c39fc2b0805deb7136395ae7130f0a7c0d5da50202bc16ff81c9a88899d0ed557a5e7e84e1cae1f2dc2dc3b52bf8b029d18d
+  languageName: node
+  linkType: hard
+
+"d3-voronoi@npm:1":
+  version: 1.1.4
+  resolution: "d3-voronoi@npm:1.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-voronoi%2Fdownload%2Fd3-voronoi-1.1.4.tgz"
+  checksum: 434d279925251ab1007904020cb19ea8d00b5389113b9667e23be5f9bde9e095038b8267c66d5a638207a565529259c0c6a6c7c8ce0c4f091a344ca7b6ec775b
+  languageName: node
+  linkType: hard
+
+"d3-zoom@npm:1":
+  version: 1.8.3
+  resolution: "d3-zoom@npm:1.8.3::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3-zoom%2Fdownload%2Fd3-zoom-1.8.3.tgz"
+  dependencies:
+    d3-dispatch: 1
+    d3-drag: 1
+    d3-interpolate: 1
+    d3-selection: 1
+    d3-transition: 1
+  checksum: a16611fecc85203ed42fc9f0a4488c526dd76720914a735370b30870b4d1c4fee3e86fb3f3994fe2f10b03013ce95900902bb426d6fb98906dbc823ea86185b1
+  languageName: node
+  linkType: hard
+
+"d3@npm:^5.14, d3@npm:^5.7.0":
+  version: 5.16.0
+  resolution: "d3@npm:5.16.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fd3%2Fdownload%2Fd3-5.16.0.tgz"
+  dependencies:
+    d3-array: 1
+    d3-axis: 1
+    d3-brush: 1
+    d3-chord: 1
+    d3-collection: 1
+    d3-color: 1
+    d3-contour: 1
+    d3-dispatch: 1
+    d3-drag: 1
+    d3-dsv: 1
+    d3-ease: 1
+    d3-fetch: 1
+    d3-force: 1
+    d3-format: 1
+    d3-geo: 1
+    d3-hierarchy: 1
+    d3-interpolate: 1
+    d3-path: 1
+    d3-polygon: 1
+    d3-quadtree: 1
+    d3-random: 1
+    d3-scale: 2
+    d3-scale-chromatic: 1
+    d3-selection: 1
+    d3-shape: 1
+    d3-time: 1
+    d3-time-format: 2
+    d3-timer: 1
+    d3-transition: 1
+    d3-voronoi: 1
+    d3-zoom: 1
+  checksum: 43f56916b20f3a6bbd00f83b55c0cfd1795516406fbc274d8de9600bbd30ca70431bdd77e08825d0cca09c05fbbf4f20166b012d077ce08d31e93276eb264170
+  languageName: node
+  linkType: hard
+
+"dagre-d3@npm:^0.6.4":
+  version: 0.6.4
+  resolution: "dagre-d3@npm:0.6.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fdagre-d3%2Fdownload%2Fdagre-d3-0.6.4.tgz"
+  dependencies:
+    d3: ^5.14
+    dagre: ^0.8.5
+    graphlib: ^2.1.8
+    lodash: ^4.17.15
+  checksum: bfcfbf625c820cd25e42c6e93ff1f8317fe59729ff3a88f63df06caf3b31a4eb39a368d61313f8596c218475a917df26e255344697fc98ff8ba44f05b3ab4b71
+  languageName: node
+  linkType: hard
+
+"dagre@npm:^0.8.4, dagre@npm:^0.8.5":
+  version: 0.8.5
+  resolution: "dagre@npm:0.8.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fdagre%2Fdownload%2Fdagre-0.8.5.tgz"
+  dependencies:
+    graphlib: ^2.1.8
+    lodash: ^4.17.15
+  checksum: 174cf2dcb4e6fdaab37ef5357f4a0063b2d008f2aeeffb5354089560b29382707acbd55c9c534d4313f63ae6fb594b80171fb6402497042fa2c85196c419d610
+  languageName: node
+  linkType: hard
+
+"dayjs@npm:^1.10.6":
+  version: 1.10.6
+  resolution: "dayjs@npm:1.10.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.6.tgz"
+  checksum: 474d21162c12d269d40e90cb3ce049bb2d987b8038c173224c8eb5805d6f38f07d11875779a81e282d8f889d3803c4bbb91d09b6ee08a1a44ae60ec26afd8f45
+  languageName: node
+  linkType: hard
+
 "de-indent@npm:^1.0.2":
   version: 1.0.2
   resolution: "de-indent@npm:1.0.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fde-indent%2Fdownload%2Fde-indent-1.0.2.tgz"
@@ -1951,6 +2321,15 @@ __metadata:
   dependencies:
     iconv-lite: ^0.6.2
   checksum: 282d5696a4916383b0f71a87375505e33ef0be0c3a30939fb559a878b691873d48acc61ee6dcbfacf3e68404ab4462e081bcfd0aa3c9a3f1fabb900306aad77d
+  languageName: node
+  linkType: hard
+
+"entity-decode@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "entity-decode@npm:2.0.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fentity-decode%2Fdownload%2Fentity-decode-2.0.2.tgz"
+  dependencies:
+    he: ^1.1.1
+  checksum: d9185ff48fa2d4d4f52cc3947c8a9b37993fbd43e77ff2072f643b3d08cf742f70863b40f3c97c50bab2418962b9470fa6ccc20cd0b0cba226a06f4f58d7351d
   languageName: node
   linkType: hard
 
@@ -2324,6 +2703,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"graphlib@npm:^2.1.7, graphlib@npm:^2.1.8":
+  version: 2.1.8
+  resolution: "graphlib@npm:2.1.8::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fgraphlib%2Fdownload%2Fgraphlib-2.1.8.tgz"
+  dependencies:
+    lodash: ^4.17.15
+  checksum: 86e4433af9cf450c414d8cc58481ac8b96321fc25ecbbf08d27f0694a5e3a72a5c7a973795683b5ed5bbced75af1b0706c2b6e964f44f27b9078b229b652abee
+  languageName: node
+  linkType: hard
+
 "has-flag@npm:^3.0.0":
   version: 3.0.0
   resolution: "has-flag@npm:3.0.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fhas-flag%2Fdownload%2Fhas-flag-3.0.0.tgz"
@@ -2358,6 +2746,15 @@ fsevents@~2.3.2:
   version: 2.0.0
   resolution: "hash-sum@npm:2.0.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fhash-sum%2Fdownload%2Fhash-sum-2.0.0.tgz"
   checksum: 9d833f05e8b9cb318ff0154c3864b0d2aaf4bd675a4b65377fb4d12eed13505423deb45e85b484affd71da3d3c8b8fe30e83bf81ca9a1dd6f3523043d9281e34
+  languageName: node
+  linkType: hard
+
+"he@npm:^1.1.1":
+  version: 1.2.0
+  resolution: "he@npm:1.2.0::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fhe%2Fdownload%2Fhe-1.2.0.tgz"
+  bin:
+    he: bin/he
+  checksum: 212122003c20c8c17ac0c83a419b4c8e835411ff6ab9195d053ea6e4a0597cc005b5b8eabcbd57b0b0c0fe676f0049e09315845fff4e051198845491cbba260e
   languageName: node
   linkType: hard
 
@@ -2453,7 +2850,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.4":
+"iconv-lite@npm:0.4, iconv-lite@npm:0.4.24, iconv-lite@npm:^0.4.4":
   version: 0.4.24
   resolution: "iconv-lite@npm:0.4.24::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Ficonv-lite%2Fdownload%2Ficonv-lite-0.4.24.tgz"
   dependencies:
@@ -2777,6 +3174,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"khroma@npm:^1.1.0":
+  version: 1.4.1
+  resolution: "khroma@npm:1.4.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fkhroma%2Fdownload%2Fkhroma-1.4.1.tgz"
+  checksum: a051d054b6764c469811a358c02ed05eea28eea38f0e1c7100094314fcf74bb3cc6134448b88c612a675f518656dd9b141425732635497c6f850ce22960c530b
+  languageName: node
+  linkType: hard
+
 "less@npm:^4.1.1":
   version: 4.1.1
   resolution: "less@npm:4.1.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fless%2Fdownload%2Fless-4.1.1.tgz"
@@ -2858,7 +3262,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.19, lodash@npm:^4.17.21":
+"lodash@npm:^4.17.15, lodash@npm:^4.17.19, lodash@npm:^4.17.21":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.21.tgz"
   checksum: 4983720b9abca930a4a46f18db163d7dad8dd00dbed6db0cc7b499b33b717cce69f80928b27bbb1ff2cbd3b19d251ee90669a8b5ea466072ca81c2ebe91e7468
@@ -2968,6 +3372,23 @@ fsevents@~2.3.2:
   version: 1.4.1
   resolution: "merge2@npm:1.4.1::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fmerge2%2Fdownload%2Fmerge2-1.4.1.tgz"
   checksum: 7ad40d8b140a5ed4e621b916858410e4f0dd4ced1e5a2b675563347e70f0661d95ba6c3c8007dd3c4e242d0b8eee44559fa75bb90a146cf168debffc0cbc18f3
+  languageName: node
+  linkType: hard
+
+"mermaid@npm:^8.11.0":
+  version: 8.11.0
+  resolution: "mermaid@npm:8.11.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fmermaid%2Fdownload%2Fmermaid-8.11.0.tgz"
+  dependencies:
+    "@braintree/sanitize-url": ^3.1.0
+    d3: ^5.7.0
+    dagre: ^0.8.4
+    dagre-d3: ^0.6.4
+    entity-decode: ^2.0.2
+    graphlib: ^2.1.7
+    khroma: ^1.1.0
+    moment-mini: ^2.22.1
+    stylis: ^3.5.2
+  checksum: 4ef786daa97d35c99eaec787b55d0462baf46969ccb182cf365089fc659e1579092678020793e1fea08241f28a371761ad936c5f709d45f88faea06d8fd61cca
   languageName: node
   linkType: hard
 
@@ -3112,6 +3533,13 @@ fsevents@~2.3.2:
   version: 1.1.0
   resolution: "modern-normalize@npm:1.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fmodern-normalize%2Fdownload%2Fmodern-normalize-1.1.0.tgz"
   checksum: d75412f804e93ccc4b992b5c66f3a37093b4e105e1ed90ac2fa718601dad2c1250d06d7773fe0fee054927bd53b4ab624e04ecafddfa80ea337937f6282791b2
+  languageName: node
+  linkType: hard
+
+"moment-mini@npm:^2.22.1":
+  version: 2.24.0
+  resolution: "moment-mini@npm:2.24.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fmoment-mini%2Fdownload%2Fmoment-mini-2.24.0.tgz"
+  checksum: 0597a6759122fbae7bb2f98488b1f2eaaa1dbcdb9d0f174a4b47cb727b710e44a582eafc57fbad006410d807d60225fbb6be5c2b0b179f106b9c709c34c57923
   languageName: node
   linkType: hard
 
@@ -3793,6 +4221,13 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
+"rw@npm:1":
+  version: 1.3.3
+  resolution: "rw@npm:1.3.3::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Frw%2Fdownload%2Frw-1.3.3.tgz"
+  checksum: 8eb664ac5e5612d026e542cfdcb871f4705eb787032418fe1677e4bfa2e5afe4c2f1ffa4be0d4a30773645890424626744201fe10189a1993c43d3c5ec262ecb
+  languageName: node
+  linkType: hard
+
 "safe-buffer@npm:5.1.2, safe-buffer@npm:~5.1.0, safe-buffer@npm:~5.1.1":
   version: 5.1.2
   resolution: "safe-buffer@npm:5.1.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fsafe-buffer%2Fdownload%2Fsafe-buffer-5.1.2.tgz"
@@ -4073,6 +4508,13 @@ resolve@^1.20.0:
   dependencies:
     ansi-regex: ^5.0.0
   checksum: 10568c91cadbef182a807c38dfa718dce15a35b12fcc97b96b6b2029d0508ef66ca93fabddeb49482d9b027495d1e18591858e80f27ad26861c4967c60fd207f
+  languageName: node
+  linkType: hard
+
+"stylis@npm:^3.5.2":
+  version: 3.5.4
+  resolution: "stylis@npm:3.5.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fstylis%2Fdownload%2Fstylis-3.5.4.tgz"
+  checksum: 356e2352b1800595c46f3969c6afdce82ab3e5d668bbb6733e68a4968fa2190208cccd74129b7456e80ade3d321beeaff7c2c69ab90288127221062f90dcff99
   languageName: node
   linkType: hard
 

@@ -1,2 +1,6 @@
 # default: dist
 outDir: dist
+
+highlight:
+  # @see https://github.com/highlightjs/highlight.js/tree/11.0.0/src/styles
+  theme: qtcreator-dark

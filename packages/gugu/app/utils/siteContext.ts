@@ -1,10 +1,19 @@
+import axios from 'axios';
 import { App, inject } from 'vue';
 
 const key = Symbol('siteContext');
 
-export function createSiteContext(siteCtx: ISiteContext): ISiteContext & {
+export function createSiteContext(): ISiteContext & {
   install: (app: App) => void;
 } {
+  const siteCtx: ISiteContext = {
+    axios: axios.create(),
+    blogConfig: {
+      url: 'https://xxx.com',
+      base: '/',
+    },
+  };
+
   Object.defineProperty(siteCtx, 'install', {
     get() {
       return function (app: App) {

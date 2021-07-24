@@ -1,6 +1,6 @@
 <template>
   <div class="mx-auto my-6 max-w-screen-xl flex">
-    <div class="base-box w-48 py-6">
+    <div class="blog-base-area-box w-48 py-6 sticky top-6">
       <img
         class="block w-24 h-24 rounded-full mx-auto"
         src="https://avatars.githubusercontent.com/u/19222089?v=4"
@@ -27,7 +27,7 @@
         </div>
       </div>
       <div class="mt-6 text-center">
-        <router-link
+        <ALink
           v-for="(item, index) in menus"
           :key="index"
           :to="item.link"
@@ -41,18 +41,21 @@
             text-sm text-c-text
             menu-link
           "
-          >{{ item.label }}</router-link
         >
+          {{ item.label }}
+        </ALink>
       </div>
     </div>
-    <div class="base-box flex-grow mx-5 bg-white">
+    <div class="w-0 flex-grow mx-5">
       <router-view v-slot="{ Component }">
-        <Suspense>
-          <component :is="Component" />
-        </Suspense>
+        <div>
+          <Suspense>
+            <component :is="Component" />
+          </Suspense>
+        </div>
       </router-view>
     </div>
-    <div class="base-box w-48 bg-white">12</div>
+    <div class="blog-base-area-box w-48 sticky top-6">asd</div>
   </div>
 </template>
 
@@ -65,12 +68,13 @@ export default defineComponent({});
 
 <script lang="ts" setup>
 import Icon from '@app/components/Icon.vue';
+import ALink from './components/ALink.vue';
 const store = useStore();
 const site = computed(() => store.state.global.site);
 
 const menus = [
   {
-    link: '/',
+    link: 'https://baidu.com',
     label: '首页',
   },
   {
@@ -84,10 +88,13 @@ const menus = [
 ];
 </script>
 
-<style scoped lang="less">
-.base-box {
-  @apply bg-white shadow-md rounded-lg;
+<style lang="less">
+.blog-base-area-box {
+  @apply bg-white shadow-md rounded-lg flex-shrink-0 self-start;
 }
+</style>
+
+<style scoped lang="less">
 .menu-link.router-link-active {
   color: #fff;
   @apply bg-primary bg-opacity-50;

@@ -1,23 +1,5 @@
-<template>
-  <svg class="if-icon" aria-hidden="true">
-    <use :xlink:href="`#if-${name}`"></use>
-  </svg>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-if (!import.meta.env.SSR) {
-  const script = document.createElement('script');
-  script.async = true;
-  script.defer = true;
-  script.src = '//at.alicdn.com/t/font_2433925_t9m84e1923.js';
-  document.body.append(script);
-}
-
-export default defineComponent({
-  name: 'Icon',
-});
+<script lang="tsx">
+import { defineComponent, PropType } from 'vue';
 
 type IName =
   | 'wenzhang'
@@ -38,13 +20,30 @@ type IName =
   | 'person'
   | 'archive'
   | 'category';
-</script>
 
-<script lang="ts" setup>
-defineProps({
-  name: {
-    type: String as () => IName,
-    required: true,
+if (!import.meta.env.SSR) {
+  const script = document.createElement('script');
+  script.async = true;
+  script.defer = true;
+  script.src = '//at.alicdn.com/t/font_2433925_t9m84e1923.js';
+  document.body.append(script);
+}
+
+export default defineComponent({
+  name: 'Icon',
+  props: {
+    name: {
+      type: String as PropType<IName>,
+      required: true,
+    },
+  },
+  setup: (props, { attrs }) => {
+    const { name } = props;
+    return () => (
+      <svg class="if-icon" aria-hidden="true" {...attrs}>
+        <use xlinkHref={`#if-${name}`}></use>
+      </svg>
+    );
   },
 });
 </script>

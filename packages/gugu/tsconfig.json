@@ -19,7 +19,8 @@
       {
         "name": "@vuedx/typescript-plugin-vue"
       }
-    ]
+    ],
+    "jsx": "preserve"
   },
   "include": ["src/**/*", "@types/**/*", "app"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
