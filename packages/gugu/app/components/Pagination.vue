@@ -10,7 +10,7 @@ export default defineComponent({
     current: Number,
     linkPattern: String,
   },
-  setup(props, { emit }) {
+  setup(props, { emit, attrs }) {
     const router = useRouter();
     const delta = 3;
 
@@ -83,7 +83,7 @@ export default defineComponent({
     return () => {
       if (total.value > 1) {
         return (
-          <div class="my-8">
+          <div {...attrs}>
             <nav class="flex justify-center">
               {config.value.map((page, index) => (
                 <a

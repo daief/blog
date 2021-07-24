@@ -187,31 +187,35 @@ export class GuDao {
       // 下面仅针对文章进行标签、分类处理
       // handle tags
       post.tags = strTags.map((tagName) => {
-        const newItem: ggDB.ITag = allTags.find(
-          (it) => it.name === tagName,
-        ) || {
-          id: md5(tagName),
-          name: tagName,
-          slug: 'tags/' + tagName,
-          path: '/tags/' + tagName,
-          postIds: [],
-        };
-        allTags.push(newItem);
+        let newItem: ggDB.ITag = allTags.find((it) => it.name === tagName);
+        if (!newItem) {
+          newItem = {
+            id: md5(tagName),
+            name: tagName,
+            slug: 'tags/' + tagName,
+            path: '/tags/' + tagName,
+            postIds: [],
+          };
+          allTags.push(newItem);
+        }
         newItem.postIds.push(post.id);
         return newItem;
       });
 
       // handle Categories
       post.categories = strCategories.map((cName, i) => {
-        const item = allCategories.find((it) => it.name === cName) || {
-          id: md5(cName),
-          name: cName,
-          slug: 'categories/' + cName,
-          path: '/categories/' + cName,
-          parentId: i === 0 ? '' : md5(strCategories[i - 1]),
-          postIds: [],
-        };
-        allCategories.push(item);
+        let item = allCategories.find((it) => it.name === cName);
+        if (!item) {
+          item = {
+            id: md5(cName),
+            name: cName,
+            slug: 'categories/' + cName,
+            path: '/categories/' + cName,
+            parentId: i === 0 ? '' : md5(strCategories[i - 1]),
+            postIds: [],
+          };
+          allCategories.push(item);
+        }
         item.postIds.push(post.id);
         return item;
       });

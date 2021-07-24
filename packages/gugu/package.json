@@ -4,6 +4,7 @@
   "bin": "bin/index.js",
   "dependencies": {
     "@types/node": "^16.0.0",
+    "@vant/use": "^1.2.2",
     "@vitejs/plugin-vue": "^1.2.4",
     "@vitejs/plugin-vue-jsx": "^1.1.6",
     "@vue/compiler-sfc": "^3.0.8",

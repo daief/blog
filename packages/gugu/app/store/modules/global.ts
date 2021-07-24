@@ -10,6 +10,10 @@ const md: Module<
       categoryCount: number;
     };
     indexPostPagination: IListResponse<ggDB.IPost>;
+    postDetail: {
+      post: ggDB.IPost;
+    };
+    tocHtml: string;
   },
   any
 > = {
@@ -22,6 +26,10 @@ const md: Module<
       totalPages: 0,
       result: [],
     },
+    postDetail: {
+      post: null,
+    },
+    tocHtml: '',
   }),
   mutations: {
     setState(state, payload) {

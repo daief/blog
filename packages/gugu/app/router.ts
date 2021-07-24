@@ -7,18 +7,25 @@ import {
 } from 'vue-router';
 
 import PostPaginationVue from './pages/PostPagination.vue';
+import PostDetail from './pages/Post.vue';
+import { ROUTER_NAME_ENUM } from './utils/constants';
 
 export function createRouterIns() {
   const routes: RouteRecordRaw[] = [
     {
-      name: 'home',
+      name: ROUTER_NAME_ENUM.home,
       path: '/',
       component: PostPaginationVue,
     },
     {
-      name: 'postPagination',
+      name: ROUTER_NAME_ENUM.postPagination,
       path: '/page/:no',
       component: PostPaginationVue,
+    },
+    {
+      name: ROUTER_NAME_ENUM.postDetail,
+      path: '/post/:id',
+      component: PostDetail,
     },
   ];
 

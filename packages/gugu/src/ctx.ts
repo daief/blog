@@ -73,7 +73,7 @@ export class GContext extends EventEmitter {
     };
     this.renderer.heading = (text: string, level) => {
       const anchorText = `${text}`;
-      return `<h${level} id="${anchorText}">${anchorText}<a name="${anchorText}" class="anchor" href="#${anchorText}"></a></h${level}>`;
+      return `<h${level} id="${anchorText}">${anchorText}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
     };
 
     await this.dao.init();
