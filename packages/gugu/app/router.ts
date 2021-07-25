@@ -13,6 +13,9 @@ import SimplePage from '@app/pages/SimplePage.vue';
 import Tags from '@app/pages/Tags.vue';
 import TagsPostPagination from '@app/pages/TagsPostPagination.vue';
 
+import Categories from '@app/pages/Categories.vue';
+import CategoriesPostPagination from '@app/pages/CategoriesPostPagination.vue';
+
 import { ROUTER_NAME_ENUM } from './utils/constants';
 
 function getSimplePageRouteCfg(cfg: Partial<RouteRecordRaw>): RouteRecordRaw {
@@ -58,6 +61,27 @@ export function createRouterIns(opts: ICreateOptions) {
       redirect: (to) => ({
         ...to,
         name: ROUTER_NAME_ENUM.tagsPostPagination,
+        params: {
+          ...to.params,
+          no: 1,
+        },
+      }),
+    },
+    {
+      name: ROUTER_NAME_ENUM.category,
+      path: '/categories',
+      component: Categories,
+    },
+    {
+      name: ROUTER_NAME_ENUM.categoryPostPagination,
+      path: '/categories/:category/:no',
+      component: CategoriesPostPagination,
+    },
+    {
+      path: '/categories/:category',
+      redirect: (to) => ({
+        ...to,
+        name: ROUTER_NAME_ENUM.categoryPostPagination,
         params: {
           ...to.params,
           no: 1,
