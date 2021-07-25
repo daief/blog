@@ -8,6 +8,8 @@ export interface IUserConfig {
   avatar?: string;
   /** 站点语言 */
   language?: string;
+  /** 站点起始时间，年份 */
+  since?: string;
   /**
    * 输出目录
    * @default dist
