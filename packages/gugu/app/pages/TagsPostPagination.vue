@@ -38,9 +38,6 @@ export default defineComponent({
   async asyncData({ store, route, site }) {
     const current = +route.params.no || 1;
     const tagName = route.params.tag as string;
-    const { postPagination } = store.state.tags as {
-      postPagination: IListResponse<ggDB.ITag>;
-    };
     const resp = await getPostList(site.axios, { current, tag: tagName });
     await store.commit('tags/setState', {
       postPagination: resp,

@@ -1,13 +1,9 @@
+import { encodeURL, decode } from 'js-base64';
+
 export function toBase64(str: string) {
-  if (!import.meta.env.SSR) {
-    return btoa(str);
-  }
-  return Buffer.from(str).toString('base64');
+  return encodeURL(str);
 }
 
 export function fromBase64(str: string) {
-  if (!import.meta.env.SSR) {
-    return atob(str);
-  }
-  return Buffer.from(str, 'base64').toString();
+  return decode(str);
 }
