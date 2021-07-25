@@ -1,7 +1,5 @@
 import { createApp } from './main';
 import { renderToString } from '@vue/server-renderer';
-import { createSiteContext } from './utils/siteContext';
-import axios from 'axios';
 import { merge } from 'lodash';
 
 export async function render(
@@ -12,13 +10,9 @@ export async function render(
     serverState: any;
   },
 ) {
-  const { app, router, store } = createApp();
-
-  store.replaceState(merge({}, store.state, options.serverState));
-
-  const site = createSiteContext();
+  const { app, router, store, site } = createApp(options);
   site.axios.defaults.baseURL = options.serverAddress;
-  app.use(site);
+  store.replaceState(merge({}, store.state, options.serverState));
 
   // set the router to the desired URL before rendering
   router.push(url);

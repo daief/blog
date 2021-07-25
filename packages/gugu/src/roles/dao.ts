@@ -23,18 +23,29 @@ export class GuDao {
     this.db.writeSync();
   }
 
+  getAvailablePosts() {
+    return this.db._.get('posts')
+      .filter((it) => it.isArticle && it.published)
+      .value();
+  }
+
   /**
    * 获取站点基本信息
    * @returns
    */
   getSiteInfo() {
     return {
-      postCount: this.db._.get('posts').size(),
+      postCount: this.getAvailablePosts().length,
       tagCount: this.db._.get('tags').size(),
       categoryCount: this.db._.get('categories').size(),
     };
   }
 
+  /**
+   * 获取已发布文章列表
+   * @param data
+   * @returns
+   */
   getPostList(data: {
     current?: number;
     pageSize?: number;
@@ -42,9 +53,7 @@ export class GuDao {
     category?: string;
   }): IListResponse<ggDB.IPost> {
     const { current = 1, pageSize = 10, tag = '', category = '' } = data;
-    let posts = this.db._.get('posts')
-      .filter((it) => it.published)
-      .value();
+    let posts = this.getAvailablePosts();
 
     if (tag) {
       posts = posts.filter((it) => it.tags.some((tagVo) => tagVo.name === tag));
@@ -64,10 +73,13 @@ export class GuDao {
     };
   }
 
+  /**
+   * 根据 id 查询文章详情
+   * @param data
+   * @returns
+   */
   getPostDetail(data: { id: string }) {
-    const posts = this.db._.get('posts')
-      .filter((it) => it.published)
-      .value();
+    const posts = this.getAvailablePosts();
 
     const index = posts.findIndex((it) => it.id === data.id);
 
@@ -80,6 +92,29 @@ export class GuDao {
     post.prev = posts[index + 1] ? this.sortPostVO(posts[index + 1]) : null;
 
     return post;
+  }
+
+  /**
+   * 根据路径查询普通页面的内容
+   * @param pagePath
+   * @returns
+   */
+  getSimpleContentByPath(pagePath: string): ggDB.IPost {
+    const res = this.db._.get('posts')
+      .find((it) => it.path === pagePath)
+      .value();
+    return res ? this.sortPostVO(res, false) : null;
+  }
+
+  /**
+   * 获取普通页面的列表
+   * @returns
+   */
+  getSimplePages() {
+    const posts = this.db._.get('posts')
+      .filter((it) => !it.isArticle)
+      .value();
+    return posts.map((p) => this.sortPostVO(p));
   }
 
   private sortPostVO(post: ggDB.IPost, isSimple = true): ggDB.IPost {
@@ -98,8 +133,8 @@ export class GuDao {
       wordCount: post.wordCount,
       excerpt: post.excerpt,
       more: post.more,
-      tocHtml: post.tocHtml,
       hash: post.hash,
+      isArticle: post.isArticle,
       filename: '',
       raw: '',
       prev: null,

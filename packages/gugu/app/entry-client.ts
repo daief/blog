@@ -1,12 +1,10 @@
 import { createApp } from './main';
-import { createSiteContext } from './utils/siteContext';
 import '@gugu-highlight-theme';
+import NProgress from 'nprogress';
+
 import './styles';
 
-const site = createSiteContext();
-const { app, router, store } = createApp();
-
-app.use(site);
+const { app, router, store, site } = createApp();
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
@@ -16,13 +14,24 @@ if (window.__INITIAL_STATE__) {
 router.isReady().then(() => {
   router.beforeEach(async (to, from) => {
     const { matched } = to;
-    await Promise.all(
-      matched.map((it) => {
-        const C: any = it.components.default;
-        if (typeof C.asyncData !== 'function') return;
-        return C.asyncData({ store, route: to, fromRoute: from, site });
-      }),
-    );
+
+    if (!matched || !matched.length) {
+      return;
+    }
+
+    try {
+      NProgress.start();
+      await Promise.all(
+        matched.map((it) => {
+          const C: any = it.components.default;
+          if (typeof C.asyncData !== 'function') return;
+          return C.asyncData({ store, route: to, fromRoute: from, site });
+        }),
+      );
+    } catch (error) {
+      console.warn('asyncData 出错了：', error);
+    }
+    NProgress.done();
   });
 
   app.mount('#app');

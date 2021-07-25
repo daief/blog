@@ -35,9 +35,10 @@ declare namespace ggDB {
     next?: IPost;
     excerpt: string;
     more: string;
-    tocHtml?: string;
     filename: string;
     hash: string;
+    /** 是否文章 */
+    isArticle: boolean;
   }
 
   export interface IDB {

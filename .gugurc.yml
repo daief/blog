@@ -20,15 +20,15 @@ siteMenus:
   home:
     link: /
     label: 首页
-  archives:
-    link: /archives/
-    label: 归档
-  categories:
-    link: /categories/
-    label: 分类
+  # archives:
+  #   link: /archives/
+  #   label: 归档
+  # categories:
+  #   link: /categories/
+  #   label: 分类
+  # tags:
+  #   link: /tags/
+  #   label: 标签
   about:
     link: /about/
     label: 关于
-  tags:
-    link: /tags/
-    label: 标签

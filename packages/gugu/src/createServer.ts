@@ -76,6 +76,11 @@ export async function createServer(
         const serverState = {
           global: {
             site: ctx.dao.getSiteInfo(),
+            simplePages: ctx.dao.getSimplePages().map((it) => ({
+              id: it.id,
+              slug: it.slug,
+              path: it.path,
+            })),
           },
         };
 
@@ -95,9 +100,8 @@ export async function createServer(
           `<script>window.__INITIAL_STATE__=${JSON.stringify(
             initialState,
           )}</script>`,
-          // TODO 普通页面
           // `<script>window.__PLAIN_PAGES__=${JSON.stringify(
-          //   ctx.db._.get('pages').map((it) => it.slug),
+          //   ctx.dao.getSimplePages().map,
           // )}</script>`,
         ].join('\n');
 

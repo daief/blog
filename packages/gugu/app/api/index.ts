@@ -24,3 +24,12 @@ export function getPostDetail(
     .get(`/blog-api/post/detail/${id}.json`)
     .then((resp) => resp.data);
 }
+
+export function getSimplePageContent(
+  axios: AxiosInstance,
+  path: string,
+): Promise<ggDB.IPost> {
+  return axios
+    .get(`/blog-api//simplepage/content/${stringifyParams({ path })}.json`)
+    .then((resp) => resp.data);
+}
