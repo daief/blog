@@ -28,7 +28,8 @@ jobs:
         env:
           ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
         run: echo 'set env'
+        run: yarn
+        run: yarn build && yarn generate
+        run: bash ./scripts/deploy.sh
 
-      - run: yarn
-      - run: yarn build && yarn generate
-      - run: bash ./scripts/deploy.sh
+
