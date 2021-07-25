@@ -2836,7 +2836,7 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "hexo-site@workspace:."
   dependencies:
-    "@blog/gugu": "workspace:packages/gugu"
+    "@blog/gugu": 0.0.1
   languageName: unknown
   linkType: soft
 

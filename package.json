@@ -19,6 +19,6 @@
     "@blog/gugu": "portal:/Users/daief/Documents/fe/mime/blog-v2/packages/gugu"
   },
   "dependencies": {
-    "@blog/gugu": "workspace:packages/gugu"
+    "@blog/gugu": "0.0.1"
   }
 }
