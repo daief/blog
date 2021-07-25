@@ -6,8 +6,11 @@
     "version": "4.2.0"
   },
   "scripts": {
-    "start": "hexo server --draft",
-    "dev": "gugu dev"
+    "dev": "gugu dev",
+    "build": "gugu build",
+    "generate": "gugu generate",
+    "serve": "gugu serve",
+    "deploy": ""
   },
   "workspaces": [
     "packages/*"

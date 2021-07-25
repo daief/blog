@@ -5,38 +5,37 @@ on:
   push:
     branches:
       - master
+      - feature/vite-ssg
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [12.x]
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Setup Hexo env
-      env:
-        ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
-      run: |
-        mkdir -p ~/.ssh/
-        echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        ssh-keyscan git.coding.net >> ~/.ssh/known_hosts
-        # set git infomation
-        git config --global user.name 'daief'
-        git config --global user.email '1437931235@qq.com'
-    
-    - run: yarn
-    - run: yarn b:d
-      
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Setup Env
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
+        run: |
+          mkdir -p ~/.ssh/
+          echo "$ACTION_DEPLOY_KEY" | tr -d '\r' > ~/.ssh/id_rsa # 配置秘钥
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+          ssh-keyscan git.coding.net >> ~/.ssh/known_hosts
+          # set git infomation
+          git config --global user.name 'daief'
+          git config --global user.email '1437931235@qq.com'
+
+      - run: yarn build && yarn generate
+      - run: bash ./scripts/deploy-example.sh
