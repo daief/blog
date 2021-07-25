@@ -19,7 +19,7 @@ export default defineComponent({
         nextTick(() => {
           if (import.meta.env.SSR || !el.value) return;
 
-          import('mermaid').then((mermaid) => {
+          import('mermaid/dist/mermaid.min.js').then((mermaid) => {
             Array.from(el.value.querySelectorAll('.mermaid') || []).forEach(
               (graph) => {
                 mermaid.init(void 0, graph);

@@ -1,7 +1,14 @@
 const colors = require('tailwindcss/colors');
+const path = require('path');
+
+const resolveApp = (p) => path.resolve(__dirname, p);
 
 module.exports = {
-  purge: ['./app/index.html', './app/**/*.{vue,js,ts,jsx,tsx}'],
+  purge: [
+    resolveApp('./app/index.html'),
+    resolveApp('./app/**/*.{vue,js,ts,jsx,tsx}'),
+    resolveApp('./app/styles/**/*.{ts,css}'),
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
