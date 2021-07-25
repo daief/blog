@@ -38,4 +38,4 @@ jobs:
 
       - run: yarn
       - run: yarn build && yarn generate
-      - run: bash ./scripts/deploy-example.sh
+      - run: bash ./scripts/deploy.sh
