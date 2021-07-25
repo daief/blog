@@ -32,6 +32,10 @@ export function createJsonApi(ctx: GContext): RequestHandler {
       category: '',
     });
 
+    console.log({
+      params,
+    });
+
     sendJson(
       res,
       ctx.dao.getPostList({
