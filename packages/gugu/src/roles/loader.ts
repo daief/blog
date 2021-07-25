@@ -93,19 +93,20 @@ export class GLoader {
         `${this.gg.dirs.sourceDir}/${type}/**/*.md`,
         {},
       );
-      const p = [];
+      const p: Array<
+        ggDB.IPost & {
+          strCategories: string[];
+          strTags: string[];
+        }
+      > = [];
       for await (const mdPath of results) {
         const content = await fs.readFile(mdPath, 'utf-8');
         const hash = md5(content);
 
-        this.resolvingMarkdown = {
-          filename: mdPath,
-          id: '',
-        };
-        // id 在 parseMarkdown 方法中赋值
-        const parsedResult = this.parseMarkdown(content);
-
-        this.resolvingMarkdown = null;
+        const parsedResult = this.parseMarkdown(content, mdPath);
+        if (!parsedResult.id) {
+          continue;
+        }
 
         p.push({
           ...parsedResult,
@@ -117,7 +118,7 @@ export class GLoader {
           tags: [],
           categories: [],
           published: true,
-          isPost: type === 'posts',
+          isArticle: type === 'posts',
           filename: mdPath,
         });
       }
@@ -125,16 +126,12 @@ export class GLoader {
     };
 
     const [posts, pages] = await Promise.all(
-      ['posts', 'pages'].map((type) =>
-        getPosts(type as any).then((ls) => {
-          return ls.sort(
-            (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf(),
-          );
-        }),
-      ),
+      ['posts', 'pages'].map((type) => getPosts(type as any)),
     );
 
-    const all = [...posts, ...pages];
+    const all = [...posts, ...pages].sort(
+      (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf(),
+    );
 
     const allTags: ggDB.ITag[] = [];
     const allCategories: ggDB.ICategory[] = [];
@@ -142,10 +139,14 @@ export class GLoader {
     all.forEach((post) => {
       const { strTags, strCategories } = post;
 
-      if (!post.isPost) {
-        post.slug = relative(this.gg.dirs.sourceDir + '/pages', post.filename)
+      if (!post.isArticle) {
+        post.slug = relative(
+          resolve(this.gg.dirs.sourceDir, 'pages'),
+          post.filename,
+        )
           .replace(/\.md$/i, '')
-          .replace(/^\/?/, '/');
+          .replace(/^\/?/, '');
+        post.path = '/' + post.slug;
         return;
       }
 
@@ -192,8 +193,7 @@ export class GLoader {
     [
       ['tags', allTags],
       ['categories', allCategories],
-      ['posts', posts],
-      ['pages', pages],
+      ['posts', all],
     ].forEach(([type, data]: [string, any[]]) => {
       (this.gg.dao.db._.get(type) as CollectionChain<any>)
         .push(...data)
@@ -215,7 +215,9 @@ export class GLoader {
     }
   }
 
-  public parseMarkdown(source: string) {
+  onAddMd(files: string[]) {}
+
+  public parseMarkdown(source: string, filepath: string) {
     const { attributes: metadata, body: markdownBody } = fm<{
       title: string;
       date: string;
@@ -227,11 +229,16 @@ export class GLoader {
       comments: boolean;
     }>(source);
 
-    this.resolvingMarkdown.id = metadata.id;
+    this.resolvingMarkdown = {
+      filename: filepath,
+      id: metadata.id,
+    };
 
     const [excerpt, more = ''] = marked(markdownBody, {
       renderer: this.renderer,
     }).split('<!-- more -->');
+
+    this.resolvingMarkdown = null;
 
     return {
       ...omit(metadata, ['tags', 'categories']),

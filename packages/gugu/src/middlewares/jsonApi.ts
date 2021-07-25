@@ -44,13 +44,30 @@ export function createJsonApi(ctx: GContext): RequestHandler {
 
   router.use('/post/detail/:id.json', (req, res) => {
     const { id } = req.params;
+    const json = ctx.dao.getPostDetail({
+      id,
+    });
 
-    sendJson(
-      res,
-      ctx.dao.getPostDetail({
-        id,
-      }),
-    );
+    if (!json) {
+      return res.sendStatus(404);
+    }
+
+    sendJson(res, json);
+  });
+
+  router.use('/simplepage/content/:paramStr.json', (req, res) => {
+    const { paramStr } = req.params;
+
+    const params = parseParams(paramStr, {
+      path: '',
+    });
+
+    const json = ctx.dao.getSimpleContentByPath(params.path);
+    if (!json) {
+      return res.sendStatus(404);
+    }
+
+    sendJson(res, json);
   });
 
   return router;

@@ -14,6 +14,10 @@ const md: Module<
       post: ggDB.IPost;
     };
     tocHtml: string;
+    simplePages: Array<{ path: string; id: string }>;
+    simplePageDetail: {
+      post: ggDB.IPost;
+    };
   },
   any
 > = {
@@ -30,6 +34,10 @@ const md: Module<
       post: null,
     },
     tocHtml: '',
+    simplePages: [],
+    simplePageDetail: {
+      post: null,
+    },
   }),
   mutations: {
     setState(state, payload) {

@@ -21,7 +21,7 @@ export default defineComponent({
           props.center && 'justify-center',
         ]}
       >
-        <h1 class="text-lg font-normal break-words">
+        <h1 class="text-xl font-normal break-words">
           <ALinkVue class="unset post-title" to={props.post.path}>
             {props.post.title}
           </ALinkVue>
