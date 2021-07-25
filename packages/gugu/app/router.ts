@@ -7,9 +7,11 @@ import {
 } from 'vue-router';
 import type { ICreateOptions } from './main';
 
-import PostPaginationVue from './pages/PostPagination.vue';
-import PostDetail from './pages/Post.vue';
-import SimplePage from './pages/SimplePage.vue';
+import PostPaginationVue from '@app/pages/PostPagination.vue';
+import PostDetail from '@app/pages/Post.vue';
+import SimplePage from '@app/pages/SimplePage.vue';
+import Tags from '@app/pages/Tags.vue';
+import TagsPostPagination from '@app/pages/TagsPostPagination.vue';
 
 import { ROUTER_NAME_ENUM } from './utils/constants';
 
@@ -38,6 +40,29 @@ export function createRouterIns(opts: ICreateOptions) {
       name: ROUTER_NAME_ENUM.postDetail,
       path: '/post/:id',
       component: PostDetail,
+    },
+    {
+      name: ROUTER_NAME_ENUM.tags,
+      path: '/tags',
+      // TODO asyncData 暂不支持异步组件
+      // component: () => import('@app/pages/Tags.vue'),
+      component: Tags,
+    },
+    {
+      name: ROUTER_NAME_ENUM.tagsPostPagination,
+      path: '/tags/:tag/:no',
+      component: TagsPostPagination,
+    },
+    {
+      path: '/tags/:tag',
+      redirect: (to) => ({
+        ...to,
+        name: ROUTER_NAME_ENUM.tagsPostPagination,
+        params: {
+          ...to.params,
+          no: 1,
+        },
+      }),
     },
   ];
 

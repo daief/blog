@@ -5,6 +5,7 @@ declare namespace ggDB {
     slug: string;
     path: string;
     postIds: string[];
+    postCount?: number;
   }
 
   export interface ICategory {
@@ -14,6 +15,7 @@ declare namespace ggDB {
     path: string;
     parentId: string;
     postIds: string[];
+    postCount?: number;
   }
 
   export interface IPost {

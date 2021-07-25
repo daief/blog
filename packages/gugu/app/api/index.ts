@@ -30,6 +30,16 @@ export function getSimplePageContent(
   path: string,
 ): Promise<ggDB.IPost> {
   return axios
-    .get(`/blog-api//simplepage/content/${stringifyParams({ path })}.json`)
+    .get(`/blog-api/simplepage/content/${stringifyParams({ path })}.json`)
+    .then((resp) => resp.data);
+}
+
+export function getTagList(axios: AxiosInstance): Promise<ggDB.ITag[]> {
+  return axios.get('/blog-api/tag/list/data.json').then((resp) => resp.data);
+}
+
+export function getCategoryList(axios: AxiosInstance): Promise<ggDB.ITag[]> {
+  return axios
+    .get('/blog-api/category/list/data.json')
     .then((resp) => resp.data);
 }

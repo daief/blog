@@ -70,5 +70,15 @@ export function createJsonApi(ctx: GContext): RequestHandler {
     sendJson(res, json);
   });
 
+  router.use('/tag/list/data.json', (req, res) => {
+    const json = ctx.dao.getTagList();
+    sendJson(res, json);
+  });
+
+  router.use('/category/list/data.json', (req, res) => {
+    const json = ctx.dao.getCategoryList();
+    sendJson(res, json);
+  });
+
   return router;
 }
