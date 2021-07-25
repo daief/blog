@@ -16,7 +16,7 @@
           {{ siteCtx.blogConfig.description }}
         </p>
         <div class="mt-3 text-xs flex justify-center">
-          <router-link to="/archives" class="unset">
+          <router-link to="/" class="unset">
             <Icon name="wenzhang" />({{ blogBrief.postCount }})
           </router-link>
           <span class="mx-1 text-c-secondary">|</span>

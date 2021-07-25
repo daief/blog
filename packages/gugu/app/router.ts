@@ -2,7 +2,6 @@ import {
   createMemoryHistory,
   createRouter,
   createWebHistory,
-  Router,
   RouteRecordRaw,
 } from 'vue-router';
 import type { ICreateOptions } from './main';
@@ -109,7 +108,7 @@ export function createRouterIns(opts: ICreateOptions) {
   const router = createRouter({
     history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
     routes,
-    scrollBehavior(to, from, savedPosition) {
+    scrollBehavior(to, _from, savedPosition) {
       if (to.hash) {
         return {
           el: to.hash,
