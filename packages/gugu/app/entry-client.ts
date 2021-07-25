@@ -3,7 +3,6 @@ import '@gugu-highlight-theme';
 import NProgress from 'nprogress';
 
 import './styles';
-import { wait } from './utils/wait';
 
 const { app, router, store, site } = createApp();
 

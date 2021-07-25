@@ -151,10 +151,6 @@ export async function createServer(
           `<script>window.__INITIAL_STATE__=${JSON.stringify(
             initialState,
           )}</script>`,
-          // TODO 普通页面
-          // `<script>window.__PLAIN_PAGES__=${JSON.stringify(
-          //   ctx.db._.get('pages').map((it) => it.slug),
-          // )}</script>`,
         ].join('\n');
 
         // 5. 注入渲染后的应用程序 HTML 到模板中。
