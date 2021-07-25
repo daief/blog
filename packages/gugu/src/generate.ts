@@ -15,14 +15,51 @@ export async function generate(ctx: GContext) {
   const { dao } = ctx;
   const outDir = ctx.userConfig.outDir;
 
-  const routes = ['/', ...paginationUtil(43, '/page/%d')];
+  const tags = dao
+    .getTagList()
+    .map((tag) => {
+      return paginationUtil(
+        dao.getPostList({ tag: tag.name }).totalPages,
+        `/tags/${encodeURIComponent(tag.name)}/%d`,
+        1,
+      );
+    })
+    .flat();
+
+  const cats = dao
+    .getTagList()
+    .map((cat) => {
+      return paginationUtil(
+        dao.getPostList({ category: cat.name }).totalPages,
+        `/tags/${encodeURIComponent(cat.name)}/%d`,
+        1,
+      );
+    })
+    .flat();
+
+  const routes = [
+    // 文章分页
+    ...paginationUtil(dao.getAvailablePosts().length, '/page/%d'),
+    // 文章详情
+    ...dao.getAvailablePosts().map((it) => it.path),
+
+    '/tags',
+    ...tags,
+
+    '/categories',
+    ...cats,
+
+    ...dao.getSimplePages().map((it) => it.path),
+
+    '/', // 最后
+  ];
 
   const { server, serverAddress } = await createServer(ctx, {});
 
   fs.emptydirSync(outDir);
   await fs.copy(ctx.resolveGuguRoot('dist/client'), outDir);
 
-  for await (const url of routes) {
+  for (const url of routes) {
     const html = await axios
       .get(`${serverAddress}${url}`)
       .then((resp) => resp.data);
@@ -34,7 +71,7 @@ export async function generate(ctx: GContext) {
     fs.outputFileSync(filePath, html, {
       encoding: 'utf-8',
     });
-    console.log('pre-rendered:', filePath);
+    console.log('✨ Pre-Rendered:', url);
   }
 
   server.close();
