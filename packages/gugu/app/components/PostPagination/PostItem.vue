@@ -32,7 +32,7 @@ export default defineComponent({
         <div class="text-xs flex justify-between">
           <PostMetaVue post={props.post} />
           <ALinkVue class="unset" to={props.post.path}>
-            查看全文{'>>'}
+            查看全文&gt;&gt;
           </ALinkVue>
         </div>
       </div>
