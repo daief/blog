@@ -18,6 +18,8 @@ import { computed, ComputedRef, defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import PostItem from '@app/components/PostPagination/PostItem.vue';
 import Pagination from '@app/components/Pagination.vue';
+import { usePageTitle } from '@app/utils/hooks/usePageTitle';
+import { useRoute } from 'vue-router';
 
 export default defineComponent({
   name: 'PostPagination',
@@ -41,9 +43,17 @@ export default defineComponent({
   },
   setup(_) {
     const store = useStore();
+    const route = useRoute();
 
     const data: ComputedRef<IListResponse<ggDB.IPost>> = computed(
       () => store.state.global.indexPostPagination,
+    );
+
+    usePageTitle(
+      computed(() => {
+        const page = +route.params.no || 1;
+        return `第${page}页`;
+      }),
     );
 
     return {

@@ -74,8 +74,12 @@ import PostMeta from '@app/components/PostMeta.vue';
 import RichText from '@app/components/RichText.vue';
 import ALink from '@app/components/ALink.vue';
 import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
+import { usePageTitle } from '@app/utils/hooks/usePageTitle';
+
 const store = useStore();
 const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
+
+usePageTitle(computed(() => (post.value ? post.value.title : '')));
 
 const postContent = computed(() =>
   post.value
