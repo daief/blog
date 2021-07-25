@@ -28,7 +28,9 @@ export default defineComponent({
                   <ALinkVue to={cat.path} class="unset">
                     {cat.name}
                   </ALinkVue>
-                  {i !== props.post.categories.length - 1 ? '，' : ''}
+                  <span>
+                    {i !== props.post.categories.length - 1 ? '，' : ''}
+                  </span>
                 </Fragment>
               ))}
             </div>

@@ -41,6 +41,6 @@ export default defineComponent({
 <style lang="less" scoped>
 .menu-link.router-link-active {
   color: #fff;
-  @apply bg-primary bg-opacity-50;
+  @apply bg-primary bg-opacity-50 border-transparent;
 }
 </style>
