@@ -8,7 +8,7 @@
     "@vitejs/plugin-vue": "^1.2.4",
     "@vitejs/plugin-vue-jsx": "^1.1.6",
     "@vue/compiler-sfc": "^3.0.8",
-    "@vue/server-renderer": "^3.0.6",
+    "@vue/server-renderer": "^3.2.0-beta.5",
     "@vuedx/typescript-plugin-vue": "^0.7.4",
     "@vueuse/head": "^0.6.0",
     "autoprefixer": "^10.3.1",
@@ -37,7 +37,7 @@
     "serve-static": "^1.14.1",
     "tailwindcss": "^2.2.4",
     "vite": "^2.3.8",
-    "vue": "^3.0.8",
+    "vue": "^3.1.5",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },

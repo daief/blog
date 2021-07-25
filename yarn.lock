@@ -383,57 +383,7 @@ __metadata:
     "@vitejs/plugin-vue": ^1.2.4
     "@vitejs/plugin-vue-jsx": ^1.1.6
     "@vue/compiler-sfc": ^3.0.8
-    "@vue/server-renderer": ^3.0.6
-    "@vuedx/typescript-plugin-vue": ^0.7.4
-    "@vueuse/head": ^0.6.0
-    autoprefixer: ^10.3.1
-    axios: ^0.21.1
-    cac: ^6.7.3
-    chokidar: ^3.5.2
-    compression: ^1.7.4
-    cross-env: ^6.0.0
-    dayjs: ^1.10.6
-    esbuild-register: ^2.6.0
-    express: ^4.17.1
-    front-matter: ^4.0.2
-    fs-extra: ^10.0.0
-    glob: ^7.1.7
-    glob-promise: ^4.2.0
-    highlight.js: ^11.1.0
-    js-yaml: ^4.1.0
-    less: ^4.1.1
-    lodash: ^4.17.21
-    marked: ^2.1.3
-    mermaid: ^8.11.0
-    nprogress: ^0.2.0
-    postcss: ^8.3.5
-    prismjs: ^1.19.0
-    serve-static: ^1.14.1
-    tailwindcss: ^2.2.4
-    vite: ^2.3.8
-    vue: ^3.0.8
-    vue-router: ^4.0.3
-    vuex: ^4.0.0
-  bin:
-    gugu: bin/index.js
-  languageName: node
-  linkType: soft
-
-"@blog/gugu@workspace:packages/gugu":
-  version: 0.0.0-use.local
-  resolution: "@blog/gugu@workspace:packages/gugu"
-  dependencies:
-    "@types/express": ^4.17.13
-    "@types/fs-extra": ^9.0.11
-    "@types/glob": ^7.1.4
-    "@types/lodash": ^4.14.170
-    "@types/marked": ^2.0.4
-    "@types/node": ^16.0.0
-    "@vant/use": ^1.2.2
-    "@vitejs/plugin-vue": ^1.2.4
-    "@vitejs/plugin-vue-jsx": ^1.1.6
-    "@vue/compiler-sfc": ^3.0.8
-    "@vue/server-renderer": ^3.0.6
+    "@vue/server-renderer": ^3.2.0-beta.5
     "@vuedx/typescript-plugin-vue": ^0.7.4
     "@vueuse/head": ^0.6.0
     autoprefixer: ^10.3.1
@@ -462,7 +412,58 @@ __metadata:
     serve-static: ^1.14.1
     tailwindcss: ^2.2.4
     vite: ^2.3.8
-    vue: ^3.0.8
+    vue: ^3.1.5
+    vue-router: ^4.0.3
+    vuex: ^4.0.0
+  bin:
+    gugu: bin/index.js
+  languageName: node
+  linkType: soft
+
+"@blog/gugu@workspace:packages/gugu":
+  version: 0.0.0-use.local
+  resolution: "@blog/gugu@workspace:packages/gugu"
+  dependencies:
+    "@types/express": ^4.17.13
+    "@types/fs-extra": ^9.0.11
+    "@types/glob": ^7.1.4
+    "@types/lodash": ^4.14.170
+    "@types/marked": ^2.0.4
+    "@types/node": ^16.0.0
+    "@vant/use": ^1.2.2
+    "@vitejs/plugin-vue": ^1.2.4
+    "@vitejs/plugin-vue-jsx": ^1.1.6
+    "@vue/compiler-sfc": ^3.0.8
+    "@vue/server-renderer": ^3.2.0-beta.5
+    "@vuedx/typescript-plugin-vue": ^0.7.4
+    "@vueuse/head": ^0.6.0
+    autoprefixer: ^10.3.1
+    axios: ^0.21.1
+    cac: ^6.7.3
+    chokidar: ^3.5.2
+    compression: ^1.7.4
+    cross-env: ^6.0.0
+    dayjs: ^1.10.6
+    esbuild-register: ^2.6.0
+    express: ^4.17.1
+    front-matter: ^4.0.2
+    fs-extra: ^10.0.0
+    glob: ^7.1.7
+    glob-promise: ^4.2.0
+    highlight.js: ^11.1.0
+    js-base64: ^3.6.1
+    js-yaml: ^4.1.0
+    less: ^4.1.1
+    lodash: ^4.17.21
+    marked: ^2.1.3
+    mermaid: ^8.11.0
+    nprogress: ^0.2.0
+    postcss: ^8.3.5
+    prismjs: ^1.19.0
+    serve-static: ^1.14.1
+    tailwindcss: ^2.2.4
+    vite: ^2.3.8
+    vue: ^3.1.5
     vue-router: ^4.0.3
     vuex: ^4.0.0
   bin:
@@ -922,7 +923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/compiler-core@npm:^3.0.0, @vue/compiler-core@npm:^3.0.1, @vue/compiler-core@npm:^3.0.2":
+"@vue/compiler-core@npm:3.1.5, @vue/compiler-core@npm:^3.0.0, @vue/compiler-core@npm:^3.0.1, @vue/compiler-core@npm:^3.0.2":
   version: 3.1.5
   resolution: "@vue/compiler-core@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-core%2Fdownload%2F%40vue%2Fcompiler-core-3.1.5.tgz"
   dependencies:
@@ -935,6 +936,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/compiler-core@npm:3.2.0-beta.5":
+  version: 3.2.0-beta.5
+  resolution: "@vue/compiler-core@npm:3.2.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-core%2Fdownload%2F%40vue%2Fcompiler-core-3.2.0-beta.5.tgz"
+  dependencies:
+    "@babel/parser": ^7.12.0
+    "@babel/types": ^7.12.0
+    "@vue/shared": 3.2.0-beta.5
+    estree-walker: ^2.0.1
+    source-map: ^0.6.1
+  checksum: d11086e1ad57b7da1d5711b8bd01e6dca783bfee592ca2bd0defb373e330400d7f87a351294253c0d5ba9afed6b0a80bbb3373036187f0631ad37cec7aecf4a8
+  languageName: node
+  linkType: hard
+
 "@vue/compiler-dom@npm:3.1.4":
   version: 3.1.4
   resolution: "@vue/compiler-dom@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-dom%2Fdownload%2F%40vue%2Fcompiler-dom-3.1.4.tgz"
@@ -942,6 +956,26 @@ __metadata:
     "@vue/compiler-core": 3.1.4
     "@vue/shared": 3.1.4
   checksum: 7904fdd56b8766b70ad14dcd8d656b522c629dd1a0873156baf9fb71c998b97c145e85d8707e52d97c69c2eac35f37d28fbf9fdc109ab088b86048f6d9a47951
+  languageName: node
+  linkType: hard
+
+"@vue/compiler-dom@npm:3.1.5":
+  version: 3.1.5
+  resolution: "@vue/compiler-dom@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-dom%2Fdownload%2F%40vue%2Fcompiler-dom-3.1.5.tgz"
+  dependencies:
+    "@vue/compiler-core": 3.1.5
+    "@vue/shared": 3.1.5
+  checksum: 584eaa909ed52f330734dc149d8e74029d8dcdf3791a1e6a79673119d0b71ed4f2cac1c58c954e9c42cc0e4def89f273a3f372c8caef5f641681a76a7ab91dcd
+  languageName: node
+  linkType: hard
+
+"@vue/compiler-dom@npm:3.2.0-beta.5":
+  version: 3.2.0-beta.5
+  resolution: "@vue/compiler-dom@npm:3.2.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-dom%2Fdownload%2F%40vue%2Fcompiler-dom-3.2.0-beta.5.tgz"
+  dependencies:
+    "@vue/compiler-core": 3.2.0-beta.5
+    "@vue/shared": 3.2.0-beta.5
+  checksum: 63d06b6ea36433962c4012022485a2e41eabc3e05614177316c0c252bba3453251e90b451bd661edaa7cd6e299ac2237b8935870c636eea6905f32cf0274b0e6
   languageName: node
   linkType: hard
 
@@ -982,6 +1016,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@vue/compiler-ssr@npm:3.2.0-beta.5":
+  version: 3.2.0-beta.5
+  resolution: "@vue/compiler-ssr@npm:3.2.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fcompiler-ssr%2Fdownload%2F%40vue%2Fcompiler-ssr-3.2.0-beta.5.tgz"
+  dependencies:
+    "@vue/compiler-dom": 3.2.0-beta.5
+    "@vue/shared": 3.2.0-beta.5
+  checksum: a446e329c59084d38beaf054dbfb8546d1d77a8a9927445f6ac65f63a2ff3f4e849db4fe1cf23fdd19037cc8e789318d843eee432b008dd85633ce507bf9a02a
+  languageName: node
+  linkType: hard
+
 "@vue/devtools-api@npm:^6.0.0-beta.11, @vue/devtools-api@npm:^6.0.0-beta.14":
   version: 6.0.0-beta.15
   resolution: "@vue/devtools-api@npm:6.0.0-beta.15::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fdevtools-api%2Fdownload%2F%40vue%2Fdevtools-api-6.0.0-beta.15.tgz"
@@ -989,45 +1033,45 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vue/reactivity@npm:3.1.4":
-  version: 3.1.4
-  resolution: "@vue/reactivity@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Freactivity%2Fdownload%2F%40vue%2Freactivity-3.1.4.tgz"
+"@vue/reactivity@npm:3.1.5":
+  version: 3.1.5
+  resolution: "@vue/reactivity@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Freactivity%2Fdownload%2F%40vue%2Freactivity-3.1.5.tgz"
   dependencies:
-    "@vue/shared": 3.1.4
-  checksum: 6c82d4dbf269a701c4e14bcf74d86a53d7ac871d2ebc142aab6dce85d18b667b378f1e3911eb537e1537cc624841e5d516e84c8adc60f0892e4718c5113fac0b
+    "@vue/shared": 3.1.5
+  checksum: 045103ae77f32b02e0d3d0b3b2503388e0282f07d1bdabff5a2dc01db05d0ff8b259069c17c060124658933146e47e6c7c8155e4923f1c0cf045e1e29e29c592
   languageName: node
   linkType: hard
 
-"@vue/runtime-core@npm:3.1.4":
-  version: 3.1.4
-  resolution: "@vue/runtime-core@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-core%2Fdownload%2F%40vue%2Fruntime-core-3.1.4.tgz"
+"@vue/runtime-core@npm:3.1.5":
+  version: 3.1.5
+  resolution: "@vue/runtime-core@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-core%2Fdownload%2F%40vue%2Fruntime-core-3.1.5.tgz"
   dependencies:
-    "@vue/reactivity": 3.1.4
-    "@vue/shared": 3.1.4
-  checksum: f2ed8ca9d47b71751505f5ad0010d2cb7e12abfad91f005d79a5bc2997c91b33bf0bf735d0cc7981c3dfc45e9ee2a54d0ebd38fce7c1448006df6c2a3ea836db
+    "@vue/reactivity": 3.1.5
+    "@vue/shared": 3.1.5
+  checksum: e2f1a76593a2cb817d7196b00044fd5abd3bfc28adda6c9421ed40681fd4319f0780e46c9782bd9522a82b5cb411f9501196b797399f42f07925660a6e2375af
   languageName: node
   linkType: hard
 
-"@vue/runtime-dom@npm:3.1.4":
-  version: 3.1.4
-  resolution: "@vue/runtime-dom@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-dom%2Fdownload%2F%40vue%2Fruntime-dom-3.1.4.tgz"
+"@vue/runtime-dom@npm:3.1.5":
+  version: 3.1.5
+  resolution: "@vue/runtime-dom@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fruntime-dom%2Fdownload%2F%40vue%2Fruntime-dom-3.1.5.tgz"
   dependencies:
-    "@vue/runtime-core": 3.1.4
-    "@vue/shared": 3.1.4
+    "@vue/runtime-core": 3.1.5
+    "@vue/shared": 3.1.5
     csstype: ^2.6.8
-  checksum: 53dfa4fa52a352ef27c081f15856460b134146512994585513a9d6925ebdf8e612e56e214dc746aa8ef6cd315c582ffc760bbfe7dcb5642eb77cd5fddd5cdd72
+  checksum: 12bf7be3d86ace561a4c294375643e624a7ccb58bf6827e8ae94eb48cc96a3e96172f35e278a8ad576b5fc8bc0abc65022df4056279a81892d52fc264a7dc000
   languageName: node
   linkType: hard
 
-"@vue/server-renderer@npm:^3.0.6":
-  version: 3.1.4
-  resolution: "@vue/server-renderer@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fserver-renderer%2Fdownload%2F%40vue%2Fserver-renderer-3.1.4.tgz"
+"@vue/server-renderer@npm:^3.2.0-beta.5":
+  version: 3.2.0-beta.5
+  resolution: "@vue/server-renderer@npm:3.2.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fserver-renderer%2Fdownload%2F%40vue%2Fserver-renderer-3.2.0-beta.5.tgz"
   dependencies:
-    "@vue/compiler-ssr": 3.1.4
-    "@vue/shared": 3.1.4
+    "@vue/compiler-ssr": 3.2.0-beta.5
+    "@vue/shared": 3.2.0-beta.5
   peerDependencies:
-    vue: 3.1.4
-  checksum: c6273b3ad7a5bbb8d23802bff4303bf0978e3af54a50396c1b855f0f522a0f7d7ee9dac1e898d5add5e5f6061d4f7f8f6a60f9e67f3aae5098e7c2ba35bbbcb0
+    vue: 3.2.0-beta.5
+  checksum: 5c4f8e784d04b397ca981f9987437b54bf29dbc1ad455c4e56f8e753a72e7eb102861bfadc23921a374511afa2657f56660189f30bbe7880f63f3601ecb36dd3
   languageName: node
   linkType: hard
 
@@ -1042,6 +1086,13 @@ __metadata:
   version: 3.1.5
   resolution: "@vue/shared@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.1.5.tgz"
   checksum: 1f4395e246942486a50f0f9ba3955d81012753104d015b3be62797ed723aa39b62453ba6c50ae189fcab64945a53354e5f255613b3bb7c1a0f5261374d5e11f4
+  languageName: node
+  linkType: hard
+
+"@vue/shared@npm:3.2.0-beta.5":
+  version: 3.2.0-beta.5
+  resolution: "@vue/shared@npm:3.2.0-beta.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40vue%2Fshared%2Fdownload%2F%40vue%2Fshared-3.2.0-beta.5.tgz"
+  checksum: c44f9c06a1359dfe55072d230506d402659a6466a25ecffdfdbccc3f29c483768fe0c9f7f6a94cce555795f30cdae9ad79248f77d556e423ba56b548f07129fc
   languageName: node
   linkType: hard
 
@@ -4818,14 +4869,14 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.0.8":
-  version: 3.1.4
-  resolution: "vue@npm:3.1.4::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvue%2Fdownload%2Fvue-3.1.4.tgz"
+"vue@npm:^3.1.5":
+  version: 3.1.5
+  resolution: "vue@npm:3.1.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvue%2Fdownload%2Fvue-3.1.5.tgz"
   dependencies:
-    "@vue/compiler-dom": 3.1.4
-    "@vue/runtime-dom": 3.1.4
-    "@vue/shared": 3.1.4
-  checksum: 5b256d788c12cbd74ba3ca7a83456696cbacc2b7ef02e54a9f587c7bf5c42d7892e8d896aac96554056263c87f21e956a9636696bbd0843b05a92bc040fe3ffa
+    "@vue/compiler-dom": 3.1.5
+    "@vue/runtime-dom": 3.1.5
+    "@vue/shared": 3.1.5
+  checksum: 4d7d27b5276a41307a41e329fccbd7d6a706699962020e57325c9dba337f47fabaa1862b65b8efabbe345134bd9db4be7a3b4bffe91941a15b0d910610dc2568
   languageName: node
   linkType: hard
 
