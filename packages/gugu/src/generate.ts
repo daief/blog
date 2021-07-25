@@ -31,7 +31,7 @@ export async function generate(ctx: GContext) {
     .map((cat) => {
       return paginationUtil(
         dao.getPostList({ category: cat.name }).totalPages,
-        `/tags/${encodeURIComponent(cat.name)}/%d`,
+        `/categories/${encodeURIComponent(cat.name)}/%d`,
         1,
       );
     })
