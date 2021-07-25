@@ -15,9 +15,6 @@
   "workspaces": [
     "packages/*"
   ],
-  "resolutions": {
-    "@blog/gugu": "portal:/Users/daief/Documents/fe/mime/blog-v2/packages/gugu"
-  },
   "dependencies": {
     "@blog/gugu": "0.0.1"
   }
