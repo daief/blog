@@ -10,7 +10,7 @@ cd dist
 git init
 git add -f .
 git commit -m "Assets Init"
-git push --force --quiet "https://${ACTION_DEPLOY_KEY}@github.com/daief/daief.github.io.git" master:master >/dev/null
+git push --force --quiet "https://daief:${ACTION_DEPLOY_KEY}@github.com/daief/daief.github.io.git" master:master >/dev/null
 
 echo "Done updating gh-pages\n"
 
