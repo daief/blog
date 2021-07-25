@@ -1,12 +1,12 @@
 import { createStore, createLogger } from 'vuex';
 import global from './modules/global';
-import tags from './modules/tags';
+import labels from './modules/labels';
 
 export function createStoreIns() {
   const store = createStore({
     modules: {
       global,
-      tags,
+      labels,
     },
     strict: !__PROD__,
     plugins: !__PROD__ && !import.meta.env.SSR ? [createLogger()] : [],

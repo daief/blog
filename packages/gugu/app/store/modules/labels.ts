@@ -3,14 +3,15 @@ import { Module } from 'vuex';
 
 const md: Module<
   {
-    tags: ggDB.ITag[];
+    // tag or category
+    labels: ggDB.ITag[];
     postPagination: IListResponse<ggDB.IPost>;
   },
   any
 > = {
   namespaced: true,
   state: () => ({
-    tags: [],
+    labels: [],
     postPagination: {
       current: 1,
       pageSize: 10,

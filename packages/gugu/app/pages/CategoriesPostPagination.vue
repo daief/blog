@@ -2,8 +2,8 @@
   <div class="blog-base-area-box p-8">
     <Gap class="mb-6">
       <h1 class="text-lg">
-        「{{ tagName }}」
-        <small class="text-c-secondary">标签</small>
+        「{{ catName }}」
+        <small class="text-c-secondary">分类</small>
       </h1>
     </Gap>
     <PostItem v-for="item in data.result" :key="item.id" :post="item" />
@@ -12,7 +12,7 @@
     <Pagination
       :total="data.totalPages"
       :current="data.current"
-      :link-pattern="`/tags/${tagName}/%d`"
+      :link-pattern="`/tags/${catName}/%d`"
     />
   </div>
 </template>
@@ -29,7 +29,7 @@ import { useRoute } from 'vue-router';
 import Gap from '@app/components/Gap.vue';
 
 export default defineComponent({
-  name: 'TagsPostPagination',
+  name: 'CategoriesPostPagination',
   components: {
     PostItem,
     Pagination,
@@ -37,8 +37,8 @@ export default defineComponent({
   },
   async asyncData({ store, route, site }) {
     const current = +route.params.no || 1;
-    const tagName = route.params.tag as string;
-    const resp = await getPostList(site.axios, { current, tag: tagName });
+    const cat = route.params.category as string;
+    const resp = await getPostList(site.axios, { current, category: cat });
     await store.commit('labels/setState', {
       postPagination: resp,
     });
@@ -47,7 +47,7 @@ export default defineComponent({
     const store = useStore();
     const route = useRoute();
 
-    const tagName = computed(() => route.params.tag as string);
+    const catName = computed(() => route.params.category as string);
 
     const data: ComputedRef<IListResponse<ggDB.IPost>> = computed(
       () => store.state.labels.postPagination,
@@ -56,12 +56,12 @@ export default defineComponent({
     usePageTitle(
       computed(() => {
         const page = +route.params.no || 1;
-        return `「${tagName.value}」标签 - 第${page}页`;
+        return `「${catName.value}」分类 - 第${page}页`;
       }),
     );
 
     return {
-      tagName,
+      catName,
       data,
     };
   },
