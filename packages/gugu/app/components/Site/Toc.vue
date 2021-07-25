@@ -27,7 +27,10 @@ const tocHtml = computed(() => store.state.global.tocHtml);
 const route = useRoute();
 
 const shouldShowToc = computed(
-  () => route.name === ROUTER_NAME_ENUM.postDetail && !!tocHtml.value,
+  () =>
+    (route.name === ROUTER_NAME_ENUM.postDetail ||
+      (route.meta && route.meta.isSimplePage)) &&
+    !!tocHtml.value,
 );
 
 const wrapEl = ref<HTMLDivElement>();

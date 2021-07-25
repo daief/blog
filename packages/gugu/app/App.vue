@@ -64,9 +64,12 @@ import Toc from './components/Site/Toc.vue';
 import Menus from './components/Site/Menus.vue';
 import { useSiteContext } from './utils/siteContext';
 import BottomActions from './components/Site/BottomActions.vue';
+import { usePageTitle } from './utils/hooks/usePageTitle';
 const store = useStore();
 const blogBrief = computed(() => store.state.global.site);
 const siteCtx = useSiteContext();
+
+usePageTitle();
 </script>
 
 <style scoped lang="less"></style>

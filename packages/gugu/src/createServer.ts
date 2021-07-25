@@ -87,16 +87,18 @@ export async function createServer(
         // 4. 渲染应用的 HTML。这假设 entry-server.js 导出的 `render`
         //    函数调用了适当的 SSR 框架 API。
         //    例如 ReactDOMServer.renderToString()
-        const [appHtml, _preLoad, initialState] = await render(
-          url,
-          {},
-          {
-            serverState,
-            serverAddress: LOCAL_ADDRESS,
-          },
-        );
+        const { appHtml, initialState, headTags, htmlAttrs, bodyAttrs } =
+          await render(
+            url,
+            {},
+            {
+              serverState,
+              serverAddress: LOCAL_ADDRESS,
+            },
+          );
 
         const headPartial = [
+          headTags,
           `<script>window.__INITIAL_STATE__=${JSON.stringify(
             initialState,
           )}</script>`,
@@ -107,6 +109,8 @@ export async function createServer(
 
         // 5. 注入渲染后的应用程序 HTML 到模板中。
         const html = template
+          .replace('sstHtmlAttrs', htmlAttrs)
+          .replace('ssrBodyAttrs', bodyAttrs)
           .replace(`<!--ssr-head-partial-->`, headPartial)
           .replace(`<!--ssr-outlet-->`, appHtml);
 

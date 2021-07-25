@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { getPostDetail, getSimplePageContent } from '@app/api';
+import { getSimplePageContent } from '@app/api';
 import { computed, defineComponent, nextTick, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
@@ -42,6 +42,7 @@ export default defineComponent({
 <script lang="ts" setup>
 import RichText from '@app/components/RichText.vue';
 import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
+import { usePageTitle } from '../utils/hooks/usePageTitle';
 
 const store = useStore();
 const post = computed(
@@ -55,6 +56,25 @@ const postContent = computed(() =>
         .join('\n')
     : '',
 );
+
+const contentRef = ref<any>(null);
+
+watch(
+  () => postContent.value,
+  () => {
+    nextTick(() => {
+      if (!import.meta.env.SSR && !!contentRef.value)
+        store.commit('global/setState', {
+          tocHtml: createTocHtmlStrByList(
+            getContentTocFromEl(contentRef.value.$el),
+          ),
+        });
+    });
+  },
+  { immediate: true },
+);
+
+usePageTitle(computed(() => (post.value ? post.value.title : '')));
 </script>
 
 <style scoped lang="less"></style>

@@ -3,6 +3,7 @@ import { createSSRApp } from 'vue';
 import { createRouterIns } from './router';
 import { createStoreIns } from './store';
 import { createSiteContext } from './utils/siteContext';
+import { createHead } from '@vueuse/head';
 
 export interface ICreateOptions {
   serverState?;
@@ -16,9 +17,11 @@ export function createApp(opts: ICreateOptions = {}) {
   const store = createStoreIns();
   const router = createRouterIns(opts);
   const site = createSiteContext();
+  const head = createHead();
 
   app.use(store);
   app.use(router);
   app.use(site);
-  return { app, router, store, site };
+  app.use(head);
+  return { app, router, store, site, head };
 }

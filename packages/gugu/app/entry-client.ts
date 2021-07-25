@@ -15,12 +15,17 @@ router.isReady().then(() => {
   router.beforeEach(async (to, from) => {
     const { matched } = to;
 
+    console.log({ to, from });
+
     if (!matched || !matched.length) {
       return;
     }
 
+    let timer: any;
     try {
-      NProgress.start();
+      timer = setTimeout(() => {
+        NProgress.start();
+      }, 200); // 200ms 以下就不显示 loading 了
       await Promise.all(
         matched.map((it) => {
           const C: any = it.components.default;
@@ -32,6 +37,7 @@ router.isReady().then(() => {
       console.warn('asyncData 出错了：', error);
     }
     NProgress.done();
+    clearTimeout(timer);
   });
 
   app.mount('#app');

@@ -45,16 +45,14 @@ export function createRouterIns(opts: ICreateOptions) {
     ? opts.serverState
     : window.__INITIAL_STATE__;
 
-  console.log({
-    state,
-    a: typeof window !== 'undefined' && window.__INITIAL_STATE__,
-  });
-
   state.global.simplePages.forEach((it) => {
     routes.push(
       getSimplePageRouteCfg({
         name: it.path,
         path: it.path,
+        meta: {
+          isSimplePage: true,
+        },
       }),
     );
   });
