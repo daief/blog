@@ -16,15 +16,15 @@
           {{ siteCtx.blogConfig.description }}
         </p>
         <div class="mt-3 text-xs flex justify-center">
-          <router-link to="" class="unset">
+          <router-link to="/archives" class="unset">
             <Icon name="wenzhang" />({{ blogBrief.postCount }})
           </router-link>
           <span class="mx-1 text-c-secondary">|</span>
-          <router-link to="" class="unset">
+          <router-link to="/tags" class="unset">
             <Icon name="tag" />({{ blogBrief.tagCount }})
           </router-link>
           <span class="mx-1 text-c-secondary">|</span>
-          <router-link to="" class="unset">
+          <router-link to="/categories" class="unset">
             <Icon name="category" />({{ blogBrief.categoryCount }})
           </router-link>
         </div>

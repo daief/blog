@@ -3,6 +3,7 @@ import '@gugu-highlight-theme';
 import NProgress from 'nprogress';
 
 import './styles';
+import { wait } from './utils/wait';
 
 const { app, router, store, site } = createApp();
 
@@ -14,8 +15,6 @@ if (window.__INITIAL_STATE__) {
 router.isReady().then(() => {
   router.beforeEach(async (to, from) => {
     const { matched } = to;
-
-    console.log({ to, from });
 
     if (!matched || !matched.length) {
       return;
@@ -35,9 +34,12 @@ router.isReady().then(() => {
       );
     } catch (error) {
       console.warn('asyncData 出错了：', error);
+
+      throw error;
+    } finally {
+      NProgress.done();
+      clearTimeout(timer);
     }
-    NProgress.done();
-    clearTimeout(timer);
   });
 
   app.mount('#app');

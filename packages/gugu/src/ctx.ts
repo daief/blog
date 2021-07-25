@@ -42,10 +42,6 @@ export class GContext extends EventEmitter {
     const cacheDir = resolve(userRoot, '.cache/.gugu');
     const sourceDir = resolve(userRoot, 'source');
 
-    if (this.command === 'dev') {
-      fs.emptyDirSync(resolve(guguRoot, 'dist'));
-    }
-
     this.dirs = {
       guguRoot,
       appDir,
@@ -59,6 +55,23 @@ export class GContext extends EventEmitter {
   }
 
   async init() {
+    if (this.command === 'dev') {
+      fs.emptyDirSync(this.resolveGuguRoot('dist'));
+    }
+    fs.copySync(
+      resolve(this.dirs.userRoot, 'source'),
+      this.resolveGuguRoot('dist/client'),
+      {
+        recursive: true,
+        filter: (src) => {
+          return ![
+            resolve(this.dirs.userRoot, 'source/pages'),
+            resolve(this.dirs.userRoot, 'source/posts'),
+          ].some((it) => src.startsWith(it));
+        },
+      },
+    );
+
     await this.resolveConfig();
     await this.dao.init();
     await this.loader.init();

@@ -117,6 +117,18 @@ export class GuDao {
     return posts.map((p) => this.sortPostVO(p));
   }
 
+  getTagList(): ggDB.ITag[] {
+    return this.db._.get('tags')
+      .value()
+      .map((it) => this.sortTagVO(it));
+  }
+
+  getCategoryList(): ggDB.ICategory[] {
+    return this.db._.get('categories')
+      .value()
+      .map((it) => this.sortCategoryVO(it));
+  }
+
   private sortPostVO(post: ggDB.IPost, isSimple = true): ggDB.IPost {
     const result: ggDB.IPost = {
       id: post.id,
@@ -127,8 +139,8 @@ export class GuDao {
       published: post.published,
       date: post.date,
       updated: post.updated,
-      tags: post.tags,
-      categories: post.categories,
+      tags: post.tags.map((it) => this.sortTagVO(it)),
+      categories: post.categories.map((cat) => this.sortCategoryVO(cat)),
       min2read: post.min2read,
       wordCount: post.wordCount,
       excerpt: post.excerpt,
@@ -147,6 +159,33 @@ export class GuDao {
         tocHtml: '',
       });
     }
+
+    return result;
+  }
+
+  private sortTagVO(tag: ggDB.ITag): ggDB.ITag {
+    const result: ggDB.ITag = {
+      id: tag.id,
+      name: tag.name,
+      slug: tag.slug,
+      path: tag.path,
+      postCount: tag.postIds.length,
+      postIds: [],
+    };
+
+    return result;
+  }
+
+  private sortCategoryVO(cat: ggDB.ICategory): ggDB.ICategory {
+    const result: ggDB.ICategory = {
+      id: cat.id,
+      name: cat.name,
+      slug: cat.slug,
+      path: cat.path,
+      parentId: cat.parentId,
+      postCount: cat.postIds.length,
+      postIds: [],
+    };
 
     return result;
   }
