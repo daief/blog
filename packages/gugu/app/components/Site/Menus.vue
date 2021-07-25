@@ -24,7 +24,7 @@ export default defineComponent({
             flex
             items-center
             justify-center
-            border-b border-t border-gray-100
+            border-b border-gray-100
             text-sm text-c-text
             menu-link
           `}
@@ -39,8 +39,13 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.menu-link.router-link-active {
-  color: #fff;
-  @apply bg-primary bg-opacity-50 border-transparent;
+.menu-link {
+  &.router-link-active {
+    color: #fff;
+    @apply bg-primary bg-opacity-50 border-transparent;
+  }
+  &:first-of-type {
+    @apply border-t;
+  }
 }
 </style>
