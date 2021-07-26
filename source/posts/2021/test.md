@@ -30,7 +30,7 @@ graph LR
 
 网络：
 
-![](https://daief.tech/2017-07-16/start-on-a-journey/jiegeng.jpg)
+![](https://avatars.githubusercontent.com/u/19222089?v=4)
 
 本地：
 
