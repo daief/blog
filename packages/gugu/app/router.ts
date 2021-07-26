@@ -15,6 +15,8 @@ import TagsPostPagination from '@app/pages/TagsPostPagination.vue';
 import Categories from '@app/pages/Categories.vue';
 import CategoriesPostPagination from '@app/pages/CategoriesPostPagination.vue';
 
+import Page404 from '@app/pages/404.vue';
+
 import { ROUTER_NAME_ENUM } from './utils/constants';
 
 function getSimplePageRouteCfg(cfg: Partial<RouteRecordRaw>): RouteRecordRaw {
@@ -104,6 +106,26 @@ export function createRouterIns(opts: ICreateOptions) {
       }),
     );
   });
+
+  routes.push(
+    // 兼容
+    {
+      name: 'detail-legacy',
+      path: '/:yy-:mm-:dd/:id.html',
+      redirect: (to) => ({
+        name: ROUTER_NAME_ENUM.postDetail,
+        params: {
+          ...to.params,
+          id: 'xxxx',
+        },
+      }),
+    },
+    {
+      name: ROUTER_NAME_ENUM.page404,
+      path: '/:pathMatch(.*)*',
+      component: Page404,
+    },
+  );
 
   const router = createRouter({
     history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),

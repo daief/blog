@@ -28,7 +28,13 @@ router.isReady().then(() => {
         matched.map((it) => {
           const C: any = it.components.default;
           if (typeof C.asyncData !== 'function') return;
-          return C.asyncData({ store, route: to, fromRoute: from, site });
+          return C.asyncData({
+            store,
+            route: to,
+            fromRoute: from,
+            site,
+            router,
+          });
         }),
       );
     } catch (error) {

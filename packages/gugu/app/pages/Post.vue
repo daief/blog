@@ -53,14 +53,23 @@ import { useStore } from 'vuex';
 
 export default defineComponent({
   name: 'PostPage',
-  async asyncData({ store, route, site }) {
+  async asyncData({ store, route, site, router }) {
     const postId = route.params.id as string;
     const { postDetail } = store.state.global;
     const post: ggDB.IPost = postDetail.post;
     if (post && post.id === postId) {
       return;
     }
-    const resp = await getPostDetail(site.axios, postId);
+    const resp = await getPostDetail(site.axios, postId).catch((error) => {
+      try {
+        if (error.response.status === 404 && !import.meta.env.SSR) {
+          setTimeout(() => {
+            router.push('/404');
+          });
+        }
+      } catch (error) {}
+      throw error;
+    });
     await store.commit('global/setState', {
       postDetail: {
         ...postDetail,
