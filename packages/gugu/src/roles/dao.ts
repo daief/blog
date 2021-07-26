@@ -16,7 +16,6 @@ export class GuDao {
   async init() {
     this.db.readSync({
       posts: [],
-      pages: [],
       categories: [],
       tags: [],
     });

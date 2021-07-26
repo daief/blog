@@ -7,33 +7,19 @@ import { CollectionChain, omit } from 'lodash';
 import fm from 'front-matter';
 import glob from 'glob-promise';
 import fs from 'fs-extra';
-import { md5 } from '../utils/helper';
+import { md5, promiseQueue } from '../utils/helper';
 import dayjs from 'dayjs';
+import chokidar from 'chokidar';
+import minimatch from 'minimatch';
 
 export class GLoader {
   private gg: GContext;
 
-  private resolvingMarkdown: {
-    filename: string;
-    id: string;
-  };
-
   // 文章 id
-  private assets: Map<
-    string,
-    Array<{
-      // 资源文件完整路径
-      assetFilePath: string;
-      // 相对的一段路径
-      relativePath: string;
-      // 相关联的 md 文件
-      referenceMarkdown: string;
-      // 资源输出的路径
-      targetPath: string;
-    }>
-  >;
+  private assets: Map<string, ggDB.IAssetInfo[]>;
 
   renderer: marked.Renderer;
+  watcher: chokidar.FSWatcher;
 
   constructor(ctx: GContext) {
     this.gg = ctx;
@@ -42,8 +28,9 @@ export class GLoader {
 
   async init() {
     this.createRender();
-    await this.loadMarkdownFiles();
+    await this.loadAllMarkdownFiles();
     await this.loadAssets();
+    this.watch();
   }
 
   private createRender() {
@@ -63,137 +50,113 @@ export class GLoader {
       const anchorText = `${text}`;
       return `<h${level} id="${anchorText}">${anchorText}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
     };
-    this.renderer.image = (href, title, text) => {
-      const { resolvingMarkdown } = this;
-      const isNotFilePath = href.startsWith('http') || href.startsWith('//');
-
-      if (!resolvingMarkdown || isNotFilePath)
-        return `<img src="${href || ''}" alt="${text || ''}" title="${
-          title || ''
-        }">`;
-
-      const info = this.assets.get(resolvingMarkdown.id) || [];
-      info.push({
-        assetFilePath: resolve(dirname(resolvingMarkdown.filename), href),
-        relativePath: href,
-        referenceMarkdown: resolvingMarkdown.filename,
-        targetPath: resolve('/post', href),
-      });
-      this.assets.set(resolvingMarkdown.id, info);
-
-      return `<img src="${href || ''}" alt="${text || ''}" title="${
-        title || ''
-      }">`;
-    };
   }
 
-  private async loadMarkdownFiles() {
-    const getPosts = async (type: 'posts' | 'pages') => {
-      const results = await glob(
-        `${this.gg.dirs.sourceDir}/${type}/**/*.md`,
-        {},
-      );
-      const p: Array<
-        ggDB.IPost & {
-          strCategories: string[];
-          strTags: string[];
-        }
-      > = [];
-      for await (const mdPath of results) {
-        const content = await fs.readFile(mdPath, 'utf-8');
-        const hash = md5(content);
-        const isArticle = type === 'posts';
+  get getMarkdowGlob() {
+    return `${this.gg.dirs.sourceDir}/?(posts|pages)/**/*.md`;
+  }
 
-        const parsedResult = this.parseMarkdown(content, mdPath);
-        if (!parsedResult.id) {
-          if (isArticle) {
-            continue;
-          } else {
-            parsedResult.id = md5(mdPath);
-          }
-        }
-
-        p.push({
-          ...parsedResult,
-          date: parsedResult.date || dayjs().format(),
-          hash,
-          slug: '',
-          path: '',
-          updated: '',
-          tags: [],
-          categories: [],
-          published: true,
-          isArticle: type === 'posts',
-          filename: mdPath,
-        });
+  private watch() {
+    this.watcher = chokidar.watch(`${this.gg.dirs.sourceDir}/**/*`, {
+      interval: 1000,
+    });
+    this.watcher.on('change', (fname) => {
+      if (minimatch(fname, this.getMarkdowGlob)) {
+        return this.onUpdateNewMd(fname);
       }
-      return p;
-    };
+    });
+  }
 
-    const [posts, pages] = await Promise.all(
-      ['posts', 'pages'].map((type) => getPosts(type as any)),
-    );
+  private async onAddNewMd(mdPath: string) {}
 
-    const all = [...posts, ...pages].sort(
-      (a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf(),
-    );
+  private async onUpdateNewMd(mdPath: string) {
+    const target = this.gg.dao.db._.get('posts')
+      .find((it) => it.filename === mdPath)
+      .value();
+    if (!target) {
+      return this.onAddNewMd(mdPath);
+    }
+    const res = await this.parseMarkdown(mdPath);
+    if (target.hash === res.hash) return;
 
-    const allTags: ggDB.ITag[] = [];
-    const allCategories: ggDB.ICategory[] = [];
+    await this.reSortDB([res], 'insert');
+  }
 
-    all.forEach((post) => {
-      const { strTags, strCategories } = post;
+  private async reSortDB(
+    partial: IHandledPost[],
+    type: 'insert' | 'delete' = 'insert',
+  ) {
+    const { _ } = this.gg.dao.db;
+    let all = _.get('posts')
+      .filter((it) => !partial.some((p) => p.id === it.id))
+      .value();
 
+    let allTags: ggDB.ITag[] = _.get('tags').value();
+    let allCategories: ggDB.ICategory[] = _.get('categories').value();
+
+    partial.forEach((post) => {
       if (!post.isArticle) {
-        post.slug = relative(
-          resolve(this.gg.dirs.sourceDir, 'pages'),
-          post.filename,
-        )
-          .replace(/\.md$/i, '')
-          .replace(/^\/?/, '');
-        post.path = '/' + post.slug;
         return;
       }
+      const { strTags, strCategories } = post;
 
-      post.slug = `post/${post.id}`;
-      post.path = '/' + post.slug;
+      function handleLabels<T extends Partial<ggDB.ICategory & ggDB.ITag>>(
+        strs: string[],
+        labels: T[],
+        isTag = true,
+      ): [T[], T[]] {
+        // 需要被添加的 label
+        const items = strs.map((cName, i) => {
+          let item = labels.find((it) => it.name === cName);
+          if (!item) {
+            item = {
+              id: md5(cName),
+              name: cName,
+              postIds: [],
+            } as any;
+            labels.push(item);
+          }
 
-      // 下面仅针对文章进行标签、分类处理
-      // handle tags
-      post.tags = strTags.map((tagName) => {
-        let newItem: ggDB.ITag = allTags.find((it) => it.name === tagName);
-        if (!newItem) {
-          newItem = {
-            id: md5(tagName),
-            name: tagName,
-            slug: 'tags/' + tagName,
-            path: '/tags/' + tagName,
-            postIds: [],
-          };
-          allTags.push(newItem);
-        }
-        newItem.postIds.push(post.id);
-        return newItem;
-      });
+          if (!isTag) {
+            Object.assign(item, {
+              slug: 'categories/' + cName,
+              path: '/categories/' + cName,
+              parentId: i === 0 ? '' : md5(strs[i - 1]),
+            });
+          }
 
-      // handle Categories
-      post.categories = strCategories.map((cName, i) => {
-        let item = allCategories.find((it) => it.name === cName);
-        if (!item) {
-          item = {
-            id: md5(cName),
-            name: cName,
-            slug: 'categories/' + cName,
-            path: '/categories/' + cName,
-            parentId: i === 0 ? '' : md5(strCategories[i - 1]),
-            postIds: [],
-          };
-          allCategories.push(item);
-        }
-        item.postIds.push(post.id);
-        return item;
+          item.postIds.push(post.id);
+          return item;
+        });
+
+        // 需要被移除的 label
+        const removed = labels
+          .filter(
+            (it) => it.postIds.includes(post.id) && !strs.includes(it.name),
+          )
+          .map((it) => {
+            it.postIds = it.postIds.filter((id) => id !== post.id);
+            return it;
+          })
+          .filter((it) => it.postIds.length === 0);
+
+        return [items, labels.filter((it) => !removed.includes(it))];
+      }
+
+      [post.tags, allTags] = handleLabels(strTags, allTags, true);
+      [post.categories, allCategories] = handleLabels(
+        strCategories,
+        allCategories,
+        false,
+      );
+
+      console.log({
+        allCategories,
       });
     });
+
+    all.push(...partial);
+    all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
 
     [
       ['tags', allTags],
@@ -201,9 +164,20 @@ export class GLoader {
       ['posts', all],
     ].forEach(([type, data]: [string, any[]]) => {
       (this.gg.dao.db._.get(type) as CollectionChain<any>)
+        .set('length', 0)
         .push(...data)
         .commit();
     });
+  }
+
+  private async loadAllMarkdownFiles() {
+    const mdPathList = await glob(this.getMarkdowGlob, {});
+
+    const all = await promiseQueue(
+      mdPathList.map((f) => this.parseMarkdown(f)),
+    );
+
+    await this.reSortDB(all);
   }
 
   private async loadAssets() {
@@ -220,9 +194,9 @@ export class GLoader {
     }
   }
 
-  onAddMd(files: string[]) {}
+  public async parseMarkdown(filename: string): Promise<IHandledPost> {
+    const source = await fs.readFile(filename, 'utf-8');
 
-  public parseMarkdown(source: string, filepath: string) {
     const { attributes: metadata, body: markdownBody } = fm<{
       title: string;
       date: string;
@@ -234,24 +208,71 @@ export class GLoader {
       comments: boolean;
     }>(source);
 
-    this.resolvingMarkdown = {
-      filename: filepath,
-      id: metadata.id,
+    const isArticle = filename.startsWith(
+      resolve(this.gg.dirs.sourceDir, 'posts'),
+    );
+
+    const assetInfoList: ggDB.IAssetInfo[] = [];
+
+    this.renderer.image = (href, title, text) => {
+      const isNotFilePath = href.startsWith('http') || href.startsWith('//');
+
+      if (isNotFilePath)
+        return `<img src="${href || ''}" alt="${text || ''}" title="${
+          title || ''
+        }">`;
+
+      assetInfoList.push({
+        assetFilePath: resolve(dirname(filename), href),
+        relativePath: href,
+        referenceMarkdown: filename,
+        targetPath: resolve('/post', href),
+      });
+
+      return `<img src="${href || ''}" alt="${text || ''}" title="${
+        title || ''
+      }">`;
     };
+
+    if (!metadata.id) {
+      if (!isArticle) {
+        metadata.id = md5(filename);
+      } else {
+        throw new Error(`请补充【${filename}】的 id。`);
+      }
+    }
 
     const [excerpt, more = ''] = marked(markdownBody, {
       renderer: this.renderer,
     }).split('<!-- more -->');
 
-    this.resolvingMarkdown = null;
+    let slug = '';
+    if (!isArticle) {
+      slug = relative(resolve(this.gg.dirs.sourceDir, 'pages'), filename)
+        .replace(/\.md$/i, '')
+        .replace(/^\/?/, '');
+    } else {
+      slug = `post/${metadata.id}`;
+    }
 
     return {
       ...omit(metadata, ['tags', 'categories']),
+      // TODO 状态
+      published: true,
+      slug,
+      path: '/' + slug,
+      updated: '',
+      tags: [],
+      categories: [],
+      filename,
+      hash: md5(source),
+      isArticle,
       strCategories: strToArray(metadata.categories),
       strTags: strToArray(metadata.tags),
       excerpt,
       more,
       raw: source,
+      assetInfoList,
     };
   }
 }
@@ -265,3 +286,9 @@ const strToArray = (s: string | string[] | null) => {
   }
   return [];
 };
+
+interface IHandledPost extends ggDB.IPost {
+  strCategories: string[];
+  strTags: string[];
+  assetInfoList: ggDB.IAssetInfo[];
+}
