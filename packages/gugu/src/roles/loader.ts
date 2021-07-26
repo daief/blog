@@ -57,17 +57,36 @@ export class GLoader {
   }
 
   private watch() {
-    this.watcher = chokidar.watch(`${this.gg.dirs.sourceDir}/**/*`, {
-      interval: 1000,
-    });
-    this.watcher.on('change', (fname) => {
-      if (minimatch(fname, this.getMarkdowGlob)) {
-        return this.onUpdateNewMd(fname);
-      }
-    });
+    this.watcher = chokidar
+      .watch(`${this.gg.dirs.sourceDir}/**/*`, {
+        interval: 1000,
+      })
+      .on('change', (fname) => {
+        if (minimatch(fname, this.getMarkdowGlob)) {
+          return this.onUpdateNewMd(fname);
+        }
+      })
+      .on('add', (fname) => {
+        if (minimatch(fname, this.getMarkdowGlob)) {
+          return this.onAddNewMd(fname);
+        }
+      })
+      .on('unlink', (fname) => {
+        if (minimatch(fname, this.getMarkdowGlob)) {
+          return this.onDeleteNewMd(fname);
+        }
+      });
   }
 
-  private async onAddNewMd(mdPath: string) {}
+  private async onAddNewMd(mdPath: string) {
+    const res = await this.parseMarkdown(mdPath);
+    await this.reSortDB([res], 'insert');
+  }
+
+  private async onDeleteNewMd(mdPath: string) {
+    const res = await this.parseMarkdown(mdPath);
+    await this.reSortDB([res], 'delete');
+  }
 
   private async onUpdateNewMd(mdPath: string) {
     const target = this.gg.dao.db._.get('posts')
@@ -94,69 +113,80 @@ export class GLoader {
     let allTags: ggDB.ITag[] = _.get('tags').value();
     let allCategories: ggDB.ICategory[] = _.get('categories').value();
 
-    partial.forEach((post) => {
-      if (!post.isArticle) {
-        return;
-      }
-      const { strTags, strCategories } = post;
+    if (type === 'insert') {
+      partial.forEach((post) => {
+        if (!post.isArticle) {
+          return;
+        }
+        const { strTags, strCategories } = post;
 
-      function handleLabels<T extends Partial<ggDB.ICategory & ggDB.ITag>>(
-        strs: string[],
-        labels: T[],
-        isTag = true,
-      ): [T[], T[]] {
-        // 需要被添加的 label
-        const items = strs.map((cName, i) => {
-          let item = labels.find((it) => it.name === cName);
-          if (!item) {
-            item = {
-              id: md5(cName),
-              name: cName,
-              postIds: [],
-            } as any;
-            labels.push(item);
-          }
+        function handleLabels<T extends Partial<ggDB.ICategory & ggDB.ITag>>(
+          strs: string[],
+          labels: T[],
+          isTag = true,
+        ): [T[], T[]] {
+          // 需要被添加的 label
+          const items = strs.map((cName, i) => {
+            let item = labels.find((it) => it.name === cName);
+            if (!item) {
+              item = {
+                id: md5(cName),
+                name: cName,
+                postIds: [],
+              } as any;
+              labels.push(item);
+            }
 
-          if (!isTag) {
-            Object.assign(item, {
-              slug: 'categories/' + cName,
-              path: '/categories/' + cName,
-              parentId: i === 0 ? '' : md5(strs[i - 1]),
-            });
-          }
+            if (!isTag) {
+              Object.assign(item, {
+                slug: 'categories/' + cName,
+                path: '/categories/' + cName,
+                parentId: i === 0 ? '' : md5(strs[i - 1]),
+              });
+            }
 
-          item.postIds.push(post.id);
-          return item;
-        });
+            item.postIds.push(post.id);
+            return item;
+          });
 
-        // 需要被移除的 label
-        const removed = labels
-          .filter(
-            (it) => it.postIds.includes(post.id) && !strs.includes(it.name),
-          )
-          .map((it) => {
-            it.postIds = it.postIds.filter((id) => id !== post.id);
-            return it;
-          })
-          .filter((it) => it.postIds.length === 0);
+          // 需要被移除的 label
+          const removed = labels
+            .filter(
+              (it) => it.postIds.includes(post.id) && !strs.includes(it.name),
+            )
+            .map((it) => {
+              it.postIds = it.postIds.filter((id) => id !== post.id);
+              return it;
+            })
+            .filter((it) => it.postIds.length === 0);
 
-        return [items, labels.filter((it) => !removed.includes(it))];
-      }
+          return [items, labels.filter((it) => !removed.includes(it))];
+        }
 
-      [post.tags, allTags] = handleLabels(strTags, allTags, true);
-      [post.categories, allCategories] = handleLabels(
-        strCategories,
-        allCategories,
-        false,
-      );
-
-      console.log({
-        allCategories,
+        [post.tags, allTags] = handleLabels(strTags, allTags, true);
+        [post.categories, allCategories] = handleLabels(
+          strCategories,
+          allCategories,
+          false,
+        );
       });
-    });
 
-    all.push(...partial);
-    all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
+      all.push(...partial);
+      all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
+    } else {
+      // delete
+      const filterLabels = (labels: any[]) => {
+        return labels.filter((it) => {
+          it.postIds = it.postIds.filter(
+            (id) => !partial.some((p) => p.id === id),
+          );
+          return it.postIds.length;
+        });
+      };
+      allTags = filterLabels(allTags);
+      allCategories = filterLabels(allCategories);
+      all = all.filter((it) => partial.some((p) => p.filename === it.filename));
+    }
 
     [
       ['tags', allTags],
