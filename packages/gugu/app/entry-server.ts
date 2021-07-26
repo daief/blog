@@ -25,7 +25,12 @@ export async function render(
     matched.map((it) => {
       const C: any = it.components.default;
       if (typeof C.asyncData !== 'function') return;
-      return C.asyncData({ store, route: router.currentRoute.value, site });
+      return C.asyncData({
+        store,
+        route: router.currentRoute.value,
+        site,
+        router,
+      });
     }),
   );
 

@@ -6,6 +6,7 @@ export enum ROUTER_NAME_ENUM {
   tagsPostPagination = 'tagsPostPagination',
   category = 'category',
   categoryPostPagination = 'categoryPostPagination',
+  page404 = '404',
 }
 
 // TODO simple page 路由子路由

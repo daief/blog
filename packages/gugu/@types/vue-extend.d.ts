@@ -1,14 +1,15 @@
 import { IUserConfig } from '@t';
 import { AxiosInstance } from 'axios';
-import { RouteLocationNormalized } from 'vue-router';
+import { RouteLocationNormalized, Router } from 'vue-router';
 import { Store } from 'vuex';
 
 declare global {
   interface IAsyncDataCtx {
     store: Store<any>;
+    fromRoute?: RouteLocationNormalized;
     route: RouteLocationNormalized;
     site: ISiteContext;
-    fromRoute?: RouteLocationNormalized;
+    router: Router;
   }
 
   interface IAsyncData {
