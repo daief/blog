@@ -51,6 +51,9 @@ export async function generate(ctx: GContext) {
 
     ...dao.getSimplePages().map((it) => it.path),
 
+    '/404',
+    '/404.html',
+
     '/', // 最后
   ];
 
@@ -69,14 +72,24 @@ export async function generate(ctx: GContext) {
         throw e;
       });
 
-    const filePath = path.resolve(
-      outDir,
-      `${url === '/' ? '' : url}/index.html`.replace(/^\/?/, ''),
-    );
+    let uri = url;
+    switch (url) {
+      case '/':
+        uri = '/index.html';
+        break;
+      case '/404.html':
+        uri = url;
+        break;
+      default:
+        uri = url + '/index.html';
+        break;
+    }
+
+    const filePath = path.join(outDir, uri);
     fs.outputFileSync(filePath, html, {
       encoding: 'utf-8',
     });
-    console.log('✨ Pre-Rendered:', url);
+    console.log('✨ Pre-Rendered:', uri);
   }
 
   server.close();
