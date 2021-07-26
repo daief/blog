@@ -55,22 +55,22 @@ export class GContext extends EventEmitter {
   }
 
   async init() {
-    if (this.command === 'dev') {
+    if (!['generate', 'serve'].includes(this.command)) {
       fs.emptyDirSync(this.resolveGuguRoot('dist'));
-    }
-    fs.copySync(
-      resolve(this.dirs.userRoot, 'source'),
-      this.resolveGuguRoot('dist/client'),
-      {
-        recursive: true,
-        filter: (src) => {
-          return ![
-            resolve(this.dirs.userRoot, 'source/pages'),
-            resolve(this.dirs.userRoot, 'source/posts'),
-          ].some((it) => src.startsWith(it));
+      fs.copySync(
+        resolve(this.dirs.userRoot, 'source'),
+        this.resolveGuguRoot('dist/client'),
+        {
+          recursive: true,
+          filter: (src) => {
+            return ![
+              resolve(this.dirs.userRoot, 'source/pages'),
+              resolve(this.dirs.userRoot, 'source/posts'),
+            ].some((it) => src.startsWith(it));
+          },
         },
-      },
-    );
+      );
+    }
 
     await this.resolveConfig();
     await this.dao.init();
