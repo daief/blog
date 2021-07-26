@@ -48,7 +48,14 @@
 
 <script lang="ts">
 import { getPostDetail } from '@app/api';
-import { computed, defineComponent, nextTick, ref, watch } from 'vue';
+import {
+  computed,
+  defineComponent,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -86,11 +93,14 @@ import RichText from '@app/components/RichText.vue';
 import ALink from '@app/components/ALink.vue';
 import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
 import { usePageTitle } from '@app/utils/hooks/usePageTitle';
+import { useDetailLegacy } from '@app/utils/hooks/useDetailLegacy';
 
 const store = useStore();
 const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
 
 usePageTitle(computed(() => (post.value ? post.value.title : '')));
+
+useDetailLegacy();
 
 const postContent = computed(() =>
   post.value
