@@ -27,7 +27,7 @@ export async function generate(ctx: GContext) {
     .flat();
 
   const cats = dao
-    .getTagList()
+    .getCategoryList()
     .map((cat) => {
       return paginationUtil(
         dao.getPostList({ category: cat.name }).totalPages,
