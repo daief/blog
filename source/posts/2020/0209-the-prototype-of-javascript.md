@@ -180,7 +180,7 @@ n.__proto__.__proto__.__proto__; // null
 
 借用一张图总结一下：
 
-![prototype-chain](the-prototype-of-javascript/prototype-chain.jpg '图解 javascript 原型链')
+![prototype-chain](0209-the-prototype-of-javascript/prototype-chain.jpg '图解 javascript 原型链')
 
 ## 结语
 

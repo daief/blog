@@ -67,7 +67,7 @@ Java 端基于 [JWT（Json web token）](https://en.wikipedia.org/wiki/JSON_Web_
 
 nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
-![](use-summary-of-next-js-and-graphql/sequence-chart.jpg)
+![](./0703-use-summary-of-next-js-and-graphql/sequence-chart.jpg)
 
 ## nextjs-static
 
@@ -124,8 +124,8 @@ module.exports = withCSS(
 ```js
 // next.config.js
 if (typeof require !== 'undefined') {
-  require.extensions['.css'] = file => {};
-  require.extensions['.less'] = file => {};
+  require.extensions['.css'] = (file) => {};
+  require.extensions['.less'] = (file) => {};
 }
 ```
 
@@ -360,7 +360,7 @@ Babel 推荐在所有 Monorepo 项目的根目录添加 `babel.config.js`，以�
 
 module.exports = {
   webpack(config) {
-    config.module.rules.forEach(rule => {
+    config.module.rules.forEach((rule) => {
       // 这里的改动比较暴力，因为 Next.js 没有直接暴露更改内建 loader 参数的地方
       if (rule.use && rule.use.loader === 'next-babel-loader') {
         // 设置 babel 向上寻找 babel.config.js，然后将其所在的路径作为根（root）
@@ -468,13 +468,13 @@ GraphQL 的搭建基本是一个学习的过程，虽然写过一些 Node.js 脚
 ```ts
 @ObjectType()
 class Recipe {
-  @Field(type => ID)
+  @Field((type) => ID)
   id: string;
 
   @Field()
   title: string;
 
-  @Field(type => [Rate])
+  @Field((type) => [Rate])
   ratings: Rate[];
 
   @Field({ nullable: true })
