@@ -116,7 +116,6 @@ export function createRouterIns(opts: ICreateOptions) {
         name: ROUTER_NAME_ENUM.postDetail,
         params: {
           ...to.params,
-          id: 'xxxx',
         },
       }),
     },
