@@ -45,8 +45,18 @@ declare namespace ggDB {
 
   export interface IDB {
     posts: IPost[];
-    pages: IPost[];
     categories: ICategory[];
     tags: ITag[];
+  }
+
+  export interface IAssetInfo {
+    // 资源文件完整路径
+    assetFilePath: string;
+    // 相对的一段路径
+    relativePath: string;
+    // 相关联的 md 文件
+    referenceMarkdown: string;
+    // 资源输出的路径
+    targetPath: string;
   }
 }

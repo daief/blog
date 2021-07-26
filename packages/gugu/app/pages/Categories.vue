@@ -39,12 +39,17 @@ export default defineComponent({
         return false;
       }
 
-      ls.forEach((it) => {
+      while (ls.length) {
+        const it = ls.shift();
         if (!it.parentId) {
-          return tree.push({ ...it, children: [] });
+          tree.push({ ...it, children: [] });
+          continue;
         }
-        appendToTree(it, tree);
-      });
+        if (appendToTree(it, tree)) {
+          continue;
+        }
+        ls.push(it);
+      }
 
       return {
         total: ls.length,
