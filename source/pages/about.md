@@ -13,7 +13,7 @@ date: 2019-11-08 15:10:58
 
 不文艺，话很少。
 
-另外，如果有兴趣，[这里还有我的简历](https://daief.tech/resume.html)。
+另外，如果有兴趣，[这里还有我的简历](https://daief.tech/resume)。
 
 ## 关于本站
 
