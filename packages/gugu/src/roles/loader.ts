@@ -102,10 +102,15 @@ export class GLoader {
       for await (const mdPath of results) {
         const content = await fs.readFile(mdPath, 'utf-8');
         const hash = md5(content);
+        const isArticle = type === 'posts';
 
         const parsedResult = this.parseMarkdown(content, mdPath);
         if (!parsedResult.id) {
-          continue;
+          if (isArticle) {
+            continue;
+          } else {
+            parsedResult.id = md5(mdPath);
+          }
         }
 
         p.push({
