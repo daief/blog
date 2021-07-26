@@ -84,8 +84,7 @@ export class GLoader {
   }
 
   private async onDeleteNewMd(mdPath: string) {
-    const res = await this.parseMarkdown(mdPath);
-    await this.reSortDB([res], 'delete');
+    await this.reSortDB([{ filename: mdPath } as any], 'delete');
   }
 
   private async onUpdateNewMd(mdPath: string) {
@@ -175,17 +174,26 @@ export class GLoader {
       all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
     } else {
       // delete
+      const removed: ggDB.IPost[] = [];
+
+      all = all.filter((it) => {
+        if (partial.some((p) => p.filename === it.filename)) {
+          removed.push(it);
+          return false;
+        }
+        return true;
+      });
+
       const filterLabels = (labels: any[]) => {
         return labels.filter((it) => {
           it.postIds = it.postIds.filter(
-            (id) => !partial.some((p) => p.id === id),
+            (id) => !removed.some((p) => p.id === id),
           );
           return it.postIds.length;
         });
       };
       allTags = filterLabels(allTags);
       allCategories = filterLabels(allCategories);
-      all = all.filter((it) => partial.some((p) => p.filename === it.filename));
     }
 
     [

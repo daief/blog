@@ -20,6 +20,7 @@ export default defineComponent({
     const store = useStore();
     const data = computed(() => {
       const ls: ggDB.ICategory[] = [...store.state.labels.labels];
+      const total = ls.length;
 
       const tree: ITree[] = [];
 
@@ -52,7 +53,7 @@ export default defineComponent({
       }
 
       return {
-        total: ls.length,
+        total,
         tree: tree.sort((a, b) => b.postCount - a.postCount),
       };
     });
