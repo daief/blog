@@ -16,21 +16,21 @@ export class GLoader {
   private gg: GContext;
 
   // 文章 id
-  private assets: Map<string, ggDB.IAssetInfo[]>;
+  // private assets: Map<string, ggDB.IAssetInfo[]>;
 
   renderer: marked.Renderer;
   watcher: chokidar.FSWatcher;
 
   constructor(ctx: GContext) {
     this.gg = ctx;
-    this.assets = new Map();
   }
 
   async init() {
     this.createRender();
     await this.loadAllMarkdownFiles();
-    await this.loadAssets();
-    this.watch();
+    if (this.gg.command === 'dev') {
+      this.watch();
+    }
   }
 
   private createRender() {
@@ -206,6 +206,10 @@ export class GLoader {
         .push(...data)
         .commit();
     });
+
+    if (type === 'insert') {
+      await this.loadAssets(partial.map((it) => it.assetInfoList).flat());
+    }
   }
 
   private async loadAllMarkdownFiles() {
@@ -218,17 +222,15 @@ export class GLoader {
     await this.reSortDB(all);
   }
 
-  private async loadAssets() {
-    for (const [id, assetInfoLs] of this.assets) {
-      for (const ass of assetInfoLs) {
-        try {
-          fs.copySync(
-            ass.assetFilePath,
-            join(this.gg.dirs.guguRoot, 'dist/client/post', ass.relativePath),
-            { overwrite: true, recursive: true },
-          );
-        } catch (error) {}
-      }
+  private async loadAssets(assetInfoLs: ggDB.IAssetInfo[]) {
+    for (const ass of assetInfoLs) {
+      try {
+        fs.copySync(
+          ass.assetFilePath,
+          join(this.gg.dirs.guguRoot, 'dist/client/post', ass.relativePath),
+          { overwrite: true, recursive: true },
+        );
+      } catch (error) {}
     }
   }
 
