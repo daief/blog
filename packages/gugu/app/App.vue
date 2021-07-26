@@ -28,6 +28,16 @@
             <Icon name="category" />({{ blogBrief.categoryCount }})
           </router-link>
         </div>
+
+        <div class="mt-6 flex justify-center">
+          <a to="https://github.com/daief" class="unset cursor-pointer">
+            <Icon name="github" />
+          </a>
+          <span class="mx-2" />
+          <a to="mailto:defeng_mail@163.com" class="unset cursor-pointer">
+            <Icon name="email" />
+          </a>
+        </div>
       </div>
       <div class="mt-6">
         <Menus />
@@ -65,6 +75,7 @@ import Menus from './components/Site/Menus.vue';
 import { useSiteContext } from './utils/siteContext';
 import BottomActions from './components/Site/BottomActions.vue';
 import { usePageTitle } from './utils/hooks/usePageTitle';
+
 const store = useStore();
 const blogBrief = computed(() => store.state.global.site);
 const siteCtx = useSiteContext();
