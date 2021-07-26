@@ -4,7 +4,11 @@ import NProgress from 'nprogress';
 
 import './styles';
 
-const { app, router, store, site } = createApp();
+const apps = createApp();
+const { app, router, store, site } = apps;
+
+// @ts-ignore
+window.___APP___ = apps;
 
 if (window.__INITIAL_STATE__) {
   store.replaceState(window.__INITIAL_STATE__);
@@ -48,4 +52,22 @@ router.isReady().then(() => {
   });
 
   app.mount('#app', true);
+});
+
+// google ga
+// @ts-ignore
+window.dataLayer = window.dataLayer || [];
+function gtag(...args: any[]) {
+  // @ts-ignore
+  dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', 'UA-146082840-1');
+
+router.afterEach(function (to) {
+  // @ts-ignore
+  window.gtag('config', 'UA-146082840-1', {
+    page_path: to.fullPath,
+    type_os: 'web',
+  });
 });
