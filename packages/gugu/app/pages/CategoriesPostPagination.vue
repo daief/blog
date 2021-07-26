@@ -12,7 +12,7 @@
     <Pagination
       :total="data.totalPages"
       :current="data.current"
-      :link-pattern="`/tags/${catName}/%d`"
+      :link-pattern="`/categories/${catName}/%d`"
     />
   </div>
 </template>

@@ -20,7 +20,7 @@ export async function generate(ctx: GContext) {
     .map((tag) => {
       return paginationUtil(
         dao.getPostList({ tag: tag.name }).totalPages,
-        `/tags/${encodeURIComponent(tag.name)}/%d`,
+        `/tags/${tag.name}/%d`,
         1,
       );
     })
@@ -31,7 +31,7 @@ export async function generate(ctx: GContext) {
     .map((cat) => {
       return paginationUtil(
         dao.getPostList({ category: cat.name }).totalPages,
-        `/categories/${encodeURIComponent(cat.name)}/%d`,
+        `/categories/${cat.name}/%d`,
         1,
       );
     })
@@ -61,8 +61,13 @@ export async function generate(ctx: GContext) {
 
   for (const url of routes) {
     const html = await axios
-      .get(`${serverAddress}${url}`)
-      .then((resp) => resp.data);
+      .get(`${serverAddress}${encodeURI(url)}`)
+      .then((resp) => resp.data)
+      .catch((e) => {
+        console.log(url, e);
+
+        throw e;
+      });
 
     const filePath = path.resolve(
       outDir,

@@ -17,7 +17,8 @@ export async function createServer(
   ctx: GContext,
   options: ICreateServerOptions = {},
 ) {
-  const isProd = process.env.NODE_ENV === 'production';
+  const isProd =
+    process.env.NODE_ENV === 'production' || ctx.command === 'generate';
   const app = express();
 
   options = {
