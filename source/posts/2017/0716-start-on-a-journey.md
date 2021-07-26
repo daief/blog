@@ -8,4 +8,4 @@ tags:
 description: #你對本頁的描述 可以省略
 ---
 
-{% asset_img jiegeng.jpg 桔梗（ききょう） %}
+![](./imgs/jiegeng.jpg)

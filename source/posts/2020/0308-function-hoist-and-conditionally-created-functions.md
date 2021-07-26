@@ -55,7 +55,7 @@ function hoisted() {
 ```js
 var hoisted;
 
-hoisted = function() {
+hoisted = function () {
   console.log('foo');
 };
 
@@ -108,7 +108,7 @@ if (true) {
 var foo;
 
 if (true) {
-  foo = function() {
+  foo = function () {
     return 1;
   };
 }
@@ -122,7 +122,7 @@ if (true) {
 
 > 本断代码把 if 省略了，效果一样；同时添加了不少 debugger 方便断点。
 
-![1](function-hoist-and-conditionally-created-functions/1.jpg)
+![1](0308-function-hoist-and-conditionally-created-functions/1.jpg)
 
 并且局部 `a` 的值是块级作用域内定义的函数，同时全局的 `window.a` 依旧是 `undefined`。
 
@@ -130,15 +130,15 @@ if (true) {
 
 经过 `a = 5` 的赋值后，局部变量的 `a` 为 `5`，`window.a` 依旧是 `undefined`。
 
-![2](function-hoist-and-conditionally-created-functions/2.jpg)
+![2](0308-function-hoist-and-conditionally-created-functions/2.jpg)
 
 执行完**函数声明**语句后，`window.a` 神奇地变为了 `5`。我觉得此时看到的只是表面上的代码了，背后解释器的运行一定有其他的行为，但对于这些我现在还不得而知。
 
-![3](function-hoist-and-conditionally-created-functions/3.jpg)
+![3](0308-function-hoist-and-conditionally-created-functions/3.jpg)
 
 最后 `a = 2` 的赋值也只是改变了局部变量 `a`，当跳出块级作用域后，只能访问到 `window.a`，最终得到了开篇的描述的结果。
 
-![4](function-hoist-and-conditionally-created-functions/4.jpg)
+![4](0308-function-hoist-and-conditionally-created-functions/4.jpg)
 
 ## 结语
 
@@ -180,11 +180,11 @@ var foo;
 
 // if 语句或者三元表达式
 if (condition) {
-  foo = function() {
+  foo = function () {
     return 'true';
   };
 } else {
-  foo = function() {
+  foo = function () {
     return 'false';
   };
 }
