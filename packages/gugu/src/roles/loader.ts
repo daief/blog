@@ -2,7 +2,7 @@ import { GContext } from 'src/ctx';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import { escapeHtml } from '../utils/parseMarkdown';
-import { dirname, join, relative, resolve } from 'path';
+import { basename, dirname, join, relative, resolve } from 'path';
 import { CollectionChain, omit } from 'lodash';
 import fm from 'front-matter';
 import glob from 'glob-promise';
@@ -227,7 +227,7 @@ export class GLoader {
       try {
         fs.copySync(
           ass.assetFilePath,
-          join(this.gg.dirs.guguRoot, 'dist/client/post', ass.relativePath),
+          join(this.gg.dirs.guguRoot, 'dist/client', ass.targetPath),
           { overwrite: true, recursive: true },
         );
       } catch (error) {}
@@ -262,14 +262,17 @@ export class GLoader {
           title || ''
         }">`;
 
+      const assetFilePath = resolve(dirname(filename), href);
+      const hashname = `${md5(assetFilePath)}.${basename(assetFilePath)}`;
+      const targetPath = resolve('/images', hashname);
       assetInfoList.push({
-        assetFilePath: resolve(dirname(filename), href),
+        assetFilePath,
         relativePath: href,
         referenceMarkdown: filename,
-        targetPath: resolve('/post', href),
+        targetPath,
       });
 
-      return `<img src="${href || ''}" alt="${text || ''}" title="${
+      return `<img src="${targetPath}" alt="${text || ''}" title="${
         title || ''
       }">`;
     };
