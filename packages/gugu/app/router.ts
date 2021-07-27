@@ -107,24 +107,11 @@ export function createRouterIns(opts: ICreateOptions) {
     );
   });
 
-  routes.push(
-    // 兼容
-    {
-      name: 'detail-legacy',
-      path: '/:yy-:mm-:dd/:id.html',
-      redirect: (to) => ({
-        name: ROUTER_NAME_ENUM.postDetail,
-        params: {
-          ...to.params,
-        },
-      }),
-    },
-    {
-      name: ROUTER_NAME_ENUM.page404,
-      path: '/:pathMatch(.*)*',
-      component: Page404,
-    },
-  );
+  routes.push({
+    name: ROUTER_NAME_ENUM.page404,
+    path: '/:pathMatch(.*)*',
+    component: Page404,
+  });
 
   const router = createRouter({
     history: import.meta.env.SSR ? createMemoryHistory() : createWebHistory(),
