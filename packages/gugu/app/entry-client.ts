@@ -53,21 +53,3 @@ router.isReady().then(() => {
 
   app.mount('#app', true);
 });
-
-// google ga
-// @ts-ignore
-window.dataLayer = window.dataLayer || [];
-function gtag(...args: any[]) {
-  // @ts-ignore
-  dataLayer.push(arguments);
-}
-gtag('js', new Date());
-gtag('config', 'UA-146082840-1');
-
-router.afterEach(function (to) {
-  // @ts-ignore
-  window.gtag('config', 'UA-146082840-1', {
-    page_path: to.fullPath,
-    type_os: 'web',
-  });
-});
