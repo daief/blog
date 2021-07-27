@@ -1,0 +1,35 @@
+title: daief的个人日志
+description: 遇见你，遇见幸运💫
+author: daief
+language: zh-Hans
+avatar: https://avatars.githubusercontent.com/u/19222089?v=4
+since: 2017
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and base as '/child/'
+url: https://daief.tech
+base: /
+
+# default: dist
+outDir: dist
+
+highlight:
+  # @see https://github.com/highlightjs/highlight.js/tree/11.0.0/src/styles
+  theme: qtcreator-dark
+
+siteMenus:
+  home:
+    link: /
+    label: 首页
+  # archives:
+  #   link: /archives/
+  #   label: 归档
+  # categories:
+  #   link: /categories/
+  #   label: 分类
+  # tags:
+  #   link: /tags/
+  #   label: 标签
+  about:
+    link: /about/
+    label: 关于
