@@ -3,6 +3,8 @@ import { GContext } from './ctx';
 import fs from 'fs-extra';
 import { createServer } from './createServer';
 import axios from 'axios';
+import { promiseQueue } from './utils/helper';
+import dayjs from 'dayjs';
 
 function paginationUtil(length: number, pathPattern: string, perPage = 10) {
   const totalPage = perPage ? Math.ceil(length / perPage) : 1;
@@ -91,6 +93,27 @@ export async function generate(ctx: GContext) {
     });
     console.log('✨ Pre-Rendered:', uri);
   }
+
+  // 兼容老链接
+  await promiseQueue(
+    dao.getAvailablePosts().map(async (p) => {
+      const filePath = path.join(
+        outDir,
+        `/${dayjs(p.date).format('YYYY-MM-DD')}/${p.id}.html`,
+      );
+      fs.outputFileSync(
+        filePath,
+        `
+          <head>
+            <meta http-equiv="Refresh" content="0; URL=${ctx.userConfig.url}/post/${p.id}" />
+          </head>
+        `,
+        {
+          encoding: 'utf-8',
+        },
+      );
+    }),
+  );
 
   server.close();
 }
