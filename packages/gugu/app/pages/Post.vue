@@ -15,8 +15,26 @@
         :html-text="postContent"
         ref="contentRef"
       />
+
+      <Gap class="mt-6">☘️</Gap>
+
+      <div
+        v-if="post.tags.length"
+        class="flex flex-wrap justify-center text-c-secondary text-sm mt-6"
+      >
+        <router-link
+          class="unset block my-1 mx-2"
+          v-for="tag in post.tags"
+          :to="`/tags/${tag.name}`"
+          :key="tag.id"
+        >
+          <Icon name="tag" />
+          {{ tag.name }}
+        </router-link>
+      </div>
     </div>
   </div>
+  <!-- 上下篇 -->
   <div
     class="blog-base-area-box px-8 py-4 my-8 flex justify-between"
     v-if="linkedPosts.filter(Boolean).length > 0"
@@ -48,14 +66,7 @@
 
 <script lang="ts">
 import { getPostDetail } from '@app/api';
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { computed, defineComponent, nextTick, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -93,6 +104,8 @@ import RichText from '@app/components/RichText.vue';
 import ALink from '@app/components/ALink.vue';
 import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
 import { usePageTitle } from '@app/utils/hooks/usePageTitle';
+import Gap from '@app/components/Gap.vue';
+import Icon from '@app/components/Icon.vue';
 
 const store = useStore();
 const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
