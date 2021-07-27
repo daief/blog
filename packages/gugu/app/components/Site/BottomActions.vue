@@ -1,7 +1,6 @@
 <script lang="tsx">
-import { useSiteContext } from '@app/utils/siteContext';
 import { useEventListener } from '@vant/use';
-import { defineComponent, PropType, ref, Transition } from 'vue';
+import { defineComponent, ref } from 'vue';
 import throttle from 'lodash/throttle';
 import IconVue from '../Icon.vue';
 
@@ -32,7 +31,7 @@ export default defineComponent({
     const scrollInfo = useScrollToTop();
 
     return () => (
-      <div class=" fixed z-100 right-8 bottom-8">
+      <div class="fixed z-100 right-8 bottom-14">
         <div
           class={[
             'blog-base-area-box action-btn',
