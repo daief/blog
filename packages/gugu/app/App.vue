@@ -1,8 +1,8 @@
 <template>
   <div
-    class="m-4 max-w-screen-xl flex flex-wrap xl:m-6 xl:mx-auto xl:flex-nowrap"
+    class="m-4 max-w-screen-xl flex flex-wrap md:m-6 xl:mx-auto md:flex-nowrap"
   >
-    <div class="blog-base-area-box w-full py-6 mb-4 xl:sticky xl:top-6 xl:w-48">
+    <div class="blog-base-area-box w-full py-6 mb-4 md:sticky md:top-6 md:w-48">
       <img
         class="block w-24 h-24 rounded-full mx-auto"
         :src="siteCtx.blogConfig.avatar"
@@ -45,7 +45,7 @@
         <Menus />
       </div>
     </div>
-    <div class="w-full xl:w-0 xl:flex-grow xl:mx-5">
+    <div class="w-full md:w-0 md:flex-grow md:mx-5">
       <router-view v-slot="{ Component }">
         <div>
           <Suspense>
@@ -54,7 +54,7 @@
         </div>
       </router-view>
     </div>
-    <div class="blog-base-area-box hidden w-48 sticky top-6">
+    <div class="blog-base-area-box hidden md:block w-48 sticky top-6">
       <Toc />
     </div>
   </div>
