@@ -13,15 +13,15 @@ export default defineComponent({
     const hasCats = !!props.post.categories.length;
     const formated = computed(() => formatTime(props.post.date));
     return () => (
-      <div class="flex items-center">
-        <div>
+      <div class="flex items-center flex-wrap">
+        <div class="whitespace-nowrap">
           <IconVue name="calendar" class="text-c-secondary mx-1" />
           {formated.value}
         </div>
         {hasCats && (
           <>
             <span class="mx-1">|</span>
-            <div>
+            <div class="whitespace-nowrap">
               <IconVue name="folder" class="text-c-secondary mx-1" />
               {props.post.categories.map((cat, i) => (
                 <Fragment key={cat.name}>

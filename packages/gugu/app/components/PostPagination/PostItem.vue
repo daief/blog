@@ -29,9 +29,9 @@ export default defineComponent({
         <div class="my-4 break-words">
           <RichTextVue htmlText={props.post.excerpt} disabledAnchor />
         </div>
-        <div class="text-xs flex justify-between">
+        <div class="text-xs flex justify-between items-center">
           <PostMetaVue post={props.post} />
-          <ALinkVue class="unset" to={props.post.path}>
+          <ALinkVue class="unset whitespace-nowrap" to={props.post.path}>
             查看全文&gt;&gt;
           </ALinkVue>
         </div>
