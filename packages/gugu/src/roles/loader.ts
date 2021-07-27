@@ -113,6 +113,7 @@ export class GLoader {
     let allCategories: ggDB.ICategory[] = _.get('categories').value();
 
     if (type === 'insert') {
+      // TODO code refine
       partial.forEach((post) => {
         if (!post.isArticle) {
           return;
@@ -145,6 +146,7 @@ export class GLoader {
             }
 
             item.postIds.push(post.id);
+            item.postIds = [...new Set(item.postIds)];
             return item;
           });
 
