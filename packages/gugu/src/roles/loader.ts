@@ -260,9 +260,9 @@ export class GLoader {
       const isNotFilePath = href.startsWith('http') || href.startsWith('//');
 
       if (isNotFilePath)
-        return `<img src="${href || ''}" alt="${text || ''}" title="${
-          title || ''
-        }">`;
+        return `<img class="post-image" src="${href || ''}" alt="${
+          text || ''
+        }" title="${title || ''}">`;
 
       const assetFilePath = resolve(dirname(filename), href);
       const hashname = `${md5(assetFilePath)}.${basename(assetFilePath)}`;
@@ -274,9 +274,9 @@ export class GLoader {
         targetPath,
       });
 
-      return `<img src="${targetPath}" alt="${text || ''}" title="${
-        title || ''
-      }">`;
+      return `<img class="post-image" src="${targetPath}" alt="${
+        text || ''
+      }" title="${title || ''}">`;
     };
 
     if (!metadata.id) {
