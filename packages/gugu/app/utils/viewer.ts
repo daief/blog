@@ -1,7 +1,9 @@
 import { debounce } from 'lodash';
 
 // @ts-ignore
-import('viewerjs/dist/viewer.css');
+// import('viewerjs/dist/viewer.css');
+// 样式动态导入暂时有问题：https://github.com/vitejs/vite/issues/3307
+import 'viewerjs/dist/viewer.css';
 
 const getViewer = () => import('viewerjs/dist/viewer.min.js');
 
