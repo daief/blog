@@ -2,7 +2,7 @@ import { debounce } from 'lodash';
 
 // @ts-ignore
 import('viewerjs/dist/viewer.css');
-import('viewerjs');
+import('viewerjs/dist/viewer.min.js');
 
 export function bootstrapViewer() {
   window.addEventListener(
@@ -15,7 +15,7 @@ export function bootstrapViewer() {
         el.src &&
         el.classList.contains('post-image')
       ) {
-        import('viewerjs').then((m) => {
+        import('viewerjs/dist/viewer.min.js').then((m) => {
           const list = Array.from(document.querySelectorAll('img.post-image'))
             .map((it: HTMLImageElement) => it.src)
             .filter(Boolean);
