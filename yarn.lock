@@ -412,6 +412,7 @@ __metadata:
     prismjs: ^1.19.0
     serve-static: ^1.14.1
     tailwindcss: ^2.2.4
+    viewerjs: ^1.10.0
     vite: ^2.3.8
     vue: ^3.1.5
     vue-router: ^4.0.3
@@ -4766,6 +4767,13 @@ resolve@^1.20.0:
   version: 1.1.2
   resolution: "vary@npm:1.1.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvary%2Fdownload%2Fvary-1.1.2.tgz"
   checksum: 591f059f727ac1ba0d97cb7767f8583a03fcbb07db7be2b7dce838ede520ec0e958a41cb19077054769077fdc49a9b9a2dc391c83426bfee89c054b8cc7404bf
+  languageName: node
+  linkType: hard
+
+"viewerjs@npm:^1.10.0":
+  version: 1.10.0
+  resolution: "viewerjs@npm:1.10.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fviewerjs%2Fdownload%2Fviewerjs-1.10.0.tgz"
+  checksum: eb675680d7d92eea508e855122357544ac3ba96c84448fb6f159028583ff94f5574a6406c0b6bbb8d542b5a44e627b94d6fa4f7e7b914d2fb030d358fb220672
   languageName: node
   linkType: hard
 

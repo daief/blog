@@ -1,8 +1,8 @@
 import { createApp } from './main';
 import '@gugu-highlight-theme';
 import NProgress from 'nprogress';
-
 import './styles';
+import { bootstrapViewer } from './utils/viewer';
 
 const apps = createApp();
 const { app, router, store, site } = apps;
@@ -53,3 +53,5 @@ router.isReady().then(() => {
 
   app.mount('#app', true);
 });
+
+bootstrapViewer();
