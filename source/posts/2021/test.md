@@ -34,7 +34,7 @@ graph LR
 
 本地：
 
-![](../../images/body.jpg)
+![aaaaa](../../images/body.jpg '=240xxxxaaa')
 
 ```ts
 interface Type {

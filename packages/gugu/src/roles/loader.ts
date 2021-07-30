@@ -282,18 +282,27 @@ export class GLoader {
 
     const assetInfoList: ggDB.IAssetInfo[] = [];
 
-    this.renderer.image = (href, title, text) => {
+    this.renderer.image = (href, title, alt) => {
       const isNotFilePath = href.startsWith('http') || href.startsWith('//');
+
+      const r = /^=([^\s]+)/.exec(title);
+      let width = '';
+      if (r) {
+        width = r ? r[1] : void 0;
+        width = Number.isFinite(+width) ? width + 'px' : width;
+        title = title.replace(r[0], '').trim();
+      }
 
       const createImg = (src: string, attrs: any = {}) => {
         const attrsStr = Object.entries({
           class: 'post-image',
-          alt: text,
+          alt,
           title,
+          width,
           ...attrs,
-          src: src || '',
+          src,
         })
-          .map(([key, value]) => `${key}="${value}"`)
+          .map(([key, value]) => `${key}="${value || ''}"`)
           .join(' ');
         return `<img ${attrsStr}>`;
       };
