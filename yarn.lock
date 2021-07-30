@@ -416,7 +416,7 @@ __metadata:
     viewerjs: ^1.10.0
     vite: ^2.3.8
     vue: ^3.1.5
-    vue-router: ^4.0.3
+    vue-router: ^4.0.10
     vuex: ^4.0.0
   bin:
     gugu: bin/index.js
@@ -4857,7 +4857,7 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"vue-router@npm:^4.0.3":
+"vue-router@npm:^4.0.10":
   version: 4.0.10
   resolution: "vue-router@npm:4.0.10::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvue-router%2Fdownload%2Fvue-router-4.0.10.tgz"
   dependencies:

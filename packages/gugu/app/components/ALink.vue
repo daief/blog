@@ -9,6 +9,7 @@ export default defineComponent({
     to: {
       type: [String, Object] as PropType<RouteLocationRaw>,
       required: true,
+      default: '',
     },
     replace: {
       type: Boolean,
