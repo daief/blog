@@ -24,12 +24,12 @@ siteMenus:
   # archives:
   #   link: /archives/
   #   label: 归档
-  # categories:
-  #   link: /categories/
-  #   label: 分类
-  # tags:
-  #   link: /tags/
-  #   label: 标签
+  categories:
+    link: /categories/
+    label: 分类
+  tags:
+    link: /tags/
+    label: 标签
   about:
     link: /about/
     label: 关于
