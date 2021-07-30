@@ -54,6 +54,8 @@ export function getContentTocFromEl(el: HTMLElement): ITocItem[] {
 }
 
 export function createTocHtmlStrByList(list: ITocItem[]) {
+  if (!list || !list.length) return '';
+
   function walkIn(it: ITocItem, index: number, parentOrder: string) {
     const currentOrder = parentOrder
       ? `${parentOrder}.${index + 1}`
