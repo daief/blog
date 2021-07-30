@@ -57,6 +57,23 @@ export class GLoader {
   }
 
   private watch() {
+    const handleAssetFile = (fl: string, isDelete = false) => {
+      const relativePath = relative(
+        resolve(this.gg.dirs.userRoot, 'source'),
+        fl,
+      );
+      const targetFname = join(
+        this.gg.dirs.guguRoot,
+        'dist/client',
+        relativePath,
+      );
+      if (isDelete) {
+        fs.removeSync(targetFname);
+        return;
+      }
+      fs.copySync(fl, targetFname, { recursive: true });
+    };
+
     this.watcher = chokidar
       .watch(`${this.gg.dirs.sourceDir}/**/*`, {
         interval: 1000,
@@ -65,15 +82,24 @@ export class GLoader {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onUpdateNewMd(fname);
         }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname);
+        }
       })
       .on('add', (fname) => {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onAddNewMd(fname);
         }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname);
+        }
       })
       .on('unlink', (fname) => {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onDeleteNewMd(fname);
+        }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname, true);
         }
       });
   }

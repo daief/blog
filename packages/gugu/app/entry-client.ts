@@ -4,6 +4,7 @@ import NProgress from 'nprogress';
 import './styles';
 import { bootstrapViewer } from './plugins/viewer';
 import { bootstrapBusuanzi } from './plugins/busurnzi';
+import { loadUserScripts } from './plugins/loadUserScripts';
 
 const apps = createApp();
 const { app, router, store, site } = apps;
@@ -55,6 +56,7 @@ router.isReady().then(() => {
   app.mount('#app', true);
 
   // plugins
-  bootstrapViewer();
-  bootstrapBusuanzi(site);
+  [bootstrapViewer, bootstrapBusuanzi, loadUserScripts].forEach((runPlugin) => {
+    runPlugin(site);
+  });
 });
