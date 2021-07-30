@@ -34,7 +34,7 @@ graph LR
 
 本地：
 
-![](../../images/posts/jiegeng.jpg)
+![](../../images/body.jpg)
 
 ```ts
 interface Type {
