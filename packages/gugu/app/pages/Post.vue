@@ -106,9 +106,17 @@ import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
 import { usePageTitle } from '@app/utils/hooks/usePageTitle';
 import Gap from '@app/components/Gap.vue';
 import Icon from '@app/components/Icon.vue';
+import type { IStoreState } from '@app/store/types';
 
-const store = useStore();
-const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
+const store = useStore<IStoreState>();
+const post = computed(() => {
+  const p = store.state.global.postDetail.post;
+  if (!p) return null;
+  return {
+    ...p,
+    viewCount: store.state.global.site.page_pv,
+  } as ggDB.IPost;
+});
 
 usePageTitle(computed(() => (post.value ? post.value.title : '')));
 

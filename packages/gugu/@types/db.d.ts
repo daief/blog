@@ -41,6 +41,9 @@ declare namespace ggDB {
     hash: string;
     /** 是否文章 */
     isArticle: boolean;
+
+    /** 浏览量，客户端添加 */
+    viewCount?: number;
   }
 
   export interface IDB {

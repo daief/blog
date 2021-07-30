@@ -1,6 +1,7 @@
 <script lang="tsx">
 import { defineComponent, PropType } from 'vue';
 import ALinkVue from '../ALink.vue';
+import IconVue from '../Icon.vue';
 import PostMetaVue from '../PostMeta.vue';
 import RichTextVue from '../RichText.vue';
 
@@ -32,7 +33,8 @@ export default defineComponent({
         <div class="text-xs flex justify-between items-center">
           <PostMetaVue post={props.post} />
           <ALinkVue class="unset whitespace-nowrap" to={props.post.path}>
-            查看全文&gt;&gt;
+            查看全文
+            <IconVue class="transform rotate-180" name="arrow-left" />
           </ALinkVue>
         </div>
       </div>

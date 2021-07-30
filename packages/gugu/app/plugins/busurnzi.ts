@@ -16,19 +16,25 @@ function getBusuanzi() {
 
 export function bootstrapBusuanzi(site: ISiteContext) {
   const track = () =>
-    getBusuanzi().then((res) => {
-      site.store.commit('global/setState', (pre: IStoreState['global']) => {
-        Object.assign(pre.site, {
-          ...res,
+    getBusuanzi()
+      .then((res) => {
+        site.store.commit('global/setState', (pre: IStoreState['global']) => {
+          Object.assign(pre.site, {
+            ...res,
+          });
+        });
+      })
+      .catch(() => {
+        site.store.commit('global/setState', (pre: IStoreState['global']) => {
+          pre.site.page_pv = 0;
         });
       });
-    });
 
   track();
 
-  site.router.afterEach((to, from) => {
+  site.router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      track();
+      return track();
     }
   });
 }
