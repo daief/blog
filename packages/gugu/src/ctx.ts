@@ -63,10 +63,7 @@ export class GContext extends EventEmitter {
         {
           recursive: true,
           filter: (src) => {
-            return ![
-              resolve(this.dirs.userRoot, 'source/pages'),
-              resolve(this.dirs.userRoot, 'source/posts'),
-            ].some((it) => src.startsWith(it));
+            return !this.isInArticleDir(src);
           },
         },
       );
@@ -75,6 +72,13 @@ export class GContext extends EventEmitter {
     await this.resolveConfig();
     await this.dao.init();
     await this.loader.init();
+  }
+
+  isInArticleDir(p: string) {
+    return [
+      resolve(this.dirs.userRoot, 'source/pages'),
+      resolve(this.dirs.userRoot, 'source/posts'),
+    ].some((it) => p.startsWith(it));
   }
 
   private async resolveConfig() {

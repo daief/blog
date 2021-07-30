@@ -1,0 +1,19 @@
+body {
+  position: relative;
+}
+
+body::before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  filter: opacity(0.7) blur(2px) brightness(0.95);
+  background-image: url('/images/body-small.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  content: '';
+}
