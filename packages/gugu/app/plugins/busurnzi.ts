@@ -15,13 +15,20 @@ function getBusuanzi() {
 }
 
 export function bootstrapBusuanzi(site: ISiteContext) {
-  site.router.afterEach((to, from) => {
+  const track = () =>
     getBusuanzi().then((res) => {
-      site.store.dispatch('global/setState', (pre: IStoreState['global']) => {
+      site.store.commit('global/setState', (pre: IStoreState['global']) => {
         Object.assign(pre.site, {
           ...res,
         });
       });
     });
+
+  track();
+
+  site.router.afterEach((to, from) => {
+    if (to.path !== from.path) {
+      track();
+    }
   });
 }
