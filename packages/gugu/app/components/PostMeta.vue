@@ -10,15 +10,23 @@ export default defineComponent({
     post: Object as PropType<ggDB.IPost>,
   },
   setup: (props) => {
-    const hasCats = !!props.post.categories.length;
-    const formated = computed(() => formatTime(props.post.date));
+    const vals = computed(() => {
+      const hasCats = !!props.post.categories.length;
+      const hasBrowser = !!props.post.viewCount;
+      return {
+        hasCats,
+        hasBrowser,
+        formated: formatTime(props.post.date),
+      };
+    });
+
     return () => (
       <div class="flex items-center flex-wrap">
         <div class="whitespace-nowrap">
           <IconVue name="calendar" class="text-c-secondary mx-1" />
-          {formated.value}
+          {vals.value.formated}
         </div>
-        {hasCats && (
+        {vals.value.hasCats && (
           <>
             <span class="mx-1">|</span>
             <div class="whitespace-nowrap">
@@ -33,6 +41,15 @@ export default defineComponent({
                   </span>
                 </Fragment>
               ))}
+            </div>
+          </>
+        )}
+        {vals.value.hasBrowser && (
+          <>
+            <span class="mx-1">|</span>
+            <div class="whitespace-nowrap">
+              <IconVue name="browse" class="text-c-secondary mx-1" />
+              {props.post.viewCount}
             </div>
           </>
         )}
