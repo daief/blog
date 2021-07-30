@@ -19,6 +19,9 @@ export function createApp(opts: ICreateOptions = {}) {
   const site = createSiteContext();
   const head = createHead();
 
+  site.router = router;
+  site.store = store;
+
   app.use(store);
   app.use(router);
   app.use(site);

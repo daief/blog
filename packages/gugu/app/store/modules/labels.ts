@@ -1,14 +1,13 @@
 import { IListResponse } from '@t/common';
 import { Module } from 'vuex';
 
-const md: Module<
-  {
-    // tag or category
-    labels: ggDB.ITag[];
-    postPagination: IListResponse<ggDB.IPost>;
-  },
-  any
-> = {
+export interface IModuleLabelsState {
+  // tag or category
+  labels: ggDB.ITag[];
+  postPagination: IListResponse<ggDB.IPost>;
+}
+
+const md: Module<IModuleLabelsState, any> = {
   namespaced: true,
   state: () => ({
     labels: [],

@@ -2,7 +2,8 @@ import { createApp } from './main';
 import '@gugu-highlight-theme';
 import NProgress from 'nprogress';
 import './styles';
-import { bootstrapViewer } from './utils/viewer';
+import { bootstrapViewer } from './plugins/viewer';
+import { bootstrapBusuanzi } from './plugins/busurnzi';
 
 const apps = createApp();
 const { app, router, store, site } = apps;
@@ -52,6 +53,8 @@ router.isReady().then(() => {
   });
 
   app.mount('#app', true);
-});
 
-bootstrapViewer();
+  // plugins
+  bootstrapViewer();
+  bootstrapBusuanzi(site);
+});
