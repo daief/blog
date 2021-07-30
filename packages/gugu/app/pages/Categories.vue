@@ -67,7 +67,9 @@ export default defineComponent({
                 <li class={`category-item-${level}`}>
                   <ALink class="unset" to={it.path}>
                     {it.name}
-                    <small class="text-c-secondary">({it.postCount})</small>
+                    <small class="text-c-secondary">
+                      (<span>{it.postCount}</span>)
+                    </small>
                   </ALink>
                   {renderLevel(it.children || [], level + 1)}
                 </li>
@@ -85,7 +87,7 @@ export default defineComponent({
         <h1 class="text-2xl font-normal break-words mb-5">分类</h1>
 
         <div class="text-sm my-8 text-center">
-          目前共计 {data.value.total} 个分类
+          目前共计 <span>{data.value.total}</span> 个分类
         </div>
 
         {data.value.tree.length ? (

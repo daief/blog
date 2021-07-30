@@ -285,14 +285,29 @@ export class GLoader {
     this.renderer.image = (href, title, text) => {
       const isNotFilePath = href.startsWith('http') || href.startsWith('//');
 
-      if (isNotFilePath)
-        return `<img class="post-image" src="${href || ''}" alt="${
-          text || ''
-        }" title="${title || ''}">`;
+      const createImg = (src: string, attrs: any = {}) => {
+        const attrsStr = Object.entries({
+          class: 'post-image',
+          alt: text,
+          title,
+          ...attrs,
+          src: src || '',
+        })
+          .map(([key, value]) => `${key}="${value}"`)
+          .join(' ');
+        return `<img ${attrsStr}>`;
+      };
+
+      if (isNotFilePath) {
+        return createImg(href);
+      }
 
       const assetFilePath = resolve(dirname(filename), href);
-      const hashname = `${md5(assetFilePath)}.${basename(assetFilePath)}`;
+      const hashname = `${md5(
+        relative(this.gg.dirs.sourceDir, assetFilePath),
+      )}.${basename(assetFilePath)}`;
       const targetPath = resolve('/images', hashname);
+
       assetInfoList.push({
         assetFilePath,
         relativePath: href,
@@ -300,9 +315,7 @@ export class GLoader {
         targetPath,
       });
 
-      return `<img class="post-image" src="${targetPath}" alt="${
-        text || ''
-      }" title="${title || ''}">`;
+      return createImg(targetPath);
     };
 
     if (!metadata.id) {

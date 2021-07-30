@@ -22,9 +22,11 @@ export class GContext extends EventEmitter {
 
   dirs = {
     guguRoot: '',
+    guguDistClient: '',
     appDir: '',
-    userRoot: '',
     cacheDir: '',
+
+    userRoot: '',
     sourceDir: '',
   };
 
@@ -44,6 +46,7 @@ export class GContext extends EventEmitter {
 
     this.dirs = {
       guguRoot,
+      guguDistClient: resolve(guguRoot, 'dist/client'),
       appDir,
       userRoot,
       cacheDir,
