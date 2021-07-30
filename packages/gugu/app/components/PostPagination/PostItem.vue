@@ -32,7 +32,10 @@ export default defineComponent({
         </div>
         <div class="text-xs flex justify-between items-center">
           <PostMetaVue post={props.post} />
-          <ALinkVue class="unset whitespace-nowrap" to={props.post.path}>
+          <ALinkVue
+            class="unset whitespace-nowrap"
+            to={props.post.path + '#more'}
+          >
             查看全文
             <IconVue class="transform rotate-180" name="arrow-left" />
           </ALinkVue>
