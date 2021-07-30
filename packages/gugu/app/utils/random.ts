@@ -1,3 +1,3 @@
 export function randomId() {
-  return `${Date.now()}-${((1 + Math.random()) * 0x100000) | 0}`;
+  return `${Date.now()}_${((1 + Math.random()) * 0x100000) | 0}`;
 }

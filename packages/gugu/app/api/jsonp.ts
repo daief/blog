@@ -11,16 +11,17 @@ export function jsonp<T>(url: string, options: IJsonpOptions = {}): Promise<T> {
   const {
     params,
     callbackKey = 'jsonpCallback',
-    callbackValue = randomId(),
+    callbackValue = 'fn' + randomId(),
   } = options;
 
+  const script = document.createElement('script');
+  script.src =
+    url + '?' + stringify({ ...params, [callbackKey]: callbackValue });
+  script.type = 'text/javascript';
+  script.defer = true;
+  script.referrerPolicy = 'no-referrer-when-downgrade';
+
   const p = new Promise<T>((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src =
-      url + '?' + stringify({ ...params, [callbackKey]: callbackValue });
-    script.type = 'text/javascript';
-    script.defer = true;
-    script.referrerPolicy = 'no-referrer-when-downgrade';
     script.onerror = reject;
 
     window[callbackValue] = (val: T) => {
@@ -29,8 +30,15 @@ export function jsonp<T>(url: string, options: IJsonpOptions = {}): Promise<T> {
   });
 
   p.catch(() => null).then(() => {
-    delete window[callbackValue];
+    try {
+      delete window[callbackValue];
+      document.body.removeChild(script);
+    } catch (error) {
+      console.warn('jsonp cleanup error:', error);
+    }
   });
+
+  document.body.appendChild(script);
 
   return p;
 }
