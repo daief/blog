@@ -11,6 +11,15 @@ export function createStoreIns() {
     },
     strict: !__PROD__,
     plugins: !__PROD__ && !import.meta.env.SSR ? [createLogger()] : [],
+    mutations: {
+      setState(state, payload) {
+        if (typeof payload === 'function') {
+          Object.assign(state, payload(state));
+        } else {
+          Object.assign(state, { ...payload });
+        }
+      },
+    },
   });
 
   return store;

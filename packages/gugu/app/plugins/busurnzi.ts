@@ -15,8 +15,11 @@ function getBusuanzi() {
 }
 
 export function bootstrapBusuanzi(site: ISiteContext) {
-  const track = () =>
-    getBusuanzi()
+  const track = () => {
+    site.store.commit('setState', (pre: IStoreState) => {
+      pre.global.site.page_pv = 0;
+    });
+    return getBusuanzi()
       .then((res) => {
         site.store.commit('global/setState', (pre: IStoreState['global']) => {
           Object.assign(pre.site, {
@@ -29,12 +32,13 @@ export function bootstrapBusuanzi(site: ISiteContext) {
           pre.site.page_pv = 0;
         });
       });
+  };
 
   track();
 
-  site.router.beforeEach(async (to, from) => {
+  site.router.afterEach((to, from) => {
     if (to.path !== from.path) {
-      return track();
+      track();
     }
   });
 }
