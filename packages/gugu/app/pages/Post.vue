@@ -15,8 +15,26 @@
         :html-text="postContent"
         ref="contentRef"
       />
+
+      <Gap class="mt-6">☘️</Gap>
+
+      <div
+        v-if="post.tags.length"
+        class="flex flex-wrap justify-center text-c-secondary text-sm mt-6"
+      >
+        <router-link
+          class="unset block my-1 mx-2"
+          v-for="tag in post.tags"
+          :to="`/tags/${tag.name}`"
+          :key="tag.id"
+        >
+          <Icon name="tag" />
+          {{ tag.name }}
+        </router-link>
+      </div>
     </div>
   </div>
+  <!-- 上下篇 -->
   <div
     class="blog-base-area-box px-8 py-4 my-8 flex justify-between"
     v-if="linkedPosts.filter(Boolean).length > 0"
@@ -44,18 +62,28 @@
       </template>
     </div>
   </div>
+  <!-- 评论 -->
+  <div
+    id="comment"
+    v-if="post && post.comments"
+    class="blog-base-area-box px-8 py-4 my-8"
+  >
+    <h1 class="text-c-title text-xl block font-normal mb-5">
+      <a
+        href="#comment"
+        class="unset text-c-title hover:text-c-title hover:underline"
+      >
+        留言板
+      </a>
+    </h1>
+
+    <Comment :key="post.id" />
+  </div>
 </template>
 
 <script lang="ts">
 import { getPostDetail } from '@app/api';
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  onMounted,
-  ref,
-  watch,
-} from 'vue';
+import { computed, defineComponent, nextTick, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
 export default defineComponent({
@@ -93,9 +121,20 @@ import RichText from '@app/components/RichText.vue';
 import ALink from '@app/components/ALink.vue';
 import { createTocHtmlStrByList, getContentTocFromEl } from '@app/utils/dom';
 import { usePageTitle } from '@app/utils/hooks/usePageTitle';
+import Gap from '@app/components/Gap.vue';
+import Icon from '@app/components/Icon.vue';
+import type { IStoreState } from '@app/store/types';
+import Comment from '@app/components/Comment.vue';
 
-const store = useStore();
-const post = computed(() => store.state.global.postDetail.post as ggDB.IPost);
+const store = useStore<IStoreState>();
+const post = computed(() => {
+  const p = store.state.global.postDetail.post;
+  if (!p) return null;
+  return {
+    ...p,
+    viewCount: store.state.global.site.page_pv,
+  } as ggDB.IPost;
+});
 
 usePageTitle(computed(() => (post.value ? post.value.title : '')));
 

@@ -101,13 +101,10 @@ export async function generate(ctx: GContext) {
         outDir,
         `/${dayjs(p.date).format('YYYY-MM-DD')}/${p.id}.html`,
       );
+      const finalUrl = new URL(`/post/${p.id}`, ctx.userConfig.url).href;
       fs.outputFileSync(
         filePath,
-        `
-          <head>
-            <meta http-equiv="Refresh" content="0; URL=${ctx.userConfig.url}/post/${p.id}" />
-          </head>
-        `,
+        `<head><meta http-equiv="Refresh" content="0; URL=${finalUrl}" /></head>`,
         {
           encoding: 'utf-8',
         },

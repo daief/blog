@@ -5,7 +5,7 @@ on:
   push:
     branches:
       - master
-      - feature/vite-ssg
+      # - feature/vite-ssg
 
 jobs:
   build:
@@ -24,13 +24,12 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Setup Env
-        env:
-          ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
+      - name: Build
         run: |
-          echo 'set env'
           yarn
           yarn build && yarn generate
-          bash ./scripts/deploy.sh
 
-
+      - name: Deploy
+        env:
+          ACTION_DEPLOY_KEY: ${{ secrets.ACTION_DEPLOY_KEY }}
+        run: bash ./scripts/deploy.sh

@@ -6,7 +6,7 @@ const key = Symbol('siteContext');
 export function createSiteContext(): ISiteContext & {
   install: (app: App) => void;
 } {
-  const siteCtx: ISiteContext = {
+  const siteCtx: any = {
     axios: axios.create(),
     blogConfig: __INJECTED_USER_CONFIG__,
   };

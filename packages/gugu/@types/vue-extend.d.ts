@@ -1,3 +1,4 @@
+import { IStoreState } from '@app/store/types';
 import { IUserConfig } from '@t';
 import { AxiosInstance } from 'axios';
 import { RouteLocationNormalized, Router } from 'vue-router';
@@ -5,7 +6,7 @@ import { Store } from 'vuex';
 
 declare global {
   interface IAsyncDataCtx {
-    store: Store<any>;
+    store: Store<IStoreState>;
     fromRoute?: RouteLocationNormalized;
     route: RouteLocationNormalized;
     site: ISiteContext;
@@ -19,6 +20,8 @@ declare global {
   interface ISiteContext {
     axios: AxiosInstance;
     blogConfig: IUserConfig;
+    router: Router;
+    store: Store<IStoreState>;
   }
 }
 

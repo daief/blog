@@ -2,6 +2,7 @@
 import { defineComponent, PropType } from 'vue';
 
 type IName =
+  | 'browse'
   | 'wenzhang'
   | 'love'
   | 'top'
@@ -25,7 +26,7 @@ if (!import.meta.env.SSR) {
   const script = document.createElement('script');
   script.async = true;
   script.defer = true;
-  script.src = '//at.alicdn.com/t/font_2433925_t9m84e1923.js';
+  script.src = '//at.alicdn.com/t/font_2433925_g3odfyi16xt.js';
   document.body.append(script);
 }
 
