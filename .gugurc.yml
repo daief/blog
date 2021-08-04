@@ -15,7 +15,7 @@ outDir: dist
 
 highlight:
   # @see https://github.com/highlightjs/highlight.js/tree/11.0.0/src/styles
-  theme: qtcreator-dark
+  theme: vs2015
 
 siteMenus:
   home:

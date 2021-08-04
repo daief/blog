@@ -25,7 +25,6 @@ declare namespace ggDB {
     path: string;
     title: string;
     comments: boolean;
-    // link: string;
     published: boolean;
     date: string;
     updated: string;

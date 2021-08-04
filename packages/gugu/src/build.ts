@@ -5,7 +5,7 @@ import { getViteConfig } from './utils/viteConfig';
 
 export async function build(ctx: GContext, options = {}) {
   await viteBuild(
-    getViteConfig(ctx, false, {
+    getViteConfig(ctx, true, {
       build: {
         manifest: true,
         outDir: path.resolve(ctx.dirs.guguRoot, 'dist/client'),
@@ -14,7 +14,7 @@ export async function build(ctx: GContext, options = {}) {
   );
 
   await viteBuild(
-    getViteConfig(ctx, false, {
+    getViteConfig(ctx, true, {
       build: {
         outDir: path.resolve(ctx.dirs.guguRoot, 'dist/server'),
         ssr: 'entry-server.ts',

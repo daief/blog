@@ -53,7 +53,7 @@ export class GLoader {
   }
 
   get getMarkdowGlob() {
-    return `${this.gg.dirs.sourceDir}/?(posts|pages)/**/*.md`;
+    return `${this.gg.dirs.sourceDir}/?(posts|pages|drafts)/**/*.md`;
   }
 
   private watch() {
@@ -130,6 +130,10 @@ export class GLoader {
     partial: IHandledPost[],
     type: 'insert' | 'delete' = 'insert',
   ) {
+    if (this.gg.command !== 'dev' && type === 'insert') {
+      partial = partial.filter((it) => it.published);
+    }
+
     const { _ } = this.gg.dao.db;
     let all = _.get('posts')
       .filter((it) => !partial.some((p) => p.id === it.id))
@@ -276,8 +280,11 @@ export class GLoader {
       comments: boolean;
     }>(source);
 
-    const isArticle = filename.startsWith(
-      resolve(this.gg.dirs.sourceDir, 'posts'),
+    const isArticle = !filename.startsWith(
+      resolve(this.gg.dirs.sourceDir, 'pages'),
+    );
+    const published = !filename.startsWith(
+      resolve(this.gg.dirs.sourceDir, 'drafts'),
     );
 
     const assetInfoList: ggDB.IAssetInfo[] = [];
@@ -350,8 +357,8 @@ export class GLoader {
 
     return {
       ...omit(metadata, ['tags', 'categories']),
-      // TODO 状态
-      published: true,
+      comments: metadata.comments !== false,
+      published,
       slug,
       path: '/' + slug,
       updated: '',
