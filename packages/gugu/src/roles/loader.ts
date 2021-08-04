@@ -203,7 +203,9 @@ export class GLoader {
       });
 
       all.push(...partial);
-      all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
+      all
+        .sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf())
+        .sort((a, b) => b.sort - a.sort);
     } else {
       // delete
       const removed: ggDB.IPost[] = [];
@@ -278,6 +280,7 @@ export class GLoader {
       tags: string | string[];
       description: string;
       comments: boolean;
+      sort: number;
     }>(source);
 
     const isArticle = !filename.startsWith(
@@ -357,6 +360,7 @@ export class GLoader {
 
     return {
       ...omit(metadata, ['tags', 'categories']),
+      sort: Number.isFinite(metadata.sort) ? metadata.sort : 0,
       comments: metadata.comments !== false,
       published,
       slug,

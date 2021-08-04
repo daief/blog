@@ -152,6 +152,7 @@ export class GuDao {
       more: post.more,
       hash: post.hash,
       isArticle: post.isArticle,
+      sort: post.sort,
       filename: '',
       raw: '',
       prev: null,
