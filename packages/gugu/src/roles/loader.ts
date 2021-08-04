@@ -2,7 +2,7 @@ import { GContext } from 'src/ctx';
 import marked from 'marked';
 import hljs from 'highlight.js';
 import { escapeHtml } from '../utils/parseMarkdown';
-import { dirname, join, relative, resolve } from 'path';
+import { basename, dirname, join, relative, resolve } from 'path';
 import { CollectionChain, omit } from 'lodash';
 import fm from 'front-matter';
 import glob from 'glob-promise';
@@ -53,10 +53,27 @@ export class GLoader {
   }
 
   get getMarkdowGlob() {
-    return `${this.gg.dirs.sourceDir}/?(posts|pages)/**/*.md`;
+    return `${this.gg.dirs.sourceDir}/?(posts|pages|drafts)/**/*.md`;
   }
 
   private watch() {
+    const handleAssetFile = (fl: string, isDelete = false) => {
+      const relativePath = relative(
+        resolve(this.gg.dirs.userRoot, 'source'),
+        fl,
+      );
+      const targetFname = join(
+        this.gg.dirs.guguRoot,
+        'dist/client',
+        relativePath,
+      );
+      if (isDelete) {
+        fs.removeSync(targetFname);
+        return;
+      }
+      fs.copySync(fl, targetFname, { recursive: true });
+    };
+
     this.watcher = chokidar
       .watch(`${this.gg.dirs.sourceDir}/**/*`, {
         interval: 1000,
@@ -65,15 +82,24 @@ export class GLoader {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onUpdateNewMd(fname);
         }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname);
+        }
       })
       .on('add', (fname) => {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onAddNewMd(fname);
         }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname);
+        }
       })
       .on('unlink', (fname) => {
         if (minimatch(fname, this.getMarkdowGlob)) {
           return this.onDeleteNewMd(fname);
+        }
+        if (!this.gg.isInArticleDir(fname)) {
+          handleAssetFile(fname, true);
         }
       });
   }
@@ -104,6 +130,10 @@ export class GLoader {
     partial: IHandledPost[],
     type: 'insert' | 'delete' = 'insert',
   ) {
+    if (this.gg.command !== 'dev' && type === 'insert') {
+      partial = partial.filter((it) => it.published);
+    }
+
     const { _ } = this.gg.dao.db;
     let all = _.get('posts')
       .filter((it) => !partial.some((p) => p.id === it.id))
@@ -113,6 +143,7 @@ export class GLoader {
     let allCategories: ggDB.ICategory[] = _.get('categories').value();
 
     if (type === 'insert') {
+      // TODO code refine
       partial.forEach((post) => {
         if (!post.isArticle) {
           return;
@@ -145,6 +176,7 @@ export class GLoader {
             }
 
             item.postIds.push(post.id);
+            item.postIds = [...new Set(item.postIds)];
             return item;
           });
 
@@ -171,7 +203,9 @@ export class GLoader {
       });
 
       all.push(...partial);
-      all.sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf());
+      all
+        .sort((a, b) => dayjs(b.date).valueOf() - dayjs(a.date).valueOf())
+        .sort((a, b) => b.sort - a.sort);
     } else {
       // delete
       const removed: ggDB.IPost[] = [];
@@ -227,7 +261,7 @@ export class GLoader {
       try {
         fs.copySync(
           ass.assetFilePath,
-          join(this.gg.dirs.guguRoot, 'dist/client/post', ass.relativePath),
+          join(this.gg.dirs.guguRoot, 'dist/client', ass.targetPath),
           { overwrite: true, recursive: true },
         );
       } catch (error) {}
@@ -246,32 +280,61 @@ export class GLoader {
       tags: string | string[];
       description: string;
       comments: boolean;
+      sort: number;
     }>(source);
 
-    const isArticle = filename.startsWith(
-      resolve(this.gg.dirs.sourceDir, 'posts'),
+    const isArticle = !filename.startsWith(
+      resolve(this.gg.dirs.sourceDir, 'pages'),
+    );
+    const published = !filename.startsWith(
+      resolve(this.gg.dirs.sourceDir, 'drafts'),
     );
 
     const assetInfoList: ggDB.IAssetInfo[] = [];
 
-    this.renderer.image = (href, title, text) => {
+    this.renderer.image = (href, title, alt) => {
       const isNotFilePath = href.startsWith('http') || href.startsWith('//');
 
-      if (isNotFilePath)
-        return `<img src="${href || ''}" alt="${text || ''}" title="${
-          title || ''
-        }">`;
+      const r = /^=([^\s]+)/.exec(title);
+      let width = '';
+      if (r) {
+        width = r ? r[1] : void 0;
+        width = Number.isFinite(+width) ? width + 'px' : width;
+        title = title.replace(r[0], '').trim();
+      }
+
+      const createImg = (src: string, attrs: any = {}) => {
+        const attrsStr = Object.entries({
+          class: 'post-image',
+          alt,
+          title,
+          width,
+          ...attrs,
+          src,
+        })
+          .map(([key, value]) => `${key}="${value || ''}"`)
+          .join(' ');
+        return `<img ${attrsStr}>`;
+      };
+
+      if (isNotFilePath) {
+        return createImg(href);
+      }
+
+      const assetFilePath = resolve(dirname(filename), href);
+      const hashname = `${md5(
+        relative(this.gg.dirs.sourceDir, assetFilePath),
+      )}.${basename(assetFilePath)}`;
+      const targetPath = resolve('/images', hashname);
 
       assetInfoList.push({
-        assetFilePath: resolve(dirname(filename), href),
+        assetFilePath,
         relativePath: href,
         referenceMarkdown: filename,
-        targetPath: resolve('/post', href),
+        targetPath,
       });
 
-      return `<img src="${href || ''}" alt="${text || ''}" title="${
-        title || ''
-      }">`;
+      return createImg(targetPath);
     };
 
     if (!metadata.id) {
@@ -297,8 +360,9 @@ export class GLoader {
 
     return {
       ...omit(metadata, ['tags', 'categories']),
-      // TODO 状态
-      published: true,
+      sort: Number.isFinite(metadata.sort) ? metadata.sort : 0,
+      comments: metadata.comments !== false,
+      published,
       slug,
       path: '/' + slug,
       updated: '',

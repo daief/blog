@@ -5,8 +5,6 @@ Allow: /archives/
 Allow: /categories/
 Allow: /tags/
 Allow: /js/
-Allow: /css/
-Allow: /lib/
-Disallow: /fonts/
+Allow: /post/
 Sitemap: https://daief.tech/sitemap.xml
 Sitemap: https://daief.tech/baidusitemap.xml

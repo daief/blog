@@ -3,11 +3,16 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Gap',
-  setup: (_, { slots }) => {
+  setup: (_, { slots, attrs }) => {
     return () => {
       const children = slots.default();
       return (
-        <div class={[children.length ? 'has-child' : '', '']}>{children}</div>
+        <div
+          {...attrs}
+          class={[children.length ? 'has-child' : '', attrs.class]}
+        >
+          {children}
+        </div>
       );
     };
   },

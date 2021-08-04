@@ -22,9 +22,11 @@ export class GContext extends EventEmitter {
 
   dirs = {
     guguRoot: '',
+    guguDistClient: '',
     appDir: '',
-    userRoot: '',
     cacheDir: '',
+
+    userRoot: '',
     sourceDir: '',
   };
 
@@ -44,6 +46,7 @@ export class GContext extends EventEmitter {
 
     this.dirs = {
       guguRoot,
+      guguDistClient: resolve(guguRoot, 'dist/client'),
       appDir,
       userRoot,
       cacheDir,
@@ -63,10 +66,7 @@ export class GContext extends EventEmitter {
         {
           recursive: true,
           filter: (src) => {
-            return ![
-              resolve(this.dirs.userRoot, 'source/pages'),
-              resolve(this.dirs.userRoot, 'source/posts'),
-            ].some((it) => src.startsWith(it));
+            return !this.isInArticleDir(src);
           },
         },
       );
@@ -75,6 +75,14 @@ export class GContext extends EventEmitter {
     await this.resolveConfig();
     await this.dao.init();
     await this.loader.init();
+  }
+
+  isInArticleDir(p: string) {
+    return [
+      resolve(this.dirs.userRoot, 'source/pages'),
+      resolve(this.dirs.userRoot, 'source/posts'),
+      resolve(this.dirs.userRoot, 'source/drafts'),
+    ].some((it) => p.startsWith(it));
   }
 
   private async resolveConfig() {

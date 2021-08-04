@@ -19,14 +19,14 @@
 
 <script lang="tsx">
 import { getPostList } from '@app/api';
-import type { IListResponse } from '@t/common';
-import { computed, ComputedRef, defineComponent, ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import PostItem from '@app/components/PostPagination/PostItem.vue';
 import Pagination from '@app/components/Pagination.vue';
 import { usePageTitle } from '@app/utils/hooks/usePageTitle';
 import { useRoute } from 'vue-router';
 import Gap from '@app/components/Gap.vue';
+import type { IStoreState } from '@app/store/types';
 
 export default defineComponent({
   name: 'TagsPostPagination',
@@ -44,14 +44,12 @@ export default defineComponent({
     });
   },
   setup(_) {
-    const store = useStore();
+    const store = useStore<IStoreState>();
     const route = useRoute();
 
     const tagName = computed(() => route.params.tag as string);
 
-    const data: ComputedRef<IListResponse<ggDB.IPost>> = computed(
-      () => store.state.labels.postPagination,
-    );
+    const data = computed(() => store.state.labels.postPagination);
 
     usePageTitle(
       computed(() => {

@@ -25,7 +25,6 @@ declare namespace ggDB {
     path: string;
     title: string;
     comments: boolean;
-    // link: string;
     published: boolean;
     date: string;
     updated: string;
@@ -41,6 +40,11 @@ declare namespace ggDB {
     hash: string;
     /** 是否文章 */
     isArticle: boolean;
+    /** 排序值 */
+    sort: number;
+
+    /** 浏览量，客户端添加 */
+    viewCount?: number;
   }
 
   export interface IDB {
