@@ -17,11 +17,20 @@ export default defineComponent({
         hasCats,
         hasBrowser,
         formated: formatTime(props.post.date),
+        statusName: !props.post.published && !__PROD__ ? '草稿' : '',
       };
     });
 
     return () => (
       <div class="flex items-center flex-wrap">
+        {vals.value.statusName ? (
+          <>
+            <div class="whitespace-nowrap bg-primary text-white py-0.5 px-1 rounded-sm">
+              {vals.value.statusName}
+            </div>
+            <span class="mx-1">|</span>
+          </>
+        ) : null}
         <div class="whitespace-nowrap">
           <IconVue name="calendar" class="text-c-secondary mx-1" />
           {vals.value.formated}

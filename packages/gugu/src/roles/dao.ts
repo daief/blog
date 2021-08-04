@@ -23,6 +23,12 @@ export class GuDao {
   }
 
   getAvailablePosts() {
+    if (this.gg.command === 'dev') {
+      // 允许草稿
+      return this.db._.get('posts')
+        .filter((it) => it.isArticle)
+        .value();
+    }
     return this.db._.get('posts')
       .filter((it) => it.isArticle && it.published)
       .value();

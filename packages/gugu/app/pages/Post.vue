@@ -62,6 +62,23 @@
       </template>
     </div>
   </div>
+  <!-- 评论 -->
+  <div
+    id="comment"
+    v-if="post && post.comments"
+    class="blog-base-area-box px-8 py-4 my-8"
+  >
+    <h1 class="text-c-title text-xl block font-normal mb-5">
+      <a
+        href="#comment"
+        class="unset text-c-title hover:text-c-title hover:underline"
+      >
+        留言板
+      </a>
+    </h1>
+
+    <Comment :key="post.id" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -107,6 +124,7 @@ import { usePageTitle } from '@app/utils/hooks/usePageTitle';
 import Gap from '@app/components/Gap.vue';
 import Icon from '@app/components/Icon.vue';
 import type { IStoreState } from '@app/store/types';
+import Comment from '@app/components/Comment.vue';
 
 const store = useStore<IStoreState>();
 const post = computed(() => {

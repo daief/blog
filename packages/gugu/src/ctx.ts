@@ -81,6 +81,7 @@ export class GContext extends EventEmitter {
     return [
       resolve(this.dirs.userRoot, 'source/pages'),
       resolve(this.dirs.userRoot, 'source/posts'),
+      resolve(this.dirs.userRoot, 'source/drafts'),
     ].some((it) => p.startsWith(it));
   }
 
