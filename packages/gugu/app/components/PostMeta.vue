@@ -17,16 +17,26 @@ export default defineComponent({
         hasCats,
         hasBrowser,
         formated: formatTime(props.post.date),
-        statusName: !props.post.published && !__PROD__ ? '草稿' : '',
+        isShowDraft: !props.post.published && !__PROD__,
+        // 默认 sort 为 0，大于 0 即认为是置顶操作
+        isShowTop: props.post.sort > 0,
       };
     });
 
     return () => (
       <div class="flex items-center flex-wrap">
-        {vals.value.statusName ? (
+        {vals.value.isShowDraft ? (
+          <>
+            <div class="whitespace-nowrap bg-danger text-white py-0.5 px-1 rounded-sm">
+              草稿
+            </div>
+            <span class="mx-1">|</span>
+          </>
+        ) : null}
+        {vals.value.isShowTop ? (
           <>
             <div class="whitespace-nowrap bg-primary text-white py-0.5 px-1 rounded-sm">
-              {vals.value.statusName}
+              置顶
             </div>
             <span class="mx-1">|</span>
           </>
