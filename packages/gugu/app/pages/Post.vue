@@ -1,8 +1,6 @@
 <template>
   <div class="blog-base-area-box p-8">
-    <div v-if="!post">
-      <!-- TODO 文章不存在 -->
-    </div>
+    <div v-if="!post">您访问的内容不存在🚫</div>
     <div v-else>
       <h1 class="text-2xl font-normal break-words">{{ post.title }}</h1>
       <div class="my-4 text-xs text-c-secondary" v-if="!!post">
