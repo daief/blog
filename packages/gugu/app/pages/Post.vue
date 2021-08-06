@@ -1,5 +1,5 @@
 <template>
-  <div class="blog-base-area-box p-8">
+  <div class="blog-base-area-box px-4 py-8 md:px-8">
     <div v-if="!post">您访问的内容不存在🚫</div>
     <div v-else>
       <h1 class="text-2xl font-normal break-words">{{ post.title }}</h1>
@@ -34,7 +34,7 @@
   </div>
   <!-- 上下篇 -->
   <div
-    class="blog-base-area-box px-8 py-4 my-8 flex justify-between"
+    class="blog-base-area-box px-4 py-4 my-8 flex justify-between md:px-8"
     v-if="linkedPosts.filter(Boolean).length > 0"
   >
     <div
@@ -64,7 +64,7 @@
   <div
     id="comment"
     v-if="post && post.comments"
-    class="blog-base-area-box px-8 py-4 my-8"
+    class="blog-base-area-box p-4 my-8 md:px-8"
   >
     <h1 class="text-c-title text-xl block font-normal mb-5">
       <a

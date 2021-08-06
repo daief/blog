@@ -6,7 +6,8 @@ import { debounce } from 'lodash';
 import 'viewerjs/dist/viewer.css';
 import './viewer.less';
 
-const getViewer = () => import('viewerjs/dist/viewer.min.js');
+const getViewer = (): Promise<typeof import('viewerjs').default> =>
+  import('viewerjs/dist/viewer.min.js').then((m) => m.default);
 
 getViewer();
 
@@ -21,7 +22,7 @@ export function bootstrapViewer() {
         el.src &&
         el.classList.contains('post-image')
       ) {
-        getViewer().then((m) => {
+        getViewer().then((Viewer) => {
           const list = Array.from(document.querySelectorAll('img.post-image'))
             .map((it: HTMLImageElement) => it.src)
             .filter(Boolean);
@@ -29,7 +30,8 @@ export function bootstrapViewer() {
           rootEl.innerHTML = list
             .map((it) => `<li><img src="${it}"></li>`)
             .join('');
-          const gallery: import('viewerjs').default = new m.default(rootEl, {
+          const gallery = new Viewer(rootEl, {
+            navbar: false,
             initialViewIndex: Math.max(
               list.findIndex((it) => it === el.src),
               0,
