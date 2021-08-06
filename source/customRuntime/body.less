@@ -1,26 +1,26 @@
-body {
-  position: relative;
+// body {
+//   position: relative;
 
-  &::before {
-    @apply inset-0;
-    position: fixed;
-    z-index: -1;
-    filter: opacity(0.7) blur(2px) brightness(0.95);
-    background-image: url('/images/body-small.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    content: '';
-  }
+//   &::before {
+//     @apply inset-0;
+//     position: fixed;
+//     z-index: -1;
+//     filter: opacity(0.7) blur(2px) brightness(0.95);
+//     background-image: url('/images/body-small.jpg');
+//     background-attachment: fixed;
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     content: '';
+//   }
 
-  .blog-base-area-box {
-    @apply bg-opacity-60;
-  }
-}
+//   .blog-base-area-box {
+//     @apply bg-opacity-60;
+//   }
+// }
 
-@screen md {
-  body::before {
-    background-image: url('/images/body.jpg');
-  }
-}
+// @screen md {
+//   body::before {
+//     background-image: url('/images/body.jpg');
+//   }
+// }
