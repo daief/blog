@@ -5,7 +5,6 @@ import { getThemeColorRgb, setTheme } from '@app/utils/theme';
 import { computed, defineComponent, ref } from 'vue';
 import { useStore } from 'vuex';
 import ColorPickerVue from '../ColorPicker.vue';
-import IconVue from '../Icon.vue';
 
 export default defineComponent({
   name: 'SiteFooter',
@@ -17,8 +16,10 @@ export default defineComponent({
     );
     const author = computed(() => `By gugu & ${site.blogConfig.author}`);
 
-    const themeColorStr = ref(`rgb(${getThemeColorRgb()})`);
-    setTheme(getThemeColorRgb()); // 初始化赋值
+    const initialThemeValue =
+      site.blogConfig.primaryColorRGB || getThemeColorRgb();
+    const themeColorStr = ref(`rgb(${initialThemeValue})`);
+    setTheme(initialThemeValue); // 初始化赋值
 
     const handleColorChange = (color: string, rgba: number[]) => {
       themeColorStr.value = color;

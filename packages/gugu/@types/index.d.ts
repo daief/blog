@@ -30,4 +30,12 @@ export interface IUserConfig {
       label: string;
     }
   >;
+  primaryColorRGB?: string;
+  utteranc?: {
+    enable: boolean;
+    repo: string;
+    'issue-term': string;
+    label: string;
+    theme: string;
+  };
 }
