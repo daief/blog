@@ -373,6 +373,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blog/gugu@workspace:packages/gugu"
   dependencies:
+    "@simonwep/pickr": ^1.8.1
     "@types/express": ^4.17.13
     "@types/fs-extra": ^9.0.11
     "@types/glob": ^7.1.4
@@ -648,6 +649,16 @@ __metadata:
     "@sentry/types": 5.30.0
     tslib: ^1.9.3
   checksum: 5126166e06947283dd57f8b79a247c5227cacff1f7c9d838c8a4846db621722c97c327c161ed2c4e2949c4e9e66054c464ba0e73aa3a22feda31d7208fdb4acd
+  languageName: node
+  linkType: hard
+
+"@simonwep/pickr@npm:^1.8.1":
+  version: 1.8.1
+  resolution: "@simonwep/pickr@npm:1.8.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40simonwep%2Fpickr%2Fdownload%2F%40simonwep%2Fpickr-1.8.1.tgz"
+  dependencies:
+    core-js: ^3.12.1
+    nanopop: ^2.1.0
+  checksum: 19dc1123e6918a11be208b924b37fb1db6ca9e722accdef6ed75544c286658030fbea644fdf2b5d07a62313862d1c5a98fa7619d2940e4da75074176d734e750
   languageName: node
   linkType: hard
 
@@ -1794,6 +1805,13 @@ __metadata:
   dependencies:
     is-what: ^3.12.0
   checksum: ea938e0ec79ed51b000e69498fb6f43f9416128370afc0fbf3d32f64c4f4b8b9103a9e7974627fb753498a477da1f1102fb1b638db898a0ba10b3438bb81fa11
+  languageName: node
+  linkType: hard
+
+"core-js@npm:^3.12.1":
+  version: 3.16.0
+  resolution: "core-js@npm:3.16.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fcore-js%2Fdownload%2Fcore-js-3.16.0.tgz"
+  checksum: 5a9743b324e5a67d119fe0b8074888c47ab12d8e92222db9c56b853e74016e71a09422bbd93a526b78a870951bd7a72872df75ee777f92f4878490ef74d57315
   languageName: node
   linkType: hard
 
@@ -3635,6 +3653,13 @@ fsevents@~2.3.2:
   bin:
     nanoid: bin/nanoid.cjs
   checksum: e6dea1da5a593ffdc8cf2676d1d02f0626f07a54a5947a7a1f5ff1fd07901b2f53044c285e98b87eb367f016fde285fd8785d54a2dceeab9c3721f4e618f8326
+  languageName: node
+  linkType: hard
+
+"nanopop@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "nanopop@npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fnanopop%2Fdownload%2Fnanopop-2.1.0.tgz"
+  checksum: c817be67a2bfd2440932605e1ea90b07ef31aad7c40e2768bbc79e40532074cf53168f059f63b481ec9cc1891eb7efd0f84cb49fcc0f5a1027656e2e6d2e8c61
   languageName: node
   linkType: hard
 
