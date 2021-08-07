@@ -108,7 +108,7 @@ export default defineComponent({
   @apply inline-flex;
   font-size: 8px;
 
-  /deep/ .pcr-button {
+  :deep(.pcr-button) {
     @apply block;
   }
 }

@@ -33,3 +33,14 @@ siteMenus:
   about:
     link: /about/
     label: 关于
+
+# 主题主色 rgb 值
+primaryColorRGB: 250,84,28
+
+# utteranc 评论
+utteranc:
+  enable: true
+  repo: daief/daief.github.io
+  issue-term: pathname
+  label: Comment
+  theme: boxy-light
