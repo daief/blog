@@ -5,6 +5,7 @@ import './styles';
 import { bootstrapViewer } from './plugins/viewer';
 import { bootstrapBusuanzi } from './plugins/busurnzi';
 import { loadUserScripts } from './plugins/loadUserScripts';
+import { loadGoogleGA } from './plugins/ga';
 
 const apps = createApp();
 const { app, router, store, site } = apps;
@@ -56,7 +57,9 @@ router.isReady().then(() => {
   app.mount('#app', true);
 
   // plugins
-  [bootstrapViewer, bootstrapBusuanzi, loadUserScripts].forEach((runPlugin) => {
-    runPlugin(site);
-  });
+  [bootstrapViewer, bootstrapBusuanzi, loadUserScripts, loadGoogleGA].forEach(
+    (runPlugin) => {
+      runPlugin(site);
+    },
+  );
 });

@@ -38,4 +38,7 @@ export interface IUserConfig {
     label: string;
     theme: string;
   };
+  google_analytics?: {
+    GA_MEASUREMENT_ID: string;
+  };
 }

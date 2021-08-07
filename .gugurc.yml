@@ -44,3 +44,7 @@ utteranc:
   issue-term: pathname
   label: Comment
   theme: boxy-light
+
+# https://developers.google.com/analytics/devguides/collection/gtagjs?hl=zh_cn
+google_analytics:
+  GA_MEASUREMENT_ID: UA-146082840-1
