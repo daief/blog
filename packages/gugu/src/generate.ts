@@ -16,7 +16,7 @@ export async function generate(ctx: GContext) {
   fs.emptydirSync(outDir);
   await fs.copy(ctx.resolveGuguRoot('dist/client'), outDir);
 
-  for (const url of routes) {
+  for (const url of ['/sitemap.xml', ...routes]) {
     const html = await axios
       .get(`${serverAddress}${encodeURI(url)}`)
       .then((resp) => resp.data)
@@ -33,6 +33,8 @@ export async function generate(ctx: GContext) {
         break;
       case '/404.html':
         uri = url;
+        break;
+      case '/sitemap.xml':
         break;
       default:
         uri = url + '/index.html';
