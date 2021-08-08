@@ -41,7 +41,7 @@ export async function createServer(
       .getRoutes()
       .map((path) => `<url><loc>${ctx.userConfig.url}${path}</loc></url>`)
       .join('');
-    const xml = `<?xml version="1.0" encoding="utf-8"?><urlset>${links}</urlset>`;
+    const xml = `<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${links}</urlset>`;
     res.setHeader('Content-Type', 'text/xml');
     return res.send(xml);
   });
