@@ -14,7 +14,6 @@ export default defineComponent({
     const copyright = computed(
       () => `© ${site.blogConfig.since}-${new Date().getFullYear()}`,
     );
-    const author = computed(() => `By gugu & ${site.blogConfig.author}`);
 
     const initialThemeValue =
       site.blogConfig.primaryColorRGB || getThemeColorRgb();
@@ -32,7 +31,14 @@ export default defineComponent({
           <div>{copyright.value}</div>
         </div>
         <div class="flex items-center justify-center">
-          {author.value}&nbsp;-&nbsp;
+          By&nbsp;
+          <a
+            href="https://github.com/daief/blog/tree/master/packages/gugu"
+            target="_blank"
+          >
+            gugu
+          </a>
+          &nbsp; & {site.blogConfig.author}&nbsp;-&nbsp;
           <ColorPickerVue
             value={themeColorStr.value}
             onUpdateValue={handleColorChange}
@@ -44,6 +50,11 @@ export default defineComponent({
         {store.state.global.site.site_uv ? (
           <div>本站访客数 {store.state.global.site.site_uv}</div>
         ) : null}
+        <div>
+          <a href="/sitemap.xml" target="_blank">
+            站点地图
+          </a>
+        </div>
       </div>
     );
   },
