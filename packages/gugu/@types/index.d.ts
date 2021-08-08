@@ -15,6 +15,10 @@ export interface IUserConfig {
    * @default dist
    */
   outDir?: string;
+  /**
+   * 分页大小
+   */
+  paginationSize?: number;
   url?: string;
   base?: string;
   /**

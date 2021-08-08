@@ -6,59 +6,11 @@ import axios from 'axios';
 import { promiseQueue } from './utils/helper';
 import dayjs from 'dayjs';
 
-function paginationUtil(length: number, pathPattern: string, perPage = 10) {
-  const totalPage = perPage ? Math.ceil(length / perPage) : 1;
-  return [...Array(totalPage).keys()].map((no) =>
-    pathPattern.replace(/\%d/g, `${no + 1}`),
-  );
-}
-
 export async function generate(ctx: GContext) {
   const { dao } = ctx;
   const outDir = ctx.userConfig.outDir;
 
-  const tags = dao
-    .getTagList()
-    .map((tag) => {
-      return paginationUtil(
-        dao.getPostList({ tag: tag.name }).totalPages,
-        `/tags/${tag.name}/%d`,
-        1,
-      );
-    })
-    .flat();
-
-  const cats = dao
-    .getCategoryList()
-    .map((cat) => {
-      return paginationUtil(
-        dao.getPostList({ category: cat.name }).totalPages,
-        `/categories/${cat.name}/%d`,
-        1,
-      );
-    })
-    .flat();
-
-  const routes = [
-    // 文章分页
-    ...paginationUtil(dao.getAvailablePosts().length, '/page/%d'),
-    // 文章详情
-    ...dao.getAvailablePosts().map((it) => it.path),
-
-    '/tags',
-    ...tags,
-
-    '/categories',
-    ...cats,
-
-    ...dao.getSimplePages().map((it) => it.path),
-
-    '/404',
-    '/404.html',
-
-    '/', // 最后
-  ];
-
+  const routes = dao.getRoutes();
   const { server, serverAddress } = await createServer(ctx, {});
 
   fs.emptydirSync(outDir);
@@ -94,7 +46,7 @@ export async function generate(ctx: GContext) {
     console.log('✨ Pre-Rendered:', uri);
   }
 
-  // 兼容老链接
+  // TODO 兼容老链接, @start 2021-08-08
   await promiseQueue(
     dao.getAvailablePosts().map(async (p) => {
       const filePath = path.join(

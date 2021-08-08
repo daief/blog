@@ -27,7 +27,7 @@ export function createJsonApi(ctx: GContext): RequestHandler {
   router.use('/post/list/:paramStr.json', (req, res) => {
     const params = parseParams(req.params.paramStr, {
       current: 1,
-      pageSize: 10,
+      pageSize: ctx.dao.PageSize,
       tag: '',
       category: '',
     });
@@ -37,7 +37,7 @@ export function createJsonApi(ctx: GContext): RequestHandler {
       ctx.dao.getPostList({
         ...params,
         current: +params.current || 1,
-        pageSize: +params.pageSize || 10,
+        pageSize: +params.pageSize || ctx.dao.PageSize,
       }),
     );
   });
