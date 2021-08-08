@@ -1,5 +1,5 @@
 # Blog Resource
 
-See [daief.github.io](https://github.com/daief/daief.github.io).
+See [daief.github.io](https://github.com/daief/daief.github.io) or <https://daief.tech>.
 
-- [] 站点地图
+- [ ] 搜索

@@ -2,11 +2,9 @@ import express from 'express';
 import { createServer as createViteServer, ViteDevServer } from 'vite';
 import fs from 'fs-extra';
 import path from 'path';
-import vuePlugin from '@vitejs/plugin-vue';
 import { GContext } from './ctx';
 import { createJsonApi } from './middlewares/jsonApi';
 import serveStatic from 'serve-static';
-import { merge } from 'lodash';
 import { getViteConfig } from './utils/viteConfig';
 
 export interface ICreateServerOptions {
@@ -37,6 +35,16 @@ export async function createServer(
   const jsonApi = createJsonApi(ctx);
 
   app.use('/blog-api', jsonApi);
+
+  app.get('/sitemap.xml', (req, res) => {
+    const links = ctx.dao
+      .getRoutes()
+      .map((path) => `<url><loc>${ctx.userConfig.url}${path}</loc></url>`)
+      .join('');
+    const xml = `<?xml version="1.0" encoding="utf-8"?><urlset>${links}</urlset>`;
+    res.setHeader('Content-Type', 'text/xml');
+    return res.send(xml);
+  });
 
   let vite: ViteDevServer;
   if (!isProd) {
