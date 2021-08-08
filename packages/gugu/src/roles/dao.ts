@@ -22,6 +22,10 @@ export class GuDao {
     this.db.writeSync();
   }
 
+  get PageSize() {
+    return this.gg.userConfig.paginationSize;
+  }
+
   getAvailablePosts() {
     if (this.gg.command === 'dev') {
       // 允许草稿
@@ -57,7 +61,12 @@ export class GuDao {
     tag?: string;
     category?: string;
   }): IListResponse<ggDB.IPost> {
-    const { current = 1, pageSize = 10, tag = '', category = '' } = data;
+    const {
+      current = 1,
+      pageSize = this.PageSize,
+      tag = '',
+      category = '',
+    } = data;
     let posts = this.getAvailablePosts();
 
     if (tag) {
@@ -134,6 +143,57 @@ export class GuDao {
       .map((it) => this.sortCategoryVO(it));
   }
 
+  /**
+   * 枚举站点路由
+   * @returns
+   */
+  getRoutes(): string[] {
+    const tags = this.getTagList()
+      .map((tag) => {
+        return paginationUtil(
+          this.getPostList({ tag: tag.name }).totalPages,
+          `/tags/${tag.name}/%d`,
+          1,
+        );
+      })
+      .flat();
+
+    const cats = this.getCategoryList()
+      .map((cat) => {
+        return paginationUtil(
+          this.getPostList({ category: cat.name }).totalPages,
+          `/categories/${cat.name}/%d`,
+          1,
+        );
+      })
+      .flat();
+
+    const routes = [
+      // 文章分页
+      ...paginationUtil(
+        this.getAvailablePosts().length,
+        '/page/%d',
+        this.PageSize,
+      ),
+      // 文章详情
+      ...this.getAvailablePosts().map((it) => it.path),
+
+      '/tags',
+      ...tags,
+
+      '/categories',
+      ...cats,
+
+      ...this.getSimplePages().map((it) => it.path),
+
+      '/404',
+      '/404.html',
+
+      '/', // 最后
+    ];
+    return routes;
+  }
+
   private sortPostVO(post: ggDB.IPost, isSimple = true): ggDB.IPost {
     const result: ggDB.IPost = {
       id: post.id,
@@ -195,4 +255,11 @@ export class GuDao {
 
     return result;
   }
+}
+
+function paginationUtil(length: number, pathPattern: string, perPage = 10) {
+  const totalPage = perPage ? Math.ceil(length / perPage) : 1;
+  return [...Array(totalPage).keys()].map((no) =>
+    pathPattern.replace(/\%d/g, `${no + 1}`),
+  );
 }
