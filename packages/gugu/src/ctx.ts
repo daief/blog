@@ -66,7 +66,7 @@ export class GContext extends EventEmitter {
         {
           recursive: true,
           filter: (src) => {
-            return !this.isInArticleDir(src);
+            return !this.isInArticleDir(src) && !this.isIgnoredAssets(src);
           },
         },
       );
@@ -82,6 +82,14 @@ export class GContext extends EventEmitter {
       resolve(this.dirs.userRoot, 'source/pages'),
       resolve(this.dirs.userRoot, 'source/posts'),
       resolve(this.dirs.userRoot, 'source/drafts'),
+    ].some((it) => p.startsWith(it));
+  }
+
+  // 需要被忽略的自定义文件
+  isIgnoredAssets(p: string) {
+    return [
+      this.dirs.sourceDir + '/customRuntime',
+      this.dirs.sourceDir + '/.',
     ].some((it) => p.startsWith(it));
   }
 

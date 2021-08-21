@@ -4,6 +4,7 @@
   "bin": "bin/index.js",
   "dependencies": {
     "@simonwep/pickr": "^1.8.1",
+    "@tailwindcss/line-clamp": "^0.2.1",
     "@types/node": "^16.0.0",
     "@vant/use": "^1.2.2",
     "@vitejs/plugin-vue": "^1.4.0",

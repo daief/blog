@@ -449,6 +449,7 @@ __metadata:
   resolution: "@blog/gugu@workspace:packages/gugu"
   dependencies:
     "@simonwep/pickr": ^1.8.1
+    "@tailwindcss/line-clamp": ^0.2.1
     "@types/express": ^4.17.13
     "@types/fs-extra": ^9.0.11
     "@types/glob": ^7.1.4
@@ -733,6 +734,15 @@ __metadata:
     core-js: ^3.12.1
     nanopop: ^2.1.0
   checksum: 19dc1123e6918a11be208b924b37fb1db6ca9e722accdef6ed75544c286658030fbea644fdf2b5d07a62313862d1c5a98fa7619d2940e4da75074176d734e750
+  languageName: node
+  linkType: hard
+
+"@tailwindcss/line-clamp@npm:^0.2.1":
+  version: 0.2.1
+  resolution: "@tailwindcss/line-clamp@npm:0.2.1::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2F%40tailwindcss%2Fline-clamp%2Fdownload%2F%40tailwindcss%2Fline-clamp-0.2.1.tgz"
+  peerDependencies:
+    tailwindcss: ">=2.0.0"
+  checksum: 4975660111876e351832e737eced18925b1d11c402fbef014866bb8ffea6d62d4b50af3beab9f021721bd89414b167240631cb5d7d9fe892afece9e70e4dbfb4
   languageName: node
   linkType: hard
 
