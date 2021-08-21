@@ -15,7 +15,7 @@ description:
 
 记录那些年，我们都在用的调试方法。第一部分主要是一些 Chrome 开发者工具的使用记录；剩余部分是一些其他的调试手段，包括移动端调试、代理内容的介绍。了解 Chrome 开发者的同学，可以跳过第一部分。
 
-![](./1103-some-web-debugging-skills/chrome-chan.jpg '=300')
+![](./1103-some-web-debugging-skills/chrome-chan.jpg 'width=300&title=谷歌娘')
 
 <!-- more -->
 

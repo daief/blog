@@ -11,6 +11,8 @@ import { md5, promiseQueue } from '../utils/helper';
 import dayjs from 'dayjs';
 import chokidar from 'chokidar';
 import minimatch from 'minimatch';
+import { parse } from 'query-string';
+import htmlEntities from 'html-entities';
 
 export class GLoader {
   private gg: GContext;
@@ -292,27 +294,29 @@ export class GLoader {
 
     const assetInfoList: ggDB.IAssetInfo[] = [];
 
-    this.renderer.image = (href, title, alt) => {
+    this.renderer.image = (href, imgAttrsQuery, alt) => {
       const isNotFilePath = href.startsWith('http') || href.startsWith('//');
+      const imgBaseName = basename(href);
 
-      const r = /^=([^\s]+)/.exec(title);
-      let width = '';
-      if (r) {
-        width = r ? r[1] : void 0;
-        width = Number.isFinite(+width) ? width + 'px' : width;
-        title = title.replace(r[0], '').trim();
+      const imgAttrs = parse(
+        htmlEntities.decode(imgAttrsQuery || ''),
+      ) as Record<string, string>;
+      if (Number.isFinite(+imgAttrs.width)) {
+        imgAttrs.width = imgAttrs.width + 'px';
       }
 
-      const createImg = (src: string, attrs: any = {}) => {
+      const createImg = (src: string) => {
         const attrsStr = Object.entries({
-          class: 'post-image',
-          alt,
-          title,
-          width,
-          ...attrs,
+          alt: alt || imgAttrs.title || imgBaseName,
+          loading: 'lazy',
+          ...imgAttrs,
+          title: imgAttrs.title || alt || imgBaseName,
+          class: `post-image ${imgAttrs.class || ''}`,
           src,
         })
-          .map(([key, value]) => `${key}="${value || ''}"`)
+          .map(([key, value]) =>
+            value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
+          )
           .join(' ');
         return `<img ${attrsStr}>`;
       };

@@ -1,9 +1,7 @@
 import { debounce } from 'lodash';
 
 // @ts-ignore
-// import('viewerjs/dist/viewer.css');
-// 样式动态导入暂时有问题：https://github.com/vitejs/vite/issues/3307
-import 'viewerjs/dist/viewer.css';
+import('viewerjs/dist/viewer.css');
 import './viewer.less';
 
 const getViewer = (): Promise<typeof import('viewerjs').default> =>
@@ -23,19 +21,39 @@ export function bootstrapViewer() {
         el.classList.contains('post-image')
       ) {
         getViewer().then((Viewer) => {
-          const list = Array.from(document.querySelectorAll('img.post-image'))
-            .map((it: HTMLImageElement) => it.src)
-            .filter(Boolean);
+          const list = Array.from<HTMLImageElement>(
+            document.querySelectorAll('img.post-image'),
+          )
+            .filter((it) => it.src)
+            .map((it) => ({
+              src: it.src,
+              html: it.outerHTML,
+            }));
           let rootEl = document.createElement('ul');
-          rootEl.innerHTML = list
-            .map((it) => `<li><img src="${it}"></li>`)
-            .join('');
+
+          rootEl.innerHTML = list.map((it) => `<li>${it.html}</li>`).join('');
+          // 避免一次性全都加载
+          Array.from(rootEl.getElementsByTagName('img')).forEach((img) => {
+            img.setAttribute('data-src', img.src);
+            img.src = '/images/loading.gif';
+          });
+
           const gallery = new Viewer(rootEl, {
             navbar: false,
             initialViewIndex: Math.max(
-              list.findIndex((it) => it === el.src),
+              list.findIndex((it) => it.src === el.src),
               0,
             ),
+            url: 'data-src',
+            inheritedAttributes: [
+              'crossOrigin',
+              'decoding',
+              'isMap',
+              'referrerPolicy',
+              'sizes',
+              'srcset',
+              'useMap',
+            ],
             hide: () => {
               gallery.destroy();
               rootEl.remove();
