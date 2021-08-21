@@ -53,6 +53,7 @@ export async function render(
     headTags,
     htmlAttrs,
     bodyAttrs,
+    router,
   };
 }
 

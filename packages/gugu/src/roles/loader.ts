@@ -318,7 +318,7 @@ export class GLoader {
             value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
           )
           .join(' ');
-        return `<img ${attrsStr}>`;
+        return `<img ${attrsStr} onerror="this.onerror=null;this.src='/images/image-error.jpg';">`;
       };
 
       if (isNotFilePath) {
