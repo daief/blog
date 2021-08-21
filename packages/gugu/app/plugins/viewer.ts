@@ -54,7 +54,7 @@ export function bootstrapViewer() {
               'srcset',
               'useMap',
             ],
-            hide: () => {
+            hidden: () => {
               gallery.destroy();
               rootEl.remove();
               rootEl = null;
