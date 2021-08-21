@@ -90,7 +90,7 @@ comments: false
 
 <!-- more -->
 
-more 注释下文的是正文内容。
+more 注释下方的是正文内容。
 ```
 
 #### 支持 mermaid
