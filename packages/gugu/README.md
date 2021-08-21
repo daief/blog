@@ -64,7 +64,7 @@ $ gug generate
 Markdown 支持以下配置：
 
 ```md
---- # 文档配置由 --- 开始
+---
 title: 文章的标题
 # 创建时间
 date: 2021-07-25 22:18:00
@@ -84,7 +84,6 @@ description:
 sort: 0
 # 是否开启评论，默认开启
 comments: false
-# 文档配置以 --- 结束
 ---
 
 文章前言，会在列表中展示。
