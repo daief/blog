@@ -195,7 +195,7 @@ PS：hexo 运行时会将 Markdown 文件序列化，将所有数据存储于一
 
 SSG 的过程就是在开发服务的基础上，枚举所有路由去访问本地服务，将响应的 HTML 输出成一个个 html 文件。
 
-源码地址：[gugu](https://github.com/daief/blog/tree/master/packages/gugu)。
+源码地址：[gugu](https://github.com/daief/blog/tree/master/packages/gugu 'data-layout=card')
 
 期间有个问题值得一提，框架的改造重新设计了博客的链接，格式从 `/YYYY-MM-DD/:id.html` 改成了 `post/:id`，这样一来使用新框架之后，原本被搜索引擎收录的链接就都变成 404 了，这是一种不好的体验。正常的做法是需要在服务器上对迁移的链接配置 301 重定向，而我的应用托管在 github pages 上，不具备配置服务器的能力。幸运的是，meta 标签支持定义页面的重定向，只要配置如下内容，浏览器在加载文档之后就会根据配置跳转至目标链接，对搜索引擎也是比较友好的，相当于实现了客户端层面的 301 重定向。
 

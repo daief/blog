@@ -979,49 +979,51 @@
 
 /* ------------------------------------------ 自定义 ------------------------------------------ */
 
-.markdown-body h1 {
-  font-size: 1.75em;
-  margin: 0.6em 0;
-}
-.markdown-body h2 {
-  font-size: 1.5em;
-}
-.markdown-body h3 {
-  font-size: 1.25em;
-}
-.markdown-body h4 {
-  font-size: 1em;
-}
-.markdown-body h5 {
-  font-size: 0.875em;
-}
-.markdown-body h6 {
-  font-size: 0.75em;
-}
-
-.markdown-body .mermaid {
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-}
-
-.markdown-body blockquote {
-  @apply border-primary;
-}
-
-.markdown-body,
-.markdown-body .pl-s .pl-s1,
-.markdown-body .pl-smi,
-.markdown-body .pl-mi,
-.markdown-body .pl-mb,
-.markdown-body .blob-code-inner {
-  @apply text-c-text;
-}
-
 .markdown-body {
   @apply text-sm;
-}
 
-.markdown-body img.post-image {
-  display: block;
-  @apply mx-auto p-0.5 border border-gray-300 border-solid rounded-sm my-1;
+  h1 {
+    font-size: 1.75em;
+    margin: 0.6em 0;
+  }
+  h2 {
+    font-size: 1.5em;
+  }
+  h3 {
+    font-size: 1.25em;
+  }
+  h4 {
+    font-size: 1em;
+  }
+  h5 {
+    font-size: 0.875em;
+  }
+  h6 {
+    font-size: 0.75em;
+  }
+  .mermaid {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+  blockquote {
+    @apply border-primary;
+  }
+  code {
+    @apply bg-primary bg-opacity-5;
+  }
+  strong {
+    @apply text-primary;
+  }
+  &,
+  .pl-s .pl-s1,
+  .pl-smi,
+  .pl-mi,
+  .pl-mb,
+  .blob-code-inner {
+    @apply text-c-text;
+  }
+  img.post-image {
+    padding: 2px;
+    @apply mx-auto block border border-gray-300 border-solid rounded-sm my-1;
+  }
 }
