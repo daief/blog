@@ -109,7 +109,7 @@ export async function createServer(
       // 4. 渲染应用的 HTML。这假设 entry-server.js 导出的 `render`
       //    函数调用了适当的 SSR 框架 API。
       //    例如 ReactDOMServer.renderToString()
-      const { appHtml, initialState, headTags, htmlAttrs, bodyAttrs } =
+      const { appHtml, initialState, headTags, htmlAttrs, bodyAttrs, router } =
         await render(
           url,
           {},
@@ -118,6 +118,8 @@ export async function createServer(
             serverAddress: LOCAL_ADDRESS,
           },
         );
+
+      const statusCode = router.currentRoute.value.name == '404' ? 404 : 200;
 
       const headPartial = [
         headTags,
@@ -137,7 +139,7 @@ export async function createServer(
         .replace(`<!--ssr-outlet-->`, appHtml);
 
       // 6. 返回渲染后的 HTML。
-      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
+      res.status(statusCode).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       // 如果捕获到了一个错误，让 vite 来修复该堆栈，这样它就可以映射回
       // 你的实际源码中。
