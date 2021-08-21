@@ -1,78 +1,7 @@
 <script lang="tsx">
 import { defineComponent, nextTick, ref, watch } from 'vue';
-
-async function getPageAttributesByUrl(url = '') {
-  const res = await fetch(
-    `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-  );
-  const resp = await res.json();
-  let content = resp.contents;
-
-  const template = document.createElement('template');
-  template.innerHTML = content;
-  const pageDoc = template.content;
-
-  const metas = Array.from(pageDoc.childNodes)
-    .filter((el) => el.nodeName === 'META')
-    .map((el: HTMLMetaElement) =>
-      Array.from(el.attributes).reduce((res, attr) => {
-        res[attr.name] = attr.value;
-        return res;
-      }, {} as Record<string, string>),
-    );
-
-  function getFromMetas(
-    key: string,
-    valueOfKey: string,
-    resultKey = 'content',
-  ) {
-    try {
-      return metas.find((it) => it[key] === valueOfKey)[resultKey] || '';
-    } catch (error) {
-      return '';
-    }
-  }
-
-  // 标题：页面 title => meta og:title => url
-  let title = url;
-  try {
-    title =
-      pageDoc.querySelector('title').textContent ||
-      getFromMetas('property', 'og:title') ||
-      title;
-  } catch (error) {}
-
-  // 描述：meta description => meta og:description => url
-  const description =
-    getFromMetas('name', 'description') ||
-    getFromMetas('property', 'og:description') ||
-    '🔗 ' + url;
-
-  // 图片：meta image => meta og:image => 页面中第一个 img 标签 => 网站 icon
-  let image = '';
-  try {
-    image =
-      getFromMetas('name', 'image') || getFromMetas('property', 'og:image');
-
-    let tmpEl: any;
-
-    if (!image) {
-      tmpEl = pageDoc.querySelector('img');
-      tmpEl && (image = tmpEl.getAttribute('data-src') || tmpEl.src);
-    }
-
-    if (!image) {
-      tmpEl = pageDoc.querySelector('link[rel="icon"]');
-      tmpEl && (image = tmpEl.href);
-    }
-  } catch (error) {}
-
-  return {
-    title,
-    description,
-    image,
-  };
-}
+import { loadMermaid } from './richTextHelpers/loadMermaid';
+import { transformALink } from './richTextHelpers/transformALink';
 
 export default defineComponent({
   name: 'RichText',
@@ -84,55 +13,21 @@ export default defineComponent({
   },
   setup: (props, { attrs }) => {
     const el = ref<HTMLDivElement>(null);
-    const linkSvg = `<svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M582.826667 687.217778a9.187556 9.187556 0 0 0-12.913778 0l-132.807111 132.835555c-61.468444 61.44-165.262222 67.982222-233.130667 0-67.982222-68.010667-61.496889-171.690667 0-233.159111l132.807111-132.807111a9.159111 9.159111 0 0 0 0-12.913778l-45.511111-45.511111a9.187556 9.187556 0 0 0-12.885333 0l-132.807111 132.835556c-96.711111 96.682667-96.711111 253.155556 0 349.696 96.711111 96.568889 253.155556 96.711111 349.724444 0l132.778667-132.778667a9.187556 9.187556 0 0 0 0-12.913778l-45.226667-45.283555zM878.364444 145.521778c-96.682667-96.711111-253.155556-96.711111-349.696 0l-132.920888 132.807111a9.159111 9.159111 0 0 0 0 12.913778l45.368888 45.368889c3.555556 3.527111 9.386667 3.527111 12.913778 0l132.807111-132.835556c61.496889-61.44 165.262222-67.982222 233.130667 0 68.010667 68.039111 61.496889 171.690667 0 233.159111l-132.778667 132.835556a9.187556 9.187556 0 0 0 0 12.885333l45.482667 45.511111c3.527111 3.527111 9.386667 3.527111 12.913778 0l132.807111-132.835555a247.409778 247.409778 0 0 0 0-349.809778z m-254.293333 206.734222a9.187556 9.187556 0 0 0-12.885333 0l-258.844445 258.730667a9.159111 9.159111 0 0 0 0 12.913777l45.226667 45.283556c3.555556 3.527111 9.386667 3.527111 12.913778 0l258.759111-258.759111a9.187556 9.187556 0 0 0 0-12.913778l-45.141333-45.226667z" p-id="1668"></path></svg>`;
 
     watch(
       () => props.htmlText,
       (_1, _2, onInvalidate) => {
-        // mermaid 绘图
-        nextTick(() => {
-          if (import.meta.env.SSR || !el.value) return;
+        const opts = { root: el, disabledAnchor: props.disabledAnchor };
 
-          import('mermaid/dist/mermaid.min.js').then((mermaid) => {
-            Array.from(el.value.querySelectorAll('.mermaid')).forEach(
-              (graph) => {
-                mermaid.init(void 0, graph);
-              },
-            );
+        const cleanUpList: any[] = [];
+        [loadMermaid, transformALink].forEach((plugin) => {
+          nextTick(() => {
+            cleanUpList.push(plugin(opts));
           });
-
-          Array.from(el.value.querySelectorAll('a.headerlink')).forEach(
-            (it) => {
-              it.innerHTML = props.disabledAnchor ? '' : linkSvg;
-            },
-          );
         });
 
-        // 转换 a 链接为卡片
-        nextTick(() => {
-          if (import.meta.env.SSR || !el.value) return;
-          Array.from<HTMLAnchorElement>(
-            el.value.querySelectorAll('a[data-layout=card]'),
-          )
-            .filter((a) => !!a.href)
-            .forEach(async (a) => {
-              const { title, description, image } =
-                await getPageAttributesByUrl(a.href);
-              a.innerHTML = `
-                <div class="link-text-wrap flex-grow break-all">
-                  <div class="text-c-title text-sm mb-0.5 line-clamp-2">
-                    <span title=${JSON.stringify(title)}>${title}</span>
-                  </div>
-                  <div class="text-c-secondary text-xs line-clamp-3">
-                    <span title=${JSON.stringify(
-                      description,
-                    )}>${description}</span>
-                  </div>
-                </div>
-                <img class="block bg-gray-200 w-16 h-16 rounded object-contain ml-3" style="text-indent:-2000em;" src="${image}" />
-              `;
-              a.setAttribute('data-layout-status', 'complete');
-            });
+        onInvalidate(() => {
+          cleanUpList.forEach((clean) => clean && clean());
         });
       },
       { immediate: true },
@@ -188,7 +83,7 @@ export default defineComponent({
 
   // 卡片样式
   a[data-layout='card'][data-layout-status='complete'] {
-    @apply flex items-center w-80 mx-auto my-4 p-3 bg-gray-100 max-w-full rounded-md no-underline;
+    @apply flex items-center w-80 mx-auto my-4 p-3 bg-gray-50 max-w-full rounded-md no-underline;
     min-height: 84px;
 
     &:hover {

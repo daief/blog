@@ -87,10 +87,7 @@ export class GContext extends EventEmitter {
 
   // 需要被忽略的自定义文件
   isIgnoredAssets(p: string) {
-    return [
-      this.dirs.sourceDir + '/customRuntime',
-      this.dirs.sourceDir + '/.',
-    ].some((it) => p.startsWith(it));
+    return [this.dirs.sourceDir + '/.'].some((it) => p.startsWith(it));
   }
 
   private async resolveConfig() {
