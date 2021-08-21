@@ -21,8 +21,12 @@ export async function generate(ctx: GContext) {
       .get(`${serverAddress}${encodeURI(url)}`)
       .then((resp) => resp.data)
       .catch((e) => {
+        try {
+          if (e.response.status === 404) {
+            return e.response.data;
+          }
+        } catch (error) {}
         console.log(url, e);
-
         throw e;
       });
 
