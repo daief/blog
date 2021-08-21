@@ -19,8 +19,8 @@ comments: false
 
 - 男 / 1996-10
 - 本科 / 杭州师范大学 / 计算机科学与技术 / 2014-09 ~ 2018-06
-- 个人博客：<https://daief.tech>
-- Github：<https://github.com/daief>
+- 个人博客：[https://daief.tech](https://daief.tech 'data-layout=card')
+- Github：[https://github.com/daief](https://github.com/daief 'data-layout=card')
 - 期望职位：Web 前端工程师
   <!-- - 工作年限：2 年 -->
   <!-- - 现居城市：杭州市 -->

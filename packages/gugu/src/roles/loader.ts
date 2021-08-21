@@ -52,6 +52,20 @@ export class GLoader {
       const anchorText = `${text}`;
       return `<h${level} id="${anchorText}">${anchorText}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
     };
+    this.renderer.link = (href: string, aAttrsQuery: string, text: string) => {
+      const imgAttrs = parse(htmlEntities.decode(aAttrsQuery || '')) as Record<
+        string,
+        string
+      >;
+
+      const attrStr = Object.entries({ ...imgAttrs, href })
+        .map(([key, value]) =>
+          value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
+        )
+        .join(' ');
+
+      return `<a ${attrStr}>${text}</a>`;
+    };
   }
 
   get getMarkdowGlob() {
@@ -59,11 +73,16 @@ export class GLoader {
   }
 
   private watch() {
+    // 拷贝、删除普通自定义文件
     const handleAssetFile = (fl: string, isDelete = false) => {
       const relativePath = relative(
         resolve(this.gg.dirs.userRoot, 'source'),
         fl,
       );
+
+      // 忽略处理的文件
+      if (this.gg.isIgnoredAssets(fl)) return;
+
       const targetFname = join(
         this.gg.dirs.guguRoot,
         'dist/client',
@@ -244,7 +263,7 @@ export class GLoader {
     });
 
     if (type === 'insert') {
-      await this.loadAssets(partial.map((it) => it.assetInfoList).flat());
+      await this.loadPostAssets(partial.map((it) => it.assetInfoList).flat());
     }
   }
 
@@ -258,7 +277,7 @@ export class GLoader {
     await this.reSortDB(all);
   }
 
-  private async loadAssets(assetInfoLs: ggDB.IAssetInfo[]) {
+  private async loadPostAssets(assetInfoLs: ggDB.IAssetInfo[]) {
     for (const ass of assetInfoLs) {
       try {
         fs.copySync(
@@ -301,6 +320,7 @@ export class GLoader {
       const imgAttrs = parse(
         htmlEntities.decode(imgAttrsQuery || ''),
       ) as Record<string, string>;
+
       if (Number.isFinite(+imgAttrs.width)) {
         imgAttrs.width = imgAttrs.width + 'px';
       }

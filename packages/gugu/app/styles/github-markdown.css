@@ -1021,7 +1021,7 @@
   @apply text-sm;
 }
 
-.markdown-body img {
+.markdown-body img.post-image {
   display: block;
   @apply mx-auto p-0.5 border border-gray-300 border-solid rounded-sm my-1;
 }

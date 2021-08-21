@@ -12,9 +12,11 @@
 │   ├── drafts # 草稿目录，markdown 文件
 │   ├── pages # 自定义页面，markdown 文件
 │   ├── posts # 文章目录，markdown 文件
-│   └── CNAME、favicon.ico... # 其他任意，最终会被直接拷贝
+│   └── CNAME、favicon.ico... # 自定义的其他文件
 └── .gugurc.yml # 配置文件
 ```
+
+> source 目录中除了 `drafts`、`pages` 等特殊目录以及隐藏目录（`.`开头），打包完都会被直接拷贝到结果。
 
 `.gugurc.yml` 配置详见：[daief 的配置文件](../../.gugurc.yml)。
 
@@ -117,6 +119,8 @@ graph LR
 图片支持设置属性：
 
 ```md
+<!-- ![alt](src "title=x&a=b") -->
+
 ![](../images/a.jpg 'width=200')
 
 ![](../images/a.jpg 'width=200px')
@@ -124,4 +128,20 @@ graph LR
 同时设置图片 `title`：
 
 ![](../images/a.jpg 'width=20%&title=图片描述')
+```
+
+#### A 链接
+
+支持设置其他属性：
+
+```md
+<!-- ![alt](href "title=x&a=b") -->
+
+![](https://github.com 'target=_blank')
+```
+
+支持以卡片形式展示链接，只需开启 `data-layout=card`：
+
+```md
+![](https://github.com 'data-layout=card')
 ```
