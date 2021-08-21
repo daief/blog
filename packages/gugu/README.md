@@ -135,13 +135,13 @@ graph LR
 支持设置其他属性：
 
 ```md
-<!-- ![alt](href "title=x&a=b") -->
+<!-- [text](href "title=something&class=red-link") -->
 
-![](https://github.com 'target=_blank')
+[](https://github.com 'target=_blank')
 ```
 
 支持以卡片形式展示链接，只需开启 `data-layout=card`：
 
 ```md
-![](https://github.com 'data-layout=card')
+[](https://github.com 'data-layout=card')
 ```

@@ -64,6 +64,7 @@ async function getPageAttributesByUrl(url = '') {
       tmpEl && (image = tmpEl.href);
     }
   } catch (error) {}
+  image = image || '/images/network-icon.jpeg';
 
   return {
     title,
