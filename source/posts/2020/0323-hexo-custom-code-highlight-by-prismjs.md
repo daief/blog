@@ -4,6 +4,7 @@ date: 2020-03-23 16:50:24
 id: hexo-custom-code-highlight-by-prismjs
 categories: ['前端', 'Hexo']
 tags:
+  - Blog
   - Hexo
 keywords:
   - hexo
