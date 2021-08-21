@@ -108,24 +108,20 @@ graph LR
 
 #### 图片
 
-本地图片支持引用相对路径即可：
+相对路径引用的图片会被自动包含：
 
 ```md
 ![](../images/a.jpg)
 ```
 
-图片支持设置宽度：
+图片支持设置属性：
 
 ```md
-![](../images/a.jpg '=200')
+![](../images/a.jpg 'width=200')
 
-![](../images/a.jpg '=200px')
+![](../images/a.jpg 'width=200px')
 
-![](../images/a.jpg '=20%')
-```
+同时设置图片 `title`：
 
-如果有图片 `title`，则添加一个空格进行分隔：
-
-```md
-![](../images/a.jpg '=200px 这里是图片的描述')
+![](../images/a.jpg 'width=20%&title=图片描述')
 ```

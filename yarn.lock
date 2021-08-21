@@ -476,6 +476,7 @@ __metadata:
     glob: ^7.1.7
     glob-promise: ^4.2.0
     highlight.js: ^11.1.0
+    html-entities: ^2.3.2
     js-base64: ^3.6.1
     js-yaml: ^4.1.0
     less: ^4.1.1
@@ -490,7 +491,7 @@ __metadata:
     serve-static: ^1.14.1
     tailwindcss: ^2.2.4
     viewerjs: ^1.10.0
-    vite: ^2.3.8
+    vite: ^2.5.0
     vue: ^3.2.0
     vue-router: ^4.0.10
     vuex: ^4.0.0
@@ -2449,6 +2450,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild@npm:^0.12.17":
+  version: 0.12.21
+  resolution: "esbuild@npm:0.12.21::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.21.tgz"
+  bin:
+    esbuild: bin/esbuild
+  checksum: b7f4839ba9dfb2e2c2fefd96bda6d6d82cc21e494120a72e9571bf74bc13796b884b04bc216dc8aaaba7cece5ef6ea6bba4a99e00abd3c6d713d4b2ea6a5e39c
+  languageName: node
+  linkType: hard
+
 "esbuild@npm:^0.12.8":
   version: 0.12.14
   resolution: "esbuild@npm:0.12.14::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.14.tgz"
@@ -2856,6 +2866,13 @@ fsevents@~2.3.2:
   version: 11.1.0
   resolution: "highlight.js@npm:11.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fhighlight.js%2Fdownload%2Fhighlight.js-11.1.0.tgz"
   checksum: 5ea3b4b122084fa07292469fb3d57e23739e31f14eaf5dab039cd266db1f58ba5a289b771ee101988b5a317e9f87b50745ecd8c05a94400bc5add85e7c3f7e78
+  languageName: node
+  linkType: hard
+
+"html-entities@npm:^2.3.2":
+  version: 2.3.2
+  resolution: "html-entities@npm:2.3.2::__archiveUrl=https%3A%2F%2Fregistry.npm.taobao.org%2Fhtml-entities%2Fdownload%2Fhtml-entities-2.3.2.tgz"
+  checksum: a0bcdfdb2326d8943d43d4f5f794769f666d335f7795e82ac5140154970d82a8a1be082725bd53e18c8727821713e7d124982ed9a3463db9b0159b58bc6eff42
   languageName: node
   linkType: hard
 
@@ -4078,7 +4095,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.1.10, postcss@npm:^8.1.6, postcss@npm:^8.2.1, postcss@npm:^8.3.4, postcss@npm:^8.3.5":
+"postcss@npm:^8.1.10, postcss@npm:^8.1.6, postcss@npm:^8.2.1, postcss@npm:^8.3.5":
   version: 8.3.5
   resolution: "postcss@npm:8.3.5::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.5.tgz"
   dependencies:
@@ -4086,6 +4103,17 @@ fsevents@~2.3.2:
     nanoid: ^3.1.23
     source-map-js: ^0.6.2
   checksum: 87dc16efcf40286fad4ded0a433497ddbc55dfad3d7ddb200ba9c0761ec376280fa2c06a522628583c9284def85894c52bc361cffedf0679f4936370c084a145
+  languageName: node
+  linkType: hard
+
+"postcss@npm:^8.3.6":
+  version: 8.3.6
+  resolution: "postcss@npm:8.3.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.6.tgz"
+  dependencies:
+    colorette: ^1.2.2
+    nanoid: ^3.1.23
+    source-map-js: ^0.6.2
+  checksum: 515c26472861ce0f3b0a7945b9ac4732756d2aab6b12950137f72c7c6d90967136ba56e878815edcbf132c5643005dad1e9bbcb14139a948802af10245a8f6e3
   languageName: node
   linkType: hard
 
@@ -4864,13 +4892,13 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.3.8":
-  version: 2.3.8
-  resolution: "vite@npm:2.3.8::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.3.8.tgz"
+"vite@npm:^2.5.0":
+  version: 2.5.0
+  resolution: "vite@npm:2.5.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.5.0.tgz"
   dependencies:
-    esbuild: ^0.12.8
+    esbuild: ^0.12.17
     fsevents: ~2.3.2
-    postcss: ^8.3.4
+    postcss: ^8.3.6
     resolve: ^1.20.0
     rollup: ^2.38.5
   dependenciesMeta:
@@ -4878,7 +4906,7 @@ resolve@^1.20.0:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: acbf893f19d9d3f544506bee3869f8ce355e7fb86c7dacedcb3fc7740328f25cb2007b0266ebab75180909dc435be0d18a48c7c320987f8a2aa2f837bbaea521
+  checksum: 7f72bff87eb4231550c611ff436003d269153840da7f1102d8bae77385040c401f9b4f3ce27a5867cd16644c8029dba7c2a9f62d9250de585902cd6cd6da640d
   languageName: node
   linkType: hard
 
