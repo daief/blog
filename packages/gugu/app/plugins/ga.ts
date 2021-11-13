@@ -8,7 +8,7 @@ declare global {
 window.dataLayer = window.dataLayer || [];
 window.gtag =
   window.gtag ||
-  function gtag(..._args: any[]) {
+  function gtag() {
     window.dataLayer.push(arguments);
   };
 
