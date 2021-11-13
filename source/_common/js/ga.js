@@ -21,4 +21,10 @@
   // window.gtag('config', GA_ID, {
   //   page_path: path,
   // });
+  window.gtag.GA_ID = GA_ID;
+  window.gtag.trackPath = function (path) {
+    window.gtag('config', GA_ID, {
+      page_path: path,
+    });
+  };
 })();
