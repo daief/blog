@@ -14,7 +14,7 @@ window.gtag =
 
 window.gtag('js', new Date());
 
-export function loadGoogleGA(site: ISiteContext) {
+export async function loadGoogleGA(site: ISiteContext) {
   const ID = site.blogConfig.google_analytics.GA_MEASUREMENT_ID;
   if (!ID) return;
 
@@ -33,6 +33,8 @@ export function loadGoogleGA(site: ISiteContext) {
       page_path: path,
     });
   };
+
+  await site.router.isReady();
 
   site.router.afterEach((to, from) => {
     if (to.path !== from.path) {
