@@ -492,7 +492,7 @@ __metadata:
     serve-static: ^1.14.1
     tailwindcss: ^2.2.4
     viewerjs: ^1.10.0
-    vite: ^2.5.0
+    vite: ^2.5.6
     vue: ^3.2.0
     vue-router: ^4.0.10
     vuex: ^4.0.0
@@ -2450,6 +2450,97 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-android-arm64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-android-arm64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-android-arm64%2Fdownload%2Fesbuild-android-arm64-0.13.13.tgz"
+  checksum: 53349efc7b1145bf65bfdc9ae25b2a5908a850562a4db3b8e9e265fe021071df4e5d645341d276474f597ff983c2da23c8e8676a96fe64b03e0939d9eb580559
+  languageName: node
+  linkType: hard
+
+"esbuild-darwin-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-darwin-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-darwin-64%2Fdownload%2Fesbuild-darwin-64-0.13.13.tgz"
+  checksum: a371aa7718c686b89589e6ac3efc0b094f016432187f3f6b8ac68ec1fe2e19674832f93c16d8565b6bc5a83d703a9df5c57510285e038700d458bdfdd2c9d458
+  languageName: node
+  linkType: hard
+
+"esbuild-darwin-arm64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-darwin-arm64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-darwin-arm64%2Fdownload%2Fesbuild-darwin-arm64-0.13.13.tgz"
+  checksum: 8e264a5073d02a94f4da14f52ef90768a2739cb8211679b518f8e4ef5f4907e85d31ab21d3bdd30c407326fcbd09cce2c9206c41a4359854fadc2f2cf8f4ba7c
+  languageName: node
+  linkType: hard
+
+"esbuild-freebsd-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-freebsd-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-freebsd-64%2Fdownload%2Fesbuild-freebsd-64-0.13.13.tgz"
+  checksum: 57e85c449588255510b3e9a89a94bbf5a4b4c5d7051d703763401ac2a5ed643456353334bf05779d4a0d5ef59b30f2766924df9c61947dc9d8c434821514ca48
+  languageName: node
+  linkType: hard
+
+"esbuild-freebsd-arm64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-freebsd-arm64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-freebsd-arm64%2Fdownload%2Fesbuild-freebsd-arm64-0.13.13.tgz"
+  checksum: 1ce1d172e1a0299b033ea8f33ac4f816ccdc3b430e86f1d33ee95f49b2e4e2b3179972dd91a71e82c74b85a95d28bfb98ec96b8ce9029fd28ce6ecafbc78b5ff
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-32@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-32@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-32%2Fdownload%2Fesbuild-linux-32-0.13.13.tgz"
+  checksum: d21f2537444b8b70c85d2606e61afba155d44fe008d2426a6c58e39f2e95095bdffe3d428850ab537eacc588426ef915a21f91fffe960eac3014cd496d835ab5
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-64%2Fdownload%2Fesbuild-linux-64-0.13.13.tgz"
+  checksum: ae213734a847ec0343f1a87daebb87b2c8a2b223c562a7fb409e24d92ddbc65464d4d8e81415f4a7f6fa20b9dd030b013b1120ac7c33c8d8a7f96ba2a4b6d09a
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-arm64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-arm64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-arm64%2Fdownload%2Fesbuild-linux-arm64-0.13.13.tgz"
+  checksum: 088c8b256778c779a0886ae3fea78befd11b7cd60542d6592266de90af912dd479d95d2d49106b992b92bfc92bfca1870f0e5fff6e84d4a6346be5434735585e
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-arm@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-arm@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-arm%2Fdownload%2Fesbuild-linux-arm-0.13.13.tgz"
+  checksum: 7045b0bd902b68507384e43f8fe571f3f62068cc0c7e699645d64cb43abbf26df454146bac1f03b6f2fd30a96399fc0870074e8cc47737ef13302a22aa2f8603
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-mips64le@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-mips64le@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-mips64le%2Fdownload%2Fesbuild-linux-mips64le-0.13.13.tgz"
+  checksum: b8d026a749631b2a276318ff06e753520b3b7aec144f08ade0e20ba4de4d059abc2f17d2705a9f440239c1573c19e255b6d508b1c02c75ba983733d3c4343a85
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-ppc64le@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-linux-ppc64le@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-linux-ppc64le%2Fdownload%2Fesbuild-linux-ppc64le-0.13.13.tgz"
+  checksum: 9261d2e12541ec79319e0ac42aec347942c53f84358db9e216e215c9d7eddd1e8da3518d5ae58042ae26f3c8e0b44f631825426cd919db3ff1b637f6bbdfa493
+  languageName: node
+  linkType: hard
+
+"esbuild-netbsd-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-netbsd-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-netbsd-64%2Fdownload%2Fesbuild-netbsd-64-0.13.13.tgz"
+  checksum: 13bccdcd4072cc5e7a4ec2de05708b7b5148ec29f1dac1c8d8a83b95f2d3e46cc1720605116129d0e2d924155f600b2e8d7188b6a8c360d8176ca5aa14eb5310
+  languageName: node
+  linkType: hard
+
+"esbuild-openbsd-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-openbsd-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-openbsd-64%2Fdownload%2Fesbuild-openbsd-64-0.13.13.tgz"
+  checksum: 35259bc22ea13c67f1f09c5ca74295fdf0a59a3816cdc4fcb57b32193e3e51df0094dc0e4e9f8bb8ad678f2892a1b0ab0016bc764f28c1c621cc0bc6a265b95e
+  languageName: node
+  linkType: hard
+
 "esbuild-register@npm:^2.6.0":
   version: 2.6.0
   resolution: "esbuild-register@npm:2.6.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fesbuild-register%2Fdownload%2Fesbuild-register-2.6.0.tgz"
@@ -2460,12 +2551,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.12.17":
-  version: 0.12.21
-  resolution: "esbuild@npm:0.12.21::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fesbuild%2Fdownload%2Fesbuild-0.12.21.tgz"
-  bin:
-    esbuild: bin/esbuild
-  checksum: b7f4839ba9dfb2e2c2fefd96bda6d6d82cc21e494120a72e9571bf74bc13796b884b04bc216dc8aaaba7cece5ef6ea6bba4a99e00abd3c6d713d4b2ea6a5e39c
+"esbuild-sunos-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-sunos-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-sunos-64%2Fdownload%2Fesbuild-sunos-64-0.13.13.tgz"
+  checksum: a86a356c28fffb36d80a12a03b5af2a7d77f6389ba26a10d98db945912d15d09d03efae60cbaed3fc95b8b19de5f36c73343d19065a781cdb790b716f6a7340a
+  languageName: node
+  linkType: hard
+
+"esbuild-windows-32@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-windows-32@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-32%2Fdownload%2Fesbuild-windows-32-0.13.13.tgz"
+  checksum: 2b73f2709e590208abc437e842085ba42d5ba39d6a9bc10280b8c193206f7f0cc764d6c762fa11f234a038deacbfa6ac38f9f8fe949e3a80ae34a6feec184118
+  languageName: node
+  linkType: hard
+
+"esbuild-windows-64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-windows-64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-64%2Fdownload%2Fesbuild-windows-64-0.13.13.tgz"
+  checksum: 8a9db43b1024128efd96b016e5aa189253f417918d35ff378df0244be94ede566e26248781d42885e57cf849ae873974016d3b40c44787c4b9b9b721ec8651fd
+  languageName: node
+  linkType: hard
+
+"esbuild-windows-arm64@npm:0.13.13":
+  version: 0.13.13
+  resolution: "esbuild-windows-arm64@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild-windows-arm64%2Fdownload%2Fesbuild-windows-arm64-0.13.13.tgz"
+  checksum: ea3b3f2fcfb069bb26deaee5a8e01343b9c9e12933c14613860870b13a11fefe57e2eb3ba59273db4458c3b15e8cc5711672d8985c32fbbebddd380d35cb569d
   languageName: node
   linkType: hard
 
@@ -2475,6 +2585,68 @@ __metadata:
   bin:
     esbuild: bin/esbuild
   checksum: ac7ffaecb83eda6fb93eae18ad3b46a17bc0b78db9e4f6669a4470970e0288388ac4f5f0d1a0c7dbd283fe92492dfa3a6a9463111fdf940198865dc43da34c4c
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.13.2":
+  version: 0.13.13
+  resolution: "esbuild@npm:0.13.13::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fesbuild%2Fdownload%2Fesbuild-0.13.13.tgz"
+  dependencies:
+    esbuild-android-arm64: 0.13.13
+    esbuild-darwin-64: 0.13.13
+    esbuild-darwin-arm64: 0.13.13
+    esbuild-freebsd-64: 0.13.13
+    esbuild-freebsd-arm64: 0.13.13
+    esbuild-linux-32: 0.13.13
+    esbuild-linux-64: 0.13.13
+    esbuild-linux-arm: 0.13.13
+    esbuild-linux-arm64: 0.13.13
+    esbuild-linux-mips64le: 0.13.13
+    esbuild-linux-ppc64le: 0.13.13
+    esbuild-netbsd-64: 0.13.13
+    esbuild-openbsd-64: 0.13.13
+    esbuild-sunos-64: 0.13.13
+    esbuild-windows-32: 0.13.13
+    esbuild-windows-64: 0.13.13
+    esbuild-windows-arm64: 0.13.13
+  dependenciesMeta:
+    esbuild-android-arm64:
+      optional: true
+    esbuild-darwin-64:
+      optional: true
+    esbuild-darwin-arm64:
+      optional: true
+    esbuild-freebsd-64:
+      optional: true
+    esbuild-freebsd-arm64:
+      optional: true
+    esbuild-linux-32:
+      optional: true
+    esbuild-linux-64:
+      optional: true
+    esbuild-linux-arm:
+      optional: true
+    esbuild-linux-arm64:
+      optional: true
+    esbuild-linux-mips64le:
+      optional: true
+    esbuild-linux-ppc64le:
+      optional: true
+    esbuild-netbsd-64:
+      optional: true
+    esbuild-openbsd-64:
+      optional: true
+    esbuild-sunos-64:
+      optional: true
+    esbuild-windows-32:
+      optional: true
+    esbuild-windows-64:
+      optional: true
+    esbuild-windows-arm64:
+      optional: true
+  bin:
+    esbuild: bin/esbuild
+  checksum: 41456ec911afce63ca2f0fb7829f4cb6bf721b0f39cf399f30f6a98ebcaca9f8c3921433096551920877fe38db049f9c31e63db62394c55a43d9b8a61ea36271
   languageName: node
   linkType: hard
 
@@ -3704,6 +3876,15 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"nanoid@npm:^3.1.30":
+  version: 3.1.30
+  resolution: "nanoid@npm:3.1.30::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fnanoid%2Fdownload%2Fnanoid-3.1.30.tgz"
+  bin:
+    nanoid: bin/nanoid.cjs
+  checksum: 440f685e9890bd96433cf6c01535165b1e9677ba4a5c4179e1a61612f0b4c428cc628425fe232038b93304d15b191892d7ced9503fa558d1296e4e95fe80a627
+  languageName: node
+  linkType: hard
+
 "nanopop@npm:^2.1.0":
   version: 2.1.0
   resolution: "nanopop@npm:2.1.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fnanopop%2Fdownload%2Fnanopop-2.1.0.tgz"
@@ -3968,6 +4149,13 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
+"picocolors@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "picocolors@npm:1.0.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpicocolors%2Fdownload%2Fpicocolors-1.0.0.tgz"
+  checksum: 6616d34dd03bde8881c63402dea34f0b5972845b04b791b234446d4a408bc3d7f932acea3970a6b671d8f5c5aae1b1ce9fc1f89b0ed9a363469cf9da8e916b71
+  languageName: node
+  linkType: hard
+
 "picomatch@npm:^2.0.4, picomatch@npm:^2.2.1, picomatch@npm:^2.2.2, picomatch@npm:^2.2.3":
   version: 2.3.0
   resolution: "picomatch@npm:2.3.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fpicomatch%2Fdownload%2Fpicomatch-2.3.0.tgz"
@@ -4116,14 +4304,14 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"postcss@npm:^8.3.6":
-  version: 8.3.6
-  resolution: "postcss@npm:8.3.6::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.6.tgz"
+"postcss@npm:^8.3.8":
+  version: 8.3.11
+  resolution: "postcss@npm:8.3.11::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss%2Fdownload%2Fpostcss-8.3.11.tgz"
   dependencies:
-    colorette: ^1.2.2
-    nanoid: ^3.1.23
+    nanoid: ^3.1.30
+    picocolors: ^1.0.0
     source-map-js: ^0.6.2
-  checksum: 515c26472861ce0f3b0a7945b9ac4732756d2aab6b12950137f72c7c6d90967136ba56e878815edcbf132c5643005dad1e9bbcb14139a948802af10245a8f6e3
+  checksum: fa1530f7e1817bcaf40b34db246d0c49e42daf12719abd4a3a1b5886491cca125af6b21ccdfc24a074ea9b6b73a6677e1478906adb732b2bd5208077a64473a6
   languageName: node
   linkType: hard
 
@@ -4348,9 +4536,9 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.38.5":
-  version: 2.52.7
-  resolution: "rollup@npm:2.52.7::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Frollup%2Fdownload%2Frollup-2.52.7.tgz"
+"rollup@npm:^2.57.0":
+  version: 2.60.0
+  resolution: "rollup@npm:2.60.0::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Frollup%2Fdownload%2Frollup-2.60.0.tgz"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -4358,7 +4546,7 @@ resolve@^1.20.0:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 341065bf751b811b6b88bf99282ef45da277bcd9e035a2e449a960db011b0916b2ea164999f13d435a9c64d016b61d474dfbf7def517b828f99c2eee8f00cf04
+  checksum: 70b6bf3c11e550cfaf76e76fe65c725be0a2ad01df00f613d738e24f34b5641ec17fbdca28febd24fe5b506e48ca1c7367870092203360d66c8cd34e748ec4f3
   languageName: node
   linkType: hard
 
@@ -4902,21 +5090,32 @@ resolve@^1.20.0:
   languageName: node
   linkType: hard
 
-"vite@npm:^2.5.0":
-  version: 2.5.0
-  resolution: "vite@npm:2.5.0::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fvite%2Fdownload%2Fvite-2.5.0.tgz"
+"vite@npm:^2.5.6":
+  version: 2.6.14
+  resolution: "vite@npm:2.6.14::__archiveUrl=https%3A%2F%2Fregistry.npmmirror.com%2Fvite%2Fdownload%2Fvite-2.6.14.tgz"
   dependencies:
-    esbuild: ^0.12.17
+    esbuild: ^0.13.2
     fsevents: ~2.3.2
-    postcss: ^8.3.6
+    postcss: ^8.3.8
     resolve: ^1.20.0
-    rollup: ^2.38.5
+    rollup: ^2.57.0
+  peerDependencies:
+    less: "*"
+    sass: "*"
+    stylus: "*"
   dependenciesMeta:
     fsevents:
       optional: true
+  peerDependenciesMeta:
+    less:
+      optional: true
+    sass:
+      optional: true
+    stylus:
+      optional: true
   bin:
     vite: bin/vite.js
-  checksum: 7f72bff87eb4231550c611ff436003d269153840da7f1102d8bae77385040c401f9b4f3ce27a5867cd16644c8029dba7c2a9f62d9250de585902cd6cd6da640d
+  checksum: 678fddda80541248494cf5c7c85c3db2dbb7d79a8f3273e400501b700669f761933d8e2a780526a86a49e6d23c8a0bd8f51c7309639adfa3377a177f6dd22f26
   languageName: node
   linkType: hard
 
