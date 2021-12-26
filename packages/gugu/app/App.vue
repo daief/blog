@@ -33,13 +33,13 @@
           </div>
 
           <div class="mt-6 flex justify-center">
-            <a to="https://github.com/daief" class="unset cursor-pointer">
+            <ALink to="https://github.com/daief" class="unset cursor-pointer">
               <Icon name="github" />
-            </a>
+            </ALink>
             <span class="mx-2" />
-            <a to="mailto:defeng_mail@163.com" class="unset cursor-pointer">
+            <ALink to="mailto:defeng_mail@163.com" class="unset cursor-pointer">
               <Icon name="email" />
-            </a>
+            </ALink>
           </div>
         </div>
         <div class="mt-6">
@@ -89,6 +89,7 @@ import { useSiteContext } from './utils/siteContext';
 import BottomActions from './components/Site/BottomActions.vue';
 import { usePageTitle } from './utils/hooks/usePageTitle';
 import SiteFooter from './components/Site/Footer.vue';
+import ALink from './components/ALink.vue';
 
 const store = useStore();
 const blogBrief = computed(() => store.state.global.site);
