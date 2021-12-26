@@ -20,7 +20,7 @@ export default defineComponent({
     const site = useSiteContext();
     const isExternal =
       typeof to === 'string' &&
-      to.startsWith('http') &&
+      /^\w+:/i.test(to) &&
       !to.startsWith(site.blogConfig.url);
     return () =>
       !isExternal && !!to ? (
