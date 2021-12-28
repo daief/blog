@@ -2,7 +2,6 @@
 title: 博客框架 —— gugu
 date: 2021-07-25 22:18:00
 id: site-engine-gugu
-sort: 10
 categories: ['前端']
 tags:
   - Blog
