@@ -39,6 +39,9 @@ export async function render(
   // itself on ctx.modules. After the render, ctx.modules would contain all the
   // components that have been instantiated during this render call.
   const ctx: any = {};
+
+  // xssA线xc
+  // xsds
   const html = await renderToString(app, ctx);
   const { headTags, htmlAttrs, bodyAttrs } = renderHeadToString(head);
 
