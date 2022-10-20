@@ -1437,6 +1437,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"blog@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "blog@workspace:."
+  dependencies:
+    "@blog/gugu": 0.0.1
+  languageName: unknown
+  linkType: soft
+
 "bluebird@npm:^3.7.2":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2::__archiveUrl=https%3A%2F%2Fregistry.nlark.com%2Fbluebird%2Fdownload%2Fbluebird-3.7.2.tgz"
@@ -3028,14 +3036,6 @@ fsevents@~2.3.2:
   checksum: 212122003c20c8c17ac0c83a419b4c8e835411ff6ab9195d053ea6e4a0597cc005b5b8eabcbd57b0b0c0fe676f0049e09315845fff4e051198845491cbba260e
   languageName: node
   linkType: hard
-
-"hexo-site@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "hexo-site@workspace:."
-  dependencies:
-    "@blog/gugu": 0.0.1
-  languageName: unknown
-  linkType: soft
 
 "highlight.js@npm:^10.7.1":
   version: 10.7.3

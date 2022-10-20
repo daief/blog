@@ -6,6 +6,7 @@ Allow: /categories/
 Allow: /tags/
 Allow: /js/
 Allow: /post/
+Allow: /daisyui-vue/
 Disallow: /vue-music
 Sitemap: https://daief.tech/sitemap.xml
 Sitemap: https://daief.tech/baidusitemap.xml
