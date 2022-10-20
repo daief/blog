@@ -1,10 +1,7 @@
 {
-  "name": "hexo-site",
+  "name": "blog",
   "version": "0.0.0",
   "private": true,
-  "hexo": {
-    "version": "4.2.0"
-  },
   "scripts": {
     "dev": "gugu dev",
     "build": "gugu build",
