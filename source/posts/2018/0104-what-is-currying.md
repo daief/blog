@@ -1,7 +1,7 @@
 ---
-title: 认识柯里化(currying)
+title: 认识柯里化（currying）
 date: 2018-1-4 22:29:17
-categories: ["前端", "JavaScript"]
+categories: ['前端', 'JavaScript']
 id: what-is-currying
 tags:
   - JavaScript
@@ -27,7 +27,7 @@ function currying(fn) {
   var slice = Array.prototype.slice,
     // 取fn之后的参数并转化为数组
     __args = slice.call(arguments, 1);
-  return function() {
+  return function () {
     // 将具有length属性的对象（arguments）转成数组
     var __inargs = slice.call(arguments);
     // 合并参数并调用fn
@@ -89,4 +89,3 @@ foo2('C1'); // A B C1
 
 > 柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围。
 > 函数柯里化，是固定部分参数，返回一个接受剩余参数的函数，也称为部分计算函数，目的是为了缩小适用范围，创建一个针对性更强的函数。
-
