@@ -21,7 +21,7 @@
     "cross-env": "^6.0.0",
     "dayjs": "^1.10.6",
     "esbuild-register": "^2.6.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "front-matter": "^4.0.2",
     "fs-extra": "^10.0.0",
     "glob": "^7.1.7",
