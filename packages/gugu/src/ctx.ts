@@ -7,7 +7,7 @@ import { IUserConfig } from '@t';
 import { GuDao } from './roles/dao';
 import { GLoader } from './roles/loader';
 
-export type ICommandType = 'dev' | 'build' | 'serve' | 'generate';
+export type ICommandType = 'dev' | 'build' | 'serve' | 'generate' | 'new';
 
 export interface IGContextOptions {
   command: ICommandType;
