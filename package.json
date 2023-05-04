@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "new": "gugu new",
     "dev": "gugu dev",
     "build": "gugu build",
     "generate": "gugu generate",
