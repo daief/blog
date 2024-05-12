@@ -13,7 +13,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@blog/gugu": "0.0.1"
+    "@blog/gugu": "workspace:0.0.1"
   },
   "engines": {
     "node": ">=18"
