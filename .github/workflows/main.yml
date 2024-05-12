@@ -25,10 +25,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
       - name: Build
         run: |
-          yarn
-          yarn build && yarn generate
+          pnpm install
+          pnpm build && pnpm generate
 
       - name: Deploy
         env:
