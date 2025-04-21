@@ -42,11 +42,26 @@ comments: false
 
 # 项目经历
 
+## 酷家乐前端基础设施 - 脚手架集成 Rspack 构建器（2025.01-至今）
+
+职责 / 技术栈：模块负责人 / `NodeJS`、`Rspack`
+
+背景：基于 webpack 的构建方式难以在速度上更进一步，需要调研使用一些新兴的构建器。
+
+行动：调研并选用了与 webpack 思想一致的 Rspack，完成与内部脚手架的集成、解决了微应用、公共包的打包兼容，使用 entry 占位的方式解决按需启动的问题。
+
+结果：
+
+- 内部多个项目完成迁移均有 `50%+` 以上的提升，外部 `1` 个试点的工具项目改造完成
+- 沉淀迁移指导和常见问题文档，有最快 `3` 分钟完成迁移的记录
+
 ## 酷家乐前端基础设施 - 多语言平台（2024.11-至今）
 
 <!-- 15w + 词条、300w+ 翻译 -->
 
 > “多语言平台”是酷家乐国际化进程的基本能力平台，提供所有多语言相关词条、语种管理，到 PR（page render）一站式的注入使用。
+
+- 职责 / 技术栈：技术负责人 / `NestJS`
 
 背景：
 
@@ -119,6 +134,7 @@ comments: false
 - [gugu](https://github.com/daief/blog/tree/master/packages/gugu)：一个简单的博客引擎
 - [chip8](https://daief.tech/chip8/?source=wasm)：一个有趣的 `chip8` 模拟器，分别使用 `Rust` 和 `JavaScript` 实现
 - [daisyui-vue](https://github.com/daief/daisyui-vue)：一个进行中的 `Vue` 组件库
+- [Jugg](https://daief.tech/jugg/#/docs/readme)：一套高度封装并插件化的前端脚手架
 
 # 技能清单
 
