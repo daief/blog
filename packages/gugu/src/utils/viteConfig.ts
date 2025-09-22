@@ -33,7 +33,7 @@ export function getViteConfig(
     {
       mode: isProd ? 'production' : 'development',
       root: ctx.dirs.appDir,
-      plugins: [vuePlugin(), vueJsx({}), highlightPlugin()],
+      plugins: [vuePlugin({}), vueJsx({}), highlightPlugin()],
       configFile: false,
       define: {
         __PROD__: isProd,
@@ -44,7 +44,7 @@ export function getViteConfig(
       },
       resolve: {
         alias: {
-          '@app': ctx.resolveGuguRoot('app'),
+          '@app': ctx.resolveRoot('app'),
         },
       },
     },

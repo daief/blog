@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "node20",
+    "moduleResolution": "nodenext",
     "lib": ["DOM", "ESNext"],
     "allowSyntheticDefaultImports": true,
     "noImplicitAny": false,
@@ -15,11 +15,6 @@
     "importsNotUsedAsValues": "remove",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "plugins": [
-      {
-        "name": "@vuedx/typescript-plugin-vue"
-      }
-    ],
     "jsx": "preserve"
   },
   "include": ["src/**/*", "@types/**/*", "app"],

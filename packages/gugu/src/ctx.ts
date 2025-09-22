@@ -21,8 +21,8 @@ export class GContext extends EventEmitter {
   userConfig: IUserConfig;
 
   dirs = {
-    guguRoot: '',
-    guguDistClient: '',
+    root: '',
+    distClient: '',
     appDir: '',
     cacheDir: '',
 
@@ -38,15 +38,15 @@ export class GContext extends EventEmitter {
 
     this.command = opts.command;
 
-    const guguRoot = resolve(__dirname, '..');
-    const appDir = resolve(guguRoot, 'app');
+    const root = resolve(__dirname, '..');
+    const appDir = resolve(root, 'app');
     const userRoot = this.context;
     const cacheDir = resolve(userRoot, '.cache/.gugu');
     const sourceDir = resolve(userRoot, 'source');
 
     this.dirs = {
-      guguRoot,
-      guguDistClient: resolve(guguRoot, 'dist/client'),
+      root,
+      distClient: resolve(root, 'dist/client'),
       appDir,
       userRoot,
       cacheDir,
@@ -59,12 +59,11 @@ export class GContext extends EventEmitter {
 
   async init() {
     if (!['generate', 'serve'].includes(this.command)) {
-      fs.emptyDirSync(this.resolveGuguRoot('dist'));
+      fs.emptyDirSync(this.resolveRoot('dist'));
       fs.copySync(
         resolve(this.dirs.userRoot, 'source'),
-        this.resolveGuguRoot('dist/client'),
+        this.resolveRoot('dist/client'),
         {
-          recursive: true,
           filter: (src) => {
             return !this.isInArticleDir(src) && !this.isIgnoredAssets(src);
           },
@@ -114,7 +113,7 @@ export class GContext extends EventEmitter {
     );
   }
 
-  public resolveGuguRoot(...p: string[]) {
-    return resolve(this.dirs.guguRoot, ...p);
+  public resolveRoot(...p: string[]) {
+    return resolve(this.dirs.root, ...p);
   }
 }

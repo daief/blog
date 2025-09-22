@@ -1,18 +1,19 @@
 import { GContext } from 'src/ctx';
 import marked from 'marked';
-import hljs from 'highlight.js';
-import { escapeHtml } from '../utils/parseMarkdown';
+import { createRenderer, escapeHtml, IGMarkerd } from '../utils/markdown';
 import { basename, dirname, join, relative, resolve } from 'path';
 import { CollectionChain, omit } from 'lodash';
 import fm from 'front-matter';
-import glob from 'glob-promise';
+import glob from 'glob';
 import fs from 'fs-extra';
 import { md5, promiseQueue } from '../utils/helper';
 import dayjs from 'dayjs';
-import chokidar from 'chokidar';
-import minimatch from 'minimatch';
-import { parse } from 'query-string';
+import chokidar, { FSWatcher } from 'chokidar';
+import { minimatch } from 'minimatch';
+import qs from 'query-string';
 import htmlEntities from 'html-entities';
+
+const { parse } = qs;
 
 export class GLoader {
   private gg: GContext;
@@ -20,52 +21,18 @@ export class GLoader {
   // 文章 id
   // private assets: Map<string, ggDB.IAssetInfo[]>;
 
-  renderer: marked.Renderer;
-  watcher: chokidar.FSWatcher;
+  renderer: IGMarkerd;
+  watcher: FSWatcher;
 
   constructor(ctx: GContext) {
     this.gg = ctx;
   }
 
   async init() {
-    this.createRender();
-    await this.loadAllMarkdownFiles();
+    this.renderer = createRenderer();
     if (this.gg.command === 'dev') {
       this.watch();
     }
-  }
-
-  private createRender() {
-    // ----------- renderer
-    this.renderer = new marked.Renderer();
-    this.renderer.code = (sourceCode, language) => {
-      // 处理 mermaid 图表
-      if (/^mermaid$/i.test(language)) {
-        return `<div class="mermaid">${sourceCode}</div>`;
-      }
-      const codeResult = !hljs.getLanguage(language)
-        ? escapeHtml(sourceCode)
-        : hljs.highlight(sourceCode, { language }).value;
-      return `<pre class="hljs language-${language}" hljs-language="${language}"><code style="display:block;">${codeResult}</code></pre>`;
-    };
-    this.renderer.heading = (text: string, level) => {
-      const anchorText = `${text}`;
-      return `<h${level} id="${anchorText}">${anchorText}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
-    };
-    this.renderer.link = (href: string, aAttrsQuery: string, text: string) => {
-      const imgAttrs = parse(htmlEntities.decode(aAttrsQuery || '')) as Record<
-        string,
-        string
-      >;
-
-      const attrStr = Object.entries({ ...imgAttrs, href })
-        .map(([key, value]) =>
-          value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
-        )
-        .join(' ');
-
-      return `<a ${attrStr}>${text}</a>`;
-    };
   }
 
   get getMarkdowGlob() {
@@ -83,20 +50,16 @@ export class GLoader {
       // 忽略处理的文件
       if (this.gg.isIgnoredAssets(fl)) return;
 
-      const targetFname = join(
-        this.gg.dirs.guguRoot,
-        'dist/client',
-        relativePath,
-      );
+      const targetFname = join(this.gg.dirs.root, 'dist/client', relativePath);
       if (isDelete) {
         fs.removeSync(targetFname);
         return;
       }
-      fs.copySync(fl, targetFname, { recursive: true });
+      fs.copySync(fl, targetFname, {});
     };
 
     this.watcher = chokidar
-      .watch(`${this.gg.dirs.sourceDir}/**/*`, {
+      .watch(`${this.gg.dirs.sourceDir}`, {
         interval: 1000,
       })
       .on('change', (fname) => {
@@ -256,6 +219,8 @@ export class GLoader {
       ['categories', allCategories],
       ['posts', all],
     ].forEach(([type, data]: [string, any[]]) => {
+      // TODO type error
+      // @ts-expect-error
       (this.gg.dao.db._.get(type) as CollectionChain<any>)
         .set('length', 0)
         .push(...data)
@@ -268,7 +233,7 @@ export class GLoader {
   }
 
   private async loadAllMarkdownFiles() {
-    const mdPathList = await glob(this.getMarkdowGlob, {});
+    const mdPathList = await glob.glob(this.getMarkdowGlob, {});
 
     const all = await promiseQueue(
       mdPathList.map((f) => this.parseMarkdown(f)),
@@ -282,8 +247,8 @@ export class GLoader {
       try {
         fs.copySync(
           ass.assetFilePath,
-          join(this.gg.dirs.guguRoot, 'dist/client', ass.targetPath),
-          { overwrite: true, recursive: true },
+          join(this.gg.dirs.root, 'dist/client', ass.targetPath),
+          { overwrite: true },
         );
       } catch (error) {}
     }
@@ -369,9 +334,9 @@ export class GLoader {
       }
     }
 
-    const [excerpt, more = ''] = marked(markdownBody, {
-      renderer: this.renderer,
-    }).split('<!-- more -->');
+    const [excerpt, more = ''] = this.renderer
+      .gParse(markdownBody, {})
+      .split('<!-- more -->');
 
     let slug = '';
     if (!isArticle) {

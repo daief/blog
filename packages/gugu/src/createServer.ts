@@ -25,7 +25,7 @@ export async function createServer(
   };
 
   app.use(
-    serveStatic(ctx.resolveGuguRoot('dist/client'), {
+    serveStatic(ctx.resolveRoot('dist/client'), {
       index: false,
     }),
   );
@@ -55,7 +55,7 @@ export async function createServer(
     // 一个开发中间件来使用），那么这里请用 'html'
     vite = await createViteServer(
       getViteConfig(ctx, false, {
-        server: { middlewareMode: 'ssr' },
+        server: { middlewareMode: true },
       }),
     );
 
@@ -87,12 +87,10 @@ export async function createServer(
         ({ render } = await vite.ssrLoadModule('/entry-server.ts'));
       } else {
         template = fs.readFileSync(
-          ctx.resolveGuguRoot('dist/client/index.html'),
+          ctx.resolveRoot('dist/client/index.html'),
           'utf-8',
         );
-        ({ render } = require(ctx.resolveGuguRoot(
-          'dist/server/entry-server.js',
-        )));
+        ({ render } = require(ctx.resolveRoot('dist/server/entry-server.js')));
       }
 
       const serverState = {
