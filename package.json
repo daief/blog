@@ -2,9 +2,11 @@
   "name": "blog",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "new": "gugu new",
-    "dev": "gugu dev",
+    "//dev": "gugu dev",
+    "dev": "node scripts/dev.mjs",
     "build": "gugu build",
     "generate": "gugu generate",
     "serve": "gugu serve"
@@ -13,9 +15,15 @@
     "packages/*"
   ],
   "dependencies": {
-    "@blog/gugu": "workspace:0.0.1"
+    "@blog/gugu": "workspace:*",
+    "@blog/gugu2": "workspace:*"
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "chokidar": "^4.0.0",
+    "tree-kill": "^1.2.2",
+    "vite": "^7.1.7"
   }
 }

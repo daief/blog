@@ -33,7 +33,9 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
       },
       heading({ tokens, depth: level }) {
         const text = this.parser.parseInline(tokens);
-        const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+        const escapedText = text.toLowerCase();
+        // TODO
+        // .replace(/[^\w]+/g, '-');
         return `<h${level} id="${escapedText}">${text}<a name="${escapedText}" class="headerlink" href="#${escapedText}"></a></h${level}>`;
       },
       link: ({ href, title: aAttrsQuery, text }) => {

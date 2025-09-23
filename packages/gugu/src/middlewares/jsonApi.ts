@@ -1,5 +1,5 @@
 import { RequestHandler, Router } from 'express';
-import { Response } from 'express-serve-static-core';
+import { Response } from 'express';
 import { GContext } from 'src/ctx';
 import fs from 'fs-extra';
 import path from 'path';
@@ -7,10 +7,7 @@ import { parseParams } from '../../app/utils/api';
 
 export function createJsonApi(ctx: GContext): RequestHandler {
   const router = Router();
-  const sendJson = (
-    res: Response<any, Record<string, any>, number>,
-    json: any,
-  ) => {
+  const sendJson = (res: Response, json: any) => {
     if (ctx.command === 'generate') {
       fs.outputFileSync(
         path.resolve(

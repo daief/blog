@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html sstHtmlAttrs>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--ssr-head-partial-->
+    <script>
+      if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) {
+        // redirect IE to Edge
+        // This browser is no longer supported
+        window.location.href = 'microsoft-edge:' + window.location.href;
+        alert('请使用 Chrome/Edge/Firefox/Safari 等现代浏览器。');
+        throw new Error('请使用 Chrome/Edge/Firefox/Safari 等现代浏览器。');
+      }
+    </script>
+  </head>
+  <body ssrBodyAttrs>
+    <div id="app"><!--ssr-outlet--></div>
+    <script type="module" src="/entry-client.ts"></script>
+  </body>
+</html>
