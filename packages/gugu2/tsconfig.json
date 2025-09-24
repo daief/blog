@@ -5,13 +5,17 @@
     "moduleResolution": "nodenext",
     "lib": ["DOM", "ESNext"],
     "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
     "importsNotUsedAsValues": "remove",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "jsx": "preserve",
     "allowImportingTsExtensions": true,
-    "noEmit": true
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["app/*"]
+    },
+    "strict": true
   },
   "include": ["src/**/*", "types/**/*", "app"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]

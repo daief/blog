@@ -1,1 +1,1 @@
-export * from './node.mts';
+export * from './config.mts';

@@ -7,7 +7,8 @@
     "new": "gugu new",
     "//dev": "gugu dev",
     "dev": "node scripts/dev.mjs",
-    "build": "gugu build",
+    "//build": "gugu build",
+    "build": "vite-ssg build",
     "generate": "gugu generate",
     "serve": "gugu serve"
   },
@@ -24,6 +25,7 @@
   "devDependencies": {
     "chokidar": "^4.0.0",
     "tree-kill": "^1.2.2",
-    "vite": "^7.1.7"
+    "vite": "^7.1.7",
+    "vite-ssg": "^28.1.0"
   }
 }
