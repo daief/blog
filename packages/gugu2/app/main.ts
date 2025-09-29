@@ -23,5 +23,5 @@ export const createApp = ViteSSG(
       return { top: 0 };
     },
   },
-  () => {},
+  ({ app }) => {},
 );

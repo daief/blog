@@ -2,7 +2,7 @@
   "name": "@blog/gugu2",
   "version": "0.0.0",
   "type": "module",
-  "main": "src/index.mts",
+  "main": "index.mjs",
   "dependencies": {
     "@simonwep/pickr": "^1.9.1",
     "@tailwindcss/line-clamp": "^0.4.4",

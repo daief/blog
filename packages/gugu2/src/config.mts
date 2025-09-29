@@ -8,34 +8,39 @@ import { createMdPlugin } from './plugins/md.mts';
 import type { IBlogConifg } from '../types/index.mts';
 import { ContextService } from './services/context.service.ts';
 import { createRoutesPlugin } from './plugins/routes/index.mts';
+import { getService } from './services/accessor.ts';
 
 const __dirname = getDirname(import.meta.url);
 
-export const extendConfig = (blogConfig: IBlogConifg, config: UserConfig) => {
-  const ggCtx = new ContextService(process.cwd(), blogConfig);
+export const extendConfig = (
+  blogConfig: IBlogConifg,
+  viteConfig: UserConfig,
+) => {
+  const ggCtx = getService(ContextService);
   global.ggContext = ggCtx;
+  ggCtx.init(process.cwd(), blogConfig);
 
-  config.root = path.resolve(__dirname, '../app');
-  config.plugins = [
+  viteConfig.root = path.resolve(__dirname, '../app');
+  viteConfig.plugins = [
     createMdPlugin(),
     createRoutesPlugin(),
     vuePlugin(),
     vueJsx({}),
-    ...(config.plugins || []),
+    ...(viteConfig.plugins || []),
   ];
 
-  config.resolve = {
-    ...config.resolve,
+  viteConfig.resolve = {
+    ...viteConfig.resolve,
     alias: {
-      ...config.resolve?.alias,
+      ...viteConfig.resolve?.alias,
       '@app': path.resolve(__dirname, '../app'),
     },
   };
 
-  config.build = {
-    ...config.build,
+  viteConfig.build = {
+    ...viteConfig.build,
     outDir: path.resolve(ggCtx.cwd, 'dist'),
   };
 
-  return config;
+  return viteConfig;
 };

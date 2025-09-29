@@ -5,6 +5,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "allowImportingTsExtensions": false,
-    "jsx": "preserve"
+    "jsx": "preserve",
+    "baseUrl": ".",
+    "paths": {
+      "@app/*": ["./*"]
+    }
   }
 }

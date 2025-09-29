@@ -6,15 +6,12 @@
     "lib": ["DOM", "ESNext"],
     "allowSyntheticDefaultImports": true,
     "importsNotUsedAsValues": "remove",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+    // "experimentalDecorators": true,
+    // "emitDecoratorMetadata": true,
     "jsx": "preserve",
     "allowImportingTsExtensions": true,
     "noEmit": true,
-    "baseUrl": ".",
-    "paths": {
-      "@app/*": ["app/*"]
-    },
+
     "strict": true
   },
   "include": ["src/**/*", "types/**/*", "app"],

@@ -30,3 +30,12 @@ export const createLogger = (prefix: string) => {
     error: wrap(logger.error),
   };
 };
+
+export type ILogger = ReturnType<typeof createLogger>;
+
+export const injectLogger =
+  (prefix: string) => (_: unknown, ctx: ClassFieldDecoratorContext) => {
+    ctx.addInitializer(function (this: any) {
+      this[ctx.name] = createLogger(prefix);
+    });
+  };

@@ -25,9 +25,15 @@ async function restart() {
   }
 }
 
-chokidar.watch(['vite.config.ts', 'packages/gugu2/src']).on('change', () => {
-  console.log('Config changed, restarting vite...');
-  restart();
-});
+let timmer;
+chokidar
+  .watch(['vite.config.ts', 'packages/gugu2/src', 'packages/gugu2/types'])
+  .on('change', () => {
+    clearTimeout(timmer);
+    timmer = setTimeout(() => {
+      console.log('Config changed, restarting vite...');
+      restart();
+    }, 1000);
+  });
 
 start();
