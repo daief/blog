@@ -4,10 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "new": "gugu new",
-    "//dev": "gugu dev",
     "dev": "node scripts/dev.mjs",
-    "//build": "gugu build",
     "build": "vite-ssg build",
     "generate": "gugu generate",
     "serve": "gugu serve"
@@ -16,8 +13,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@blog/gugu": "workspace:*",
-    "@blog/gugu2": "workspace:*"
+    "@blog/gugu": "workspace:*"
   },
   "engines": {
     "node": ">=18"

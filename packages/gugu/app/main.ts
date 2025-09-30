@@ -1,30 +1,27 @@
-import App from './App.vue';
-import { createSSRApp } from 'vue';
-import { createRouterIns } from './router';
-import { createStoreIns } from './store';
-import { createSiteContext } from './utils/siteContext';
-import { createHead } from '@vueuse/head';
+import { ViteSSG } from 'vite-ssg';
+import App from './app.vue';
+// @ts-ignore
+import routes from 'vblog:routes';
 
-export interface ICreateOptions {
-  serverState?;
-}
+console.log('🚀 ~ main.ts:5 ~ routes:', routes);
 
-// SSR requires a fresh app instance per request, therefore we export a function
-// that creates a fresh app instance. If using Vuex, we'd also be creating a
-// fresh store here.
-export function createApp(opts: ICreateOptions = {}) {
-  const app = createSSRApp(App);
-  const store = createStoreIns();
-  const router = createRouterIns(opts);
-  const site = createSiteContext();
-  const head = createHead();
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    scrollBehavior(to, _from, savedPosition) {
+      if (to.hash) {
+        return {
+          el: to.hash,
+        };
+      }
 
-  site.router = router;
-  site.store = store;
+      if (savedPosition) {
+        return savedPosition;
+      }
 
-  app.use(store);
-  app.use(router);
-  app.use(site);
-  app.use(head);
-  return { app, router, store, site, head };
-}
+      return { top: 0 };
+    },
+  },
+  ({ app }) => {},
+);

@@ -39,6 +39,7 @@ export const extendConfig = async (
   };
 
   viteConfig.build = {
+    emptyOutDir: true,
     ...viteConfig.build,
     outDir: getService(FileService).resolveDist(),
   };

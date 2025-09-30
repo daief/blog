@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "node20",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "lib": ["DOM", "ESNext"],
-    "allowSyntheticDefaultImports": true,
-    "noImplicitAny": false,
-    "baseUrl": ".",
-    "paths": {
-      "@t": ["@types/index"],
-      "@t/*": ["@types/*"],
-      "@app/*": ["app/*"]
-    },
+    "allowSyntheticDefaultImports": false,
     "importsNotUsedAsValues": "remove",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "jsx": "preserve"
+    // "experimentalDecorators": true,
+    // "emitDecoratorMetadata": true,
+    "jsx": "preserve",
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+
+    "strict": true,
+    "skipLibCheck": true
   },
-  "include": ["src/**/*", "@types/**/*", "app"],
+  "include": ["src/**/*", "types/**/*", "app"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]
 }

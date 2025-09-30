@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { extendConfig } from '@blog/gugu2';
+import { extendConfig } from '@blog/gugu';
 
 export default defineConfig(() => {
   return extendConfig(
