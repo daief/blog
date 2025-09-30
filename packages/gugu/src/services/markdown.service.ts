@@ -10,67 +10,25 @@ import { FileService } from './file.service.ts';
 import { normalizePath } from 'vite';
 import * as fm from 'front-matter';
 import { ensureArray } from '../utils/misc.mts';
+import { ref, computed } from '@vue/reactivity';
 
 class DataSource {
   @injectLogger('[DataSource]')
   private readonly logger!: ILogger;
 
-  private mdMap = new Map<string, IMarkdown>();
-
-  private articles: IMarkdown[] = [];
-  private pages: IMarkdown[] = [];
-
-  private tagMap = new Map<string, IMarkdown[]>();
+  private mdMap = ref(new Map<string, IMarkdown>());
   private pageSize = 10;
 
-  setData(data: IMarkdown[]) {
-    this.mdMap = new Map(data.map((item) => [item.filepath, item]));
-    this.resort();
-  }
-
-  update(post: IMarkdown) {
-    const cache = this.mdMap.get(post.filepath);
-    // if (cache && equal(cache.frontmatter, post.frontmatter)) {
-    //   return;
-    // }
-
-    this.mdMap.set(post.filepath, post);
-    this.resort();
-  }
-
-  getArticlePaginations() {
-    return this.paginate(this.articles);
-  }
-
-  getTagPaginations(tag: string) {
-    return this.paginate(this.tagMap.get(tag) || []);
-  }
-
-  getTags() {
-    return Array.from(this.tagMap.entries())
-      .map(([tag, posts]) => ({ tag, posts: posts.length }))
-      .sort((a, b) => b.posts - a.posts);
-  }
-
-  remove(filepath: string) {
-    if (this.mdMap.delete(filepath)) {
-      this.resort();
-    }
-  }
-
-  private resort() {
-    const allMds = Array.from(this.mdMap.values());
+  readonly articles = computed(() => {
+    const allMds = Array.from(this.mdMap.value.values());
     const articles: IMarkdown[] = [];
-    const pages: IMarkdown[] = [];
     for (const md of allMds) {
-      if (md.type === 'page') {
-        pages.push(md);
-      } else if (md.type === 'article') {
+      if (md.type === 'article') {
         articles.push(md);
       }
     }
 
-    articles
+    return articles
       .map((it) => {
         if (!it.frontmatter.date) {
           this.logger.warn(
@@ -89,18 +47,50 @@ class DataSource {
           b.frontmatter.date.valueOf() - a.frontmatter.date.valueOf();
         return dateDiff;
       });
+  });
 
-    this.articles = articles;
-    this.pages = pages;
-    this.tagMap.clear();
-    for (const post of articles) {
+  readonly pages = computed(() => {
+    const allMds = Array.from(this.mdMap.value.values());
+    return allMds.filter((md) => md.type === 'page');
+  });
+
+  readonly tagMap = computed(() => {
+    const map = new Map<string, IMarkdown[]>();
+    for (const post of this.articles.value) {
       for (const tag of post.frontmatter.tags) {
-        if (!this.tagMap.has(tag)) {
-          this.tagMap.set(tag, []);
+        if (!map.has(tag)) {
+          map.set(tag, []);
         }
-        this.tagMap.get(tag)?.push(post);
+        map.get(tag)?.push(post);
       }
     }
+    return map;
+  });
+
+  setData(data: IMarkdown[]) {
+    this.mdMap.value = new Map(data.map((item) => [item.filepath, item]));
+  }
+
+  update(post: IMarkdown) {
+    this.mdMap.value.set(post.filepath, post);
+  }
+
+  remove(filepath: string) {
+    return this.mdMap.value.delete(filepath);
+  }
+
+  getArticlePaginations() {
+    return this.paginate(this.articles.value);
+  }
+
+  getTagPaginations(tag: string) {
+    return this.paginate(this.tagMap.value.get(tag) || []);
+  }
+
+  getTags() {
+    return Array.from(this.tagMap.value.entries())
+      .map(([tag, posts]) => ({ tag, posts: posts.length }))
+      .sort((a, b) => b.posts - a.posts);
   }
 
   private paginate(arr: IMarkdown[]) {
@@ -134,6 +124,8 @@ export class MarkdownService {
         );
       })
       .on('change', async (filepath) => {
+        console.log('🚀 ~ markdown.service.ts:132 ~ filepath:', filepath);
+
         this.dataSource.update(
           await this.loadMd(normalizePath(filepath), true),
         );

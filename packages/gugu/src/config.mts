@@ -10,13 +10,17 @@ import { ContextService } from './services/context.service.ts';
 import { getService } from './services/accessor.ts';
 import { FileService } from './services/file.service.ts';
 import { createVBlogPlugin } from './plugins/vblog.mts';
+import { createLogger } from './utils/logger.mts';
 
+const logger = createLogger('[extendConfig]');
 const __dirname = getDirname(import.meta.url);
 
 export const extendConfig = async (
   blogConfig: IBlogConifg,
   viteConfig: UserConfig,
 ) => {
+  logger.info('Start...');
+
   const ggCtx = getService(ContextService);
   global.ggContext = ggCtx;
   await ggCtx.init({ cwd: process.cwd(), blogConfig });

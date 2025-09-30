@@ -27,7 +27,7 @@ async function restart() {
 
 let timmer;
 chokidar
-  .watch(['vite.config.ts', 'packages/gugu2/src', 'packages/gugu2/types'])
+  .watch(['vite.config.ts', 'packages/gugu/src', 'packages/gugu/types'])
   .on('change', () => {
     clearTimeout(timmer);
     timmer = setTimeout(() => {

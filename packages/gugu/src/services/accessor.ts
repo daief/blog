@@ -6,7 +6,12 @@ const container = new Map<Newable<any>, any>();
 
 export function getService<T>(cls: Newable<T>): T {
   if (!container.has(cls)) {
-    container.set(cls, new cls());
+    const ins = new cls();
+    container.set(cls, ins);
+    Promise.resolve().then(() => {
+      // @ts-expect-error service created life hook
+      ins.onCreated?.();
+    });
   }
 
   return container.get(cls);
@@ -21,3 +26,7 @@ export const injectService =
       });
     });
   };
+
+export interface IService {
+  onCreated?(): void;
+}

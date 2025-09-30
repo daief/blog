@@ -17,11 +17,8 @@ export class FileService {
 
   async init() {
     this.watcher = chokidar.watch(this.resolveSource(), {
-      ignoreInitial: true,
       ignored: (file, stats) =>
-        Boolean(
-          stats?.isFile() && file.endsWith('.md') && !file.startsWith('.'),
-        ),
+        Boolean(stats?.isFile() && !file.endsWith('.md')),
     });
 
     const ready = Promise.withResolvers<void>();
@@ -29,6 +26,8 @@ export class FileService {
       .once('ready', () => ready.resolve())
       .once('error', (err: any) => ready.resolve(err));
     await ready.promise;
+
+    this.logger.info('ready');
   }
 
   resolveSource(...args: string[]) {
