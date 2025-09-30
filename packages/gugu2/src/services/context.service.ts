@@ -1,22 +1,24 @@
 import type { IBlogConifg } from '../../types/config.mts';
 import { ILogger, injectLogger } from '../utils/index.mts';
 import { injectService } from './accessor.ts';
-import { PostManageService } from './post-manage.service.ts';
+import { ConfigService } from './config.service.ts';
+import { FileService } from './file.service.ts';
+import { MarkdownService } from './markdown.service.ts';
 
 export class ContextService {
   @injectLogger('[ContextService]')
   logger!: ILogger;
 
-  blogConfig!: IBlogConifg;
-  cwd!: string;
+  @injectService(() => ConfigService)
+  configService!: ConfigService;
+  @injectService(() => MarkdownService)
+  markdownService!: MarkdownService;
+  @injectService(() => FileService)
+  fileService!: FileService;
 
-  @injectService(PostManageService)
-  postManageService!: PostManageService;
-
-  init(cwd: string, cfg: IBlogConifg) {
-    this.cwd = cwd;
-    this.blogConfig = cfg;
-    this.logger.info('初始化 ContextService....');
-    this.postManageService;
+  async init(initOpts: { cwd: string; blogConfig: IBlogConifg }) {
+    this.configService.init(initOpts);
+    await this.fileService.init();
+    await this.markdownService.init();
   }
 }

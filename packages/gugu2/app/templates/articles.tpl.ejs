@@ -1,0 +1,18 @@
+<template>
+  <!-- <component :is="render()" /> -->
+  <div>
+    <% articles.forEach(article => { %>
+    <div><%- article.frontmatter.title %></div>
+    <% }) %>
+  </div>
+</template>
+
+<script setup lang="tsx">
+  defineOptions({
+    name: 'Articles',
+  });
+
+  const render = () => {
+    return <div></div>;
+  };
+</script>

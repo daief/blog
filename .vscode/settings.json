@@ -1,4 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "volar.tsPlugin": false
+  "emmet.includeLanguages": {
+    "ejs": "html"
+  }
 }

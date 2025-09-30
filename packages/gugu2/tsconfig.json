@@ -4,7 +4,7 @@
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "lib": ["DOM", "ESNext"],
-    "allowSyntheticDefaultImports": true,
+    "allowSyntheticDefaultImports": false,
     "importsNotUsedAsValues": "remove",
     // "experimentalDecorators": true,
     // "emitDecoratorMetadata": true,
@@ -12,7 +12,8 @@
     "allowImportingTsExtensions": true,
     "noEmit": true,
 
-    "strict": true
+    "strict": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*", "types/**/*", "app"],
   "exclude": ["node_modules/*", "__sapper__/*", "public/*"]

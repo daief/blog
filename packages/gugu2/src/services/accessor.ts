@@ -13,10 +13,11 @@ export function getService<T>(cls: Newable<T>): T {
 }
 
 export const injectService =
-  (cls: Newable) => (_: unknown, ctx: ClassFieldDecoratorContext<any, any>) => {
+  (getCls: () => Newable) =>
+  (_: unknown, ctx: ClassFieldDecoratorContext<any, any>) => {
     ctx.addInitializer(function (this: any) {
       Object.defineProperty(this, ctx.name, {
-        get: () => getService(cls),
+        get: () => getService(getCls()),
       });
     });
   };

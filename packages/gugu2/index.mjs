@@ -1,5 +1,7 @@
 import 'tsx';
 
+Error.stackTraceLimit = 30;
+
 /**
  * @type {typeof import('./src/index.mts').extendConfig}
  */

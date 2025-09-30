@@ -1,0 +1,55 @@
+import { ILogger, injectLogger } from '../utils/logger.mts';
+import { injectService } from './accessor.ts';
+import * as path from 'path';
+import chokidar, { type FSWatcher } from 'chokidar';
+import { ConfigService } from './config.service.ts';
+import { normalizePath } from 'vite';
+import { getDirname } from '../utils/path.mts';
+
+export class FileService {
+  @injectLogger('[FileService]')
+  private readonly logger!: ILogger;
+
+  @injectService(() => ConfigService)
+  configService!: ConfigService;
+
+  watcher!: FSWatcher;
+
+  async init() {
+    this.watcher = chokidar.watch(this.resolveSource(), {
+      ignoreInitial: true,
+      ignored: (file, stats) =>
+        Boolean(
+          stats?.isFile() && file.endsWith('.md') && !file.startsWith('.'),
+        ),
+    });
+
+    const ready = Promise.withResolvers<void>();
+    this.watcher
+      .once('ready', () => ready.resolve())
+      .once('error', (err: any) => ready.resolve(err));
+    await ready.promise;
+  }
+
+  resolveSource(...args: string[]) {
+    return path.resolve(this.configService.cwd, 'source', ...args);
+  }
+
+  resolveDist(...args: string[]) {
+    return path.resolve(this.configService.cwd, 'dist', ...args);
+  }
+
+  resolveApp(...args: string[]) {
+    return getDirname(import.meta.url, '../../app', ...args);
+  }
+
+  isArticle(filename: string) {
+    return [this.resolveSource('posts'), this.resolveSource('drafts')]
+      .map((it) => normalizePath(it))
+      .some((it) => filename.startsWith(it));
+  }
+
+  isDraft(filename: string) {
+    return filename.startsWith(normalizePath(this.resolveSource('drafts')));
+  }
+}
