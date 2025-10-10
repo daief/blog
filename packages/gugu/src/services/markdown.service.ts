@@ -16,11 +16,11 @@ class DataSource {
   @injectLogger('[DataSource]')
   private readonly logger!: ILogger;
 
-  private mdMap = ref(new Map<string, IMarkdown>());
+  private markdownMap = ref(new Map<string, IMarkdown>());
   private pageSize = 10;
 
   readonly articles = computed(() => {
-    const allMds = Array.from(this.mdMap.value.values());
+    const allMds = Array.from(this.markdownMap.value.values());
     const articles: IMarkdown[] = [];
     for (const md of allMds) {
       if (md.type === 'article') {
@@ -50,7 +50,7 @@ class DataSource {
   });
 
   readonly pages = computed(() => {
-    const allMds = Array.from(this.mdMap.value.values());
+    const allMds: IMarkdown[] = Array.from(this.markdownMap.value.values());
     return allMds.filter((md) => md.type === 'page');
   });
 
@@ -68,15 +68,15 @@ class DataSource {
   });
 
   setData(data: IMarkdown[]) {
-    this.mdMap.value = new Map(data.map((item) => [item.filepath, item]));
+    this.markdownMap.value = new Map(data.map((item) => [item.filepath, item]));
   }
 
   update(post: IMarkdown) {
-    this.mdMap.value.set(post.filepath, post);
+    this.markdownMap.value.set(post.filepath, post);
   }
 
   remove(filepath: string) {
-    return this.mdMap.value.delete(filepath);
+    return this.markdownMap.value.delete(filepath);
   }
 
   getArticlePaginations() {

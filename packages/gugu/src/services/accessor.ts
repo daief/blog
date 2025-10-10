@@ -27,6 +27,6 @@ export const injectService =
     });
   };
 
-export interface IService {
+export interface IServiceCreated {
   onCreated?(): void;
 }

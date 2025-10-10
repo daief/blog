@@ -1,11 +1,11 @@
 import { IRawRoute } from '../../types/index.mts';
-import { injectService, IService } from './accessor.ts';
+import { injectService, IServiceCreated } from './accessor.ts';
 import { MarkdownService } from './markdown.service.ts';
 import { computed, type ComputedRef } from '@vue/reactivity';
 
 const getVid = (str: string) => Buffer.from(str).toString('base64') + '.vue';
 
-export class RouteService implements IService {
+export class RouteService implements IServiceCreated {
   @injectService(() => MarkdownService)
   markdownService!: MarkdownService;
 
@@ -13,7 +13,6 @@ export class RouteService implements IService {
 
   onCreated() {
     this.allRoutes = computed(() => {
-      console.log('Recomputing allRoutes...');
       const articlePaginations =
         this.markdownService.dataSource.getArticlePaginations();
       return [
