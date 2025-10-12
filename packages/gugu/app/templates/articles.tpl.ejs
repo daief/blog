@@ -1,8 +1,11 @@
 <template>
-  <!-- <component :is="render()" /> -->
   <div>
     <% articles.forEach(article => { %>
-    <div><%- article.frontmatter.title %></div>
+    <div>
+      <router-link to="/post/<%- article.frontmatter.id %>">
+        <%- article.frontmatter.title %>
+      </router-link>
+    </div>
     <% }) %>
   </div>
 </template>
@@ -11,8 +14,4 @@
   defineOptions({
     name: 'Articles',
   });
-
-  const render = () => {
-    return <div></div>;
-  };
 </script>

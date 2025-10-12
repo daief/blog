@@ -1,4 +1,4 @@
-import { IRawRoute } from '../../types/index.mts';
+import { IRawRoute, ITemplateType } from '../../types/index.mts';
 import { injectService, IServiceCreated } from './accessor.ts';
 import { MarkdownService } from './markdown.service.ts';
 import { computed, type ComputedRef } from '@vue/reactivity';
@@ -9,19 +9,48 @@ export class RouteService implements IServiceCreated {
   @injectService(() => MarkdownService)
   markdownService!: MarkdownService;
 
+  articlesPaginationRoutes!: ComputedRef<IRawRoute[]>;
+  articleRoutes!: ComputedRef<IRawRoute[]>;
   allRoutes!: ComputedRef<IRawRoute[]>;
 
   onCreated() {
-    this.allRoutes = computed(() => {
+    this.articlesPaginationRoutes = computed(() => {
       const articlePaginations =
         this.markdownService.dataSource.getArticlePaginations();
-      return [
-        ...articlePaginations.map<IRawRoute>((articles, i) => ({
-          vid: getVid(`/page/${i + 1}`),
-          path: `/page/${i + 1}`,
-          layout: 'articles',
+      const arr = articlePaginations.map<IRawRoute>((articles, i) => {
+        const path = `/page/${i + 1}`;
+        return {
+          vid: getVid(path),
+          path,
+          template: 'articles',
           data: { articles },
-        })),
+        };
+      });
+      const indexRoute = { ...arr[0] };
+      indexRoute.path = '/';
+      return [indexRoute, ...arr];
+    });
+
+    this.articleRoutes = computed(() => {
+      return this.markdownService.dataSource.articles.value.map<IRawRoute>(
+        (it) => {
+          const path = `/post/${it.frontmatter.id}`;
+          return {
+            vid: getVid(path),
+            path,
+            template: 'article',
+            data: {
+              article: it,
+            },
+          };
+        },
+      );
+    });
+
+    this.allRoutes = computed(() => {
+      return [
+        ...this.articlesPaginationRoutes.value,
+        ...this.articleRoutes.value,
       ];
     });
   }

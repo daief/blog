@@ -19,10 +19,12 @@ export interface IMarkdown {
   rawContent: string;
 }
 
+export type ITemplateType = 'article' | 'tags' | 'categories' | 'articles';
+
 export interface IRawRoute {
   /** vue 文件的虚拟模块 id */
   vid: string;
   path: string;
-  layout: 'article' | 'tags' | 'categories' | 'articles';
+  template: ITemplateType;
   data: any;
 }

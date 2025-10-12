@@ -67,7 +67,7 @@ export const createVBlogPlugin = () => {
       const target = routeService.getAllRoutes().find((it) => it.vid === id);
       if (target) {
         const code = await renderFileTpl(
-          fileService.resolveApp('templates/articles.tpl.ejs'),
+          fileService.resolveApp(`templates/${target.template}.tpl.ejs`),
           target.data,
         );
 
