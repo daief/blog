@@ -4,6 +4,7 @@ db.json
 *.log
 node_modules/
 public/
+!source/public/
 .deploy*/
 .git-
 dist

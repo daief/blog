@@ -1,9 +1,7 @@
-import type { UserConfig } from 'vite';
-import * as path from 'path';
+import { type UserConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
-import { getDirname } from './utils/path.mts';
 import { createMdPlugin } from './plugins/md.mts';
 import type { IBlogConifg } from '../types/index.mts';
 import { ContextService } from './services/context.service.ts';
@@ -13,7 +11,6 @@ import { createVBlogPlugin } from './plugins/vblog.mts';
 import { createLogger } from './utils/logger.mts';
 
 const logger = createLogger('[extendConfig]');
-const __dirname = getDirname(import.meta.url);
 
 export const extendConfig = async (
   blogConfig: IBlogConifg,
@@ -25,7 +22,10 @@ export const extendConfig = async (
   global.ggContext = ggCtx;
   await ggCtx.init({ cwd: process.cwd(), blogConfig });
 
-  viteConfig.root = path.resolve(__dirname, '../app');
+  const fileService = getService(FileService);
+
+  viteConfig.root = fileService.resolveApp();
+  viteConfig.publicDir = fileService.resolveSource('public');
   viteConfig.plugins = [
     createMdPlugin(),
     createVBlogPlugin(),
@@ -38,14 +38,15 @@ export const extendConfig = async (
     ...viteConfig.resolve,
     alias: {
       ...viteConfig.resolve?.alias,
-      '@app': path.resolve(__dirname, '../app'),
+      '@app': fileService.resolveApp(),
     },
   };
 
   viteConfig.build = {
     emptyOutDir: true,
     ...viteConfig.build,
-    outDir: getService(FileService).resolveDist(),
+    outDir: fileService.resolveDist(),
+    copyPublicDir: true,
   };
 
   return viteConfig;
