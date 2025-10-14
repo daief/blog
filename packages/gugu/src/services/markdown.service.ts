@@ -160,9 +160,10 @@ export class MarkdownService {
    * @returns
    */
   private async loadMd(filepath: string, all = false): Promise<IMarkdown> {
-    const fileContent = all
-      ? await fs.readFile(filepath, 'utf-8')
-      : await readUntilMore(filepath);
+    // const fileContent = all
+    //   ? await fs.readFile(filepath, 'utf-8')
+    //   : await readUntilMore(filepath);
+    const fileContent = await fs.readFile(filepath, 'utf-8');
     const matterResult = fm.default<any>(fileContent);
     const frontmatter = matterResult.attributes as Omit<
       IMarkdown['frontmatter'],

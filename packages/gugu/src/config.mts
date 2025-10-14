@@ -9,6 +9,7 @@ import { getService } from './services/accessor.ts';
 import { FileService } from './services/file.service.ts';
 import { createVBlogPlugin } from './plugins/vblog.mts';
 import { createLogger } from './utils/logger.mts';
+import { getDirname } from './utils/path.mts';
 
 const logger = createLogger('[extendConfig]');
 
@@ -47,6 +48,11 @@ export const extendConfig = async (
     ...viteConfig.build,
     outDir: fileService.resolveDist(),
     copyPublicDir: true,
+  };
+
+  viteConfig.css = {
+    ...viteConfig.css,
+    postcss: getDirname(import.meta.url, '../postcss.config.mjs'),
   };
 
   return viteConfig;

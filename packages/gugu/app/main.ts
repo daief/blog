@@ -2,8 +2,11 @@ import { ViteSSG } from 'vite-ssg';
 import App from './app.vue';
 // @ts-ignore
 import routes from 'vblog:routes';
+import { setup } from '@css-render/vue3-ssr';
 
-console.log('🚀 ~ main.ts:5 ~ routes:', routes);
+import 'vfonts/Lato.css';
+import 'vfonts/FiraCode.css';
+import './styles/main.css';
 
 export const createApp = ViteSSG(
   App,
@@ -23,5 +26,11 @@ export const createApp = ViteSSG(
       return { top: 0 };
     },
   },
-  ({ app }) => {},
+  ({ app, initialState }) => {
+    // @ts-expect-error
+    if (import.meta.env.SSR) {
+      const { collect } = setup(app);
+      initialState.naiveUiStyles = collect();
+    }
+  },
 );

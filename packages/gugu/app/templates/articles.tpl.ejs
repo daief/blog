@@ -1,16 +1,33 @@
 <template>
-  <div>
+  <div class="space-y-8">
     <% articles.forEach(article => { %>
-    <div>
-      <router-link to="/post/<%- article.frontmatter.id %>">
-        <%- article.frontmatter.title %>
-      </router-link>
-    </div>
+    <n-card>
+      <template #header>
+        <router-link
+          :to="'/post/<%- article.frontmatter.id %>#more'"
+          class="text-2xl font-bold hover:text-blue-500 transition-colors"
+        >
+          <%- article.frontmatter.title %>
+        </router-link>
+      </template>
+
+      <Markdown> <%- article.excerpt %> </Markdown>
+
+      <template #footer>
+        <div class="text-gray-500 mb-4 text-sm">
+          <%- new Date(article.frontmatter.date).toLocaleDateString() %>
+        </div>
+      </template>
+    </n-card>
     <% }) %>
   </div>
 </template>
 
-<script setup lang="tsx">
+<script setup lang="ts">
+  import { NCard, NButton, NIcon } from 'naive-ui';
+  import { ChevronBack } from '@vicons/ionicons5';
+  import Markdown from '@app/components/markdown.vue';
+
   defineOptions({
     name: 'Articles',
   });
