@@ -1,1 +1,3 @@
-export interface IBlogConifg {}
+export interface IBlogConifg {
+  mode: string;
+}

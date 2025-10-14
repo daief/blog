@@ -124,8 +124,6 @@ export class MarkdownService {
         );
       })
       .on('change', async (filepath) => {
-        console.log('🚀 ~ markdown.service.ts:132 ~ filepath:', filepath);
-
         this.dataSource.update(
           await this.loadMd(normalizePath(filepath), true),
         );

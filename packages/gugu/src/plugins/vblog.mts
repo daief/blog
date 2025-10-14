@@ -5,6 +5,9 @@ import ejs from 'ejs';
 import { FileService } from '../services/file.service.ts';
 import { watch } from '@vue/reactivity';
 import { type IRawRoute } from '../../types/index.mts';
+import { createLogger } from '../utils/logger.mts';
+
+const logger = createLogger('[plugin:vblog]');
 
 const renderFileTpl = (file: string, env: any) => {
   return ejs.renderFile(file, env, {});
@@ -22,7 +25,7 @@ export const createVBlogPlugin = () => {
   const vRoutesId = 'vblog:routes';
 
   const getRoutesCode = () => {
-    const routes = routeService.getAllRoutes();
+    const routes = routeService.allRoutes.value;
     const arrStr = routes
       .map((route) => {
         return `{
@@ -40,15 +43,14 @@ export const createVBlogPlugin = () => {
         const mod = server.moduleGraph.getModuleById(id);
         if (mod) {
           server.reloadModule(mod);
-          console.log(`[vblog] invalidated: ${id}`);
+          logger.info(`invalidated: ${id}`);
         }
       };
 
+      // TODO 考虑使用 addWatchFile 添加 md 依赖
       watch(
         () => routeService.allRoutes.value,
         (newRoutes: IRawRoute[]) => {
-          console.log('[vblog] Route data changed, invalidating modules...');
-
           invalidateModule(vRoutesId);
 
           if (newRoutes) {
@@ -59,18 +61,19 @@ export const createVBlogPlugin = () => {
     },
     resolveId(id) {
       if (id.startsWith(vIdPrefix)) return id;
-      if (routeService.getAllRoutes().some((it) => it.vid === id)) return id;
+      if (routeService.allRoutesMap.value.has(id)) return id;
     },
     async load(id, options) {
       if (id === vRoutesId) return getRoutesCode();
 
-      const target = routeService.getAllRoutes().find((it) => it.vid === id);
+      const target = routeService.allRoutesMap.value.get(id);
       if (target) {
-        const code = await renderFileTpl(
-          fileService.resolveApp(`templates/${target.template}.tpl.ejs`),
-          target.data,
+        const tplPath = fileService.resolveApp(
+          `templates/${target.template}.tpl.ejs`,
         );
+        this.addWatchFile(tplPath);
 
+        const code = await renderFileTpl(tplPath, target.data);
         return code;
       }
       return null;

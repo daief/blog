@@ -8,8 +8,13 @@ export class ConfigService {
   blogConfig!: IBlogConifg;
   cwd!: string;
 
-  init(initOpts: { cwd: string; blogConfig: IBlogConifg }) {
-    this.blogConfig = initOpts.blogConfig;
-    this.cwd = initOpts.cwd;
+  get IsDev() {
+    return this.blogConfig.mode === 'development';
+  }
+
+  init({ cwd, blogConfig }: { cwd: string; blogConfig: IBlogConifg }) {
+    this.logger.info('mode:', blogConfig.mode);
+    this.blogConfig = blogConfig;
+    this.cwd = cwd;
   }
 }

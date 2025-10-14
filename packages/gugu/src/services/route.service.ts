@@ -11,7 +11,9 @@ export class RouteService implements IServiceCreated {
 
   articlesPaginationRoutes!: ComputedRef<IRawRoute[]>;
   articleRoutes!: ComputedRef<IRawRoute[]>;
+
   allRoutes!: ComputedRef<IRawRoute[]>;
+  allRoutesMap!: ComputedRef<Map<string, IRawRoute>>;
 
   onCreated() {
     this.articlesPaginationRoutes = computed(() => {
@@ -53,9 +55,9 @@ export class RouteService implements IServiceCreated {
         ...this.articleRoutes.value,
       ];
     });
-  }
 
-  getAllRoutes(): IRawRoute[] {
-    return this.allRoutes.value;
+    this.allRoutesMap = computed(() => {
+      return new Map(this.allRoutes.value.map((it) => [it.vid, it]));
+    });
   }
 }
