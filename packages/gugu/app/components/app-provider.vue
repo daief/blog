@@ -29,10 +29,10 @@ import { useTheme } from '@app/composables/use-theme';
 const { naiveTheme } = useTheme();
 const themeOverrides = computed<GlobalThemeOverrides>(() => ({
   common: {
-    primaryColor: '#3498db',
-    primaryColorHover: '#5dade2',
-    primaryColorPressed: '#217dbb',
-    primaryColorSuppl: '#3498db',
+    primaryColor: '#f97316',
+    primaryColorHover: '#fb923c',
+    primaryColorPressed: '#ea580c',
+    primaryColorSuppl: '#f97316',
   },
 }));
 </script>

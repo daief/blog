@@ -4,8 +4,8 @@ import App from './app.vue';
 import routes from 'vblog:routes';
 import { setup } from '@css-render/vue3-ssr';
 
-import 'vfonts/Lato.css';
-import 'vfonts/FiraCode.css';
+import 'vfonts/Inter.css';
+import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
 
 export const createApp = ViteSSG(

@@ -1,24 +1,22 @@
 <template>
-  <n-card>
-    <template #header>
+  <article>
+    <header>
       <h1 class="text-4xl font-bold text-center mb-4">
         <%- article.frontmatter.title %>
       </h1>
-      <div class="text-gray-500 text-center text-sm">
+      <div class="text-gray-500 dark:text-gray-400 text-center text-sm">
         <%- new Date(article.frontmatter.date).toLocaleDateString() %>
       </div>
-    </template>
-    <Markdown>
+    </header>
+    <Markdown class="mt-8">
       <%- article.excerpt %>
       <a href="#more" class="hidden"></a>
       <%- article.more %>
     </Markdown>
-  </n-card>
+  </article>
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue';
-  import { NCard } from 'naive-ui';
   import Markdown from '@app/components/markdown.vue';
 
   defineOptions({

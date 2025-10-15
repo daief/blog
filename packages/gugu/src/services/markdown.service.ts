@@ -6,6 +6,7 @@ import plimit from 'p-limit';
 import { IMarkdown } from '../../types/index.mts';
 import fs from 'fs-extra';
 import * as glob from 'glob';
+import * as path from 'path';
 import { FileService } from './file.service.ts';
 import { normalizePath } from 'vite';
 import * as fm from 'front-matter';
@@ -171,9 +172,25 @@ export class MarkdownService {
     > & { tags: string[] | string };
     const { sort, tags, ...rest } = frontmatter;
 
-    const [excerpt, more = ''] = this.md!.gParse(matterResult.body, {}).split(
-      '<!-- more -->',
-    );
+    const [excerpt, more = ''] = this.md!.gParse(matterResult.body, {
+      transformImgSrc: (imgSrc) => {
+        const isAbs = ['http', '//', 'data:'].some((prefix) =>
+          imgSrc.startsWith(prefix),
+        );
+        if (isAbs) return imgSrc;
+
+        const sourceRoot = this.fileService.resolveSource();
+        const fileDir = path.dirname(filepath);
+        const imageAbsPath = path.resolve(fileDir, imgSrc);
+
+        if (imageAbsPath.startsWith(sourceRoot)) {
+          const relativeToSource = path.relative(sourceRoot, imageAbsPath);
+          return `@source/${relativeToSource.replace(/\\/g, '/')}`;
+        }
+
+        return imgSrc;
+      },
+    }).split('<!-- more -->');
 
     return {
       type: this.fileService.isArticle(filepath) ? 'article' : 'page',

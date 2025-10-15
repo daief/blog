@@ -40,6 +40,7 @@ export const extendConfig = async (
     alias: {
       ...viteConfig.resolve?.alias,
       '@app': fileService.resolveApp(),
+      '@source': fileService.resolveSource(),
     },
   };
 

@@ -4,6 +4,7 @@ import { Marked, MarkedExtension } from 'marked';
 import hljs from 'highlight.js';
 import qs from 'query-string';
 import * as htmlEntities from 'html-entities';
+import * as path from 'path';
 
 export async function readUntilMore(
   filepath: string,
@@ -45,6 +46,10 @@ export const escapeHtml = (str: string) =>
       )[tag] || tag),
   );
 
+export interface IEnv {
+  transformImgSrc?: (src: string) => string;
+}
+
 const markedHtmlEnhanceExt = (): MarkedExtension => {
   return {
     renderer: {
@@ -79,8 +84,37 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
 
         return `<a ${attrStr}>${text}</a>`;
       },
-      image: ({ href, title: imgAttrsQuery }) => {
-        return '';
+      image(imgToken) {
+        const { href, title: imgAttrsQuery, text: alt } = imgToken;
+        const options = this.parser.options as IEnv;
+        const attrInput = qs.parse(
+          htmlEntities.decode(imgAttrsQuery || ''),
+        ) as Record<string, string>;
+        const imgBaseName = path.basename(href);
+
+        const attrObj = {
+          ...attrInput,
+        };
+
+        if (attrObj.width) {
+          attrObj.width = Number.isFinite(+attrObj.width)
+            ? attrObj.width + 'px'
+            : attrObj.width;
+        }
+
+        const attrs = Object.entries({
+          alt: alt || attrObj.title || imgBaseName,
+          loading: 'lazy',
+          ...attrObj,
+          title: attrObj.title || imgBaseName,
+          class: `post-image ${attrObj.class || ''}`,
+          src: options.transformImgSrc ? options.transformImgSrc(href) : href,
+        }).map(([key, value]) =>
+          value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
+        );
+        const attrsStr = attrs.join(' ');
+
+        return `<img ${attrsStr}  onerror="this.onerror=null;this.src='/images/image-error.jpg';">`;
       },
     },
   };
@@ -91,8 +125,8 @@ export type IGMarkerd = ReturnType<typeof createRenderer>;
 export const createRenderer = () => {
   const marked = new Marked(markedHtmlEnhanceExt());
 
-  const gParse = (md: string, env: {}) => {
-    return marked.parse(md, { async: false });
+  const gParse = (md: string, env: IEnv) => {
+    return marked.parse(md, { async: false, ...env });
   };
 
   return Object.assign(marked, {
