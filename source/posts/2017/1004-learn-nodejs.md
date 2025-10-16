@@ -2,7 +2,7 @@
 title: Node.js 学习搭建
 date: 2017-10-04
 id: learn-nodejs
-categories: ["Node.js"]
+categories: ['Node.js']
 tags:
   - JavaScript
   - Node.js
@@ -80,7 +80,7 @@ npm init
 新建`app.js`：
 
 ```javascript
-console.log("hello world");
+console.log('hello world');
 ```
 
 最后终端里运行可以看到：
@@ -103,16 +103,16 @@ Node.js 应用是由哪几部分组成的：
 编辑`app.js`:
 
 ```javascript
-var http = require("http");
+var http = require('http');
 
 http
-  .createServer(function(request, response) {
+  .createServer(function (request, response) {
     // 发送 HTTP 头部
     // HTTP 状态值: 200 : OK
     // 内容类型: text/plain;charset=utf-8
-    response.writeHead(200, { "Content-Type": "text/plain;charset=utf-8" });
+    response.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 
-    response.write("Hello World");
+    response.write('Hello World');
 
     response.end();
   })
@@ -133,24 +133,24 @@ http
 修改 app.js：
 
 ```javascript
-var http = require("http");
+var http = require('http');
 // 引入 fs 模块并赋值给变量 fs
-var fs = require("fs");
+var fs = require('fs');
 
 http
-  .createServer(function(request, response) {
+  .createServer(function (request, response) {
     // 发送 HTTP 头部
     // HTTP 状态值: 200 : OK
     // 内容类型: text/plain;charset=utf-8
-    response.writeHead(200, { "Content-Type": "text/plain;charset=utf-8" });
+    response.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
 
     // 读取文件，异步执行。同步：var data = fs.readFileSync('input.txt');
-    fs.readFile("file/1.txt", function(err, data) {
+    fs.readFile('file/1.txt', function (err, data) {
       // 回调函数
       if (err) {
         console.log(err);
         // 读取失败发回响应信息
-        response.end("文件读取失败");
+        response.end('文件读取失败');
         return;
       }
       // 发回文件内容
@@ -181,18 +181,18 @@ javascript
 
 ```javascript
 // 引入中间件
-var express = require("express");
+var express = require('express');
 
 var app = express();
 
 // 注册路由'/'
-app.get("/", function(req, res) {
-  res.send("Hello World");
+app.get('/', function (req, res) {
+  res.send('Hello World');
 });
 
 // 监听端口
-app.listen(8888, function() {
-  console.log("run@", 8888);
+app.listen(8888, function () {
+  console.log('run@', 8888);
 });
 ```
 
@@ -232,19 +232,19 @@ added 48 packages in 28.21s
 
 ```javascript
 // 引入中间件
-var express = require("express");
+var express = require('express');
 
 var app = express();
 
 // 设置public目录作为静态资源，可以直接通过url进行访问
-app.use(express.static("public"));
+app.use(express.static('public'));
 
-app.get("/", function(req, res) {
-  res.send("Hello GET");
+app.get('/', function (req, res) {
+  res.send('Hello GET');
 });
 
-app.listen(8888, function() {
-  console.log("run@", 8888);
+app.listen(8888, function () {
+  console.log('run@', 8888);
 });
 ```
 
@@ -264,32 +264,30 @@ public
 
 安装 ejs：
 
-```npm
+```bash
 npm i ejs --save
 ```
 
 创建`views`目录，并在其中创建 hello.ejs：
 
-```ejs
-<div>
-  姓名: <%=name%>
-</div>
+```html
+<div>姓名: <%=name%></div>
 ```
 
 引入、使用，编辑`app.js`：
 
 ```javascript
 // 引入中间件
-var express = require("express");
+var express = require('express');
 // 引入ejs
-var ejs = require("ejs");
+var ejs = require('ejs');
 var app = express();
 
 // 设置public目录作为静态资源，可以直接通过url进行访问
-app.use(express.static("public"));
+app.use(express.static('public'));
 
 // 将模版引擎设置为 ejs
-app.set("view engine", "ejs");
+app.set('view engine', 'ejs');
 
 // 将 app.set('view engine', 'ejs'); 换成下面两句之后
 // 模板不再以.ejs结尾，改为.html
@@ -297,19 +295,19 @@ app.set("view engine", "ejs");
 // app.engine('.html',ejs.__express);
 // app.set('view engine', 'html');
 
-app.get("/", function(req, res) {
-  res.send("Hello GET");
+app.get('/', function (req, res) {
+  res.send('Hello GET');
 });
 
-app.get("/hello", function(req, res) {
+app.get('/hello', function (req, res) {
   // 修改响应信息
   // 渲染 hello.ejs
   // 读取 ./views/hello.ejs文件的内容，然后将其中的name变量替换为test,例如<%=name%>会变为张三
-  res.render("hello", { name: "张三" });
+  res.render('hello', { name: '张三' });
 });
 
-app.listen(8888, function() {
-  console.log("run@", 8888);
+app.listen(8888, function () {
+  console.log('run@', 8888);
 });
 ```
 
@@ -332,33 +330,33 @@ app.listen(8888, function() {
 
 ```javascript
 // ===========在app中注册路由===========
-app.use("/user", require("./router/user"));
+app.use('/user', require('./router/user'));
 ```
 
 编辑`user.js`：
 
 ```javascript
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
 var users = [
-  { id: 1, name: "张三" },
-  { id: 2, name: "李四" },
-  { id: 3, name: "王五" }
+  { id: 1, name: '张三' },
+  { id: 2, name: '李四' },
+  { id: 3, name: '王五' },
 ];
 
 // 统一设置 head 信息
-router.all("*", function(req, res, next) {
+router.all('*', function (req, res, next) {
   // 跨域请求时是否携带cookie
-  res.header("Access-Control-Allow-Credentials", true);
+  res.header('Access-Control-Allow-Credentials', true);
   // 允许跨域
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Origin', '*');
   res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept',
   );
-  res.header("Access-Control-Allow-Methods", "PUT,POST,GET,DELETE,OPTIONS");
-  res.header("Content-Type", "application/json;charset=utf-8");
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS');
+  res.header('Content-Type', 'application/json;charset=utf-8');
   // 调用next
   next();
 });
@@ -366,7 +364,7 @@ router.all("*", function(req, res, next) {
 // app.js中是在 /user 后引用的，所以 /user/id/1 才能进行匹配
 
 //定义一个get请求
-router.get("/id/:id", function(req, res, next) {
+router.get('/id/:id', function (req, res, next) {
   var queryid = req.params.id || 0;
 
   var user = {};
@@ -382,7 +380,7 @@ router.get("/id/:id", function(req, res, next) {
 });
 
 // post请求
-router.post("/id", function(req, res, next) {
+router.post('/id', function (req, res, next) {
   // req.param(“id”) 已舍弃
   var queryid = req.body.id || 0;
 
@@ -398,7 +396,7 @@ router.post("/id", function(req, res, next) {
   res.send(JSON.stringify(user));
 });
 
-router.get("/all", function(req, res, next) {
+router.get('/all', function (req, res, next) {
   // 返回用户列表
   res.send(JSON.stringify(users));
 });
@@ -413,7 +411,7 @@ module.exports = router;
 
 ```javascript
 // 通常使用body-parser进行post参数的解析,不添加该项依赖，req.body为undefined
-var bodyParser = require("body-parser");
+var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -436,23 +434,23 @@ npm i mysql --save
 
 ```javascript
 // 引入模块
-var mysql = require("mysql");
+var mysql = require('mysql');
 
 // 基本使用
 var connection = mysql.createConnection({
-  host: "localhost",
-  port: "3306",
-  user: "root", // 数据库连接用户名
-  password: "123456", // 连接密码
-  database: "test_db" // 连接数据库
+  host: 'localhost',
+  port: '3306',
+  user: 'root', // 数据库连接用户名
+  password: '123456', // 连接密码
+  database: 'test_db', // 连接数据库
 });
 
 connection.connect();
 
 //查询
-connection.query("select * from `admin`", function(err, rows, fields) {
+connection.query('select * from `admin`', function (err, rows, fields) {
   if (err) throw err;
-  console.log("查询结果为: ", rows, fields);
+  console.log('查询结果为: ', rows, fields);
 });
 //关闭连接
 connection.end();
@@ -465,27 +463,27 @@ connection.end();
 编辑`mysql.js`：
 
 ```javascript
-var mysql = require("mysql");
+var mysql = require('mysql');
 
 // 连接池，默认10个连接数
 var pool = mysql.createPool({
-  host: "localhost",
-  port: "3306",
-  user: "root", // 数据库连接用户名
-  password: "123456", // 连接密码
-  database: "test_db", // 连接数据库
-  multipleStatements: true
+  host: 'localhost',
+  port: '3306',
+  user: 'root', // 数据库连接用户名
+  password: '123456', // 连接密码
+  database: 'test_db', // 连接数据库
+  multipleStatements: true,
 });
 
-var query = function({ sql, obj, success, fail }) {
-  obj = obj || "";
-  pool.getConnection(function(err, conn) {
+var query = function ({ sql, obj, success, fail }) {
+  obj = obj || '';
+  pool.getConnection(function (err, conn) {
     if (err) {
       // 失败回调
       fail(err);
     } else {
       // sql，obj 预编译，后面可以看到
-      conn.query(sql, obj, function(qerr, vals, fields) {
+      conn.query(sql, obj, function (qerr, vals, fields) {
         // 释放连接
         conn.release();
         // 成功回调
@@ -503,24 +501,24 @@ module.exports = query;
 
 ```javascript
 // 引入
-var query = require("../mysql");
+var query = require('../mysql');
 
 // 修改 get 请求的控制器
-router.get("/id/:id", function(req, res, next) {
+router.get('/id/:id', function (req, res, next) {
   var queryid = req.params.id || 0;
 
   var user = {};
 
   query({
     // sql 预编译
-    sql: "select * from `user` where id = ?",
+    sql: 'select * from `user` where id = ?',
     obj: queryid,
     success: (err, vals, fields) => {
       res.send(JSON.stringify(vals));
     },
-    fail: err => {
+    fail: (err) => {
       res.send(JSON.stringify([]));
-    }
+    },
   });
 });
 ```
@@ -578,12 +576,12 @@ log4js 配置说明（还不是很清楚，简单按照官方配置）：
 
 ```javascript
 // add log4js
-var log4js = require("log4js");
+var log4js = require('log4js');
 
 // 使用 config/log4js.json 的配置
-log4js.configure("./config/log4js.json");
+log4js.configure('./config/log4js.json');
 // 页面请求日志, level用auto时
-app.use(log4js.connectLogger(log4js.getLogger("http"), { level: "auto" }));
+app.use(log4js.connectLogger(log4js.getLogger('http'), { level: 'auto' }));
 ```
 
 创建`log`目录，再重新运行，可以看到`log`目录下生成了两个日志文件。访问链接后发现日志中的内容会自动记录。
@@ -592,12 +590,12 @@ app.use(log4js.connectLogger(log4js.getLogger("http"), { level: "auto" }));
 
 ```javascript
 // 引入log4js
-var logger = require("log4js").getLogger("user");
+var logger = require('log4js').getLogger('user');
 
 // 然后使用 logger 可进行日志记录
-logger.debug("Some debug handle");
+logger.debug('Some debug handle');
 
-logger.error("some error");
+logger.error('some error');
 ```
 
 ### 结束

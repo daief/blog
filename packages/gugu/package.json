@@ -51,6 +51,7 @@
     "query-string": "^9.3.1",
     "sass-embedded": "^1.93.2",
     "serve-static": "^2.2.0",
+    "shiki": "^3.13.0",
     "tailwindcss": "^4.1.13",
     "tsx": "^4.20.5",
     "vfonts": "^0.0.3",

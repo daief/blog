@@ -132,6 +132,8 @@ export class MarkdownService {
       .on('unlink', (filepath) => {
         this.dataSource.remove(normalizePath(filepath));
       });
+
+    this.logger.info('ready');
   }
 
   private async loadMds() {
@@ -172,7 +174,8 @@ export class MarkdownService {
     > & { tags: string[] | string };
     const { sort, tags, ...rest } = frontmatter;
 
-    const [excerpt, more = ''] = this.md!.gParse(matterResult.body, {
+    const mdHtml = await this.md!.gParse(matterResult.body, {
+      filepath,
       transformImgSrc: (imgSrc) => {
         const isAbs = ['http', '//', 'data:'].some((prefix) =>
           imgSrc.startsWith(prefix),
@@ -190,7 +193,8 @@ export class MarkdownService {
 
         return imgSrc;
       },
-    }).split('<!-- more -->');
+    });
+    const [excerpt, more = ''] = mdHtml.split('<!-- more -->');
 
     return {
       type: this.fileService.isArticle(filepath) ? 'article' : 'page',

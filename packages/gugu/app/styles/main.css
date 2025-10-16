@@ -1,34 +1,61 @@
 @import 'tailwindcss';
-@plugin "@tailwindcss/typography";
+@import './typography.css';
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  * {
+    @apply border-border outline-accent/75;
+    scrollbar-width: auto;
+    scrollbar-color: var(--color-muted) transparent;
+  }
+
+  html {
+    @apply overflow-y-scroll scroll-smooth;
+  }
+
   body {
-    font-family: 'Inter', sans-serif;
+    /* font-family: 'Inter', sans-serif; */
+    font-family: ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji';
   }
 
   code,
   pre {
-    font-family: 'IBM Plex Mono', monospace;
+    /* font-family: 'IBM Plex Mono', monospace; */
   }
 }
 
 :root,
 html[data-theme='light'] {
-  /* --background: #fdfdfd;
+  --background: #fdfdfd;
   --foreground: #282728;
   --accent: #006cac;
-  --muted: #e6e6e6; */
+  --muted: #e6e6e6;
   --border: #ece9e9;
 }
 
 html[data-theme='dark'] {
-  /* --background: #212737;
+  --background: #212737;
   --foreground: #eaedf3;
   --accent: #ff6b01;
-  --muted: #343f60; */
+  --muted: #343f60;
   --border: #ab4b08;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 }
 
 @utility max-w-app {
   @apply max-w-3xl;
+}
+
+body {
+  /* @apply bg-background; */
+  background-color: var(--background) !important;
 }

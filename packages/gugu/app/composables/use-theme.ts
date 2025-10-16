@@ -4,12 +4,14 @@ import { darkTheme } from 'naive-ui';
 
 const isDark = useDark({
   selector: 'html',
-  attribute: 'class',
+  attribute: 'data-theme',
   valueDark: 'dark',
   valueLight: 'light',
 });
 
-const theme = computed<'light' | 'dark'>(() => isDark.value ? 'dark' : 'light');
+const theme = computed<'light' | 'dark'>(() =>
+  isDark.value ? 'dark' : 'light',
+);
 const naiveTheme = computed(() => (isDark.value ? darkTheme : null));
 
 export function useTheme() {

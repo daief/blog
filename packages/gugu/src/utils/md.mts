@@ -5,6 +5,7 @@ import hljs from 'highlight.js';
 import qs from 'query-string';
 import * as htmlEntities from 'html-entities';
 import * as path from 'path';
+import * as shiki from 'shiki';
 
 export async function readUntilMore(
   filepath: string,
@@ -47,22 +48,51 @@ export const escapeHtml = (str: string) =>
   );
 
 export interface IEnv {
+  filepath: string;
   transformImgSrc?: (src: string) => string;
 }
 
 const markedHtmlEnhanceExt = (): MarkedExtension => {
   return {
+    async: true,
+    async walkTokens(token) {
+      // @ts-expect-error
+      const options = this.options as IEnv;
+
+      if (token.type === 'code') {
+        const [lang = 'text', ...props] = token.lang?.split(' ') ?? [];
+        if (lang === 'mermaid') return;
+
+        const sourceCode = token.text;
+
+        const codeResult = await shiki.codeToHtml(sourceCode, {
+          lang,
+          themes: { light: 'min-light', dark: 'night-owl' },
+          defaultColor: false,
+          transformers: [],
+        });
+
+        // transforms token to html
+        Object.assign(token, {
+          type: 'html',
+          block: true,
+          text: `${codeResult}\n`,
+        });
+      }
+    },
     renderer: {
-      code: ({ text: sourceCode, lang }) => {
+      code({ text: sourceCode, lang }) {
+        const options = this.options as IEnv;
         const language = lang!;
         // 处理 mermaid 图表
         if (/^mermaid$/i.test(language)) {
-          return `<div class="mermaid">${sourceCode}</div>`;
+          return `<pre class="mermaid">${sourceCode}</pre>`;
         }
-        const codeResult = !hljs.getLanguage(language)
-          ? escapeHtml(sourceCode)
-          : hljs.highlight(sourceCode, { language }).value;
-        return `<pre class="hljs language-${language}" hljs-language="${language}"><code style="display:block;">${codeResult}</code></pre>`;
+        // const codeResult = !hljs.getLanguage(language)
+        //   ? escapeHtml(sourceCode)
+        //   : hljs.highlight(sourceCode, { language }).value;
+        // return `<pre class="hljs language-${language}" hljs-language="${language}"><code style="display:block;">${codeResult}</code></pre>`;
+        return '';
       },
       heading({ tokens, depth: level }) {
         const text = this.parser.parseInline(tokens);
@@ -126,7 +156,7 @@ export const createRenderer = () => {
   const marked = new Marked(markedHtmlEnhanceExt());
 
   const gParse = (md: string, env: IEnv) => {
-    return marked.parse(md, { async: false, ...env });
+    return marked.parse(md, { async: true, ...env });
   };
 
   return Object.assign(marked, {
