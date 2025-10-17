@@ -7,6 +7,7 @@ export interface IMarkdown {
     title: string;
     sort: number;
     date: Date;
+    modified?: Date;
     tags: string[];
     description?: string | null;
     comment?: boolean;

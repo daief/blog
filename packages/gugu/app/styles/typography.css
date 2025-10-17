@@ -89,17 +89,25 @@
     pre {
       @apply focus-visible:border-transparent focus-visible:outline-2 focus-visible:outline-accent focus-visible:outline-dashed;
     }
+
+    /* ===== Image ===== */
+    img.post-image {
+      @apply border block mx-auto rounded-sm p-0.5;
+    }
+
+    /* ===== first & last ===== */
+    & > :first-child {
+      @apply mt-0;
+    }
+    & > :last-child {
+      @apply mb-0;
+    }
   }
 
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .shiki {
     @apply flex border border-border bg-(--shiki-light-bg) text-(--shiki-light) outline-border [&_span]:text-(--shiki-light);
   }
-
-  html[data-theme='dark'] .shiki {
-    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
-  }
-
   /* Styles for Shiki transformers */
   /* https://shiki.style/packages/transformers */
   .shiki {
@@ -116,17 +124,7 @@
       @apply rounded-sm border border-border px-0.5 py-px;
     }
   }
-
-  /* ===== Image ===== */
-  img.post-image {
-    @apply border block mx-auto rounded-sm p-0.5;
-  }
-
-  /* ===== first & last ===== */
-  &:first-child {
-    @apply mt-0;
-  }
-  &:last-child {
-    @apply mb-0;
+  html[data-theme='dark'] .shiki {
+    @apply bg-(--shiki-dark-bg) text-(--shiki-dark) [&_span]:text-(--shiki-dark);
   }
 }

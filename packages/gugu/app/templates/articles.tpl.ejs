@@ -4,16 +4,17 @@
     <article>
       <router-link
         :to="'/post/<%- article.frontmatter.id %>#more'"
-        class="text-2xl font-bold hover:text-orange-500 transition-colors"
+        class="text-xl font-bold text-accent transition-colors"
       >
         <%- article.frontmatter.title %>
       </router-link>
-      <div class="text-gray-500 dark:text-gray-400 mt-2 text-sm">
-        <%- new Date(article.frontmatter.date).toLocaleDateString() %>
-      </div>
-      <div class="mt-4">
-        <Markdown> <%- article.excerpt %> </Markdown>
-      </div>
+
+      <PostMetaInfo
+        class="my-2"
+        :meta="metaMap['<%- article.frontmatter.id %>']"
+      />
+
+      <Markdown> <%- article.excerpt %> </Markdown>
     </article>
     <% }) %>
   </div>
@@ -21,8 +22,13 @@
 
 <script setup lang="ts">
   import Markdown from '@app/components/markdown.vue';
+  import PostMetaInfo from '@app/components/post/meta-info.vue';
 
   defineOptions({
     name: 'Articles',
   });
+
+  const metaMap = JSON.parse(
+    '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter, isDraft: article.isDraft }]))) %>',
+  );
 </script>

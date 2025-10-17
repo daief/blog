@@ -1,6 +1,7 @@
 import { type UserConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
+import VueMacros from 'vue-macros/vite';
 
 import { createMdPlugin } from './plugins/md.mts';
 import type { IBlogConifg } from '../types/index.mts';
@@ -28,10 +29,14 @@ export const extendConfig = async (
   viteConfig.root = fileService.resolveApp();
   viteConfig.publicDir = fileService.resolveSource('public');
   viteConfig.plugins = [
+    VueMacros({
+      plugins: {
+        vue: vuePlugin(),
+        vueJsx: vueJsx({}),
+      },
+    }),
     createMdPlugin(),
     createVBlogPlugin(),
-    vuePlugin(),
-    vueJsx({}),
     ...(viteConfig.plugins || []),
   ];
 
