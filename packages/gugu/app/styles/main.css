@@ -56,6 +56,10 @@ html[data-theme='dark'] {
 }
 
 body {
-  /* @apply bg-background; */
-  background-color: var(--background) !important;
+  background-color: var(--background);
+}
+
+.page-bg-gradient {
+  background-image: linear-gradient(var(--accent), transparent);
+  @apply opacity-15 dark:opacity-10;
 }
