@@ -1,14 +1,13 @@
 <template>
   <article>
     <header>
-      <h1 class="text-4xl font-bold text-center mb-4">
+      <h1 class="text-foreground text-3xl font-bold mb-4">
         <%- article.frontmatter.title %>
       </h1>
-      <div class="text-gray-500 dark:text-gray-400 text-center text-sm">
-        <%- new Date(article.frontmatter.date).toLocaleDateString() %>
-      </div>
+
+      <PostMetaInfo :meta="meta" />
     </header>
-    <Markdown class="mt-8">
+    <Markdown class="mt-6">
       <%- article.excerpt %>
       <a href="#more" class="hidden"></a>
       <%- article.more %>
@@ -18,8 +17,13 @@
 
 <script setup lang="ts">
   import Markdown from '@app/components/markdown.vue';
+  import PostMetaInfo from '@app/components/post/meta-info.vue';
 
   defineOptions({
     name: 'Article',
   });
+
+  const meta = JSON.parse(
+    '<%- JSON.stringify({ isDraft: article.isDraft, ...article.frontmatter }) %>',
+  );
 </script>
