@@ -1,6 +1,5 @@
 import { useDark } from '@vueuse/core';
 import { computed } from 'vue';
-import { darkTheme } from 'naive-ui';
 
 const isDark = useDark({
   selector: 'html',
@@ -12,7 +11,6 @@ const isDark = useDark({
 const theme = computed<'light' | 'dark'>(() =>
   isDark.value ? 'dark' : 'light',
 );
-const naiveTheme = computed(() => (isDark.value ? darkTheme : null));
 
 export function useTheme() {
   const toggleTheme = () => {
@@ -21,7 +19,7 @@ export function useTheme() {
 
   return {
     theme,
-    naiveTheme,
+    isDark,
     toggleTheme,
   };
 }

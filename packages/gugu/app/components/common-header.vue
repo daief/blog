@@ -2,7 +2,7 @@
   <header>
     <div
       id="nav-container"
-      class="mx-auto flex max-w-app flex-col items-center justify-between sm:flex-row"
+      class="mx-auto text-foreground flex max-w-app flex-col items-center justify-between sm:flex-row"
     >
       <div
         id="top-nav-wrap"

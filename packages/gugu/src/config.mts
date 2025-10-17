@@ -2,6 +2,7 @@ import { type UserConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import VueMacros from 'vue-macros/vite';
+import tailwindcss from '@tailwindcss/vite';
 
 import { createMdPlugin } from './plugins/md.mts';
 import type { IBlogConifg } from '../types/index.mts';
@@ -29,6 +30,7 @@ export const extendConfig = async (
   viteConfig.root = fileService.resolveApp();
   viteConfig.publicDir = fileService.resolveSource('public');
   viteConfig.plugins = [
+    tailwindcss(),
     VueMacros({
       plugins: {
         vue: vuePlugin(),
@@ -46,6 +48,7 @@ export const extendConfig = async (
       ...viteConfig.resolve?.alias,
       '@app': fileService.resolveApp(),
       '@source': fileService.resolveSource(),
+      '@mcss': fileService.resolveApp('styles/main.css'),
     },
   };
 
@@ -54,11 +57,6 @@ export const extendConfig = async (
     ...viteConfig.build,
     outDir: fileService.resolveDist(),
     copyPublicDir: true,
-  };
-
-  viteConfig.css = {
-    ...viteConfig.css,
-    postcss: getDirname(import.meta.url, '../postcss.config.mjs'),
   };
 
   return viteConfig;

@@ -40,10 +40,19 @@ class DataSource {
         return it;
       })
       .sort((a, b) => {
+        // 优先置顶草稿
+        const isSameDraft = a.isDraft === b.isDraft;
+        if (!isSameDraft) {
+          return b.isDraft ? 1 : -1;
+        }
+
+        // 再基于 sort 排序
         const sortDiff = b.frontmatter.sort - a.frontmatter.sort;
         if (sortDiff !== 0) {
           return sortDiff;
         }
+
+        // 最后基于时间
         const dateDiff =
           b.frontmatter.date.valueOf() - a.frontmatter.date.valueOf();
         return dateDiff;
