@@ -32,7 +32,7 @@ const render = () => {
   if (meta.isDraft) {
     nodes.push(
       renderWrapper(
-        <div class="text-xs text-red-500 py-0.5 px-1 border border-red-400">
+        <div class="text-xs text-red-500 py-0.5 px-1 border border-red-400 rounded-xs">
           草稿
         </div>,
       ),
@@ -42,7 +42,7 @@ const render = () => {
   if (meta.sort! > 0) {
     nodes.push(
       renderWrapper(
-        <div class="text-xs text-accent py-0.5 px-1 border border-accent">
+        <div class="text-xs text-accent py-0.5 px-1 border border-accent rounded-xs">
           置顶
         </div>,
       ),

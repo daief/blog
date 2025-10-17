@@ -1,7 +1,7 @@
 <template>
   <button
     @click="toggleTheme"
-    class="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-300 transition-all"
+    class="w-9 h-9 bg-gray-200 rounded-lg dark:bg-gray-600 flex items-center justify-center hover:ring-2 ring-gray-300 transition-all cursor-pointer"
   >
     <Icon size="20">
       <Sunny v-if="theme === 'light'" />
