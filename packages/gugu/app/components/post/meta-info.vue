@@ -68,7 +68,7 @@ const render = () => {
       renderWrapper(
         meta.tags.map((tag) => (
           <span class="mr-2">
-            <span class="select-none">#</span>
+            <i-mdi-tag-outline class="select-none mr-0.5" />
             {tag}
           </span>
         )),
@@ -78,7 +78,7 @@ const render = () => {
 
   nodes = nodes.map((node, i) => (
     <>
-      {i !== 0 && <div class="inline-block h-[1em] w-px bg-gray-200" />}
+      {i !== 0 && <div class="inline-block h-[1em] w-px bg-gray-300" />}
       {node}
     </>
   ));

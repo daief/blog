@@ -48,6 +48,7 @@ export const extendConfig = async (
       resolvers: [IconsResolver({})],
     }),
     Icons({
+      defaultClass: 'inline-block',
       collectionsNodeResolvePath: [
         getDirname(import.meta.url),
         ggCtx.configService.cwd,
