@@ -4,6 +4,10 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 import VueMacros from 'vue-macros/vite';
 import tailwindcss from '@tailwindcss/vite';
 
+import IconsResolver from 'unplugin-icons/resolver';
+import Icons from 'unplugin-icons/vite';
+import Components from 'unplugin-vue-components/vite';
+
 import { createMdPlugin } from './plugins/md.mts';
 import type { IBlogConifg } from '../types/index.mts';
 import { ContextService } from './services/context.service.ts';
@@ -39,6 +43,17 @@ export const extendConfig = async (
     }),
     createMdPlugin(),
     createVBlogPlugin(),
+
+    Components({
+      resolvers: [IconsResolver({})],
+    }),
+    Icons({
+      collectionsNodeResolvePath: [
+        getDirname(import.meta.url),
+        ggCtx.configService.cwd,
+      ],
+    }),
+
     ...(viteConfig.plugins || []),
   ];
 

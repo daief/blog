@@ -65,12 +65,16 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
 
         const sourceCode = token.text;
 
-        const codeResult = await shiki.codeToHtml(sourceCode, {
+        let codeResult = await shiki.codeToHtml(sourceCode, {
           lang,
           themes: { light: 'min-light', dark: 'night-owl' },
           defaultColor: false,
           transformers: [],
         });
+
+        codeResult = codeResult
+          .replaceAll('{', '&lcub;')
+          .replaceAll('}', '&rcub;');
 
         // transforms token to html
         Object.assign(token, {
@@ -88,18 +92,16 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
         if (/^mermaid$/i.test(language)) {
           return `<pre class="mermaid">${sourceCode}</pre>`;
         }
-        // const codeResult = !hljs.getLanguage(language)
-        //   ? escapeHtml(sourceCode)
-        //   : hljs.highlight(sourceCode, { language }).value;
-        // return `<pre class="hljs language-${language}" hljs-language="${language}"><code style="display:block;">${codeResult}</code></pre>`;
         return '';
       },
-      heading({ tokens, depth: level }) {
-        const text = this.parser.parseInline(tokens);
-        const escapedText = text.toLowerCase();
-        // TODO
-        // .replace(/[^\w]+/g, '-');
-        return `<h${level} id="${escapedText}">${text}<a name="${escapedText}" class="headerlink" href="#${escapedText}"></a></h${level}>`;
+      heading({ tokens, depth: level, ...rest }) {
+        const options = this.options as IEnv;
+        const text = this.parser.parseInline(tokens).trim();
+        // remove html tag
+        // input: text text <a href="#text">text2</a>
+        // output: text text text2
+        const anchorText = text.replace(/<[^>]+>/g, '');
+        return `<h${level} id="${anchorText}">${text}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
       },
       link: ({ href, title: aAttrsQuery, text }) => {
         const imgAttrs = qs.parse(

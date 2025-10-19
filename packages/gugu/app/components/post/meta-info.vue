@@ -5,8 +5,6 @@
 </template>
 
 <script setup lang="tsx">
-import { CalendarOutline } from '@vicons/ionicons5';
-import { Icon } from '@vicons/utils';
 import { type IMarkdown } from '../../../types/markdown.mjs';
 import { formatDate } from '@vueuse/core';
 
@@ -53,9 +51,7 @@ const render = () => {
     nodes.push(
       renderWrapper(
         <>
-          <Icon>
-            <CalendarOutline />
-          </Icon>
+          <i-mdi-calendar-month-outline />
           <span>
             {meta.modified ? '更新于：' : '发表于：'}
             <time datetime={meta.modified || meta.date}>

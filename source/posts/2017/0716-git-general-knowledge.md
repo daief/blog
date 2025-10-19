@@ -313,7 +313,7 @@ nothing to commit, working directory clean
 
 #### 修改了工作区的内容，并且 commit 了
 
-使用`git log`或'git reflog`查看提交记录，然后也是使用`git reset <commit id>`来跳到指定commit版本，提交记录过长按`q`可以退出
+使用`git log`或`git reflog`查看提交记录，然后也是使用`git reset <commit id>`来跳到指定 commit 版本，提交记录过长按`q`可以退出
 
 ```bash
 $ git log

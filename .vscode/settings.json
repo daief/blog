@@ -2,5 +2,6 @@
   "editor.formatOnSave": true,
   "emmet.includeLanguages": {
     "ejs": "html"
-  }
+  },
+  "liveServer.settings.root": "/dist"
 }

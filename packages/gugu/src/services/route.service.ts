@@ -3,7 +3,7 @@ import { injectService, IServiceCreated } from './accessor.ts';
 import { MarkdownService } from './markdown.service.ts';
 import { computed, type ComputedRef } from '@vue/reactivity';
 
-const getVid = (str: string) => Buffer.from(str).toString('base64') + '.vue';
+const getVid = (str: string) => 'vm:' + str.replace(/\//g, '_') + '.vue';
 
 export class RouteService implements IServiceCreated {
   @injectService(() => MarkdownService)

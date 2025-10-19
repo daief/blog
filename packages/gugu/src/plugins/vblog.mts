@@ -6,6 +6,8 @@ import { FileService } from '../services/file.service.ts';
 import { watch } from '@vue/reactivity';
 import { type IRawRoute } from '../../types/index.mts';
 import { createLogger } from '../utils/logger.mts';
+import fs from 'fs-extra';
+import * as path from 'node:path';
 
 const logger = createLogger('[plugin:vblog]');
 
@@ -20,6 +22,9 @@ const renderFileTpl = (file: string, env: any) => {
 export const createVBlogPlugin = () => {
   const routeService = getService(RouteService);
   const fileService = getService(FileService);
+
+  const debugDir = path.resolve(process.cwd(), 'node_modules/.vblog-temp');
+  fs.emptyDir(debugDir);
 
   const vIdPrefix = 'vblog:';
   const vRoutesId = 'vblog:routes';
@@ -64,7 +69,11 @@ export const createVBlogPlugin = () => {
       if (routeService.allRoutesMap.value.has(id)) return id;
     },
     async load(id, options) {
-      if (id === vRoutesId) return getRoutesCode();
+      if (id === vRoutesId) {
+        const code = getRoutesCode();
+        fs.writeFile(path.join(debugDir, 'routes.js'), code, 'utf-8');
+        return code;
+      }
 
       const target = routeService.allRoutesMap.value.get(id);
       if (target) {
@@ -74,7 +83,14 @@ export const createVBlogPlugin = () => {
         this.addWatchFile(tplPath);
 
         const code = await renderFileTpl(tplPath, target.data);
-        return code;
+        await fs.writeFile(
+          path.join(debugDir, id.replace(/vm:/g, '')),
+          code,
+          'utf-8',
+        );
+        return {
+          code,
+        };
       }
       return null;
     },
