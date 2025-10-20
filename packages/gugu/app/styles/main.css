@@ -3,6 +3,41 @@
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
+:root,
+html[data-theme='light'] {
+  --background: #fdfdfd;
+  --foreground: #282728;
+  --accent: #006cac;
+  --muted: #e6e6e6;
+  --border: #ece9e9;
+
+  --accent-hover: color-mix(in srgb, var(--accent) 80%, white);
+  --accent-active: color-mix(in srgb, var(--accent) 80%, black);
+}
+
+html[data-theme='dark'] {
+  --background: #212737;
+  --foreground: #eaedf3;
+  --accent: #ff6b01;
+  --muted: #343f60;
+  --border: #ab4b08;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-active: var(--accent-active);
+}
+
+@utility max-w-app {
+  @apply max-w-4xl;
+}
+
 @layer base {
   * {
     @apply border-border outline-accent/75;
@@ -20,46 +55,16 @@
       'Segoe UI Emoji', Segoe UI Symbol, 'Noto Color Emoji';
   }
 
-  code,
-  pre {
-    /* font-family: 'IBM Plex Mono', monospace; */
+  body {
+    background-color: var(--background);
   }
-}
 
-:root,
-html[data-theme='light'] {
-  --background: #fdfdfd;
-  --foreground: #282728;
-  --accent: #006cac;
-  --muted: #e6e6e6;
-  --border: #ece9e9;
-}
+  a {
+    @apply text-accent hover:text-accent-hover active:text-accent-active;
+  }
 
-html[data-theme='dark'] {
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #ff6b01;
-  --muted: #343f60;
-  --border: #ab4b08;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-accent: var(--accent);
-  --color-muted: var(--muted);
-  --color-border: var(--border);
-}
-
-@utility max-w-app {
-  @apply max-w-3xl;
-}
-
-body {
-  background-color: var(--background);
-}
-
-.page-bg-gradient {
-  background-image: linear-gradient(var(--accent), transparent);
-  @apply opacity-15 dark:opacity-10;
+  .page-bg-gradient {
+    background-image: linear-gradient(var(--accent), transparent);
+    @apply opacity-15 dark:opacity-10;
+  }
 }

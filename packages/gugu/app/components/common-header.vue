@@ -67,3 +67,11 @@ const navList = [
   },
 ];
 </script>
+
+<style lang="css">
+@reference "@mcss";
+
+header a {
+  @apply text-foreground hover:text-accent-hover active:text-accent-active;
+}
+</style>
