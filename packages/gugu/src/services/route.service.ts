@@ -25,7 +25,7 @@ export class RouteService implements IServiceCreated {
           vid: getVid(path),
           path,
           template: 'articles',
-          data: { articles },
+          data: { articles, current: i + 1, total: articlePaginations.length },
         };
       });
       const indexRoute = { ...arr[0] };

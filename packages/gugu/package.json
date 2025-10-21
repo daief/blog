@@ -14,8 +14,6 @@
     "@tailwindcss/vite": "^4.1.14",
     "@types/node": "^22.5.2",
     "@vant/use": "^1.6.0",
-    "@vicons/ionicons5": "^0.13.0",
-    "@vicons/utils": "^0.1.4",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
     "@vue/compiler-sfc": "^3.5.21",
