@@ -11,6 +11,7 @@ export class RouteService implements IServiceCreated {
 
   articlesPaginationRoutes!: ComputedRef<IRawRoute[]>;
   articleRoutes!: ComputedRef<IRawRoute[]>;
+  pageRoutes!: ComputedRef<IRawRoute[]>;
 
   allRoutes!: ComputedRef<IRawRoute[]>;
   allRoutesMap!: ComputedRef<Map<string, IRawRoute>>;
@@ -49,10 +50,27 @@ export class RouteService implements IServiceCreated {
       );
     });
 
+    this.pageRoutes = computed(() => {
+      return this.markdownService.dataSource.pages.value.map<IRawRoute>(
+        (it) => {
+          const path = it.slug;
+          return {
+            vid: getVid(path),
+            path,
+            template: 'article',
+            data: {
+              article: it,
+            },
+          };
+        },
+      );
+    });
+
     this.allRoutes = computed(() => {
       return [
         ...this.articlesPaginationRoutes.value,
         ...this.articleRoutes.value,
+        ...this.pageRoutes.value,
       ];
     });
 

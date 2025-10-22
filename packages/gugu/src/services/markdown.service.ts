@@ -204,9 +204,20 @@ export class MarkdownService {
       },
     });
     const [excerpt, more = ''] = mdHtml.split('<!-- more -->');
+    const type = this.fileService.isArticle(filepath) ? 'article' : 'page';
+
+    let slug = '';
+    if (type === 'page') {
+      slug =
+        '/' +
+        normalizePath(
+          path.relative(this.fileService.resolveSource(), filepath),
+        ).replace(/\.md$/, '');
+    }
 
     return {
-      type: this.fileService.isArticle(filepath) ? 'article' : 'page',
+      type,
+      slug,
       isDraft: this.fileService.isDraft(filepath),
       filepath,
       rawContent: matterResult.body,

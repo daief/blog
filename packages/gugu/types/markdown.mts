@@ -2,6 +2,8 @@ export interface IMarkdown {
   type: 'article' | 'page';
   isDraft: boolean;
   filepath: string;
+  /** 普通页面才有 */
+  slug: string;
   frontmatter: {
     id?: string;
     title: string;
