@@ -13,8 +13,9 @@
       @apply mb-3 text-foreground;
     }
 
-    h3 {
-      @apply italic;
+    h5,
+    h6 {
+      @apply font-bold;
     }
 
     p,
@@ -95,6 +96,13 @@
     /* ===== Image ===== */
     img.post-image {
       @apply border block mx-auto rounded-sm p-0.5;
+    }
+
+    pre.mermaid {
+      &,
+      p {
+        @apply text-gray-600;
+      }
     }
 
     /* ===== first & last ===== */
