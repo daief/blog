@@ -21,7 +21,7 @@ $ ssh-keygen -t rsa -b 2048 -C "xxxxxxxxxx@qq.com"
 
 <!-- more -->
 
-# SSH
+## SSH
 
 先说 SSH，SSH（Secure Shell）是一种安全的网络协议，用于在网络上远程连接和管理计算机系统。它可以加密数据并确保数据传输的完整性，从而提供了一种安全的远程访问方式。
 
@@ -33,7 +33,7 @@ SSH 协议使用公钥加密技术，使得数据传输过程中即使被窃听�
 
 在 Windows 上，可以通过安装 OpenSSH 以获得 SSH 的服务端/客户端能力。
 
-## SSH key
+### SSH key
 
 开头命令生成的内容就是 SSH key，公密钥组成一对，用于 SSH 连接，`id_rsa.pub` 就是公钥，`id_rsa` 是私钥，需要妥善保管。
 
@@ -44,7 +44,7 @@ SSH 协议使用公钥加密技术，使得数据传输过程中即使被窃听�
 - 非对称加密：加密和解密需要两个不同的密钥，故被称为非对称加密；私钥不需要公开，加密效率较低
 - 对称加密：加密和解密都使用同一个密钥，密钥需要经过网络传输，加密效率高
 
-## 认证过程
+### 认证过程
 
 SSH 连接有两种认证方式：密码认证和密钥认证，下面分别是两种方式的认证流程。
 
@@ -110,7 +110,7 @@ This key is not known by any other names
 Warning: Permanently added 'x.x.x.x' (ED25519) to the list of known hosts.
 ```
 
-# Git
+## Git
 
 再次回到开头的命令，命令的含义是指定使用 RSA 算法、长度 2048 生成一对密钥，`-C` 是可选的，指定注释信息，内容会追加在公钥后面：
 
@@ -122,7 +122,7 @@ $ ssh-keygen -t rsa -b 2048 -C "xxxxxxxxxx@qq.com"
 
 ![](./imgs/git-clone.png)
 
-# 使用 Ed25519 算法
+## 使用 Ed25519 算法
 
 一般网上通过使用 ssh-key 生成密钥对时都使用 RSA 算法，RSA 经典且可靠，但性能不够理想。
 
@@ -140,7 +140,7 @@ $ ssh-keygen -t ed25519  -C "xxxxx@zz.com"
 
 在生成密钥的时候，会提示输入密码，这个密码是用来保护私钥的，如果不想设置密码，直接回车即可。但为了安全考虑，十分有必要设置密码。这样即使私钥丢失或被盗，也不会轻易被他人使用。
 
-# 管理多对 SSH key 和多个 Git 账户
+## 管理多对 SSH key 和多个 Git 账户
 
 以 Git 为例，往往一个人会拥有多个平台的账号，比如 GitHub、GitLab、公司 Git 等，这时建议为每个服务生成一对专用的密钥。而多对密钥、多个 Git 账户的管理又是个新的问题，不过好在通过简单的配置，就能轻松解决了。
 
@@ -219,7 +219,7 @@ email=xxxxx3@qq.com
 
 这样一来，当在 `~/Desktop/codes/` 目录下执行 Git 命令时，就会使用 `~/Desktop/codes/.gitconfig` 配置；而在 `~/Documents/fe/projects/` 目录下执行 Git 命令时，就会使用 `~/Documents/fe/projects/.gitconfig` 配置；否则就是使用全局配置。
 
-# 总结
+## 总结
 
 其实最开始只是寻找管理多个 Git 账号的解决方案，期间接触了不少别的知识，想着就干脆都了解一下，再整合记录一下。
 

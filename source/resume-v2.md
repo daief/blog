@@ -8,14 +8,14 @@ comments: false
 - https://github.com/geekcompany/ResumeSample/blob/master/web.md
 -->
 
-# 联系方式
+## 联系方式
 
 - 姓名：戴\*\*
 - 手机：177\*\*\*\*\*732
 - Email：<defeng_mail@163.com>
 - 微信号：[defenghznu](https://daief.tech/images/wechat.jpg)
 
-# 个人信息
+## 个人信息
 
 - 男 / 1996.10
 - 本科 / 杭州师范大学 / 计算机科学与技术 / 2014.09-2018.06
@@ -23,7 +23,7 @@ comments: false
 - Github：[https://github.com/daief](https://github.com/daief 'data-layout=card')
 - 期望职位：前端开发工程师
 
-# 技能清单
+## 技能清单
 
 - 掌握 `HTML`、`CSS`、`JavaScript` 以及 `TypeScript`
 - 掌握 `React` 及相关技术，熟悉 `Vue` 开发
@@ -34,7 +34,7 @@ comments: false
 - 有 `Serverless` 项目的开发经验
 - 熟悉敏捷开发，担任 `Scrum Master`
 
-# 工作经历
+## 工作经历
 
 ### 杭州群核信息技术有限公司（2020.06-至今）- 前端 TO
 
@@ -50,9 +50,9 @@ comments: false
 
 - 负责移动端 Web 页面开发；引入 Vue 框架和前端工程化模式，取代原始的开发模式
 
-# 项目经历
+## 项目经历
 
-## 酷家乐 PC 客户端（2022.04-至今）
+### 酷家乐 PC 客户端（2022.04-至今）
 
 > 酷家乐客户端是酷家乐的重要产品终端，承载了绝大部分的业务和 60%+ 的用户活跃。
 
@@ -77,7 +77,7 @@ comments: false
 - 协同监控平台产出 `Electron` 监控 SDK；与 3D 工具组持续进行崩溃治理，改善 `1.5‰` 的崩溃率；使用 Rust 基于 `egui` 开发独立小工具，用于用户、客服快速解决常见问题
 - 主导酷客户端基建平台的建设，管理打包、版本、发布、灰发和数据回收等功能，`5+` 业务线接入，`700+` 构建，服务 QPS 峰值 `65+`
 
-## 酷家乐设计圈（2020.06-2022.04）
+### 酷家乐设计圈（2020.06-2022.04）
 
 > 设计圈是一款面向商家的、囊括了一整套自闭环体系的设计师培育解决方案，同时可用于私域流量推广和留资，产品形态包括 Web 前后台和小程序。
 
@@ -104,7 +104,7 @@ comments: false
 
 <!-- 评论组件（10+ 业务接入）、浏览器插件、图片上传云端压缩、React 基座、 -->
 
-## 惠借科技基础建设（2019.07-2020.06）
+### 惠借科技基础建设（2019.07-2020.06）
 
 背景：技术栈使用混乱，编码自由无章法，复用纯靠拷贝无文档，整体建设落后
 
@@ -117,12 +117,12 @@ comments: false
 - 产出脚手架，累计服务 `10+` 项目，支持零配置或低配置启动新项目
 - 产出原生 bridge 的封装库，使用队列解决历史设计缺陷造成的数据竞态问题
 
-# 个人作品
+## 个人作品
 
 - [gugu](https://github.com/daief/blog/tree/master/packages/gugu)：一个简单的博客引擎
 - [chip8](https://daief.tech/chip8/?source=wasm)：一个有趣的 `chip8` 模拟器，分别使用 `Rust` 和 `JavaScript` 实现
 - [daisyui-vue](https://github.com/daief/daisyui-vue)：一个进行中的 `Vue` 组件库
 
-# 致谢
+## 致谢
 
 感谢您花时间阅读我的简历，期待能有机会和您共事。

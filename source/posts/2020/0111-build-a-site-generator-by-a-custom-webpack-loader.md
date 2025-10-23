@@ -24,7 +24,7 @@ description:
 
 > 这时候会想到 `mdx` 之类的实现，或是 docsify、Docusaurus、VuePress、bisheng 等优秀的开源站点生成器，但这都无法阻止自己想要折腾的心。
 
-# 预览
+## 预览
 
 效果预览地址：<https://daief.tech/jugg/#/jugg-plugin-doc/packages/jugg-plugin-doc/demos>。
 
@@ -41,7 +41,7 @@ description:
 
 这里要十分感谢 Ant Design，因为这里的主题就是借鉴（~~抄~~）来的。
 
-# 自定义 loader
+## 自定义 loader
 
 目的：编写一个处理 Markdown 的 webpack loader —— md-loader，实现 Markdown 文件以及代码块的解析。
 
@@ -147,15 +147,16 @@ export default {
         use: ['vue-loader'],
       },
     ],
+    v,
   },
 };
 ```
 
-## 具体实现
+### 具体实现
 
 具体的实现就不贴了，可以查看[这里的实现](https://github.com/daief/jugg/blob/master/packages/jugg-plugin-doc/src/loader/md.ts)。
 
-# 站点生成器
+## 站点生成器
 
 我叫它这个名字只是因为这样看起来比较高级，刚好又具有了这样的功能。
 
@@ -168,7 +169,7 @@ export default {
 - 搭建一个前端项目，根据数据源渲染出页面
 - 最后打包成静态文件就结束了
 
-# 结语
+## 结语
 
 因为，本篇内容在 [Github 上有具体的实现](https://github.com/daief/jugg/tree/master/packages/jugg-plugin-doc)，所以细节都没有展开。另外实现思路也比较简单，所以通篇表现得比较简略。
 

@@ -20,11 +20,11 @@ description:
 
 <!-- more -->
 
-# 创建对象
+## 创建对象
 
 “类”的一个重要的作用是作为模板来使用，以便于批量创建对象，根据资料简单认识一下创建对象的各种模式。
 
-## 工厂模式
+### 工厂模式
 
 因为 JavaScript 中没有类，开发人员发明了一种函数，用函数封装特定的模板。
 
@@ -33,7 +33,7 @@ function createPerson(name, age) {
   var o = {
     name: name,
     age: age,
-    say: function() {
+    say: function () {
       console.log(this.name);
     },
   };
@@ -48,7 +48,7 @@ var p2 = createPerson('Alice', 22);
 
 > 工厂模式虽然解决了创建多个相似对象的问题，但却没有解决对象识别的问题，即怎样知道 p1 对象的类型是什么。
 
-## 构造函数模式
+### 构造函数模式
 
 JavaScript 语言中，生成实例对象的传统方法是通过构造函数。
 
@@ -56,7 +56,7 @@ JavaScript 语言中，生成实例对象的传统方法是通过构造函数。
 function Person(name, age) {
   this.name = name;
   this.age = age;
-  this.say = function() {
+  this.say = function () {
     console.log(this.name);
   };
 }
@@ -96,7 +96,7 @@ p1 instanceof Person; // true
 p2 instanceof Person; // true
 ```
 
-## 原型模式
+### 原型模式
 
 > 定义在原型上的属性被共享给所有的实例对象（需要提前具备原型的相关知识）。
 
@@ -105,7 +105,7 @@ function Person() {}
 
 Person.prototype.name = 'Name';
 Person.prototype.age = 1;
-Person.prototype.say = function() {
+Person.prototype.say = function () {
   console.log(this.name);
 };
 
@@ -127,7 +127,7 @@ p2.hasOwnProperty('name'); // false
 
 若按照上述方式，省略了构造函数传参的步骤，所有实例对象都得到了相同的属性值，可通过组合以进行解决。
 
-## 组合使用构造函数模式和原型模式
+### 组合使用构造函数模式和原型模式
 
 一般，实例的方法可以共享，而一些成员属性是各自不同的。保持了构造函数模式的灵活又同时解决了每次实例方法重复创建的问题。
 
@@ -140,7 +140,7 @@ function Person(name, age) {
   this.hobbies = [];
 }
 
-Person.prototype.say = function() {
+Person.prototype.say = function () {
   console.log(this.name);
 };
 
@@ -150,7 +150,7 @@ var p2 = new Person('Alice', 22, ['book']);
 p1.say === p2.say; // true
 ```
 
-## ES6 class 写法
+### ES6 class 写法
 
 `class` 可以看成构造函数的另一种写法。
 
@@ -184,7 +184,7 @@ function Person(name, age) {
   this.age = age;
 }
 
-Person.prototype.say = function() {
+Person.prototype.say = function () {
   console.log(this.name);
 };
 
@@ -193,11 +193,11 @@ Person.foo = 1;
 const p = new Person('Mike', 17);
 ```
 
-# 继承
+## 继承
 
 继承是面向对象中重要的概念，应用上也十分频繁。JavaScript 中只支持实现继承，而且主要是依靠原型链来实现。
 
-## 原型链
+### 原型链
 
 定义了两个类型，分别拥有各自的属性和方法。`SubType` 继承于 `SuperType`；而继承是通过创建 `SuperType` 的实例，并将该实例赋值给 `SubType.prototype` 而实现的。
 
@@ -206,7 +206,7 @@ function SuperType() {
   this.prop = true;
 }
 
-SuperType.prototype.getSuperValue = function() {
+SuperType.prototype.getSuperValue = function () {
   return this.prop;
 };
 
@@ -216,7 +216,7 @@ function SubType() {
 // 继承 SuperType
 SubType.prototype = new SuperType();
 
-SubType.prototype.getSubType = function() {
+SubType.prototype.getSubType = function () {
   return this.subProp;
 };
 
@@ -253,13 +253,13 @@ sub1.colors.push('red');
 sub2.colors; // ['red']
 ```
 
-## 借用构造函数
+### 借用构造函数
 
 ```js
 function SuperType() {
   this.colors = [];
   // 方法需要定义在构造函数中才能被继承
-  this.getColors = function() {
+  this.getColors = function () {
     return this.colors;
   };
 }
@@ -278,7 +278,7 @@ sub1.colors === sub2.colors; // false
 
 - 在父类原型中定义的方法对子类是不可见的，因为此处父类和子类的原型链实际上并无关联
 
-## 组合继承
+### 组合继承
 
 > 组合继承（combination inheritance）有时候又叫作伪经典继承，指的是将原型链和借用构造函数的技术组合到一块，从而发挥二者之长的一种继承模式。其背后的思路是使用原型链实现对原型属性和方法的继承，而通过借用构造函数来实现对实例属性的继承。
 
@@ -288,7 +288,7 @@ function SuperType(name) {
   this.name = name;
 }
 
-SuperType.prototype.sayName = function() {
+SuperType.prototype.sayName = function () {
   console.log(this.name);
 };
 
@@ -301,7 +301,7 @@ function SubType(name, age) {
 // 继承原型属性和方法
 SubType.prototype = new SuperType();
 
-SubType.prototype.sayAge = function() {
+SubType.prototype.sayAge = function () {
   console.log(this.age);
 };
 
@@ -319,7 +319,7 @@ sub2.sayAge(); // 20
 
 > 组合继承避免了原型链和借用构造函数的缺陷，融合了它们的优点，成为 JavaScript 中最常用的继承模式。而且，`instanceof` 和 `isPrototypeOf()` 也能够用于识别基于组合继承创建的对象。
 
-## 寄生组合式继承
+### 寄生组合式继承
 
 这种通常被认为是引用类型最理想的继承范式。
 
@@ -353,7 +353,7 @@ function SuperType(name) {
   this.name = name;
 }
 
-SuperType.prototype.sayName = function() {
+SuperType.prototype.sayName = function () {
   console.log(this.name);
 };
 
@@ -365,12 +365,12 @@ function SubType(name, age) {
 // 继承原型
 inheritPrototype(SubType, SuperType);
 
-SubType.prototype.sayAge = function() {
+SubType.prototype.sayAge = function () {
   console.log(this.age);
 };
 ```
 
-## extends
+### extends
 
 使用 `extends` 就十分简洁、易读了，而且不需要顾虑那么多。
 
@@ -415,7 +415,7 @@ sub1.hasOwnProperty('sayName'); // false
 sub1.hasOwnProperty('sayAge'); // false
 ```
 
-# 结语
+## 结语
 
 老实说，从未使用原生写法写过类与继承，我想以后应该也不大会自己这样去手动实现，不过了解一下原生实现对于语言的理解是十分有帮助的。
 

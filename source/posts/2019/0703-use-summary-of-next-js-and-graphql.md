@@ -23,7 +23,7 @@ description:
 
 <!-- more -->
 
-# 简介
+## 简介
 
 本节对三个 demo 作个简单介绍。
 
@@ -41,7 +41,7 @@ description:
 
 或者在 `packages/shared/CONFIG.ts` 文件中修改成其他域名配置，然后通过域名 + 端口的形式访问本地开发环境。
 
-## nextjs-ssr
+### nextjs-ssr
 
 > 地址：<https://github.com/daief/react-ssr/tree/master/packages/nextjs-ssr>
 
@@ -55,7 +55,7 @@ Java 端基于 [JWT（Json web token）](https://en.wikipedia.org/wiki/JSON_Web_
 
 因为这是一个对内的应用，同时出于对技术的追求，该项目决定试用 SSR，选型 Next.js。同时前端组表示可以用中间层来做 cookie 的维护，而 Java 端一切保持不变。加上了 Node 层之后，又顺理成章地加上了 GraphQL Server。
 
-## gql-server
+### gql-server
 
 > 地址：<https://github.com/daief/react-ssr/tree/master/packages/gql-server>
 
@@ -69,7 +69,7 @@ nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
 ![](./0703-use-summary-of-next-js-and-graphql/sequence-chart.jpg)
 
-## nextjs-static
+### nextjs-static
 
 > 地址：<https://github.com/daief/react-ssr/tree/master/packages/nextjs-static>
 
@@ -85,11 +85,11 @@ nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
 这样可以在前端实现接口聚合、字段查询（基于真实接口的返回）等 GraphQL 的特色功能。
 
-# Next.js 使用问题
+## Next.js 使用问题
 
 下面把和 Next.js 有关的问题聚合在这一节。
 
-## 样式文件的处理
+### 样式文件的处理
 
 这个应该是使用 SSR 时候的经典问题了，不过有关样式文件在 SSR 中的问题在{% post_link get-a-ssr-demo-step-by-step %}有详细解读，这里只说明该问题在 Next.js 中的具体解决以及和 Next.js 有关的注意点。
 
@@ -271,7 +271,7 @@ module.exports = () => ({
 });
 ```
 
-## 图片等静态文件处理
+### 图片等静态文件处理
 
 Next.js 对 [`static/` 目录有特殊的支持](https://github.com/zeit/next.js#static-file-serving-eg-images)，推荐将静态资源放在这个目录，通过 `/static/some/target.png` 的形式进行引用。而且在 v9.0.0 版本在打包时还会自动对 `static/` 目录内的文件进行压缩。
 
@@ -297,7 +297,7 @@ config.module.rules.push({
 });
 ```
 
-## Monorepo 中的 Babel 配置
+### Monorepo 中的 Babel 配置
 
 当项目以 [Monorepo](https://en.wikipedia.org/wiki/Monorepo) 方式组织，同时引用其他子包内容时，引用的部分是不会经过 Babel 处理的。
 
@@ -376,7 +376,7 @@ module.exports = {
 
 如此一来，再将 Babel 插件配置在 `babel.config.js`，那么 Babel 插件在其他模块也会起作用了。
 
-## 国际化语言渲染问题
+### 国际化语言渲染问题
 
 在 `nextjs-ssr` 中，项目以 SSR 方式运行，在页面请求来临的同时，读取 cookies 就能知晓当前浏览器的语言设置信息，接着就能渲染出对应语言的页面并返回。
 
@@ -386,9 +386,9 @@ module.exports = {
 
 页面总有个初始语言，可是这样一来打开页面会有个语言切换的现象（默认语言与实际语言不符），但这个也不好避免。所以，`nextjs-static` 中的操作是一概将 Server 的国际化输出设置成 `...`，待脚本加载后会自动读取并切换成对应的语言。
 
-# 其他问题
+## 其他问题
 
-## SSR 部署期间的问题
+### SSR 部署期间的问题
 
 在部署期间发生了一个由 `host` 字段引发的问题，导致 SSR 层的请求发生错误。
 
@@ -443,7 +443,7 @@ const authLink = setContext((_, { headers }) => {
 
 一个域名会被解析成 IP 对应到一台服务器，但这一台服务器上可能存在多个服务，在内部可以通过端口来区分，但出于各种原因，这台服务器往往只对外暴露部分端口，外部访问者这时候就可以额外通过 host 字段告诉服务器想要访问的服务。
 
-# GraphQL 服务
+## GraphQL 服务
 
 GraphQL 的搭建基本是一个学习的过程，虽然写过一些 Node.js 脚本，但对于 Node.js Server 的应用还是知之甚少。
 
@@ -495,7 +495,7 @@ type Recipe {
 
 剩余的、也是主要的工作就是编写 resolvers。
 
-# 结语
+## 结语
 
 本文也终于到了结束的时候，总感觉还有遗漏的地方，只怪总结得不够及时。
 

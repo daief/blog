@@ -2,7 +2,7 @@
 title: TypeScript 之嵌套数组与深度可选类型
 date: 2019-09-08 19:22:56
 id: typescript-types-of-nested-array-and-deep-partial
-categories: ["前端", "TypeScript"]
+categories: ['前端', 'TypeScript']
 tags:
   - TypeScript
 keywords:
@@ -14,7 +14,7 @@ keywords:
 description:
 ---
 
-# 嵌套数组类型
+## 嵌套数组类型
 
 以下类型可用于描述嵌套的数组类型。
 
@@ -36,7 +36,7 @@ const bArray: DeepArray<string | boolean> = [1]; // Error
 
 > [数组 – 在 TypeScript 中描述一个深度嵌套的数组](https://codeday.me/bug/20190516/1114682.html)
 
-# 深度可选类型
+## 深度可选类型
 
 以下类型可将一个类型的所有属性、子属性转变为 `Partial`。
 

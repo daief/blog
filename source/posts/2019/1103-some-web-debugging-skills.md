@@ -19,7 +19,7 @@ description:
 
 <!-- more -->
 
-# Chrome 开发者工具
+## Chrome 开发者工具
 
 Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而言已经是 Web 开发中不可缺少的部分了。Chrome DevTools 的功能很丰富，值得我们尽情探索。
 
@@ -31,7 +31,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 | 操作系统   | Mac OS X                                  |
 | JavaScript | V8 7.6.303.29                             |
 
-## 打开 DevTools
+### 打开 DevTools
 
 - 在页面上`右键`，选择`检查`
 - 在 Chrome 菜单中选择 `更多工具` > `开发者工具`
@@ -48,7 +48,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 而且即便列出所有的点，实际上只是官方文档的复制粘贴而已，[详细的内容推荐直接在官方文档上进行查阅](https://developers.google.com/web/tools/chrome-devtools)。
 
-## 设备模式
+### 设备模式
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/device-mode/>
 
@@ -64,7 +64,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 右上角更多菜单（三个点）中还有一些快捷功能，比如开启显示标尺、显示媒体查询、页面截图等功能。
 
-## 元素面板（Elements）
+### 元素面板（Elements）
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/dom>
 
@@ -105,7 +105,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 > - 先移上鼠标让 tooltip 出现，按下快捷键 `Command` + `Shift` + `C` 进行选取。
 > - 方法一并不总是奏效，第二种依旧先让元素出现，再使用快捷键 `F8` 暂停脚本，最后可随意进行选择。（暂停按钮位于 Source 面板）
 
-## 控制台面板（Console）
+### 控制台面板（Console）
 
 在这里，可以查看日志，执行代码。看似简短的一句话，但却远远不止如此。
 
@@ -113,7 +113,7 @@ Chrome 开发者工具（DevTools）所提供的功能十分强大，对我而�
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/console>。
 
-### console 系列
+#### console 系列
 
 console API：<https://developers.google.com/web/tools/chrome-devtools/console/api>。
 
@@ -149,7 +149,7 @@ API 系列就不再啰嗦，就说一些其他的。
 > console.log(json);
 > ```
 
-### 工具类 API （Utilities API）
+#### 工具类 API （Utilities API）
 
 DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介绍~~（翻译 🤪）。
 
@@ -171,7 +171,7 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 
 ![live-expressions](./1103-some-web-debugging-skills/live-expressions.jpg)
 
-## 网络面板（Network）
+### 网络面板（Network）
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/network?hl=zh-cn>。
 
@@ -184,7 +184,7 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 
 ![network-panel](./1103-some-web-debugging-skills/network-panel.jpg)
 
-### Tips - Network Overrides
+#### Tips - Network Overrides
 
 可以很容易地将远程的资源下载一份在本地，然后可以在 DevTools 下编辑，并且 DevTools 会更新展示你编辑后的文件。换句话说，可以直接将一些请求代理到本地文件。
 
@@ -197,7 +197,7 @@ DevTools 还提供了很多高效的工具类函数，下面挑几个进行~~介
 
 ![Network Overrides](./1103-some-web-debugging-skills/network-overrides.gif)
 
-## 资源面板（Source）
+### 资源面板（Source）
 
 该部分相关文档：<https://developers.google.com/web/tools/chrome-devtools/javascript>。
 
@@ -211,7 +211,7 @@ Source 面板大体分为三部分
 
 ![Source panel](./1103-some-web-debugging-skills/source-panel.jpg)
 
-### 断点
+#### 断点
 
 普通断点。在行号前左键点击，或在代码中使用 `debugger` 语句。
 
@@ -226,7 +226,7 @@ Source 面板大体分为三部分
 - DOM Breakpoints 用于管理前面提到的在 Elements 面板中添加的 DOM 断点。
 - Event Listener Breakpoints。根据事件设置断点。
 
-### File Navigotar
+#### File Navigotar
 
 在该窗格，不仅仅能够浏览页面的资源加载目录，还能将 DevTools 转变为一款 IDE。
 
@@ -270,7 +270,7 @@ Source 面板大体分为三部分
 
 ![run snippet](./1103-some-web-debugging-skills/run-snippet.jpg)
 
-## 应用面板（Application）
+### 应用面板（Application）
 
 在应用面板可以管理页面的数据缓存，包括 IndexedDB 与 Web SQL 数据库，本地和会话存储（localStorage、sessionStorage），cookie，应用程序缓存，图像，字体和样式表。
 
@@ -278,7 +278,7 @@ Source 面板大体分为三部分
 
 ![application panel](./1103-some-web-debugging-skills/application-panel.jpg)
 
-## 命令菜单（Command Menu）
+### 命令菜单（Command Menu）
 
 使用命令菜单可以很方便地唤起 DevTools 的各种功能，因为命令菜单可以在任何面板中呼出，且同样有着丰富的功能。可以通过快捷键（Mac: `Command` + `Shift` + `P`）快速打开，或在此处菜单栏中寻得。值得一提的是，此处命令菜单的用法与 VScode 中的十分相似。
 
@@ -303,7 +303,7 @@ Source 面板大体分为三部分
 - `:` 开头快速定位行。
 - 前文提及的快速执行代码片段是以 `!` 开头。
 
-# Tips - Charles
+## Tips - Charles
 
 在 Network 面板中可以查看网络的请求情况，实际上就是一个抓包的过程。但当页面不能使用 DevTools 时该怎么办？
 
@@ -338,11 +338,11 @@ console.log('JS from mapped');
 
 ![proxy-js](./1103-some-web-debugging-skills/proxy-js.jpg)
 
-# 调试移动端的 webview
+## 调试移动端的 webview
 
 移动端页面最终还是运行在客户端，与开发者工具所模拟的环境总是会有差别，当页面在移动端出现问题时该如何调试，即如何调试真机 webview？
 
-## JS 库
+### JS 库
 
 比较简单的方式是使用像 [eruda](https://github.com/liriliri/eruda)、[vConsole](https://github.com/Tencent/vConsole) 这类专为手机网页前端设计的调试面板，类似 DevTools 迷你版的工具。这些工具提供了控制台以查看日志、执行脚本、网络抓包等功能，十分实用。
 
@@ -350,13 +350,13 @@ console.log('JS from mapped');
 
 ![eruda](./1103-some-web-debugging-skills/eruda.jpg)
 
-## DevTools
+### DevTools
 
 还可以使用 PC 上强大的 DevTools 来调试移动设备的 webview。不过 Android 和 iOS 设备需要的条件和步骤不同，接下来分设备进行介绍。下面介绍的都是通过有线连接的方式，但他们都支持无线的方式进行调试，而关于这一点就交予感兴趣的自行探索了。
 
 提前说明一点，调试页面的时候，目标页面需要处于移动设备的前台。
 
-### Android 设备
+#### Android 设备
 
 可以直接使用 Chrome，可由以下步骤进入调试。
 
@@ -377,7 +377,7 @@ console.log('JS from mapped');
 > * daemon started successfully
 > ```
 
-### iOS 设备
+#### iOS 设备
 
 首先需要在 Mac 环境上才能进行，其次需要的是 Safari（Mac 自带浏览器）。本人没有 iOS 设备，以下步骤将以文本描述为主。
 
@@ -391,11 +391,11 @@ console.log('JS from mapped');
 
 > Mac Safari 默认是没有 `开发` 菜单的，需要在设置中开启。
 
-# 其他
+## 其他
 
 除了上面的内容，还有一些有趣的东西感觉可以分享一下，但现在我只想得到下面的点，可以稍微凑合看一看。
 
-## Tips - Vue 项目
+### Tips - Vue 项目
 
 对于 Vue 构建的页面应用，有一个有趣的特征，就是在 Vue 组件所渲染出的 DOM 元素上，可以获取到对应 Vue 对象的实例。
 
@@ -407,7 +407,7 @@ console.log('JS from mapped');
 
 ![update-data-by__vue__](./1103-some-web-debugging-skills/update-data-by__vue__.jpg)
 
-# 结语
+## 结语
 
 痴心妄想了，企图以一篇文章涵盖如此之多的内容。最终的表现就是蜻蜓点水了，还不全面。 😩
 

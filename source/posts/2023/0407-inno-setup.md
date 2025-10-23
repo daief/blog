@@ -12,7 +12,7 @@ keywords:
 
 <!-- more -->
 
-# 安装 & 起步
+## 安装 & 起步
 
 > 当前所使用的 Inno Setup 版本是 6.2.2
 
@@ -50,9 +50,9 @@ DefaultDirName="{userdesktop}\hello"
 
 除了手写脚本，Inno 本身自带可视化的界面去制作安装程序，在可视化界面中一步步进行下去，最后可以将一系列操作保存为一份脚本。可视化的操作很方便易学，不过这里不对可视化操作进行过多介绍了，主要还是学习一下脚本的编写。
 
-# 脚本学习
+## 脚本学习
 
-## iss 脚本概览
+### iss 脚本概览
 
 每一个 iss 脚本由若干个 `Section` 组成，每个 `Section` 有各自的职责。一个 `Section` 由方括号 `[]` 包裹，其中包含 `Section` 的名称。在每个 `Section` 内可以包含任意数量的条目。
 
@@ -107,7 +107,7 @@ AppName=My Program
 
 默认情况下，iss 脚本使用 ISPP（如果可用），而 .isl 文件使用内置（built-in）预处理器。
 
-## 多语言
+### 多语言
 
 Inno 官方自带一部分多语言，可以在 Inno 安装目录下的 `Languages` 文件夹中找到。
 
@@ -131,7 +131,7 @@ Name: chinesesimp; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 ![](./0407-inno-setup//02-hello-installer-chinese.png)
 
-## 常量（Constants）
+### 常量（Constants）
 
 前文 `DefaultDirName="{userdesktop}\hello"`、`Source: "MYPROG.EXE"; DestDir: "{app}"` 中的 `userdesktop` 和 `app` 都是常量，安装和卸载的过程中，常量会被替换为用户选择的值或系统配置中的值。
 
@@ -139,7 +139,7 @@ Name: chinesesimp; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 完整的常量列表可以参考官方文档的常量章节。
 
-## 公共参数（Common Parameters）
+### 公共参数（Common Parameters）
 
 公共参数是指能在所有 `Section` 中都能被使用的参数，共有三条：
 
@@ -149,11 +149,11 @@ Name: chinesesimp; MessagesFile: "compiler:Languages\ChineseSimplified.isl"
 
 > TODO 待完善
 
-## Components 和 Tasks 参数
+### Components 和 Tasks 参数
 
 除了 `[Types]`、`[Components]` 和 `[Tasks]`，其他 `Section` 都支持 `Components` 和 `Tasks` 两个可选参数。
 
-### Components 参数
+#### Components 参数
 
 一个由空格分隔的组件名称列表，告诉安装程序该条目属于哪些组件。如果最终用户从此列表中选择了一个组件，则会处理该条目（例如：安装文件）。
 
@@ -166,7 +166,7 @@ Source: "MYPROG.CHM"; DestDir: "{app}"; Components: help
 Source: "README.TXT"; DestDir: "{app}"
 ```
 
-### Tasks 参数
+#### Tasks 参数
 
 一个以空格分隔的任务名称列表，告诉安装程序该条目属于哪个任务。如果最终用户从此列表中选择了一个任务，则会处理该条目（例如：安装文件）。
 
@@ -196,7 +196,7 @@ Name: s; Description: not (a or b); Components: not (a or b)
 Name: t; Description: a or b - old style; Components: a b
 ```
 
-### 尝试
+#### 尝试
 
 上面都是摘自官方的解释，但到底是什么表现呢？
 
@@ -231,9 +231,9 @@ Name: t; Description: a or b - old style; Components: a b
 - `[Components]`、`[Tasks]` 定义了组件和任务（选项）
 - `Components`、`Tasks` 参数就是根据条件（用户实际的选择组件或任务）来控制条目是否被处理
 
-# Sections 学习
+## Sections 学习
 
-## [Setup]
+### [Setup]
 
 文档：<https://jrsoftware.org/ishelp/topic_setupsection.htm>
 
@@ -252,7 +252,7 @@ Name: t; Description: a or b - old style; Components: a b
 - 和修饰类（Cosmetic），只影响安装程序的外观，如：
   - SetupIconFile：指定安装/卸载程序的图标，编译器会在源目录中查找图标文件，除非是绝对路径或以 `compiler:` 开头的路径
 
-## [Types]
+### [Types]
 
 需要与 `[Components]` 配合使用，相当于预定义一组集合，方便用户选择组件：
 
@@ -265,7 +265,7 @@ Name: "b"; Description: "Compact installation"
 Name: "c"; Description: "Custom installation"; Flags: iscustom
 ```
 
-## [Components]
+### [Components]
 
 前文已有介绍，这里只说明与 `[Types]` 配合的使用：
 
@@ -283,7 +283,7 @@ Name: "c3"; Description: "c3"; Types: a
 - 若用户选择 `Custom installation`，则可以手动勾选 `c2` 和 `c3`
 - `c1` 指定了 fixed，因此用户无法手动修改该选项
 
-## [Dirs]
+### [Dirs]
 
 `[Dirs]` 定义了除用户选择的应用程序目录（自动创建）之外，安装程序需要创建的其他目录。在主应用程序目录下创建子目录是该 Section 常见的使用方式。
 
@@ -295,7 +295,7 @@ Name: "{app}\data"
 Name: "{app}\bin"
 ```
 
-## [Files]
+### [Files]
 
 该 Section 定义了安装程序需要安装的文件。换句话说，就是将定义的 Source 文件打包到安装程序中，安装的时候根据配置分别解压到特定目录。
 
@@ -306,7 +306,7 @@ Source: "README.TXT"; DestDir: "{app}"; Flags: isreadme
 Source: "subdir\*"; DestDir: "{app}\subdir"; Flags: isreadme
 ```
 
-## [Icons]
+### [Icons]
 
 该 Section 定义了安装程序如何在开始菜单或其他位置（如桌面）创建快捷方式。
 
@@ -318,7 +318,7 @@ Source: "subdir\*"; DestDir: "{app}\subdir"; Flags: isreadme
 Name: "{group}\My Program"; Filename: "{app}\myapp.exe"; WorkingDir: "{app}"
 ```
 
-## [Registry]
+### [Registry]
 
 该 Section 定义了安装程序如何在注册表中创建、修改或删除键/值。
 
@@ -342,7 +342,7 @@ Flags 说明：
 
 > 官方不建议直接操作注册表 HKCR，而是使用 `HKA\Software\Classes` 作为替代。理由暂时不清楚，同时注册表的相关知识也只了解了零星半点，边学边搞吧。
 
-## [Run] & [UninstallRun]
+### [Run] & [UninstallRun]
 
 - `[Run]` 定义了在安装完成之后需要执行的程序
 - `[UninstallRun]` 定义了在卸载第一步需要执行的程序
@@ -353,7 +353,7 @@ Flags 说明：
 Filename: "{app}\myapp.exe"; Description: "Run myapp"; Flags: nowait postinstall skipifsilent
 ```
 
-# Pascal 脚本
+## Pascal 脚本
 
 除了上面看起来像是”配置式”的内容，Inno 还支持添加脚本（语法为 [Object Pascal](https://zh.wikipedia.org/zh-sg/Object_Pascal)）以实现自定义的逻辑，具有更多的创造性，比如：
 
@@ -367,11 +367,11 @@ Filename: "{app}\myapp.exe"; Description: "Run myapp"; Flags: nowait postinstall
 
 > 注意：从这里开始，若无特殊说明，脚本特指 `[Code]` 中的 Pascal 脚本，脚本仅在运行时执行，因此不能干涉 iss 本身的编译
 
-## [Code]
+### [Code]
 
 所有脚本内容的定义需要位于该 Section。
 
-### 事件函数
+#### 事件函数
 
 可以在 `[Code]` 定义事件回调函数，在适当的时机会被执行，例：
 
@@ -417,7 +417,7 @@ end;
 - `procedure` 表示过程，不会直接返回值
 - `function` 是函数，返回单个值
 
-### 脚本常量
+#### 脚本常量
 
 这个例子演示了如何在脚本中使用常量，同时脚本中定义的函数也可以在其他地方使用，比如：
 
@@ -442,7 +442,7 @@ end;
 FileName: "{app}\MyIni.ini"; Section: "MySettings"; Key: "ShortApp"; String: "{code:GetShortName|{app}}"
 ```
 
-### Check 参数
+#### Check 参数
 
 所有参数形式的 Section 都支持 `Check` 参数，可以在程序过程中根据条件决定是否生效，比如：
 
@@ -476,7 +476,7 @@ end;
 
 - `[Files]` 中的条目如果包含通配符，`Check` 会对每一个文件都执行一次，而不是整个条目
 
-### BeforeInstall & AfterInstall 参数
+#### BeforeInstall & AfterInstall 参数
 
 所有参数形式的 Section 也都支持 `BeforeInstall` 和 `AfterInstall`，分别是在条目安装之前、之后执行：
 
@@ -520,13 +520,13 @@ end;
 - 如果安装程序已确定不应处理该条目，则不会调用 BeforeInstall 或 AfterInstall 函数
 - `[Files]` 中的条目如果包含通配符，BeforeInstall 和 AfterInstall 会对每一个文件都执行一次，而不是整个条目
 
-### 调用 DLLs 和 .Net 程序集
+#### 调用 DLLs 和 .Net 程序集
 
 脚本可以调用外部 DLL 中的函数，这包括标准 Windows DLL 中的标准 Win32 API 函数和自定义制作的 DLL 中的自定义函数。此外，还可以调用 .NET 程序集。
 
 > 先知道有这么个能力吧，实际还没用到过
 
-### 使用 COM Automation Objects
+#### 使用 COM Automation Objects
 
 > 这些概念属实没接触过，感觉上也是能直接调用一些系统或系统库的能力
 
@@ -550,7 +550,7 @@ procedure SendHttp;
   end;
 ```
 
-# 结语
+## 结语
 
 根据文档说明，每个 Section 逐步试验下来，基本上浅浅了解了下 Inno 的各个方面。Inno 本身不难，就是各种指令、参数、Flags 以及内置函数比较多，想要全盘熟悉、用得顺手也不容易。对于 Pascal 语言，虽然没接触过，但有编程经验学点简单的写法很轻松。
 

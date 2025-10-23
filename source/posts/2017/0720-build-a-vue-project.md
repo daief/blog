@@ -2,7 +2,7 @@
 title: Vue, vue-router, vuex项目构建
 date: 2017-7-20 16:48:54
 id: build-a-vue-project
-categories: ["前端"]
+categories: ['前端']
 tags:
   - JavaScript
   - Vue
@@ -21,9 +21,9 @@ description:
 [vue-router 官方中文教程](https://router.vuejs.org/zh-cn/)
 [vuex 官方中文教程](https://vuex.vuejs.org/zh-cn/)
 
-# vue-cli 创建项目
+## vue-cli 创建项目
 
-## vue.js 项目
+### vue.js 项目
 
 使用`npm`需要提前安装 node.js，因为 node.js 自带了`npm`模块，调试的时候也需要用到 node.js，需要一些对`npm`的认识，另外需要一些`webpack`的知识，不需要自己配置的时候问题不大，根据教程键入命令行即可
 
@@ -70,11 +70,11 @@ $ npm run dev
 $ npm run build
 ```
 
-## 安装 vue-router
+### 安装 vue-router
 
 `vue init webpack vue-example`的时候，是否安装`vue-router`选择 yes 即可
 
-## 安装 vuex
+### 安装 vuex
 
 [参考来源:http://www.wdshare.org/article/58dc8ec813a809c753831529](http://www.wdshare.org/article/58dc8ec813a809c753831529)
 
@@ -88,14 +88,14 @@ $ npm install --save vuex   # --save相对--global，只在当前目录安装
 
 ```javascript
 // 引入依赖
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 // 使用vuex
 Vue.use(Vuex);
 // 引入state模块
-import states from "./states";
-import mutations from "./mutations";
-import actions from "./actions";
+import states from './states';
+import mutations from './mutations';
+import actions from './actions';
 /*
  * 第一种 state模块化
  * 适合大型项目以及状态多的项目写法
@@ -120,7 +120,7 @@ import actions from "./actions";
 const store = new Vuex.Store({
   state: states,
   mutations: mutations,
-  actions: actions
+  actions: actions,
 });
 
 export default store;
@@ -154,22 +154,22 @@ export default actions;
 在`main.js`中引入:
 
 ```javascript
-import Vue from "vue";
-import App from "./App";
-import router from "./router";
+import Vue from 'vue';
+import App from './App';
+import router from './router';
 
 // 引入vuex创建的store实例，路径 './stores' 为 './stores/index.js'的简写
-import store from "./stores";
+import store from './stores';
 
 Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
-  el: "#app",
+  el: '#app',
   router,
   store, // store: store的简写
-  template: "<App/>",
-  components: { App }
+  template: '<App/>',
+  components: { App },
 });
 ```
 

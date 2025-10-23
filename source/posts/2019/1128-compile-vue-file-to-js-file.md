@@ -18,7 +18,7 @@ description:
 
 <!-- more -->
 
-# 前言
+## 前言
 
 目标：
 
@@ -34,7 +34,7 @@ description:
 >
 > webpack 当然也能达到单文件编译的效果，下文会进行介绍。
 
-# 个人方案
+## 个人方案
 
 抛砖引玉，先介绍下自己探索后所使用的方式，另外该方式的另一个目的是与本人开发的一个[小工具（jugg）](https://github.com/daief/jugg)结合使用。
 
@@ -140,7 +140,7 @@ default_1 = __decorate(
 const __vue_script__ = default_1;
 
 /* template */
-var __vue_render__ = function() {
+var __vue_render__ = function () {
   var _vm = this;
   var _h = _vm.$createElement;
   var _c = _vm._self._c || _h;
@@ -275,7 +275,7 @@ export default __vue_component__;
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
 ></iframe>
 
-## jugg 中的应用
+### jugg 中的应用
 
 顺便介绍一下上述内容在 jugg 中的实际应用效果，该部分 demo 的地址：<https://github.com/daief/jugg/blob/master/examples/ts-lib/package.json>。
 
@@ -394,11 +394,11 @@ src
             └── base.js
 ```
 
-# 开源项目
+## 开源项目
 
 遇到问题，当然少不了参考开源项目的做法，下面拉了两个简单介绍一下。
 
-## vant
+### vant
 
 vant：<https://github.com/youzan/vant/>
 
@@ -408,7 +408,7 @@ vant 没有使用 vue 文件，使用 tsx 作为源码文件（在 vue 中使用
 
 vant 的构建结果目录参考：[地址](https://www.jsdelivr.com/package/npm/vant?version=2.2.15)。
 
-## element
+### element
 
 element：<https://github.com/ElemeFE/element>
 
@@ -418,6 +418,6 @@ element 选择 webpack 作为编译工具，把每个组件作为 webpack 的入
 
 element 的构建结果目录参考：[地址](https://www.jsdelivr.com/package/npm/element-ui?version=2.13.0)。
 
-# 结语
+## 结语
 
 此外，还可以选择 rollup 作为构建的工具。总而言之，爱生活、爱折腾，多一种方式、多一种选择。

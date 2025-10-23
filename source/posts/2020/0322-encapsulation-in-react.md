@@ -21,7 +21,7 @@ description:
 
 <!-- more -->
 
-# 前言
+## 前言
 
 > 在线演示：<https://codesandbox.io/s/encapsulation-in-react-g3crf>
 
@@ -44,7 +44,7 @@ export interface FCProps {
   reset: () => void;
 }
 
-const FC: React.FunctionComponent<FCProps> = props => {
+const FC: React.FunctionComponent<FCProps> = (props) => {
   const { name, current, start, reset } = props;
   return (
     <div style={style}>
@@ -61,7 +61,7 @@ const FC: React.FunctionComponent<FCProps> = props => {
 };
 ```
 
-# HOC
+## HOC
 
 HOC 即 High Order Component，又可叫作高阶组件。
 
@@ -84,14 +84,14 @@ type OuterProps<T> = Omit<T, 'current' | 'start' | 'reset'>;
 export default function HOC<T>(
   Component: React.ComponentType<T>,
 ): React.ComponentType<OuterProps<T>> {
-  return props => {
+  return (props) => {
     const [current, setCurrent] = React.useState(60);
     const timer = React.useRef<number | null>();
 
     const start = () => {
       reset();
       timer.current = setInterval(() => {
-        setCurrent(pre => pre - 1);
+        setCurrent((pre) => pre - 1);
       }, 1000);
     };
 
@@ -144,7 +144,7 @@ const Wrapped: React.ComponentType<Pick<FCProps, 'name'>>;
 
 ```js
 export default function HOC<T>(Component) {
-  return props => {
+  return (props) => {
     // ...
   };
 }
@@ -155,8 +155,8 @@ export default function HOC<T>(Component) {
 ```js
 // 可配置的 HOC
 export default function HOC<T>(options) {
-  return Component => {
-    return props => {
+  return (Component) => {
+    return (props) => {
       // ...
     };
   };
@@ -172,7 +172,7 @@ const Wrapped = HOC({
 
 ```tsx
 export default function HOC<T>(Component) {
-  return props => {
+  return (props) => {
     // ...
     return (
       <div>
@@ -197,7 +197,7 @@ HOC 的方式十分强大，你可以拦截到组件（指 HOC 中传入的组�
 - 经过 HOC 处理后的组件，需要注意 ref 的使用，不特殊处理的话 ref 将无法获取到想要的组件实例
 - 注意被包裹组件的静态属性，不特殊处理的话包裹后的组件将丢失了这些静态属性
 
-# Render Props
+## Render Props
 
 `Render Props` 是一种新的封装方式，可以做到与 HOC 相同效果的同时避免 HOC 的问题。这不是一项什么神奇的技术，只是将某个 props 作为 `render` 的一个回调函数。
 
@@ -213,7 +213,7 @@ const RenderProps = (props: {
   const start = () => {
     reset();
     timer.current = setInterval(() => {
-      setCurrent(pre => pre - 1);
+      setCurrent((pre) => pre - 1);
     }, 1000);
   };
 
@@ -239,13 +239,13 @@ const RenderProps = (props: {
 使用方式如下：
 
 ```tsx
-<RenderProps render={props => <FC {...props} name="RenderProps" />} />
+<RenderProps render={(props) => <FC {...props} name="RenderProps" />} />
 ```
 
 更多的 Render Props 会选择将 `children` 作为这样的 props，此时用起来就会是这样的：
 
 ```tsx
-<RenderProps>{props => <FC {...props} name="RenderProps" />}</RenderProps>
+<RenderProps>{(props) => <FC {...props} name="RenderProps" />}</RenderProps>
 ```
 
 同样地，也可以封装 UI；同时不用再担心 props 冲突、ref 等问题。
@@ -254,7 +254,7 @@ const RenderProps = (props: {
 
 - 就是单纯写起来的时候嵌套会比较多，尤其同时用到多个的时候
 
-# React Hooks
+## React Hooks
 
 React Hooks 是 React 16.8.0 中出现的新概念，不过到今天的时候已经不能算新了吧，也不多作说明了。
 
@@ -271,7 +271,7 @@ export default function useCountDown() {
   const start = () => {
     reset();
     timer.current = setInterval(() => {
-      setCurrent(pre => pre - 1);
+      setCurrent((pre) => pre - 1);
     }, 1000);
   };
 
@@ -309,7 +309,7 @@ export default function App() {
 
 这种方式完全就是 hooks 的方式了，优点、局限与常规 hooks 一致了。
 
-# 结语
+## 结语
 
 三种方式在日常开发中都是频繁使用的存在，我不敢说自己使用的时候有多么多么灵活，但的的确确在开发时带来了诸多方便，无论是代码量亦或是解耦方面都有一定的帮助。
 

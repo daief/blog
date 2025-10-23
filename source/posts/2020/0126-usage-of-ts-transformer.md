@@ -20,7 +20,7 @@ description:
 
 <!-- more -->
 
-# 配置 transformer
+## 配置 transformer
 
 想要使用 transformer 有多种方式，常见的有：
 
@@ -37,7 +37,9 @@ import * as ts from 'typescript';
 /**
  * 自定义 transformer
  */
-const RenameTransformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
+const RenameTransformerFactory: ts.TransformerFactory<ts.SourceFile> = (
+  context,
+) => {
   // ...... 暂时省略
 };
 
@@ -57,7 +59,7 @@ const emitResult = program.emit(undefined, undefined, undefined, undefined, {
 });
 ```
 
-# 使用时机
+## 使用时机
 
 在上述代码片段中可以看到，将 transformer 传入到了 `before`，同时还有 `after` 和 `afterDeclarations` 可供选择，而三者的区别参阅的资料如下：
 
@@ -85,8 +87,10 @@ TS 自身具有强大的编译功能，如将 `ESNext` 语法降级、`ESModule`
  *  - before/afterDeclarations：将 import 语句中的模块名改成 `renamed-lib-name`
  *  - after：将 `"use strict";` 语句改为 `"use strict"; // use strict`
  */
-const RenameTransformerFactory: ts.TransformerFactory<ts.SourceFile> = context => {
-  return node => {
+const RenameTransformerFactory: ts.TransformerFactory<ts.SourceFile> = (
+  context,
+) => {
+  return (node) => {
     const visitor: ts.Visitor = (node: ts.Node): ts.VisitResult<ts.Node> => {
       if (
         node.parent &&
@@ -119,7 +123,7 @@ import value from 'some-lib';
 export default value;
 ```
 
-## before
+### before
 
 只在 before 中使用，按照如下更改代码：
 
@@ -153,7 +157,7 @@ export default value;
 
 **可以看到，transformer 生效将 `some-lib` 改成了 `renamed-lib-name`；但是输出的类型文件中依旧是 `import value from 'some-lib'`**。
 
-## after
+### after
 
 更新代码如下并编译：
 
@@ -188,7 +192,7 @@ export default value;
 
 如前文所述，此时将插件作用到了 `after`，此时已经经过了 TS 自身的转换，已经转换成 `commonjs` 模块了，而更新 `some-lib` 是基于查找 `ImportDeclaration` 类型的节点的，此时自然就找不到、也做不了修改了；同时经过 TS 自身编译后的会在文件头部添加 `use strict`，因此 transformer 中第二个判断逻辑得以找到符合要求的节点并添加了注释。
 
-## afterDeclarations
+### afterDeclarations
 
 同样，更新代码使得插件作用于 `afterDeclarations`，并查看结果：
 
@@ -219,7 +223,7 @@ export default value;
 
 **可以看到只有 `d.ts` 类型文件中体现了 transformer 的修改。所以，当需要通过 AST 干涉类型文件的生成时，就要在 afterDeclarations 中指定 transformer。**
 
-# 结语
+## 结语
 
 至此，对 TS transformer 的使用总算有了一个大体的认识。忍不住想吐槽一下，TS 的 transformer 在使用上相比 babel 插件要麻烦好多啊~
 

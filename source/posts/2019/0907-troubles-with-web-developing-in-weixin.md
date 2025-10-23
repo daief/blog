@@ -2,7 +2,7 @@
 title: 微信网页开发踩坑记录
 date: 2019-09-07 14:51:32
 id: troubles-with-web-developing-in-weixin
-categories: ["前端"]
+categories: ['前端']
 tags:
 keywords:
   - 微信
@@ -16,9 +16,9 @@ description:
 
 <!-- more -->
 
-# 正文
+## 正文
 
-## iOS 中收起软键盘时页面不恢复 - 2019-08
+### iOS 中收起软键盘时页面不恢复 - 2019-08
 
 描述：页面上有一个 input 输入框，输入框聚焦时会出现软键盘，同时页面会被软键盘顶起来（页面高度被压缩）。点击输入框其他地方让输入框失去焦点，使得软键盘收起。
 
@@ -42,7 +42,7 @@ document.getElementById('myInput').addEventListener('blur', () => {
 });
 ```
 
-## iOS 中 input 的 placeholder 不垂直居中 - 2019-08
+### iOS 中 input 的 placeholder 不垂直居中 - 2019-08
 
 描述：常常，会对单行输入框 input 设置 CSS 的 `line-height` 和 `height` 以达到输入文案、placeholder 垂直居中的效果。
 
@@ -54,7 +54,7 @@ document.getElementById('myInput').addEventListener('blur', () => {
 
 - [MDN - line-height](https://developer.mozilla.org/zh-CN/docs/Web/CSS/line-height)
 
-## iOS 中 Vue 的前端路由与 URL 相关的问题 - 2019-08
+### iOS 中 Vue 的前端路由与 URL 相关的问题 - 2019-08
 
 描述：前提，Vue 项目，路由模式为 browser。在微信中打开了一个 Vue 的 SPA 页面，初次展示的页面记为 `A`，前端路由跳转至页面 `B`。此时执行操作：在浏览器中打开、复制链接。
 

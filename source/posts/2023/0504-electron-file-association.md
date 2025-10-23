@@ -17,7 +17,7 @@ keywords:
 
 <!-- more -->
 
-# 文件关联
+## 文件关联
 
 文件关联的实现和表现在不同的操作系统上会有所不同，但核心期望是一致的：
 
@@ -25,7 +25,7 @@ keywords:
 - 双击能够直接通过目标应用打开；或者右键在其他应用中能够选择目标应用
 - 应用卸载后，文件关联需要解除、文件图标显示的恢复
 
-## Windows
+### Windows
 
 Windows 的文件关联是通过注册表实现的，注册表中的 `HKEY_CLASSES_ROOT（HKCR）` 节点包含了文件扩展名关联信息。
 
@@ -93,7 +93,7 @@ Root: HKCR; Subkey: "*\shell\MyProg\command"; ValueType: string; ValueName: ""; 
 Root: HKCR; Subkey: "*\shell\MyProg"; ValueType: string; ValueName: "Icon"; ValueData: "{app}\{#appExe}"; Flags: uninsdeletekey
 ```
 
-### 刷新图标
+#### 刷新图标
 
 基于 Inno Setup，通过设置 `ChangesAssociations=yes`，可以在安装/卸载之后自动刷新资源管理器，避免图标缓存的问题。
 
@@ -101,7 +101,7 @@ Root: HKCR; Subkey: "*\shell\MyProg"; ValueType: string; ValueName: "Icon"; Valu
 
 网上的一些实现都需要重启电脑或资源管理器，体验不是很好。这个工具无需任何重启，通过调用系统 API 来通知资源管理器刷新。
 
-## Mac
+### Mac
 
 在 Mac 上实现文件关联就比较简单了，对于应用程序，相关内容都在程序清单中，只需要在 `Info.plist` 中添加 `CFBundleDocumentTypes` 节点即可，如下：
 
@@ -138,7 +138,7 @@ Root: HKCR; Subkey: "*\shell\MyProg"; ValueType: string; ValueName: "Icon"; Valu
 
 > 在测试的过程中发现设置的图标始终不生效（即使删除重装也没效果），不知道是不是玄学，把 CFBundleTypeIconFile 调整为紧跟在 CFBundleTypeExtensions 后面，重新打包安装后就立刻生效了。
 
-# Electron 读取文件
+## Electron 读取文件
 
 因为实现方式的不同，导致 Electron 在不同系统上读取文件的方式也有所不同。
 
@@ -200,7 +200,7 @@ const main = () => {
 main();
 ```
 
-# 结语
+## 结语
 
 文件关联是常见的需求，本身并不复杂，但由于原生应用开发知识的匮乏，期间找了不少资料、也问了 GPT，从完全不了解到有了头绪，总归是有了一些收获。
 

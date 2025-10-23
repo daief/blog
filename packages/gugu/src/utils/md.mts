@@ -6,6 +6,9 @@ import qs from 'query-string';
 import * as htmlEntities from 'html-entities';
 import * as path from 'path';
 import * as shiki from 'shiki';
+import { createLogger } from './logger.mts';
+
+const logger = createLogger('[utils:md]');
 
 export async function readUntilMore(
   filepath: string,
@@ -110,6 +113,11 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
       },
       heading({ tokens, depth: level }) {
         const text = this.parser.parseInline(tokens).trim();
+        if (level === 1) {
+          logger.warn(
+            `文章正文不建议使用 1 级标题，${(this.options as IEnv).filepath}`,
+          );
+        }
         // remove html tag
         // input: text text <a href="#text">text2</a>
         // output: text text text2
