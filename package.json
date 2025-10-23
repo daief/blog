@@ -20,9 +20,7 @@
   },
   "devDependencies": {
     "chokidar": "^4.0.0",
-    "tree-kill": "^1.2.2",
-    "vite": "^7.1.7",
-    "vite-ssg": "^28.1.0"
+    "tree-kill": "^1.2.2"
   },
   "overrides": {
     "vite": "npm:rolldown-vite@latest"

@@ -9,7 +9,7 @@ import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
 
 export const createApp = ViteSSG(
-  App,
+  App as any,
   {
     routes,
     scrollBehavior(to, _from, savedPosition) {

@@ -35,9 +35,10 @@ export class RouteService implements IServiceCreated {
     });
 
     this.articleRoutes = computed(() => {
-      return this.markdownService.dataSource.articles.value.map<IRawRoute>(
-        (it) => {
-          const path = `/post/${it.frontmatter.id}`;
+      return this.markdownService.dataSource.articles.value
+        .filter((it) => it.slug)
+        .map<IRawRoute>((it) => {
+          const path = it.slug;
           return {
             vid: getVid(path),
             path,
@@ -46,8 +47,7 @@ export class RouteService implements IServiceCreated {
               article: it,
             },
           };
-        },
-      );
+        });
     });
 
     this.pageRoutes = computed(() => {

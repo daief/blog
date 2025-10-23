@@ -31,10 +31,10 @@
               v-for="(item, index) in navList"
               :key="index"
             >
-              <a
+              <ALink
                 :href="item.href"
                 class="flex justify-center items-center h-full px-4 py-3 font-medium hover:text-accent sm:px-2 sm:py-1"
-                >{{ item.title }}</a
+                >{{ item.title }}</ALink
               >
             </li>
             <li class="col-span-1 flex items-center justify-center">
@@ -51,6 +51,7 @@
 </template>
 <script setup lang="ts">
 import ThemeSwitch from './theme-switch.vue';
+import ALink from './a-link.vue';
 
 const navList = [
   {
