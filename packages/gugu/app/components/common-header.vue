@@ -8,12 +8,12 @@
         id="top-nav-wrap"
         class="relative flex w-full items-baseline justify-between p-4 sm:items-center sm:py-6"
       >
-        <a
+        <ALink
           href="/"
           class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
         >
-          AstroPaper
-        </a>
+          {{ title }}
+        </ALink>
         <nav
           id="nav-menu"
           class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
@@ -56,7 +56,7 @@ import ALink from './a-link.vue';
 const navList = [
   {
     title: 'Posts',
-    href: '/page/1',
+    href: '/',
   },
   {
     title: 'Tags',
@@ -67,6 +67,8 @@ const navList = [
     href: '/about',
   },
 ];
+
+const title = __BLOG_CONFIG__.title;
 </script>
 
 <style lang="css">

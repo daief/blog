@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
-import { Marked, MarkedExtension } from 'marked';
+import { Marked, MarkedExtension, MarkedOptions } from 'marked';
 import hljs from 'highlight.js';
 import qs from 'query-string';
 import * as htmlEntities from 'html-entities';
@@ -50,16 +50,21 @@ export const escapeHtml = (str: string) =>
 export interface IEnv {
   filepath: string;
   transformImgSrc?: (src: string) => string;
+  transformLinkHref?: (href: string) => string | Promise<string>;
 }
 
-const markedHtmlEnhanceExt = (): MarkedExtension => {
+const createWalkTokens = (
+  options: IEnv,
+): MarkedOptions<string, string> & {
+  async: true;
+} => {
   return {
     async: true,
     async walkTokens(token) {
-      // @ts-expect-error
-      const options = this.options as IEnv;
-
       if (token.type === 'code') {
+        if (token.type === 'code') {
+          token;
+        }
         const [lang = 'text', ...props] = token.lang?.split(' ') ?? [];
         if (lang === 'mermaid') return;
 
@@ -82,11 +87,20 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
           block: true,
           text: `${codeResult}\n`,
         });
+      } else if (token.type === 'link') {
+        // @ts-ignore
+        if (options.transformLinkHref) {
+          token.href = await options.transformLinkHref(token.href);
+        }
       }
     },
+  };
+};
+
+const markedHtmlEnhanceExt = (): MarkedExtension => {
+  return {
     renderer: {
       code({ text: sourceCode, lang }) {
-        const options = this.options as IEnv;
         const language = lang!;
         // 处理 mermaid 图表
         if (/^mermaid$/i.test(language)) {
@@ -94,8 +108,7 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
         }
         return '';
       },
-      heading({ tokens, depth: level, ...rest }) {
-        const options = this.options as IEnv;
+      heading({ tokens, depth: level }) {
         const text = this.parser.parseInline(tokens).trim();
         // remove html tag
         // input: text text <a href="#text">text2</a>
@@ -103,7 +116,7 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
         const anchorText = text.replace(/<[^>]+>/g, '');
         return `<h${level} id="${anchorText}">${text}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
       },
-      link: ({ href, title: aAttrsQuery, text }) => {
+      link({ href, title: aAttrsQuery, text }) {
         const imgAttrs = qs.parse(
           htmlEntities.decode(aAttrsQuery || ''),
         ) as Record<string, string>;
@@ -117,8 +130,8 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
         return `<a ${attrStr}>${text}</a>`;
       },
       image(imgToken) {
+        const options = this.options as IEnv;
         const { href, title: imgAttrsQuery, text: alt } = imgToken;
-        const options = this.parser.options as IEnv;
         const attrInput = qs.parse(
           htmlEntities.decode(imgAttrsQuery || ''),
         ) as Record<string, string>;
@@ -158,7 +171,10 @@ export const createRenderer = () => {
   const marked = new Marked(markedHtmlEnhanceExt());
 
   const gParse = (md: string, env: IEnv) => {
-    return marked.parse(md, { async: true, ...env });
+    return marked.parse(md, {
+      ...env,
+      ...createWalkTokens(env),
+    });
   };
 
   return Object.assign(marked, {

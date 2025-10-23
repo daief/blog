@@ -103,6 +103,10 @@ class DataSource {
       .sort((a, b) => b.posts - a.posts);
   }
 
+  get(filepath: string) {
+    return this.markdownMap.value.get(filepath);
+  }
+
   private paginate(arr: IMarkdown[]) {
     const pages = Math.ceil(arr.length / this.pageSize);
     return Array.from({ length: pages }).map((_, idx) => {
@@ -158,7 +162,7 @@ export class MarkdownService {
     const list: IMarkdown[] = [];
     const tasks = files.map(async (filepath) =>
       limit(async () => {
-        const meta = await this.loadMd(normalizePath(filepath));
+        const meta = await this.loadMd(normalizePath(filepath), true);
         list.push(meta);
       }),
     );
@@ -172,10 +176,9 @@ export class MarkdownService {
    * @returns
    */
   private async loadMd(filepath: string, all = false): Promise<IMarkdown> {
-    // const fileContent = all
-    //   ? await fs.readFile(filepath, 'utf-8')
-    //   : await readUntilMore(filepath);
-    const fileContent = await fs.readFile(filepath, 'utf-8');
+    const fileContent = all
+      ? await fs.readFile(filepath, 'utf-8')
+      : await readUntilMore(filepath);
     const matterResult = fm.default<any>(fileContent);
     const frontmatter = matterResult.attributes as Omit<
       IMarkdown['frontmatter'],
@@ -183,26 +186,39 @@ export class MarkdownService {
     > & { tags: string[] | string };
     const { sort, tags, ...rest } = frontmatter;
 
-    const mdHtml = await this.md!.gParse(matterResult.body, {
-      filepath,
-      transformImgSrc: (imgSrc) => {
-        const isAbs = ['http', '//', 'data:'].some((prefix) =>
-          imgSrc.startsWith(prefix),
-        );
-        if (isAbs) return imgSrc;
+    const mdHtml = !matterResult.body
+      ? ''
+      : await this.md!.gParse(matterResult.body, {
+          filepath,
+          transformImgSrc: (imgSrc) => {
+            const isAbs = ['http', '//', 'data:'].some((prefix) =>
+              imgSrc.startsWith(prefix),
+            );
+            if (isAbs) return imgSrc;
 
-        const sourceRoot = this.fileService.resolveSource();
-        const fileDir = path.dirname(filepath);
-        const imageAbsPath = path.resolve(fileDir, imgSrc);
+            const sourceRoot = this.fileService.resolveSource();
+            const fileDir = path.dirname(filepath);
+            const imageAbsPath = path.resolve(fileDir, imgSrc);
 
-        if (imageAbsPath.startsWith(sourceRoot)) {
-          const relativeToSource = path.relative(sourceRoot, imageAbsPath);
-          return `@source/${relativeToSource.replace(/\\/g, '/')}`;
-        }
+            if (imageAbsPath.startsWith(sourceRoot)) {
+              const relativeToSource = path.relative(sourceRoot, imageAbsPath);
+              return `@source/${relativeToSource.replace(/\\/g, '/')}`;
+            }
 
-        return imgSrc;
-      },
-    });
+            return imgSrc;
+          },
+          /** 处理 markdown 内部链接 */
+          transformLinkHref: async (href) => {
+            if (href && !href.startsWith('http') && href.endsWith('.md')) {
+              const targetFile = normalizePath(
+                path.resolve(path.dirname(filepath), href),
+              );
+              const md = await this.getMdByPath(targetFile);
+              return md!.slug;
+            }
+            return href;
+          },
+        });
     const [excerpt, more = ''] = mdHtml.split('<!-- more -->');
     const type = this.fileService.isArticle(filepath) ? 'article' : 'page';
 
@@ -231,5 +247,13 @@ export class MarkdownService {
         sort: Number.isFinite(sort) ? sort : 0,
       },
     };
+  }
+
+  private async getMdByPath(filepath: string) {
+    const md = this.dataSource.get(filepath);
+    if (md) return md;
+
+    this.dataSource.update(await this.loadMd(normalizePath(filepath), false));
+    return this.dataSource.get(filepath);
   }
 }

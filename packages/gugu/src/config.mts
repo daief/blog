@@ -75,5 +75,10 @@ export const extendConfig = async (
     copyPublicDir: true,
   };
 
+  viteConfig.define = {
+    ...viteConfig.define,
+    __BLOG_CONFIG__: JSON.stringify(blogConfig),
+  };
+
   return viteConfig;
 };

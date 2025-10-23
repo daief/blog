@@ -28,6 +28,7 @@
     }
 
     a {
+      @apply foreground-link text-accent;
       @apply break-words underline-offset-4 no-underline;
       @apply hover:underline hover:decoration-dashed focus-visible:no-underline;
     }
