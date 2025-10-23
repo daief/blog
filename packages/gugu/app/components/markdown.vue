@@ -1,11 +1,12 @@
 <template>
-  <div class="md-prose dark:prose-invert max-w-none" ref="mdEl">
+  <div class="md-prose max-w-none dark:prose-invert" ref="mdEl">
     <slot />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, useTemplateRef } from 'vue';
+import { onMounted, useTemplateRef } from 'vue';
+import ALink from './a-link.vue'; // 给 markdown 渲染后的 html 使用
 
 const elRef = useTemplateRef<HTMLElement | null>('mdEl');
 

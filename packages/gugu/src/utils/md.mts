@@ -127,7 +127,7 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
           )
           .join(' ');
 
-        return `<a ${attrStr}>${text}</a>`;
+        return `<a-link ${attrStr}>${text}</a-link>`;
       },
       image(imgToken) {
         const options = this.options as IEnv;
