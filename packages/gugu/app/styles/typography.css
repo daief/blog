@@ -101,7 +101,11 @@
     pre.mermaid {
       &,
       p {
-        @apply text-gray-600;
+        @apply dark:text-gray-600;
+      }
+
+      & {
+        @apply bg-gray-300/80;
       }
     }
 
