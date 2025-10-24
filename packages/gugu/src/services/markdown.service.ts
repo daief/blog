@@ -1,7 +1,7 @@
 import { ILogger, injectLogger } from '../utils/logger.mts';
 import { ContextService } from './context.service.ts';
 import { getService, injectService } from './accessor.ts';
-import { createRenderer, IGMarkerd, readUntilMore } from '../utils/md.mts';
+import { readUntilMore, renderMarkdown } from '../utils/md.mts';
 import plimit from 'p-limit';
 import { IMarkdown } from '../../types/index.mts';
 import fs from 'fs-extra';
@@ -125,10 +125,7 @@ export class MarkdownService {
   @injectService(() => FileService)
   fileService!: FileService;
 
-  md!: IGMarkerd;
-
   async init() {
-    this.md = createRenderer();
     await this.loadMds();
 
     this.fileService.watcher
@@ -188,7 +185,7 @@ export class MarkdownService {
 
     const mdHtml = !matterResult.body
       ? ''
-      : await this.md!.gParse(matterResult.body, {
+      : await renderMarkdown(matterResult.body, {
           filepath,
           transformImgSrc: (imgSrc) => {
             const isAbs = ['http', '//', 'data:'].some((prefix) =>

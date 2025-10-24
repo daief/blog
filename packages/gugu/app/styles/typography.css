@@ -78,7 +78,7 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 break-words opacity-80;
+      @apply border-s-accent/80 break-words opacity-80 not-italic;
     }
 
     details {
@@ -98,6 +98,7 @@
       @apply border block mx-auto rounded-sm p-0.5;
     }
 
+    /* ===== mermaid ===== */
     pre.mermaid {
       &,
       p {

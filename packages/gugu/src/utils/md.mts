@@ -56,11 +56,7 @@ export interface IEnv {
   transformLinkHref?: (href: string) => string | Promise<string>;
 }
 
-const createWalkTokens = (
-  options: IEnv,
-): MarkedOptions<string, string> & {
-  async: true;
-} => {
+const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
   return {
     async: true,
     async walkTokens(token) {
@@ -97,11 +93,6 @@ const createWalkTokens = (
         }
       }
     },
-  };
-};
-
-const markedHtmlEnhanceExt = (): MarkedExtension => {
-  return {
     renderer: {
       code({ text: sourceCode, lang }) {
         const language = lang!;
@@ -114,9 +105,7 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
       heading({ tokens, depth: level }) {
         const text = this.parser.parseInline(tokens).trim();
         if (level === 1) {
-          logger.warn(
-            `文章正文不建议使用 1 级标题，${(this.options as IEnv).filepath}`,
-          );
+          logger.warn(`文章正文不建议使用 1 级标题，${options.filepath}`);
         }
         // remove html tag
         // input: text text <a href="#text">text2</a>
@@ -138,7 +127,6 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
         return `<a-link ${attrStr}>${text}</a-link>`;
       },
       image(imgToken) {
-        const options = this.options as IEnv;
         const { href, title: imgAttrsQuery, text: alt } = imgToken;
         const attrInput = qs.parse(
           htmlEntities.decode(imgAttrsQuery || ''),
@@ -173,19 +161,9 @@ const markedHtmlEnhanceExt = (): MarkedExtension => {
   };
 };
 
-export type IGMarkerd = ReturnType<typeof createRenderer>;
-
-export const createRenderer = () => {
-  const marked = new Marked(markedHtmlEnhanceExt());
-
-  const gParse = (md: string, env: IEnv) => {
-    return marked.parse(md, {
-      ...env,
-      ...createWalkTokens(env),
-    });
-  };
-
-  return Object.assign(marked, {
-    gParse,
+export function renderMarkdown(md: string, env: IEnv): Promise<string> {
+  const marked = new Marked(markedHtmlEnhanceExt(env));
+  return marked.parse(md, {
+    async: true,
   });
-};
+}

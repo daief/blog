@@ -5,7 +5,7 @@
     :target="props.target"
     @click="handleClick"
     :class="{
-      [props.activeClass || 'active']: link.isActive,
+      [props.activeClass || 'active']: link.isActive.value,
       'flex items-center w-80 mx-auto my-4 p-3 bg-background max-w-full rounded-md no-underline min-h-20 shadow dark:shadow-xl dark:border dark:border-border':
         state,
     }"
@@ -51,6 +51,8 @@ const attrs = useAttrs() as {
   'data-layout'?: 'card';
 };
 
+const router = useRouter();
+
 const { state } = useAsyncState(
   async () => {
     if (attrs['data-layout'] !== 'card') return;
@@ -62,8 +64,6 @@ const { state } = useAsyncState(
 
 // TODO
 const base = '';
-
-const router = useRouter();
 
 const href = computed(() => {
   if (typeof props.href === 'string' && props.href.startsWith('/')) {
@@ -85,12 +85,7 @@ const handleClick = (e: MouseEvent) => {
   // TODO exclude 404
   if (router.resolve(href.value!).matched.length) {
     e.preventDefault();
-    if (replace.value) {
-      router.replace(href.value!);
-    } else {
-      router.push(href.value!);
-    }
-
+    router[replace.value ? 'replace' : 'push'](href.value!);
     return;
   }
 };
