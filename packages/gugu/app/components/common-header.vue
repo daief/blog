@@ -2,28 +2,41 @@
   <header>
     <div
       id="nav-container"
-      class="mx-auto text-foreground flex max-w-app flex-col items-center justify-between sm:flex-row"
+      class="max-w-app mx-auto text-foreground sm:bg-transparent"
     >
       <div
         id="top-nav-wrap"
-        class="relative flex w-full items-baseline justify-between p-4 sm:items-center sm:py-6"
+        :class="[
+          'relative grid grid-cols-2 grid-rows-[2] w-full items-center justify-between p-4',
+          'sm:py-6 sm:flex sm:grid-rows-1',
+        ]"
       >
         <ALink
           href="/"
-          class="absolute py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:static sm:my-auto sm:text-2xl sm:leading-none"
+          class="py-1 text-xl leading-8 font-semibold whitespace-nowrap sm:my-auto sm:text-2xl sm:leading-none"
         >
           {{ title }}
         </ALink>
+
+        <div class="flex items-center justify-end sm:hidden">
+          <ThemeSwitch />
+          <button @click="toggleExpand">expand</button>
+        </div>
         <nav
           id="nav-menu"
-          class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
+          :class="[
+            'col-start-1 col-end-3',
+            'w-full flex-col items-center',
+            'static top-full left-0 right-0 z-10 mt-4',
+            'sm:mt-0 sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0 sm:flex',
+            !isExpand ? 'hidden' : '',
+          ]"
         >
           <ul
             id="menu-items"
             :class="[
-              'mt-4 grid w-44 grid-cols-2 place-content-center gap-2',
-              'hidden',
-              'sm:mt-0 sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0',
+              'w-full place-content-center gap-2',
+              'sm:flex sm:w-auto sm:gap-x-5 sm:gap-y-0',
             ]"
           >
             <li
@@ -37,8 +50,12 @@
                 >{{ item.title }}</ALink
               >
             </li>
-            <li class="col-span-1 flex items-center justify-center">
-              <ThemeSwitch />
+            <li class="col-span-1 hidden sm:block">
+              <a
+                class="flex justify-center items-center h-full px-4 py-3 sm:px-2 sm:py-1"
+              >
+                <ThemeSwitch />
+              </a>
             </li>
           </ul>
         </nav>
@@ -52,6 +69,7 @@
 <script setup lang="ts">
 import ThemeSwitch from './theme-switch.vue';
 import ALink from './a-link.vue';
+import { ref } from 'vue';
 
 const navList = [
   {
@@ -69,6 +87,11 @@ const navList = [
 ];
 
 const title = __BLOG_CONFIG__.title;
+const isExpand = ref(false);
+
+const toggleExpand = () => {
+  isExpand.value = !isExpand.value;
+};
 </script>
 
 <style lang="css">
