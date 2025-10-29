@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import './typography.css';
+@import './utility.css';
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
@@ -32,22 +33,6 @@ html[data-theme='dark'] {
 
   --color-accent-hover: var(--accent-hover);
   --color-accent-active: var(--accent-active);
-}
-
-@utility max-w-app {
-  @apply max-w-4xl;
-}
-
-@utility foreground-link {
-  @apply text-foreground hover:text-accent-hover active:text-accent-active;
-}
-
-@utility flex-center {
-  @apply flex items-center justify-center;
-}
-
-@utility transition-300 {
-  @apply transition-all duration-300 ease-in-out;
 }
 
 @layer base {
