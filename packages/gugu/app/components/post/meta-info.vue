@@ -1,5 +1,7 @@
 <template>
-  <div class="flex items-center gap-x-3 text-foreground opacity-80">
+  <div
+    class="flex items-center gap-x-3.5 gap-y-0.5 text-foreground opacity-80 flex-wrap"
+  >
     <component :is="render()" />
   </div>
 </template>
@@ -21,7 +23,11 @@ const { meta = {} } = defineProps<{
 }>();
 
 const renderWrapper = (cnt: any) => {
-  return <div class="inline-flex items-center gap-x-1">{cnt}</div>;
+  return (
+    <div class="inline-flex items-center gap-x-0.5 whitespace-nowrap">
+      {cnt}
+    </div>
+  );
 };
 
 const render = () => {
@@ -51,7 +57,7 @@ const render = () => {
     nodes.push(
       renderWrapper(
         <>
-          <i-mdi-calendar-month-outline />
+          <i-mdi-calendar-month-outline class="block" />
           <span>
             {meta.modified ? '更新于：' : '发表于：'}
             <time datetime={meta.modified || meta.date}>
@@ -65,23 +71,23 @@ const render = () => {
 
   if (meta.tags?.length) {
     nodes.push(
-      renderWrapper(
-        meta.tags.map((tag) => (
-          <router-link class="mr-2 foreground-link" to={`/tags/${tag}/1`}>
-            <i-mdi-tag-outline class="select-none mr-0.5" />
-            {tag}
-          </router-link>
-        )),
-      ),
+      // renderWrapper(
+      meta.tags.map((tag) => (
+        <router-link class="foreground-link" to={`/tags/${tag}/1`}>
+          <i-mdi-tag-outline class="select-none mr-0.5 text-foreground" />
+          {tag}
+        </router-link>
+      )),
+      // ),
     );
   }
 
-  nodes = nodes.map((node, i) => (
-    <>
-      {i !== 0 && <div class="inline-block h-[1em] w-px bg-gray-300" />}
-      {node}
-    </>
-  ));
+  // nodes = nodes.map((node, i) => (
+  //   <>
+  //     {i !== 0 && <div class="inline-block h-[1em] w-px bg-gray-300" />}
+  //     {node}
+  //   </>
+  // ));
 
   return <>{nodes}</>;
 };

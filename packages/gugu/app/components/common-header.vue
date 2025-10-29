@@ -77,15 +77,15 @@ import { ref } from 'vue';
 
 const navList = [
   {
-    title: 'Posts',
+    title: '全部',
     href: '/',
   },
   {
-    title: 'Tags',
+    title: '标签',
     href: '/tags',
   },
   {
-    title: 'About',
+    title: '关于',
     href: '/about',
   },
 ];
