@@ -1,0 +1,28 @@
+<template>
+  <div>
+    <h1 class="text-2xl font-semibold sm:text-3xl">Tags</h1>
+    <ul class="mt-6">
+      <% tags.forEach(tag => { %>
+      <li
+        class="group inline-block group-hover:cursor-pointer mx-1 my-3 underline-offset-8"
+      >
+        <router-link
+          class="foreground-link relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline"
+          to="/tags/<%- tag.tag %>/1"
+        >
+          <i-mdi-pound class="-me-5 opacity-80" />
+          &nbsp;&nbsp;
+          <span> <%- tag.tag %> </span>
+          <span class="opacity-80">(<%- tag.posts %>)</span>
+        </router-link>
+      </li>
+      <% }) %>
+    </ul>
+  </div>
+</template>
+
+<script setup lang="tsx">
+  defineOptions({
+    name: 'Tags',
+  });
+</script>

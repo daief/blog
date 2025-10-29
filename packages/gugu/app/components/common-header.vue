@@ -50,6 +50,7 @@
               <ALink
                 :href="item.href"
                 class="flex justify-center items-center h-full px-4 py-3 font-medium hover:text-accent sm:px-2 sm:py-1"
+                @click="isExpand = false"
                 >{{ item.title }}</ALink
               >
             </li>
