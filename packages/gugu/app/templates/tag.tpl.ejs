@@ -1,11 +1,16 @@
+<!-- 标签分页 -->
 <template>
   <div>
+    <h1 class="text-foreground text-2xl font-semibold mb-6 sm:text-3xl">
+      标签：<%- tag %>
+    </h1>
+
     <%- include('./cmn/articles.ejs', { articles }) %>
 
     <Pagination
       :current="<%= current %>"
       :total="<%= total %>"
-      pattern="/page/:page"
+      pattern="/tags/<%- tag %>/:page"
     />
   </div>
 </template>

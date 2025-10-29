@@ -12,7 +12,7 @@ import * as path from 'node:path';
 const logger = createLogger('[plugin:vblog]');
 
 const renderFileTpl = (file: string, env: any) => {
-  return ejs.renderFile(file, env, {});
+  return ejs.renderFile(file, env, { filename: file });
 };
 
 /**

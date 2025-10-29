@@ -67,10 +67,10 @@ const render = () => {
     nodes.push(
       renderWrapper(
         meta.tags.map((tag) => (
-          <span class="mr-2">
+          <router-link class="mr-2 foreground-link" to={`/tags/${tag}/1`}>
             <i-mdi-tag-outline class="select-none mr-0.5" />
             {tag}
-          </span>
+          </router-link>
         )),
       ),
     );

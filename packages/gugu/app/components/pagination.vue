@@ -1,6 +1,7 @@
 <template>
   <div
     class="h-8 flex justify-center items-center text-md gap-x-4 text-foreground"
+    v-if="total > 1"
   >
     <router-link
       :to="links.prev"

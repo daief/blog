@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h1 class="text-2xl font-semibold sm:text-3xl">Tags</h1>
-    <ul class="mt-6">
+    <h1 class="text-foreground text-2xl font-semibold mb-6 sm:text-3xl">
+      Tags
+    </h1>
+    <ul class="">
       <% tags.forEach(tag => { %>
       <li
         class="group inline-block group-hover:cursor-pointer mx-1 my-3 underline-offset-8"
@@ -11,7 +13,7 @@
           to="/tags/<%- tag.tag %>/1"
         >
           <i-mdi-pound class="-me-5 opacity-80" />
-          &nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;
           <span> <%- tag.tag %> </span>
           <span class="opacity-80">(<%- tag.posts %>)</span>
         </router-link>

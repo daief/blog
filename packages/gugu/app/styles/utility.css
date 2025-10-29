@@ -3,7 +3,7 @@
 }
 
 @utility foreground-link {
-  @apply text-foreground hover:text-accent-hover active:text-accent-active;
+  @apply text-foreground underline-offset-6 decoration-dashed hover:underline hover:text-accent-hover active:text-accent-active;
 }
 
 @utility flex-center {

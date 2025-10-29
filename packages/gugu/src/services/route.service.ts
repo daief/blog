@@ -79,12 +79,38 @@ export class RouteService implements IServiceCreated {
       };
     });
 
+    this.tagPaginationRoutes = computed(() => {
+      const tags = this.markdownService.dataSource.getTags();
+      return tags.flatMap((tagItem) => {
+        const tagPaginations =
+          this.markdownService.dataSource.getTagPaginations(tagItem.tag);
+        const arr = tagPaginations.map<IRawRoute>((articles, i) => {
+          const path = `/tags/${tagItem.tag}/${i + 1}`;
+          return {
+            vid: getVid(path),
+            path,
+            template: 'tag',
+            data: {
+              articles,
+              current: i + 1,
+              total: tagPaginations.length,
+              tag: tagItem.tag,
+            },
+          };
+        });
+        const indexRoute = { ...arr[0] };
+        indexRoute.path = '/tags';
+        return [indexRoute, ...arr];
+      });
+    });
+
     this.allRoutes = computed(() => {
       return [
         ...this.articlesPaginationRoutes.value,
         ...this.articleRoutes.value,
         ...this.pageRoutes.value,
         this.tagsRoute.value,
+        ...this.tagPaginationRoutes.value,
       ];
     });
 
