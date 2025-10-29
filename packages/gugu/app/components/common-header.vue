@@ -18,9 +18,12 @@
           {{ title }}
         </ALink>
 
-        <div class="flex items-center justify-end sm:hidden">
+        <div class="flex-center justify-end space-x-4 sm:hidden">
           <ThemeSwitch />
-          <button @click="toggleExpand">expand</button>
+          <a role="button" @click="toggleExpand" class="text-2xl p-1">
+            <i-mdi-window-close class="block" v-if="isExpand" />
+            <i-mdi-menu class="block" v-else />
+          </a>
         </div>
         <nav
           id="nav-menu"
@@ -98,6 +101,6 @@ const toggleExpand = () => {
 @reference "@mcss";
 
 header a {
-  @apply text-foreground hover:text-accent-hover active:text-accent-active;
+  @apply foreground-link;
 }
 </style>

@@ -42,6 +42,14 @@ html[data-theme='dark'] {
   @apply text-foreground hover:text-accent-hover active:text-accent-active;
 }
 
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+
+@utility transition-300 {
+  @apply transition-all duration-300 ease-in-out;
+}
+
 @layer base {
   * {
     @apply border-border outline-accent/75;
