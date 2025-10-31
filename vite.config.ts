@@ -6,6 +6,8 @@ export default defineConfig((env) => {
     {
       mode: env.mode,
       title: `Daief's blog`,
+      author: 'daief',
+      since: 2017,
     },
     {
       plugins: [],

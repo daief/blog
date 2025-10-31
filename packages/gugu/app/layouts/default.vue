@@ -11,7 +11,7 @@
     </main>
     <footer class="text-center py-6 text-gray-500 dark:text-gray-400 text-sm">
       <div>
-        <span>&copy; 2024 GUGU's Blog</span>
+        <span>&copy; {{ year }} {{ blogConfig.title }}</span>
       </div>
     </footer>
     <BackToTop />
@@ -28,4 +28,10 @@ const route = useRoute();
 const mainClass = computed(() => {
   return route.meta.layoutClass || '';
 });
+
+const blogConfig = __BLOG_CONFIG__;
+const currentYear = new Date().getFullYear();
+const year = blogConfig.since
+  ? `${blogConfig.since}-${currentYear}`
+  : currentYear;
 </script>
