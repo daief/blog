@@ -24,7 +24,11 @@
 </template>
 
 <script setup lang="tsx">
+  import { usePageTitle } from '@app/composables/use-page-title';
+
   defineOptions({
     name: 'Tags',
   });
+
+  usePageTitle('标签');
 </script>

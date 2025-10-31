@@ -19,10 +19,13 @@
   import Markdown from '@app/components/markdown.vue';
   import PostMetaInfo from '@app/components/post/meta-info.vue';
   import ALink from '@app/components/a-link.vue';
+  import { usePageTitle } from '@app/composables/use-page-title';
 
   defineOptions({
     name: 'Article',
   });
+
+  usePageTitle(`<%- article.frontmatter.title %>`);
 
   const meta = JSON.parse(
     '<%- JSON.stringify({ isDraft: article.isDraft, ...article.frontmatter }) %>',

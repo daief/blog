@@ -15,10 +15,13 @@
   import PostMetaInfo from '@app/components/post/meta-info.vue';
   import Pagination from '@app/components/pagination.vue';
   import ALink from '@app/components/a-link.vue';
+  import { usePageTitle } from '@app/composables/use-page-title';
 
   defineOptions({
     name: 'Articles',
   });
+
+  usePageTitle(`第 <%= current %> 页`);
 
   const metaMap = JSON.parse(
     '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter, isDraft: article.isDraft }]))) %>',

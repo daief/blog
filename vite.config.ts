@@ -5,7 +5,7 @@ export default defineConfig((env) => {
   return extendConfig(
     {
       mode: env.mode,
-      title: 'daief的个人日志',
+      title: `Daief's blog`,
     },
     {
       plugins: [],
