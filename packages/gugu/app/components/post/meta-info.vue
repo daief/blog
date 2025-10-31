@@ -22,63 +22,47 @@ const { meta = {} } = defineProps<{
   >;
 }>();
 
-const renderWrapper = (cnt: any) => {
-  return (
-    <div class="inline-flex items-center gap-x-0.5 whitespace-nowrap">
-      {cnt}
-    </div>
-  );
-};
-
 const render = () => {
   let nodes: any[] = [];
 
   if (meta.isDraft) {
     nodes.push(
-      renderWrapper(
-        <div class="text-xs text-red-500 py-0.5 px-1 border border-red-400 rounded-xs">
-          草稿
-        </div>,
-      ),
+      <div class="text-xs text-red-500 py-0.5 px-1 border border-red-400 rounded-xs">
+        草稿
+      </div>,
     );
   }
 
   if (meta.sort! > 0) {
     nodes.push(
-      renderWrapper(
-        <div class="text-xs text-accent py-0.5 px-1 border border-accent rounded-xs">
-          置顶
-        </div>,
-      ),
+      <div class="text-xs text-accent py-0.5 px-1 border border-accent rounded-xs">
+        置顶
+      </div>,
     );
   }
 
   if (meta.modified || meta.date) {
     nodes.push(
-      renderWrapper(
-        <>
-          <i-mdi-calendar-month-outline class="block" />
-          <span>
-            {meta.modified ? '更新于：' : '发表于：'}
-            <time datetime={meta.modified || meta.date}>
-              {formatDate(new Date(meta.modified || meta.date!), 'YYYY/MM/DD')}
-            </time>
-          </span>
-        </>,
-      ),
+      <div class="inline-flex items-center gap-x-0.5 whitespace-nowrap">
+        <i-mdi-calendar-month-outline class="block" />
+        <span>
+          {meta.modified ? '更新于：' : '发表于：'}
+          <time datetime={meta.modified || meta.date}>
+            {formatDate(new Date(meta.modified || meta.date!), 'YYYY/MM/DD')}
+          </time>
+        </span>
+      </div>,
     );
   }
 
   if (meta.tags?.length) {
     nodes.push(
-      // renderWrapper(
       meta.tags.map((tag) => (
         <router-link class="foreground-link" to={`/tags/${tag}/1`}>
           <i-mdi-pound class="select-none mr-0.5 text-foreground" />
           {tag}
         </router-link>
       )),
-      // ),
     );
   }
 
@@ -86,4 +70,4 @@ const render = () => {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css"></style>
