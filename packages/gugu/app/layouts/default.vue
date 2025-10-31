@@ -1,7 +1,12 @@
 <template>
   <div class="flex flex-col min-h-screen transition-colors duration-300">
     <CommonHeader />
-    <main class="flex-grow max-w-app mx-auto px-4 py-8 w-full">
+    <main
+      :class="[
+        'flex-grow max-w-app mx-auto px-4 py-8 w-full text-foreground',
+        mainClass,
+      ]"
+    >
       <router-view />
     </main>
     <footer class="text-center py-6 text-gray-500 dark:text-gray-400 text-sm">
@@ -15,4 +20,12 @@
 <script setup lang="ts">
 import CommonHeader from '@app/components/common-header.vue';
 import BackToTop from '@app/components/back-to-top.vue';
+import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+
+const route = useRoute();
+
+const mainClass = computed(() => {
+  return route.meta.layoutClass || '';
+});
 </script>

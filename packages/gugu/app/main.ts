@@ -4,6 +4,8 @@ import App from './app.vue';
 import routes from 'vblog:routes';
 import { setup } from '@css-render/vue3-ssr';
 
+import V404 from '@app/views/404.vue';
+
 import 'vfonts/Inter.css';
 import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
@@ -11,7 +13,16 @@ import './styles/main.css';
 export const createApp = ViteSSG(
   App as any,
   {
-    routes,
+    routes: [
+      ...routes,
+      {
+        path: '/:catchAll(.*)',
+        component: V404,
+        meta: {
+          layoutClass: 'flex-center',
+        },
+      },
+    ],
     scrollBehavior(to, _from, savedPosition) {
       if (to.hash) {
         return {

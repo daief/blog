@@ -35,7 +35,9 @@ export const createVBlogPlugin = () => {
       .map((route) => {
         return `{
         path: "${route.path}",
-        component: () => import('${route.vid}') }`;
+        component: () => import('${route.vid}'),
+        meta: ${JSON.stringify(route.meta || {})}
+      }`;
       })
       .join(',');
     return `export default [${arrStr}]`;

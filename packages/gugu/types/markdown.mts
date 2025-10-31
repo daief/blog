@@ -37,4 +37,5 @@ export interface IRawRoute {
   path: string;
   template: ITemplateType;
   data: any;
+  meta?: Record<string, any>;
 }
