@@ -13,9 +13,11 @@ export class FileService {
   @injectService(() => ConfigService)
   configService!: ConfigService;
 
-  watcher!: FSWatcher;
+  watcher: FSWatcher | null = null;
 
   async init() {
+    if (!this.configService.IsDev) return;
+
     this.watcher = chokidar.watch(this.resolveSource(), {
       ignored: (file, stats) =>
         Boolean(stats?.isFile() && !file.endsWith('.md')),
@@ -27,7 +29,7 @@ export class FileService {
       .once('error', (err: any) => ready.resolve(err));
     await ready.promise;
 
-    this.logger.info('ready');
+    this.logger.info('ready' + (this.watcher ? ' with watcher' : ''));
   }
 
   resolveSource(...args: string[]) {

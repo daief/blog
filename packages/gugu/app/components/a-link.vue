@@ -55,6 +55,7 @@ const router = useRouter();
 
 const { state } = useAsyncState(
   async () => {
+    if (import.meta.env.SSR) return;
     if (attrs['data-layout'] !== 'card') return;
     return getPageAttributesByUrl(props.href);
   },

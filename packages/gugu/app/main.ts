@@ -2,7 +2,7 @@ import { ViteSSG } from 'vite-ssg';
 import App from './app.vue';
 // @ts-ignore
 import routes from 'vblog:routes';
-// import { setup } from '@css-render/vue3-ssr';
+import { setup } from '@css-render/vue3-ssr';
 
 import 'vfonts/Inter.css';
 import 'vfonts/IbmPlexMono.css';
@@ -27,10 +27,9 @@ export const createApp = ViteSSG(
     },
   },
   ({ app, initialState }) => {
-    // // @ts-expect-error
-    // if (import.meta.env.SSR) {
-    //   const { collect } = setup(app);
-    //   initialState.naiveUiStyles = collect();
-    // }
+    if (import.meta.env.SSR) {
+      const { collect } = setup(app);
+      initialState.naiveUiStyles = collect();
+    }
   },
 );

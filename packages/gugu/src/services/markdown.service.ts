@@ -129,7 +129,7 @@ export class MarkdownService {
     await this.loadMds();
 
     this.fileService.watcher
-      .on('add', async (filepath) => {
+      ?.on('add', async (filepath) => {
         this.dataSource.update(
           await this.loadMd(normalizePath(filepath), true),
         );
