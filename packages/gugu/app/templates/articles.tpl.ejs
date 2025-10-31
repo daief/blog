@@ -21,7 +21,9 @@
     name: 'Articles',
   });
 
-  usePageTitle(`第 <%= current %> 页`);
+  usePageTitle({
+    title: `第 <%= current %> 页`,
+  });
 
   const metaMap = JSON.parse(
     '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter, isDraft: article.isDraft }]))) %>',

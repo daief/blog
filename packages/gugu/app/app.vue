@@ -1,5 +1,7 @@
 <template>
-  <component :is="render" />
+  <AppProvider>
+    <DefaultLayout />
+  </AppProvider>
 </template>
 
 <script setup lang="tsx">
@@ -9,12 +11,4 @@ import DefaultLayout from '@app/layouts/default.vue';
 defineOptions({
   name: 'App',
 });
-
-const render = () => {
-  return (
-    <AppProvider>
-      <DefaultLayout />
-    </AppProvider>
-  );
-};
 </script>

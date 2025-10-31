@@ -1,9 +1,22 @@
 import { type MaybeRef, unref } from 'vue';
-import { useHead, useSeoMeta } from '@vueuse/head';
 
-export const usePageTitle = (title: MaybeRef<string>) => {
-  useHead({
-    title: () =>
-      [unref(title), __BLOG_CONFIG__.title].filter(Boolean).join(' | '),
+import { useSeoMeta } from '@unhead/vue';
+
+export const usePageTitle = (opts: {
+  title: MaybeRef<string>;
+  description: MaybeRef<string>;
+}) => {
+  const { title, description } = opts;
+
+  const titleInput = () =>
+    [unref(title), __BLOG_CONFIG__.title].filter(Boolean).join(' | ');
+
+  const descInput = () => unref(description) || '';
+
+  useSeoMeta({
+    title: titleInput,
+    description: descInput(),
+    ogTitle: titleInput,
+    ogDescription: descInput(),
   });
 };

@@ -13,10 +13,4 @@
 defineOptions({
   name: '404',
 });
-
-const render = () => {
-  return <div>404</div>;
-};
 </script>
-
-<style lang="scss" scoped></style>

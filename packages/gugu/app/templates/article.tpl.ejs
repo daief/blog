@@ -25,7 +25,9 @@
     name: 'Article',
   });
 
-  usePageTitle(`<%- article.frontmatter.title %>`);
+  usePageTitle({
+    title: `<%- article.frontmatter.title %>`,
+  });
 
   const meta = JSON.parse(
     '<%- JSON.stringify({ isDraft: article.isDraft, ...article.frontmatter }) %>',
