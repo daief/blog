@@ -1,10 +1,10 @@
 <div class="space-y-12 mb-8">
   <% articles.forEach(article => { %>
   <article>
-    <h1 class="text-xl font-bold transition-300 foreground-link text-accent">
+    <h1 class="text-xl font-bold transition-300 text-accent">
       <router-link
         :to="'/post/<%- article.frontmatter.id %>#more'"
-        class="post-title"
+        class="post-title foreground-link"
       >
         <%- article.frontmatter.title %>
       </router-link>

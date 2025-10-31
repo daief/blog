@@ -27,6 +27,7 @@
 
   usePageTitle({
     title: `<%- article.frontmatter.title %>`,
+    description: `<%- article.frontmatter.description || '' %>`,
   });
 
   const meta = JSON.parse(

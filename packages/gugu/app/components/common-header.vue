@@ -49,7 +49,10 @@
             >
               <ALink
                 :href="item.href"
-                class="flex justify-center items-center h-full px-4 py-3 font-medium hover:text-accent sm:px-2 sm:py-1"
+                :class="[
+                  'flex justify-center items-center h-full px-4 py-3 font-medium hover:text-accent sm:px-2 sm:py-1',
+                  item.active ? 'nav-active' : '',
+                ]"
                 @click="isExpand = false"
                 >{{ item.title }}</ALink
               >
@@ -73,22 +76,44 @@
 <script setup lang="ts">
 import ThemeSwitch from './theme-switch.vue';
 import ALink from './a-link.vue';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
 
-const navList = [
+const route = useRoute();
+
+const rawlist: Array<{
+  title: string;
+  href: string;
+  match?: RegExp[];
+  active?: boolean;
+}> = [
   {
     title: '全部',
     href: '/',
+    match: [/^\/page\/\d+/, /^\/post\/[^\/]+/],
   },
   {
     title: '标签',
     href: '/tags',
+    match: [/^\/tags\//],
   },
   {
     title: '关于',
     href: '/about',
   },
 ];
+
+const navList = computed(() => {
+  return rawlist.map((item) => {
+    const active =
+      item.href === route.path ||
+      item.match?.some((reg) => reg.test(route.path));
+    return {
+      ...item,
+      active,
+    };
+  });
+});
 
 const title = __BLOG_CONFIG__.title;
 const isExpand = ref(false);
@@ -98,10 +123,14 @@ const toggleExpand = () => {
 };
 </script>
 
-<style lang="css">
+<style lang="css" scoped>
 @reference "@mcss";
 
 header a {
-  @apply foreground-link;
+  @apply foreground-link no-underline hover:no-underline;
+}
+
+header a.nav-active {
+  @apply underline-offset-4 underline decoration-wavy;
 }
 </style>

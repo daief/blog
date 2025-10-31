@@ -74,20 +74,13 @@ const render = () => {
       // renderWrapper(
       meta.tags.map((tag) => (
         <router-link class="foreground-link" to={`/tags/${tag}/1`}>
-          <i-mdi-tag-outline class="select-none mr-0.5 text-foreground" />
+          <i-mdi-pound class="select-none mr-0.5 text-foreground" />
           {tag}
         </router-link>
       )),
       // ),
     );
   }
-
-  // nodes = nodes.map((node, i) => (
-  //   <>
-  //     {i !== 0 && <div class="inline-block h-[1em] w-px bg-gray-300" />}
-  //     {node}
-  //   </>
-  // ));
 
   return <>{nodes}</>;
 };

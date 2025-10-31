@@ -11,7 +11,8 @@ export const usePageTitle = (opts: {
   const titleInput = () =>
     [unref(title), __BLOG_CONFIG__.title].filter(Boolean).join(' | ');
 
-  const descInput = () => unref(description) || '';
+  const descInput = () =>
+    unref(description) || __BLOG_CONFIG__.description || '';
 
   useSeoMeta({
     title: titleInput,
