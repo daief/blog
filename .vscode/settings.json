@@ -3,5 +3,8 @@
   "emmet.includeLanguages": {
     "ejs": "html"
   },
-  "liveServer.settings.root": "/dist"
+  "liveServer.settings.root": "/dist",
+  "markdown.copyFiles.destination": {
+    "**/*.md": "${documentDirName}/${documentBaseName}/${fileName}"
+  }
 }

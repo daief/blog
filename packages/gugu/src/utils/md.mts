@@ -128,9 +128,11 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
       },
       image(imgToken) {
         const { href, title: imgAttrsQuery, text: alt } = imgToken;
-        const attrInput = qs.parse(
-          htmlEntities.decode(imgAttrsQuery || ''),
-        ) as Record<string, string>;
+        const attrInput: Record<string, string> = imgAttrsQuery?.includes('=')
+          ? (qs.parse(htmlEntities.decode(imgAttrsQuery || '')) as any)
+          : {
+              title: imgAttrsQuery,
+            };
         const imgBaseName = path.basename(href);
 
         const attrObj = {
