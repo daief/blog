@@ -5,7 +5,7 @@ export default defineConfig((env) => {
   return extendConfig(
     {
       mode: env.mode,
-      title: `Daief's blog`,
+      title: `Daief's Blog`,
       author: 'daief',
       since: 2017,
     },
