@@ -9,20 +9,17 @@ declare global {
 
 if (!import.meta.env.SSR) {
   window.dataLayer = window.dataLayer || [];
-  window.gtag =
-    window.gtag ||
-    function gtag() {
-      window.dataLayer.push(arguments);
-    };
+  window.gtag ||= function gtag() {
+    window.dataLayer.push(arguments);
+  };
 
   window.gtag('js', new Date());
 }
 
 export async function registerGoogleAnalytics(router: Router) {
-  const ID = __BLOG_CONFIG__.googleAnalytics?.GA_MEASUREMENT_ID;
+  const ID = __BLOG_CONFIG__.googleAnalytics?.id;
   if (import.meta.env.SSR || !ID) return;
 
-  window.gtag('config', ID);
   // <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
   const script = document.createElement('script');
   script.async = true;
@@ -32,15 +29,15 @@ export async function registerGoogleAnalytics(router: Router) {
   );
   document.head.appendChild(script);
 
-  const track = (path: string) => {
+  script.onload = () => {
     window.gtag('config', ID, {
-      page_path: path,
+      send_page_view: false,
+    });
+
+    router.afterEach((to, from) => {
+      if (to.path !== from.path) {
+        window.gtag('event', 'page_view');
+      }
     });
   };
-
-  router.afterEach((to, from) => {
-    if (to.path !== from.path) {
-      track(to.path);
-    }
-  });
 }

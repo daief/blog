@@ -5,6 +5,6 @@ export interface IBlogConifg {
   author?: string;
   since?: number;
   googleAnalytics?: {
-    GA_MEASUREMENT_ID: string;
+    id: string;
   };
 }

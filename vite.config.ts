@@ -9,7 +9,7 @@ export default defineConfig((env) => {
       author: 'daief',
       since: 2017,
       googleAnalytics: {
-        GA_MEASUREMENT_ID: 'UA-146082840-1',
+        id: 'G-NPFWE07FQ2',
       },
     },
     {
