@@ -8,6 +8,9 @@ export default defineConfig((env) => {
       title: `Daief's Blog`,
       author: 'daief',
       since: 2017,
+      googleAnalytics: {
+        GA_MEASUREMENT_ID: 'UA-146082840-1',
+      },
     },
     {
       plugins: [],

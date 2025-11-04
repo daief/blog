@@ -4,4 +4,7 @@ export interface IBlogConifg {
   description?: string;
   author?: string;
   since?: number;
+  googleAnalytics?: {
+    GA_MEASUREMENT_ID: string;
+  };
 }

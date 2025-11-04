@@ -9,6 +9,7 @@ import V404 from '@app/views/404.vue';
 import 'vfonts/Inter.css';
 import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
+import { registerGoogleAnalytics } from './exts/ga';
 
 export const createApp = ViteSSG(
   App as any,
@@ -37,10 +38,12 @@ export const createApp = ViteSSG(
       return { top: 0 };
     },
   },
-  ({ app, initialState }) => {
+  ({ app, initialState, router }) => {
     if (import.meta.env.SSR) {
       const { collect } = setup(app);
       initialState.naiveUiStyles = collect();
     }
+
+    registerGoogleAnalytics(router);
   },
 );
