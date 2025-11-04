@@ -8,6 +8,7 @@ import { type IRawRoute } from '../../types/index.mts';
 import { createLogger } from '../utils/logger.mts';
 import fs from 'fs-extra';
 import * as path from 'node:path';
+import { ConfigService } from '../services/config.service.ts';
 
 const logger = createLogger('[plugin:vblog]');
 
@@ -22,6 +23,7 @@ const renderFileTpl = (file: string, env: any) => {
 export const createVBlogPlugin = () => {
   const routeService = getService(RouteService);
   const fileService = getService(FileService);
+  const configService = getService(ConfigService);
 
   const debugDir = path.resolve(process.cwd(), 'node_modules/.vblog-temp');
   fs.emptyDir(debugDir);
@@ -95,6 +97,21 @@ export const createVBlogPlugin = () => {
         };
       }
       return null;
+    },
+    buildEnd() {
+      // generate sitemap.xml
+      const links = routeService.allRoutes.value
+        .map(
+          (it) =>
+            `<url><loc>${configService.blogConfig.url}${it.path}</loc></url>`,
+        )
+        .join('');
+      const xml = `<?xml version="1.0" encoding="utf-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${links}</urlset>`;
+      this.emitFile({
+        fileName: 'sitemap.xml',
+        type: 'asset',
+        source: xml,
+      });
     },
   };
 

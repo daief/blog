@@ -6,6 +6,7 @@ export default defineConfig((env) => {
     {
       mode: env.mode,
       title: `Daief's Blog`,
+      url: 'https://daief.tech',
       author: 'daief',
       since: 2017,
       googleAnalytics: {
