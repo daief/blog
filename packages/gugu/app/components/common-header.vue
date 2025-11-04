@@ -7,7 +7,7 @@
       <div
         id="top-nav-wrap"
         :class="[
-          'relative grid grid-cols-2 grid-rows-[2] w-full items-center justify-between p-4',
+          'relative grid grid-cols-2 auto-rows-auto w-full items-center justify-between p-4',
           'sm:py-6 sm:flex sm:grid-rows-1',
         ]"
       >

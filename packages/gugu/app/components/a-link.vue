@@ -6,8 +6,10 @@
     @click="handleClick"
     :class="{
       [props.activeClass || 'active']: link.isActive.value,
-      'flex items-center w-80 mx-auto my-4 p-3 bg-gray-100 max-w-full rounded-md no-underline min-h-20 shadow dark:shadow-xl dark:border dark:border-border':
+      // card style
+      'flex items-center w-80 mx-auto my-4 p-3 bg-gray-100 max-w-full rounded-md no-underline min-h-20 shadow transition-300 hover:shadow-accent-hover':
         state,
+      'dark:border dark:border-border dark:bg-background': state,
     }"
   >
     <template v-if="state">
@@ -20,7 +22,7 @@
         </div>
       </div>
       <img
-        class="block bg-background w-16 h-16 rounded object-contain m-0 ml-3 border-0"
+        class="block border-border w-16 h-16 rounded object-contain m-0 ml-3 border"
         style="text-indent: -2000em"
         :src="state.image"
       />

@@ -6,5 +6,6 @@
   "liveServer.settings.root": "/dist",
   "markdown.copyFiles.destination": {
     "**/*.md": "${documentDirName}/${documentBaseName}/${fileName}"
-  }
+  },
+  "liveServer.settings.port": 55556
 }
