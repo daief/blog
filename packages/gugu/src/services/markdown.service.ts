@@ -147,13 +147,10 @@ export class MarkdownService {
   }
 
   private async loadMds() {
-    const files = await glob.glob(
-      `${this.fileService.resolveSource()}/**/*.md`,
-      {
-        nodir: true,
-        absolute: true,
-      },
-    );
+    let files = await glob.glob(`${this.fileService.resolveSource()}/**/*.md`, {
+      nodir: true,
+      absolute: true,
+    });
     const limit = plimit(10);
 
     const list: IMarkdown[] = [];
