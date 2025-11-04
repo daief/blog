@@ -32,7 +32,7 @@ jobs:
       - name: Build
         run: |
           pnpm install
-          pnpm build && pnpm generate
+          pnpm build
 
       - name: Deploy
         env:

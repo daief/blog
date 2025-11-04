@@ -5,9 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "node scripts/dev.mjs",
-    "build": "vite-ssg build",
-    "generate": "gugu generate",
-    "serve": "gugu serve"
+    "build": "vite-ssg build"
   },
   "workspaces": [
     "packages/*"
