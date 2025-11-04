@@ -17,6 +17,13 @@ export const createApp = ViteSSG(
     routes: [
       ...routes,
       {
+        path: '/404',
+        component: V404,
+        meta: {
+          layoutClass: 'flex-center',
+        },
+      },
+      {
         path: '/:catchAll(.*)',
         component: V404,
         meta: {
