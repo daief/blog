@@ -30,10 +30,12 @@ export async function registerGoogleAnalytics(router: Router) {
   );
   document.head.appendChild(script);
 
-  script.onload = () => {
+  script.onload = async () => {
     window.gtag('config', ID, {
-      send_page_view: false,
+      // send_page_view: false,
     });
+
+    await router.isReady();
 
     router.afterEach((to, from) => {
       if (to.path !== from.path) {
