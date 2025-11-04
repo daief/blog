@@ -16,6 +16,7 @@ if (!import.meta.env.SSR) {
   window.gtag('js', new Date());
 }
 
+// https://developers.google.com/tag-platform/gtagjs/configure?hl=zh-cn
 export async function registerGoogleAnalytics(router: Router) {
   const ID = __BLOG_CONFIG__.googleAnalytics?.id;
   if (import.meta.env.SSR || !ID) return;
