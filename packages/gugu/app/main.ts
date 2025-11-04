@@ -6,8 +6,8 @@ import { setup } from '@css-render/vue3-ssr';
 
 import V404 from '@app/views/404.vue';
 
-import 'vfonts/Inter.css';
-import 'vfonts/IbmPlexMono.css';
+// import 'vfonts/Inter.css';
+// import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
 import { registerGoogleAnalytics } from './exts/ga';
 
