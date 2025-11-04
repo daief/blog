@@ -6,7 +6,7 @@
     @click="handleClick"
     :class="{
       [props.activeClass || 'active']: link.isActive.value,
-      'flex items-center w-80 mx-auto my-4 p-3 bg-background max-w-full rounded-md no-underline min-h-20 shadow dark:shadow-xl dark:border dark:border-border':
+      'flex items-center w-80 mx-auto my-4 p-3 bg-gray-100 max-w-full rounded-md no-underline min-h-20 shadow dark:shadow-xl dark:border dark:border-border':
         state,
     }"
   >

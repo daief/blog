@@ -114,11 +114,15 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
         return `<h${level} id="${anchorText}">${text}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
       },
       link({ href, title: aAttrsQuery, text }) {
-        const imgAttrs = qs.parse(
+        const attrs = qs.parse(
           htmlEntities.decode(aAttrsQuery || ''),
         ) as Record<string, string>;
 
-        const attrStr = Object.entries({ ...imgAttrs, href })
+        if (/^\w+:/.test(href)) {
+          attrs.target = '_blank';
+        }
+
+        const attrStr = Object.entries({ ...attrs, href })
           .map(([key, value]) =>
             value ? `${key}=${JSON.stringify(htmlEntities.encode(value))}` : '',
           )

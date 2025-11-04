@@ -58,8 +58,11 @@ const render = () => {
   if (meta.tags?.length) {
     nodes.push(
       meta.tags.map((tag) => (
-        <router-link class="foreground-link" to={`/tags/${tag}/1`}>
-          <i-mdi-pound class="select-none mr-0.5 text-foreground" />
+        <router-link
+          class="inline-flex items-center foreground-link"
+          to={`/tags/${tag}/1`}
+        >
+          <i-mdi-pound class="block select-none mr-0.5 text-foreground" />
           {tag}
         </router-link>
       )),
