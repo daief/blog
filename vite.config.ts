@@ -8,6 +8,7 @@ export default defineConfig((env) => {
       title: `Daief's Blog`,
       url: 'https://daief.tech',
       author: 'daief',
+      avatar: 'https://avatars.githubusercontent.com/u/19222089?v=4',
       since: 2017,
       googleAnalytics: {
         id: 'G-NPFWE07FQ2',

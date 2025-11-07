@@ -4,6 +4,7 @@ export interface IBlogConifg {
   url: string;
   description?: string;
   author?: string;
+  avatar?: string;
   since?: number;
   googleAnalytics?: {
     id: string;

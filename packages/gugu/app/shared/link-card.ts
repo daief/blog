@@ -55,8 +55,13 @@ export async function getPageAttributesByUrl(url = '') {
       tmpEl = pageDoc.querySelector('link[rel="icon"]');
       tmpEl && (image = tmpEl.href);
     }
+
+    if (image) {
+      image = new URL(image, url).href;
+    }
   } catch (error) {}
-  image = image || '/images/network-icon.jpeg';
+
+  template.remove();
 
   return {
     title,
