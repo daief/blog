@@ -1,9 +1,8 @@
 ---
 title: 关于
 date: 2019-11-08 15:10:58
+modified: 2025-11-07
 ---
-
-> 本文更新于 `二〇二三年〇四月二十二日`。
 
 ## 关于我
 
@@ -28,3 +27,9 @@ date: 2019-11-08 15:10:58
 - 评论：[utteranc](https://utteranc.es/)
 - 统计分析：[Google Analytics](https://analytics.google.com/analytics/web/)
 - 域名：[阿里云 - 万网](https://www.aliyun.com/)
+
+站点变迁：
+
+- 2025~至今：自建，通过[增强 Vite 的形式实现](./posts/2025/1103-blog-upgrade-2025.md)。
+- 2021~2025：自建博客引擎 [Gugu](./posts/2021/0725-site-engine-gugu.md)。
+- 2017~2021：使用 [Hexo](https://hexo.io/) 搭建，主题为 [NexT](https://theme-next.org/)。
