@@ -12,6 +12,10 @@
       <a href="#more" class="hidden"></a>
       <%- article.more %>
     </Markdown>
+
+    <div class="mt-6" v-if="meta.comments">
+      <Comment />
+    </div>
   </article>
 </template>
 
@@ -20,6 +24,7 @@
   import PostMetaInfo from '@app/components/post/meta-info.vue';
   import ALink from '@app/components/a-link.vue';
   import { usePageTitle } from '@app/composables/use-page-title';
+  import Comment from '@app/components/comment.vue';
 
   defineOptions({
     name: 'Article',

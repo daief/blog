@@ -11,7 +11,7 @@ export interface IMarkdown {
     modified?: Date;
     tags: string[];
     description?: string | null;
-    comment?: boolean;
+    comments?: boolean;
   };
   /** 解析后的摘要 */
   excerpt: string;

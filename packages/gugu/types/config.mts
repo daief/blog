@@ -8,4 +8,12 @@ export interface IBlogConifg {
   googleAnalytics?: {
     id: string;
   };
+  utteranc?: {
+    enable: boolean;
+    repo: string;
+    'issue-term': string;
+    label: string;
+    lightTheme: string;
+    darkTheme: string;
+  };
 }
