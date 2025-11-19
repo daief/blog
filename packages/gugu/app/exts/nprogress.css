@@ -1,0 +1,15 @@
+/* nprogress: use accent color */
+
+#nprogress .bar {
+  background: var(--accent);
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--accent), 0 0 5px var(--accent);
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--accent);
+  border-left-color: var(--accent);
+}

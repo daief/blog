@@ -10,6 +10,7 @@ import V404 from '@app/views/404.vue';
 // import 'vfonts/IbmPlexMono.css';
 import './styles/main.css';
 import { registerGoogleAnalytics } from './exts/ga';
+import { registerNProgress } from './exts/nprogress';
 
 export const createApp = ViteSSG(
   App as any,
@@ -52,5 +53,6 @@ export const createApp = ViteSSG(
     }
 
     registerGoogleAnalytics(router);
+    registerNProgress(router);
   },
 );

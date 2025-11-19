@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { type Router } from 'vue-router';
 
 declare global {
@@ -29,18 +30,15 @@ export async function registerGoogleAnalytics(router: Router) {
     `https://www.googletagmanager.com/gtag/js?id=${ID}`,
   );
   document.head.appendChild(script);
+  window.gtag('config', ID, {});
 
-  script.onload = async () => {
-    window.gtag('config', ID, {
-      // send_page_view: false,
-    });
-
-    await router.isReady();
-
-    router.afterEach((to, from) => {
-      if (to.path !== from.path) {
-        window.gtag('event', 'page_view');
-      }
-    });
-  };
+  // 无需使用 router.afterEach，gtag 会自动跟踪路由变化
+  // script.onload = async () => {
+  //   await router.isReady();
+  //   router.afterEach((to, from) => {
+  //     if (to.path !== from.path) {
+  //       window.gtag('event', 'page_view');
+  //     }
+  //   });
+  // };
 }

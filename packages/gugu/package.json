@@ -13,6 +13,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.14",
     "@types/node": "^22.5.2",
+    "@unhead/vue": "^2.0.0",
     "@vant/use": "^1.6.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitejs/plugin-vue-jsx": "^5.1.1",
@@ -20,7 +21,6 @@
     "@vue/reactivity": "^3.5.22",
     "@vue/server-renderer": "^3.5.21",
     "@vueuse/core": "^14.0.0",
-    "@unhead/vue": "^2.0.0",
     "axios": "^1.12.2",
     "cac": "^6.7.14",
     "chokidar": "^4.0.3",
@@ -68,6 +68,7 @@
     "@types/express": "^5.0.3",
     "@types/fs-extra": "^11.0.4",
     "@types/lodash-es": "^4.17.0",
+    "@types/nprogress": "^0.2.3",
     "typescript": "^5.9.2"
   }
 }
