@@ -7,26 +7,16 @@ export async function registerNProgress(router: Router) {
   if (import.meta.env.SSR) return;
 
   await router.isReady();
-  router.beforeEach(async (to, from) => {
-    const { matched } = to;
 
-    if (!matched || !matched.length) {
-      return;
-    }
+  let timer: any;
+  router.beforeEach((to, from, next) => {
+    // 200ms 以下就不显示 loading 了
+    timer = setTimeout(() => NProgress.start(), 200);
+    next();
+  });
 
-    let timer: any;
-
-    // 路由守卫
-    router.beforeEach((to, from, next) => {
-      timer = setTimeout(() => {
-        NProgress.start();
-      }, 200); // 200ms 以下就不显示 loading 了
-      next();
-    });
-
-    router.afterEach(() => {
-      NProgress.done();
-      clearTimeout(timer);
-    });
+  router.afterEach(() => {
+    NProgress.done();
+    clearTimeout(timer);
   });
 }
