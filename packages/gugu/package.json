@@ -35,7 +35,7 @@
     "highlight.js": "^11.11.1",
     "html-entities": "^2.6.0",
     "js-base64": "^3.7.8",
-    "js-yaml": "^4.1.0",
+    "js-yaml": "^4.1.1",
     "less": "^4.4.1",
     "lodash-es": "^4.17.21",
     "marked": "^16.3.0",
