@@ -12,6 +12,7 @@ import { normalizePath } from 'vite';
 import * as fm from 'front-matter';
 import { ensureArray } from '../utils/misc.mts';
 import { ref, computed } from '@vue/reactivity';
+import { ConfigService } from './config.service.ts';
 
 class DataSource {
   @injectLogger('[DataSource]')
@@ -41,9 +42,9 @@ class DataSource {
       })
       .sort((a, b) => {
         // 优先置顶草稿
-        const isSameDraft = a.isDraft === b.isDraft;
+        const isSameDraft = a.frontmatter.draft === b.frontmatter.draft;
         if (!isSameDraft) {
-          return b.isDraft ? 1 : -1;
+          return b.frontmatter.draft ? 1 : -1;
         }
 
         // 再基于 sort 排序
@@ -120,6 +121,9 @@ export class MarkdownService {
   @injectLogger('[MarkdownService]')
   private readonly logger!: ILogger;
 
+  @injectService(() => ConfigService)
+  private readonly configService!: ConfigService;
+
   readonly dataSource = new DataSource();
 
   @injectService(() => FileService)
@@ -157,6 +161,10 @@ export class MarkdownService {
     const tasks = files.map(async (filepath) =>
       limit(async () => {
         const meta = await this.loadMd(normalizePath(filepath), true);
+        if (meta.frontmatter.draft && !this.configService.IsDev) {
+          return;
+        }
+
         list.push(meta);
       }),
     );
@@ -215,6 +223,7 @@ export class MarkdownService {
         });
     const [excerpt, more = ''] = mdHtml.split('<!-- more -->');
     const type = this.fileService.isArticle(filepath) ? 'article' : 'page';
+    const isArticle = type === 'article';
 
     let slug = '';
     if (type === 'page') {
@@ -223,14 +232,13 @@ export class MarkdownService {
         normalizePath(
           path.relative(this.fileService.resolveSource(), filepath),
         ).replace(/\.md$/, '');
-    } else if (type === 'article' && rest.id) {
+    } else if (isArticle && rest.id) {
       slug = `/post/${rest.id}`;
     }
 
     return {
       type,
       slug,
-      isDraft: this.fileService.isDraft(filepath),
       filepath,
       rawContent: matterResult.body,
       excerpt,
@@ -239,7 +247,7 @@ export class MarkdownService {
         ...rest,
         tags: ensureArray(tags),
         sort: Number.isFinite(sort) ? sort : 0,
-        comments: rest.comments ?? true,
+        comments: rest.comments ?? isArticle,
       },
     };
   }

@@ -45,12 +45,8 @@ export class FileService {
   }
 
   isArticle(filename: string) {
-    return [this.resolveSource('posts'), this.resolveSource('drafts')]
+    return [this.resolveSource('posts')]
       .map((it) => normalizePath(it))
       .some((it) => filename.startsWith(it));
-  }
-
-  isDraft(filename: string) {
-    return filename.startsWith(normalizePath(this.resolveSource('drafts')));
   }
 }

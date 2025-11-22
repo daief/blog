@@ -31,6 +31,6 @@
   });
 
   const metaMap = JSON.parse(
-    '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter, isDraft: article.isDraft }]))) %>',
+    '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter }]))) %>',
   );
 </script>

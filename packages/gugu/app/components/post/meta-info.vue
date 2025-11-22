@@ -15,17 +15,13 @@ defineOptions({
 });
 
 const { meta = {} } = defineProps<{
-  meta: Partial<
-    IMarkdown['frontmatter'] & {
-      isDraft: boolean;
-    }
-  >;
+  meta: Partial<IMarkdown['frontmatter']>;
 }>();
 
 const render = () => {
   let nodes: any[] = [];
 
-  if (meta.isDraft) {
+  if (meta.draft) {
     nodes.push(
       <div class="text-xs text-red-500 py-0.5 px-1 border border-red-400 rounded-xs">
         草稿

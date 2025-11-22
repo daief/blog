@@ -37,7 +37,5 @@
     description: `<%- article.frontmatter.description || '' %>`,
   });
 
-  const meta = JSON.parse(
-    '<%- JSON.stringify({ isDraft: article.isDraft, ...article.frontmatter }) %>',
-  );
+  const meta = JSON.parse('<%- JSON.stringify({ ...article.frontmatter }) %>');
 </script>

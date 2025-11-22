@@ -1,6 +1,5 @@
 export interface IMarkdown {
   type: 'article' | 'page';
-  isDraft: boolean;
   filepath: string;
   slug: string;
   frontmatter: {
@@ -12,6 +11,7 @@ export interface IMarkdown {
     tags: string[];
     description?: string | null;
     comments?: boolean;
+    draft: boolean;
   };
   /** 解析后的摘要 */
   excerpt: string;

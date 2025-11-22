@@ -75,7 +75,8 @@ export const createVBlogPlugin = () => {
     async load(id, options) {
       if (id === vRoutesId) {
         const code = getRoutesCode();
-        fs.writeFile(path.join(debugDir, 'routes.js'), code, 'utf-8');
+        // for debug
+        // fs.writeFile(path.join(debugDir, 'routes.js'), code, 'utf-8');
         return code;
       }
 
@@ -87,11 +88,12 @@ export const createVBlogPlugin = () => {
         this.addWatchFile(tplPath);
 
         const code = await renderFileTpl(tplPath, target.data);
-        await fs.writeFile(
-          path.join(debugDir, id.replace(/vm:/g, '')),
-          code,
-          'utf-8',
-        );
+        // for debug
+        // await fs.writeFile(
+        //   path.join(debugDir, id.replace(/vm:/g, '')),
+        //   code,
+        //   'utf-8',
+        // );
         return {
           code,
         };
