@@ -18,11 +18,11 @@ draft: true
 
 Rspack 内置了 [SWC](https://swc.rs/) 作为默认的 JS/TS 转译器，理想状态下应该要直接替换掉 Babel，这是对构建速度影响最大的环节之一。
 
-而能否顺利地完全迁移到 SWC，实际上取决于 SWC 的生态给不给力。不幸的是，当前生态并没能直接让我完全从 Babel 转向 SWC。
+而能否顺利地完全迁移到 SWC，实际上取决于 SWC 的生态给不给力。不幸的是，当前生态还不够完善、不能直接让我完全从 Babel 转向 SWC。下面分享几个（类）我对 Babel 插件的处理。
 
-### proposal 系列插件
+### [babel-plugin-react-css-modules](https://www.npmjs.com/package/babel-plugin-react-css-modules)
 
-比如 `@babel/plugin-proposal-object-rest-spread`，我的选择是舍弃这些，毕竟大部分已经是语言标准了，直接依托 SWC 所覆盖到的语法即可。不建议去使用太新、不稳定的语法特性。
+目前 SWC 生态中并没有对应的插件，这驱动了我自己去用 Rust 复刻了一个 SWC 版本的插件，也是我在迁移中比较有技术挑战的一个点。具体的插件实现后续会单独写一篇文章来介绍，之后同时也打算整理一个开源版本。
 
 ### [babel-plugin-jsx-control-statements](https://www.npmjs.com/package/babel-plugin-jsx-control-statements)
 
@@ -41,3 +41,11 @@ list.map(function (item1 /* ❌ 这里期望的 item 被重命名成了 item1 */
 ```
 
 目前打了一个补丁来解决，但未能覆盖所有场景，详见 [PR#9](https://github.com/intpp/swc-plugin-jsx-control-statements/pull/9)。在原作者未接受前，我发布了一个临时版本的包 [@axew/swc-plugin-jsx-control-statements](https://www.npmjs.com/package/@axew/swc-plugin-jsx-control-statements)。
+
+### proposal 系列插件
+
+比如 `@babel/plugin-proposal-object-rest-spread`，这部分比较好处理，我的选择是舍弃，毕竟大部分已经是语言标准了，直接依托 SWC 所覆盖到的语法即可。不建议去使用太新、不稳定的语法特性。
+
+## 小结
+
+不过得益于这次的复刻经验，在后面项目中遇到几个内部的 Babel 都比较顺畅地复刻解决了，在全量迁移。
