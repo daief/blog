@@ -46,6 +46,10 @@ list.map(function (item1 /* ❌ 这里期望的 item 被重命名成了 item1 */
 
 比如 `@babel/plugin-proposal-object-rest-spread`，这部分比较好处理，我的选择是舍弃，毕竟大部分已经是语言标准了，直接依托 SWC 所覆盖到的语法即可。不建议去使用太新、不稳定的语法特性。
 
+## TypeScript 迁移
+
+一般而言，SWC 已经能处理 TS 文件了，而且速度很快。但又如[官方迁移手册](https://swc.rs/docs/migrating-from-tsc)所示，在迁移时需要十分关注
+
 ## 小结
 
 不过得益于这次的复刻经验，在后面项目中遇到几个内部的 Babel 都比较顺畅地复刻解决了，在全量迁移。
