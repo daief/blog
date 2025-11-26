@@ -248,6 +248,7 @@ export class MarkdownService {
         tags: ensureArray(tags),
         sort: Number.isFinite(sort) ? sort : 0,
         comments: rest.comments ?? isArticle,
+        draft: rest.draft ?? false,
       },
     };
   }

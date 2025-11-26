@@ -27,6 +27,10 @@ export default defineConfig((env) => {
       server: {
         host: '0.0.0.0',
       },
+      // @ts-ignore
+      ssgOptions: {
+        dirStyle: 'nested',
+      } satisfies import('vite-ssg').ViteSSGOptions,
     },
   );
 });
