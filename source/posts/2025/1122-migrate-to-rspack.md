@@ -318,4 +318,4 @@ ERROR in ./node_modules/pkg-b/index.js 1:0-27
 
 ## 小结
 
-Rspack 提供了[迁移指导](https://rspack.rs/zh/guide/migration/webpack)
+在踩过这些坑后，之后的项目再从 Webpack 迁移到 Rspack 就变得简单了，敲个迁移命令、检查下打包配置，基本上在分钟级就能完成，对业务而言能以极低的迁移成本换取客观的性能改善。
