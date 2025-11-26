@@ -5,7 +5,7 @@ date: 2025-11-22 21:58:16
 tags:
   - Rspack
 description:
-draft: true
+draft: false
 ---
 
 过去一段时间给一些前端项目做了改造，把构建器从 Webpack4/5 迁移到了 [Rspack](https://rspack.rs/)，大部分项目迁移完后，都减少了 **50%** 以上的构建时间，整体改善还是可观的。
