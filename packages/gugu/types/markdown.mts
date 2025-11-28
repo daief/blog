@@ -19,6 +19,7 @@ export interface IMarkdown {
   more: string;
   /** md 原始内容 */
   rawContent: string;
+  toc: ITocItem[];
 }
 
 export type ITemplateType =
@@ -38,4 +39,11 @@ export interface IRawRoute {
   template: ITemplateType;
   data: any;
   meta?: Record<string, any>;
+}
+
+export interface ITocItem {
+  id: string;
+  text: string;
+  level: number;
+  children?: ITocItem[];
 }

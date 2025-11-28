@@ -26,7 +26,7 @@ import { computed } from 'vue';
 const route = useRoute();
 
 const mainClass = computed(() => {
-  return route.meta.layoutClass || '';
+  return (route.meta.layoutClass as string) || '';
 });
 
 const blogConfig = __BLOG_CONFIG__;

@@ -1,5 +1,5 @@
 @utility max-w-app {
-  @apply max-w-4xl;
+  @apply max-w-5xl;
 }
 
 @utility foreground-link {

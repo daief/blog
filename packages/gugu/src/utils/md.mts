@@ -1,12 +1,12 @@
 import * as fs from 'fs';
 import * as readline from 'readline';
 import { Marked, MarkedExtension, MarkedOptions } from 'marked';
-import hljs from 'highlight.js';
 import qs from 'query-string';
 import * as htmlEntities from 'html-entities';
 import * as path from 'path';
 import * as shiki from 'shiki';
 import { createLogger } from './logger.mts';
+import { type ITocItem } from '../../types/index.mts';
 
 const logger = createLogger('[utils:md]');
 
@@ -54,6 +54,7 @@ export interface IEnv {
   filepath: string;
   transformImgSrc?: (src: string) => string;
   transformLinkHref?: (href: string) => string | Promise<string>;
+  _headings?: ITocItem[];
 }
 
 const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
@@ -76,6 +77,7 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
           transformers: [],
         });
 
+        // TODO 识别 v-pre 指令
         codeResult = codeResult
           .replaceAll('{', '&lcub;')
           .replaceAll('}', '&rcub;');
@@ -103,6 +105,10 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
         return '';
       },
       heading({ tokens, depth: level }) {
+        if (!options._headings) {
+          options._headings = [];
+        }
+
         const text = this.parser.parseInline(tokens).trim();
         if (level === 1) {
           logger.warn(`文章正文不建议使用 1 级标题，${options.filepath}`);
@@ -111,6 +117,13 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
         // input: text text <a href="#text">text2</a>
         // output: text text text2
         const anchorText = text.replace(/<[^>]+>/g, '');
+
+        options._headings.push({
+          id: anchorText,
+          text: anchorText,
+          level,
+        });
+
         return `<h${level} id="${anchorText}">${text}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
       },
       link({ href, title: aAttrsQuery, text }) {
@@ -167,9 +180,55 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
   };
 };
 
-export function renderMarkdown(md: string, env: IEnv): Promise<string> {
+function formatTocArrayToTree(tocs: ITocItem[]): ITocItem[] {
+  if (!tocs.length) return [];
+
+  const root: ITocItem = {
+    level: 0,
+    text: '',
+    id: '',
+    children: [],
+  };
+
+  // 层级栈：存储当前路径的所有父节点（栈顶为最近的父节点）
+  const levelStack: ITocItem[] = [root];
+
+  for (const toc of tocs) {
+    toc.children ||= [];
+
+    // 找到当前项的父节点：栈中最后一个层级 < 当前层级的节点
+    // 从栈顶往回找，确保层级连续（比如level=3的父节点必须是level=2）
+    while (levelStack.length > 0) {
+      const lastParent = levelStack.at(-1)!;
+      if (lastParent.level < toc.level) {
+        // 将当前项添加到父节点的children中
+        lastParent.children?.push(toc);
+        // 更新栈：当前项成为下一层级的潜在父节点
+        levelStack.push(toc);
+        break;
+      } else {
+        // 层级不匹配，弹出栈顶（说明当前父节点层级 >= 当前项，不是正确的父节点）
+        levelStack.pop();
+      }
+    }
+  }
+
+  // 根节点的children就是最终的树结构（level=2及以下的层级都已嵌套）
+  return root.children || [];
+}
+
+export async function renderMarkdown(
+  md: string,
+  env: IEnv,
+): Promise<{
+  html: string;
+  headings: ITocItem[];
+}> {
   const marked = new Marked(markedHtmlEnhanceExt(env));
-  return marked.parse(md, {
-    async: true,
-  });
+  return {
+    html: await marked.parse(md, {
+      async: true,
+    }),
+    headings: formatTocArrayToTree(env._headings || []),
+  };
 }

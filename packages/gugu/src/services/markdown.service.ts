@@ -1,6 +1,5 @@
 import { ILogger, injectLogger } from '../utils/logger.mts';
-import { ContextService } from './context.service.ts';
-import { getService, injectService } from './accessor.ts';
+import { injectService } from './accessor.ts';
 import { readUntilMore, renderMarkdown } from '../utils/md.mts';
 import plimit from 'p-limit';
 import { IMarkdown } from '../../types/index.mts';
@@ -188,8 +187,8 @@ export class MarkdownService {
     > & { tags: string[] | string };
     const { sort, tags, ...rest } = frontmatter;
 
-    const mdHtml = !matterResult.body
-      ? ''
+    const { html: mdHtml, headings: toc } = !matterResult.body
+      ? { html: '', headings: [] }
       : await renderMarkdown(matterResult.body, {
           filepath,
           transformImgSrc: (imgSrc) => {
@@ -243,6 +242,7 @@ export class MarkdownService {
       rawContent: matterResult.body,
       excerpt,
       more,
+      toc,
       frontmatter: {
         ...rest,
         tags: ensureArray(tags),

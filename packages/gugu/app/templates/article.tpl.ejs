@@ -1,24 +1,43 @@
 <template>
-  <article>
-    <header>
-      <h1 class="text-foreground text-3xl font-bold mb-4">
-        <%- article.frontmatter.title %>
-      </h1>
+  <div class="flex">
+    <article>
+      <header>
+        <h1 class="text-foreground text-3xl font-bold mb-4">
+          <%- article.frontmatter.title %>
+        </h1>
 
-      <PostMetaInfo :meta="meta" />
-    </header>
-    <Markdown class="mt-6">
-      <%- article.excerpt %>
-      <a href="#more" class="hidden"></a>
-      <%- article.more %>
-    </Markdown>
+        <PostMetaInfo :meta="meta" />
+      </header>
+      <Markdown class="mt-6">
+        <%- article.excerpt %>
+        <a href="#more" class="hidden"></a>
+        <%- article.more %>
+      </Markdown>
+    </article>
+    <aside
+      v-if="toc.length"
+      style="max-height: calc(100vh - 120px)"
+      class="bg1-red-400 w-64 self-start sticky top-10 shrink-0 pl-8 ml-4"
+    >
+      <h2 class="text-foreground font-bold mb-4">目录</h2>
+      <nav class="space-y-2">
+        <a
+          v-for="item in toc"
+          :key="item.id"
+          :href="`#${item.id}`"
+          class="text-foreground block hover:text-accent"
+        >
+          {{ item.text }}
+        </a>
+      </nav>
+    </aside>
+  </div>
 
-    <hr class="border-border mt-10" />
+  <hr class="border-border mt-10" />
 
-    <div class="mt-10" v-if="meta.comments">
-      <Comment />
-    </div>
-  </article>
+  <div class="mt-10" v-if="meta.comments">
+    <Comment />
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -38,4 +57,7 @@
   });
 
   const meta = JSON.parse('<%- JSON.stringify({ ...article.frontmatter }) %>');
+  const toc = JSON.parse('<%- JSON.stringify(article.toc) %>');
+
+  globalThis.toc = toc;
 </script>
