@@ -201,6 +201,7 @@ function formatTocArrayToTree(tocs: ITocItem[]): ITocItem[] {
     while (levelStack.length > 0) {
       const lastParent = levelStack.at(-1)!;
       if (lastParent.level < toc.level) {
+        toc.parent = lastParent.id;
         // 将当前项添加到父节点的children中
         lastParent.children?.push(toc);
         // 更新栈：当前项成为下一层级的潜在父节点
