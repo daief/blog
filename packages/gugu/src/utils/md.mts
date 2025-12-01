@@ -116,15 +116,16 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
         // remove html tag
         // input: text text <a href="#text">text2</a>
         // output: text text text2
-        const anchorText = text.replace(/<[^>]+>/g, '');
+        const plainText = htmlEntities.decode(text.replace(/<[^>]+>/g, ''));
+        const id = encodeURIComponent(plainText);
 
         options._headings.push({
-          id: anchorText,
-          text: anchorText,
+          id,
+          text: plainText,
           level,
         });
 
-        return `<h${level} id="${anchorText}">${text}<a name="${anchorText}" class="headerlink" href="#${anchorText}"></a></h${level}>`;
+        return `<h${level} id="${id}">${text}<a name="${id}" class="headerlink" href="#${id}"></a></h${level}>`;
       },
       link({ href, title: aAttrsQuery, text }) {
         const attrs = qs.parse(

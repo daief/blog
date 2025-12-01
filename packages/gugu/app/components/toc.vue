@@ -3,9 +3,10 @@
 </template>
 
 <script setup lang="tsx">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { type ITocItem } from '../../types/markdown.mjs';
 import { useEventListener } from '@vueuse/core';
+import { throttle } from 'lodash-es';
 
 defineOptions({
   name: 'Toc',
@@ -24,7 +25,7 @@ const tocMap = computed(() => {
   return map;
 });
 
-const active = ref<ITocItem | null>(toc[0].children![0]);
+const active = ref<ITocItem | null>(null);
 
 const actives = computed(() => {
   const list: ITocItem[] = [];
@@ -37,7 +38,7 @@ const actives = computed(() => {
 });
 
 if (!import.meta.env.SSR) {
-  const TOP_BASE = 2;
+  const BASE_TOP = 20;
   const headingList = computed<HTMLElement[]>(() => {
     return Array.from(
       tocMap.value
@@ -46,19 +47,41 @@ if (!import.meta.env.SSR) {
     );
   });
 
-  useEventListener(window, 'scroll', () => {
-    const headingArray = headingList.value;
-    for (let index = 0; index < headingArray.length - 1; index++) {
-      const ele = headingArray[index];
-      const nextEle = headingArray[index + 1];
-      const eleRect = ele.getBoundingClientRect();
-      const nextRect = nextEle.getBoundingClientRect();
+  const onWindowScroll = throttle(
+    () => {
+      const headingArray = headingList.value;
 
-      if (eleRect.top < TOP_BASE && nextRect.top > TOP_BASE) {
-        active.value = tocMap.value.get(nextEle.id)!;
-        break;
-      }
-    } // for
+      for (let index = 0; index < headingArray.length; index++) {
+        const ele = headingArray[index];
+        const nextEle = headingArray[index + 1] as HTMLElement | null;
+        const eleRect = ele.getBoundingClientRect();
+        const nextRect = nextEle?.getBoundingClientRect();
+
+        // first
+        if (index === 0 && eleRect.top > BASE_TOP) {
+          active.value = tocMap.value.get(ele.id)!;
+          return;
+        }
+
+        // must be the last one
+        if (!nextRect) {
+          active.value = tocMap.value.get(ele.id)!;
+          return;
+        }
+
+        if (eleRect.top <= BASE_TOP && nextRect.top > BASE_TOP) {
+          active.value = tocMap.value.get(ele.id)!;
+          return;
+        }
+      } // for
+    },
+    400,
+    { leading: true },
+  );
+
+  useEventListener(window, 'scroll', onWindowScroll);
+  onMounted(() => {
+    onWindowScroll();
   });
 }
 
@@ -88,7 +111,7 @@ const renderToc = (list?: ITocItem[], level = 0) => {
               ]}
               style={{
                 width: `${16 - level * 2}px`,
-                marginRight: `${18 - (6 - level) * 2}px`,
+                marginRight: `${20 - (6 - level) * 2}px`,
               }}
             />
             <span
