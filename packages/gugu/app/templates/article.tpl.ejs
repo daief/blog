@@ -16,16 +16,14 @@
     </article>
     <aside
       v-if="toc.length"
-      class="absolute left-[calc(100%+60px)] top-0 h-full"
+      class="absolute left-[calc(100%+60px)] top-0 h-full hidden xl:block"
     >
-      <div
-        class="w-50 sticky top-10 overflow-y-auto"
-        style="max-height: calc(100vh - 120px)"
+      <nav
+        class="w-50 sticky top-10 overflow-y-auto text-foreground"
+        style="max-height: calc(100vh - 120px); scrollbar-width: 2px"
       >
-        <nav class="text-foreground">
-          <Toc :toc="toc" />
-        </nav>
-      </div>
+        <Toc :toc="toc" />
+      </nav>
     </aside>
   </div>
 
@@ -57,3 +55,9 @@
   const meta = JSON.parse('<%- JSON.stringify({ ...article.frontmatter }) %>');
   const toc = JSON.parse('<%- JSON.stringify(article.toc) %>');
 </script>
+
+<style scoped>
+  nav {
+    scrollbar-width: none;
+  }
+</style>

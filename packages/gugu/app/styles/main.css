@@ -38,12 +38,13 @@ html[data-theme='dark'] {
 @layer base {
   * {
     @apply border-border outline-accent/75;
-    scrollbar-width: auto;
+    scrollbar-width: thin;
     scrollbar-color: var(--color-muted) transparent;
   }
 
   html {
     @apply overflow-y-scroll scroll-smooth;
+    scrollbar-width: auto;
   }
 
   body {
