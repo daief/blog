@@ -1,5 +1,5 @@
 <template>
-  <div class="flex">
+  <div class="relative">
     <article>
       <header>
         <h1 class="text-foreground text-3xl font-bold mb-4">
@@ -16,20 +16,16 @@
     </article>
     <aside
       v-if="toc.length"
-      style="max-height: calc(100vh - 120px)"
-      class="bg1-red-400 w-64 self-start sticky top-10 shrink-0 pl-8 ml-4"
+      class="absolute left-[calc(100%+60px)] top-0 h-full"
     >
-      <h2 class="text-foreground font-bold mb-4">目录</h2>
-      <nav class="space-y-2">
-        <a
-          v-for="item in toc"
-          :key="item.id"
-          :href="`#${item.id}`"
-          class="text-foreground block hover:text-accent"
-        >
-          {{ item.text }}
-        </a>
-      </nav>
+      <div
+        class="w-50 sticky top-10 overflow-y-auto"
+        style="max-height: calc(100vh - 120px)"
+      >
+        <nav class="text-foreground">
+          <Toc :toc="toc" />
+        </nav>
+      </div>
     </aside>
   </div>
 
@@ -40,12 +36,14 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup lang="jsx">
+  import { defineComponent } from 'vue';
   import Markdown from '@app/components/markdown.vue';
   import PostMetaInfo from '@app/components/post/meta-info.vue';
   import ALink from '@app/components/a-link.vue';
   import { usePageTitle } from '@app/composables/use-page-title';
   import Comment from '@app/components/comment.vue';
+  import Toc from '@app/components/toc.vue';
 
   defineOptions({
     name: 'Article',
@@ -58,6 +56,4 @@
 
   const meta = JSON.parse('<%- JSON.stringify({ ...article.frontmatter }) %>');
   const toc = JSON.parse('<%- JSON.stringify(article.toc) %>');
-
-  globalThis.toc = toc;
 </script>
