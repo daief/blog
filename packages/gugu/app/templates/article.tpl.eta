@@ -15,13 +15,19 @@
         <%= article.more %>
       </Markdown>
     </article>
+    <!--
+    left 计算，y=mx+c，x: 视口宽度 (100vw)，y: 偏移量 (目标是 6px 到 50px)
+    计算斜率 m： (50-6)/(1280-1024)=0.171875
+    这意味着每 1vw 增加 0.171875px 的偏移
+    截距 c： c=y-mx=0-0.171875*1024=-176
+    -->
     <aside
       v-if="toc.length"
-      class="absolute left-[calc(100%+60px)] top-0 h-full hidden xl:block"
+      class="absolute left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] top-0 h-full hidden lg:block"
     >
       <nav
-        class="w-50 sticky top-10 overflow-y-auto text-foreground"
-        style="max-height: calc(100vh - 120px); scrollbar-width: 2px"
+        class="max-w-44 xl:max-w-50 sticky top-10 overflow-y-auto text-foreground"
+        style="max-height: calc(100vh - 120px)"
       >
         <Toc :toc="toc" />
       </nav>

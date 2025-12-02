@@ -106,18 +106,18 @@ const renderToc = (list?: ITocItem[], level = 0) => {
           >
             <span
               class={[
-                'block h-1 bg-foreground rounded-sm opacity-30 transition-300',
+                'block h-1 bg-foreground rounded-sm opacity-30 transition-300 shrink-0',
                 'group-hover/item:opacity-85',
               ]}
               style={{
-                width: `${16 - level * 2}px`,
-                marginRight: `${20 - (6 - level) * 2}px`,
+                width: `${20 - level * 4}px`,
+                marginRight: `${32 - (6 - level) * 4}px`,
               }}
             />
             <span
               class={[
                 'text-[color-mix(in_srgb,var(--foreground)_70%,transparent)] text-sm overflow-hidden text-ellipsis whitespace-nowrap transition-300',
-                'w-0 flex-grow',
+                'max-w-46 flex-grow',
                 'group-hover/root:opacity-100 group-hover/item:text-foreground',
                 actives.value.includes(item.id)
                   ? 'font-bold opacity-100 text-foreground'
