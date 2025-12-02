@@ -25,23 +25,23 @@
       v-if="toc.length"
       :class="[
         // mobile
-        'fixed z-20 top-0 h-full right-0 bg-background overscroll-contain',
-        // md
-        '',
+        'fixed z-20 top-0 w-full h-full right-0 overscroll-contain bg-[#00000080]',
         // lg
-        'lg:absolute lg:bg-transparent lg:left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] lg:right-auto'
+        'lg:absolute lg:w-auto lg:bg-transparent lg:left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] lg:right-auto'
       ]"
     >
       <nav
         :class="[
+          // normal
+          'overflow-y-auto text-foreground overscroll-contain bg-background ml-auto',
           // mobile
-          'w-64 max-w-full max-h-full overflow-y-auto text-foreground overscroll-contain',
-          // md
-          '',
+          'w-72 max-w-4/5 h-full py-8 px-4 rounded-tl-lg rounded-bl-lg',
           // >=lg
-          'lg:max-w-44 xl:max-w-50 lg:sticky lg:top-10 lg:max-h-[calc(100vh-130px)]',
+          'lg:p-0 lg:max-w-44 xl:max-w-50 lg:h-auto lg:max-h-[calc(100vh-130px)] lg:rounded-none',
+          'lg:sticky lg:top-10 lg:bg-transparent lg:ml-0'
         ]"
       >
+        <h2 class="mb-2 font-bold lg:hidden">TABLE OF CONTENTS</h2>
         <Toc :toc="toc" />
       </nav>
     </aside>
