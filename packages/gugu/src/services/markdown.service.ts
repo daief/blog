@@ -1,6 +1,6 @@
 import { ILogger, injectLogger } from '../utils/logger.mts';
 import { injectService } from './accessor.ts';
-import { readUntilMore, renderMarkdown } from '../utils/md.mts';
+import { readUntil, renderMarkdown } from '../utils/md.mts';
 import plimit from 'p-limit';
 import { IMarkdown } from '../../types/index.mts';
 import fs from 'fs-extra';
@@ -134,12 +134,12 @@ export class MarkdownService {
     this.fileService.watcher
       ?.on('add', async (filepath) => {
         this.dataSource.update(
-          await this.loadMd(normalizePath(filepath), true),
+          await this.loadMd(normalizePath(filepath), 'all'),
         );
       })
       .on('change', async (filepath) => {
         this.dataSource.update(
-          await this.loadMd(normalizePath(filepath), true),
+          await this.loadMd(normalizePath(filepath), 'all'),
         );
       })
       .on('unlink', (filepath) => {
@@ -159,7 +159,8 @@ export class MarkdownService {
     const list: IMarkdown[] = [];
     const tasks = files.map(async (filepath) =>
       limit(async () => {
-        const meta = await this.loadMd(normalizePath(filepath), true);
+        // TODO 先读取部分，按需全文
+        const meta = await this.loadMd(normalizePath(filepath), 'all');
         if (meta.frontmatter.draft && !this.configService.IsDev) {
           return;
         }
@@ -176,10 +177,19 @@ export class MarkdownService {
    * @param filepath
    * @returns
    */
-  private async loadMd(filepath: string, all = false): Promise<IMarkdown> {
-    const fileContent = all
-      ? await fs.readFile(filepath, 'utf-8')
-      : await readUntilMore(filepath);
+  private async loadMd(
+    filepath: string,
+    sizeType: 'all' | 'meta' | 'more' = 'meta',
+  ): Promise<IMarkdown> {
+    const fileContent =
+      sizeType === 'all'
+        ? await fs.readFile(filepath, 'utf-8')
+        : await readUntil(
+            filepath,
+            sizeType === 'more' ? undefined : '---',
+            sizeType === 'more' ? undefined : 2,
+          );
+
     const matterResult = fm.default<any>(fileContent);
     const frontmatter = matterResult.attributes as Omit<
       IMarkdown['frontmatter'],
@@ -257,7 +267,7 @@ export class MarkdownService {
     const md = this.dataSource.get(filepath);
     if (md) return md;
 
-    this.dataSource.update(await this.loadMd(normalizePath(filepath), false));
+    this.dataSource.update(await this.loadMd(normalizePath(filepath), 'meta'));
     return this.dataSource.get(filepath);
   }
 }

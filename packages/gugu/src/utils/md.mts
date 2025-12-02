@@ -10,9 +10,10 @@ import { type ITocItem } from '../../types/index.mts';
 
 const logger = createLogger('[utils:md]');
 
-export async function readUntilMore(
+export async function readUntil(
   filepath: string,
   splitter = '<!-- more -->',
+  count = 1,
 ) {
   const stream = fs.createReadStream(filepath, { encoding: 'utf-8' });
   const rl = readline.createInterface({ input: stream });
@@ -21,7 +22,7 @@ export async function readUntilMore(
 
   try {
     for await (const line of rl) {
-      if (line.trim() === splitter) {
+      if (line.trim() === splitter && --count === 0) {
         break;
       }
       lines.push(line);
