@@ -23,11 +23,24 @@
     -->
     <aside
       v-if="toc.length"
-      class="absolute left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] top-0 h-full hidden lg:block"
+      :class="[
+        // mobile
+        'fixed z-20 top-0 h-full right-0 bg-background overscroll-contain',
+        // md
+        '',
+        // lg
+        'lg:absolute lg:bg-transparent lg:left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] lg:right-auto'
+      ]"
     >
       <nav
-        class="max-w-44 xl:max-w-50 sticky top-10 overflow-y-auto text-foreground"
-        style="max-height: calc(100vh - 120px)"
+        :class="[
+          // mobile
+          'w-64 max-w-full max-h-full overflow-y-auto text-foreground overscroll-contain',
+          // md
+          '',
+          // >=lg
+          'lg:max-w-44 xl:max-w-50 lg:sticky lg:top-10 lg:max-h-[calc(100vh-130px)]',
+        ]"
       >
         <Toc :toc="toc" />
       </nav>
