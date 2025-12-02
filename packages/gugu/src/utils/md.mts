@@ -88,12 +88,16 @@ const markedHtmlEnhanceExt = (options: IEnv): MarkedExtension => {
           block: true,
           text: `${codeResult}\n`,
         });
-      } else if (token.type === 'link') {
+        return;
+      } // end code
+
+      if (token.type === 'link') {
         // @ts-ignore
         if (options.transformLinkHref) {
           token.href = await options.transformLinkHref(token.href);
         }
-      }
+        return;
+      } // end link
     },
     renderer: {
       code({ text: sourceCode, lang }) {

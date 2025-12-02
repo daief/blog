@@ -184,4 +184,4 @@ export default {
 
 主要出于对 Vue 系列重新熟悉、学习的目的，并尝试使用 TypeScript 进行编写，基于 Vue 2.x、Vue Cli 3。
 
-新的记录文章：{% post_link happy-vue-with-typescript %}
+新的记录文章：[用 TypeScript 来写 Vue！](../2019/0212-happy-vue-with-typescript.md)

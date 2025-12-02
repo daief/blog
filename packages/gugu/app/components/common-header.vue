@@ -88,7 +88,7 @@ const rawlist: Array<{
   active?: boolean;
 }> = [
   {
-    title: '全部',
+    title: '文章',
     href: '/',
     match: [/^\/page\/\d+/, /^\/post\/[^\/]+/],
   },

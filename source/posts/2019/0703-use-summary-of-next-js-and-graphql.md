@@ -17,7 +17,7 @@ description:
 
 本文主要内容包括三个 demo 的介绍，并记录一些在开发过程中遇到的问题和解决，本文对应 Next.js 版本为 ~~v8.0.3~~。写的时候发现 Next.js 升级到 v9.0.0 了，自带 TypeScript 支持了，果断把 demo 的版本也升级了。
 
-上一篇文章（《{% post_link get-a-ssr-demo-step-by-step %}》）介绍了从零搭建 SSR 的过程，并且附带了一些问题的讲解，推荐结合阅读。
+上一篇文章（[从零搭建 SSR](./0702-get-a-ssr-demo-step-by-step.md)）介绍了从零搭建 SSR 的过程，并且附带了一些问题的讲解，推荐结合阅读。
 
 那么，按照惯例就先呈上 demo 地址：[react-ssr](https://github.com/daief/react-ssr)。
 
@@ -91,7 +91,7 @@ nextjs-ssr + gql-server + Java 的整体运作情况如下。
 
 ### 样式文件的处理
 
-这个应该是使用 SSR 时候的经典问题了，不过有关样式文件在 SSR 中的问题在{% post_link get-a-ssr-demo-step-by-step %}有详细解读，这里只说明该问题在 Next.js 中的具体解决以及和 Next.js 有关的注意点。
+这个应该是使用 SSR 时候的经典问题了，不过有关样式文件在 SSR 中的问题在[从零搭建 SSR](./0702-get-a-ssr-demo-step-by-step.md)有详细解读，这里只说明该问题在 Next.js 中的具体解决以及和 Next.js 有关的注意点。
 
 这个问题主要可概括为两点：一是缺少 webpack 对于 CSS、Less 的配置；二是 SSR 项目运行的特点。
 

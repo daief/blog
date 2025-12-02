@@ -2,7 +2,6 @@
 title: 从零搭建 SSR
 date: 2019-07-02 17:10:37
 id: get-a-ssr-demo-step-by-step
-categories: ["前端"]
 tags:
   - SSR
 keywords:
@@ -12,7 +11,7 @@ keywords:
 description:
 ---
 
-在上一季度中接触并使用了 Next.js，实践了一把 SSR。期间遇见了不少问题，详情可见：{% post_link use-summary-of-next-js-and-graphql %}。
+在上一季度中接触并使用了 Next.js，实践了一把 SSR。期间遇见了不少问题，详情可见：[Next.js、GraphQL 使用小结](./0703-use-summary-of-next-js-and-graphql.md)。
 
 实际上是打算先写那篇文章，但这里还是来写这个了，这样能先从零开始认识 SSR。
 
@@ -52,23 +51,23 @@ description:
 简单抽离了两者的共同配置，做到项目的基本支持，能够处理 less、images、ts。
 
 ```js
-const merge = require("webpack-merge");
-const nodeExternals = require("webpack-node-externals");
-const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const merge = require('webpack-merge');
+const nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 const commonCfg = {
   mode: process.env.NODE_ENV,
   context: process.cwd(),
   output: {
-    filename: "[name].js"
+    filename: '[name].js',
   },
   resolve: {
-    extensions: [".js", ".json", ".ts", ".tsx"],
+    extensions: ['.js', '.json', '.ts', '.tsx'],
     alias: {
-      "@": path.resolve(__dirname, "./src/")
-    }
+      '@': path.resolve(__dirname, './src/'),
+    },
   },
   module: {
     rules: [
@@ -79,51 +78,51 @@ const commonCfg = {
           // 本意不想在服务端配置进行拆离的，但不加的时候，服务端 CSS modules 会有问题
           // 所以干脆都加上 MiniCssExtractPlugin 了
           {
-            loader: MiniCssExtractPlugin.loader
+            loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules: {
-                mode: "global",
-                localIdentName: "[local]--[hash:base64:5]"
-              }
-            }
+                mode: 'global',
+                localIdentName: '[local]--[hash:base64:5]',
+              },
+            },
           },
           {
-            loader: "less-loader",
+            loader: 'less-loader',
             options: {
-              javascriptEnabled: true
-            }
-          }
-        ]
+              javascriptEnabled: true,
+            },
+          },
+        ],
       },
       // 处理图片静态资源，这里其实可以做个优化，让 Server 只需要解析得到路径即可
       {
         test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
-        loader: "url-loader/",
+        loader: 'url-loader/',
         options: {
           limit: 4096,
           fallback: {
-            loader: "file-loader",
+            loader: 'file-loader',
             options: {
-              name: "static/[name].[hash:8].[ext]"
-            }
-          }
-        }
+              name: 'static/[name].[hash:8].[ext]',
+            },
+          },
+        },
       },
       // 解析 ts
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: "ts-loader",
+        loader: 'ts-loader',
         options: {
-          happyPackMode: true
-        }
-      }
-    ]
+          happyPackMode: true,
+        },
+      },
+    ],
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [new MiniCssExtractPlugin()],
 };
 ```
 
@@ -139,32 +138,32 @@ Client 端需要添加一个 ManifestPlugin，来获取 Client 打包的结果�
 
 ```js
 const serverCfg = {
-  target: "node",
+  target: 'node',
   entry: {
-    index: "./src/server"
+    index: './src/server',
   },
   output: {
-    libraryTarget: "commonjs",
-    path: path.resolve(__dirname, "./distServer")
+    libraryTarget: 'commonjs',
+    path: path.resolve(__dirname, './distServer'),
   },
   externals: [
     // 同级寻找
     nodeExternals(),
     // 指定到根目录寻找
     nodeExternals({
-      modulesDir: path.resolve(__dirname, "../../node_modules")
-    })
-  ]
+      modulesDir: path.resolve(__dirname, '../../node_modules'),
+    }),
+  ],
 };
 
 const clientCfg = {
   entry: {
-    index: "./src/client"
+    index: './src/client',
   },
   output: {
-    path: path.resolve(__dirname, "./distClient")
+    path: path.resolve(__dirname, './distClient'),
   },
-  plugins: [new ManifestPlugin()]
+  plugins: [new ManifestPlugin()],
 };
 
 module.exports = [merge(commonCfg, serverCfg), merge(commonCfg, clientCfg)];
@@ -201,11 +200,11 @@ module.exports = [merge(commonCfg, serverCfg), merge(commonCfg, clientCfg)];
 
 ```tsx
 // routes.tsx
-import "@/global.less";
-import About from "@/pages/About";
-import Home from "@/pages/Home";
-import * as React from "react";
-import { Route, Switch } from "react-router-dom";
+import '@/global.less';
+import About from '@/pages/About';
+import Home from '@/pages/Home';
+import * as React from 'react';
+import { Route, Switch } from 'react-router-dom';
 
 export const Routes: React.SFC = () => {
   return (
@@ -221,10 +220,10 @@ export const Routes: React.SFC = () => {
 
 ```tsx
 // client.tsx
-import { Routes } from "@/routes";
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Routes } from '@/routes';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 function ClientRender() {
   return (
@@ -234,19 +233,19 @@ function ClientRender() {
   );
 }
 
-ReactDOM.hydrate(<ClientRender />, document.querySelector("#root"));
+ReactDOM.hydrate(<ClientRender />, document.querySelector('#root'));
 ```
 
 Server 端入口，整个文件导出了一个工厂函数，返回的是一个组件。注意这里没有浏览器 API，[使用了 StaticRouter](https://reacttraining.com/react-router/web/guides/server-rendering)，通过传入的 URL 来选择对应的组件。
 
 ```tsx
 // server.tsx
-import { Routes } from "@/routes";
-import * as React from "react";
-import { StaticRouter } from "react-router";
+import { Routes } from '@/routes';
+import * as React from 'react';
+import { StaticRouter } from 'react-router';
 
 function ServerRender(req, context) {
-  return props => {
+  return (props) => {
     return (
       <StaticRouter location={req.url} context={context}>
         <Routes />
@@ -280,33 +279,33 @@ export default ServerRender;
 进入 Server 端脚本正题，详情见注释。
 
 ```ts
-import express from "express";
-import { resolve } from "path";
-import * as React from "react";
-import ReactDOMServer from "react-dom/server";
+import express from 'express';
+import { resolve } from 'path';
+import * as React from 'react';
+import ReactDOMServer from 'react-dom/server';
 // 引用 Server 端打包结果
-const serverBuild = require("../distServer").default;
+const serverBuild = require('../distServer').default;
 // 引用 Client manifest
-const manifest = require("../distClient/manifest.json");
+const manifest = require('../distClient/manifest.json');
 
 const app = express();
 
 // 将 Client 输出目录作为静态资源目录
-app.use(express.static(resolve(__dirname, "../distClient")));
+app.use(express.static(resolve(__dirname, '../distClient')));
 
 // `/` `/about` 是支持 SSR 的路由
-app.get(["/", "/about"], async (req, res) => {
+app.get(['/', '/about'], async (req, res) => {
   const context: any = {};
 
   // 已经渲染过的页面，这里不再渲染
   if (context.url) {
     res.writeHead(302, {
-      Location: context.url
+      Location: context.url,
     });
     res.end();
   } else {
     // 这里模拟在 Server 端请求数据的延迟
-    await new Promise(_ => {
+    await new Promise((_) => {
       setTimeout(_, 500);
     });
     // 这里把数据先传进去了，现在没用，稍后说明
@@ -318,22 +317,22 @@ function render(req, res, ctx, data) {
   // 通过 renderToString 将组件转换成 HTML 字符串
   const contentHtml = ReactDOMServer.renderToString(
     // 在服务端运行 React
-    React.createElement(serverBuild(req, ctx, data))
+    React.createElement(serverBuild(req, ctx, data)),
   );
 
   // 下面的是拼接出一个完整的 HTML 并发送给浏览器
   const renderLink = (): string => {
     return Object.keys(manifest)
-      .filter(key => /\.css$/.test(key))
-      .map(key => `<link rel="stylesheet" href="${manifest[key]}">`)
-      .join("\n");
+      .filter((key) => /\.css$/.test(key))
+      .map((key) => `<link rel="stylesheet" href="${manifest[key]}">`)
+      .join('\n');
   };
 
   const renderScripts = (): string => {
     return Object.keys(manifest)
-      .filter(key => /\.js$/.test(key))
-      .map(key => `<script src="${manifest[key]}"></script>`)
-      .join("\n");
+      .filter((key) => /\.js$/.test(key))
+      .map((key) => `<script src="${manifest[key]}"></script>`)
+      .join('\n');
   };
 
   res.send(`
@@ -378,16 +377,16 @@ Server 端脚本如上述即可，接下来只需添加状态管理、修改入�
 
 ```ts
 // src/store/index.ts
-import * as React from "react";
+import * as React from 'react';
 
 export const StoreCtx = React.createContext<{ store: any; dispatch: any }>(
-  null
+  null,
 );
 
 export const useStore = () => {
   const result = React.useContext(StoreCtx);
   if (!result) {
-    throw new Error("Cannot get a store context");
+    throw new Error('Cannot get a store context');
   }
   return result;
 };
@@ -396,7 +395,7 @@ export function createStore(initStore) {
   const [store, setStore] = React.useState<any>(initStore);
   return {
     store,
-    dispatch: payload => setStore(pre => ({ ...pre, ...payload }))
+    dispatch: (payload) => setStore((pre) => ({ ...pre, ...payload })),
   };
 }
 ```
@@ -405,13 +404,13 @@ export function createStore(initStore) {
 
 ```tsx
 // src/server.tsx
-import { Routes } from "@/routes";
-import { createStore, StoreCtx } from "@/store";
-import * as React from "react";
-import { StaticRouter } from "react-router";
+import { Routes } from '@/routes';
+import { createStore, StoreCtx } from '@/store';
+import * as React from 'react';
+import { StaticRouter } from 'react-router';
 
 function ServerRender(req, context, initStore) {
-  return props => {
+  return (props) => {
     // hook 要在这、函数组件内部调用
     const value = createStore(initStore);
     return (
@@ -429,11 +428,11 @@ export default ServerRender;
 
 ```tsx
 // src/client.tsx
-import { Routes } from "@/routes";
-import { createStore, StoreCtx } from "@/store";
-import React from "react";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import { Routes } from '@/routes';
+import { createStore, StoreCtx } from '@/store';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 // @ts-ignore 这里是浏览器获取初始数据的地方
 const initStore = window.__INIT_STORE__;
@@ -449,18 +448,18 @@ function ClientRender() {
   );
 }
 
-ReactDOM.hydrate(<ClientRender />, document.querySelector("#root"));
+ReactDOM.hydrate(<ClientRender />, document.querySelector('#root'));
 ```
 
 组件内的使用，也十分简单，比如。
 
 ```tsx
 // src/pages/Home.tsx
-import { useStore } from "@/store";
-import * as React from "react";
-import * as styles from "./home.less";
+import { useStore } from '@/store';
+import * as React from 'react';
+import * as styles from './home.less';
 
-export const Home: React.SFC<{}> = props => {
+export const Home: React.SFC<{}> = (props) => {
   const { store, dispatch } = useStore();
   return (
     <div className={styles.home}>
@@ -500,13 +499,13 @@ Client 端没问题，这里只针对 Server 端。
 这时候添加一些组件库，比如 antd，引入组件和样式。
 
 ```ts
-import { Button } from "antd";
-import "antd/dist/antd.less";
+import { Button } from 'antd';
+import 'antd/dist/antd.less';
 
 // 或
 
-import Button from "antd/lib/button";
-import "antd/lib/button/style";
+import Button from 'antd/lib/button';
+import 'antd/lib/button/style';
 ```
 
 一跑就报错了，无论内联还是拆离，都出现了 `require less` 的情况。打包结果会是这样的。当 Server 端脚本运行、执行 `require('../distServer')` 时，就发生了在 Node 层直接引用 less 的情况，接着就直接报错了。
@@ -524,9 +523,9 @@ import "antd/lib/button/style";
 
 ```js
 // 只需将如下代码添加到 Node.js 脚本执行的前面
-if (typeof require !== "undefined") {
-  require.extensions[".css"] = file => {};
-  require.extensions[".less"] = file => {};
+if (typeof require !== 'undefined') {
+  require.extensions['.css'] = (file) => {};
+  require.extensions['.less'] = (file) => {};
 }
 ```
 
@@ -534,11 +533,11 @@ if (typeof require !== "undefined") {
 
 ```js
 // 不关心样式内容的引用
-import "antd/dist/antd.less";
-import "antd/lib/button/style";
+import 'antd/dist/antd.less';
+import 'antd/lib/button/style';
 
 // CSS modules 开启
-import styles from "./module.less";
+import styles from './module.less';
 
 console.log(styles.classNameA);
 ```
@@ -598,7 +597,6 @@ const serverCfg = {
     ],
   },
 };
-
 ```
 
 以上，就是我使用以来对样式文件的纠结。

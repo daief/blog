@@ -1,8 +1,7 @@
 ---
-title: Linux-Java环境、Tomcat服务器的安装
+title: Linux-Java 环境、Tomcat 服务器的安装
 date: 2017-9-10 21:56:44
 id: install-java-tomcat-on-linux
-categories: ["Linux"]
 tags:
   - Linux
   - JDK
@@ -61,23 +60,23 @@ java -version
 2. 把安装包`apache-tomcat-9.0.0.M26.tar.gz`发送到`/usr/local`目录
 3. 解压安装包，然后删除
 
-  ```bash
-  # 进入目录
-  cd /usr/local
-  # 解压
-  tar -zxvf apache-tomcat-9.0.0.M26.tar.gz
-  # 删除压缩包
-  rm -rf apache-tomcat-8.0.26.tar.gz.tar.gz
-  # 将解压的apache-tomcat-8.0.26移到一个目录下并改名称为tomcat
-  mv apache-tomcat-8.0.26 tomcat
-  ```
+```bash
+# 进入目录
+cd /usr/local
+# 解压
+tar -zxvf apache-tomcat-9.0.0.M26.tar.gz
+# 删除压缩包
+rm -rf apache-tomcat-8.0.26.tar.gz.tar.gz
+# 将解压的apache-tomcat-8.0.26移到一个目录下并改名称为tomcat
+mv apache-tomcat-8.0.26 tomcat
+```
 
 4. 启动 tomcat
 
-  ```bash
-  /usr/local/tomcat/bin/startup.sh
+```bash
+/usr/local/tomcat/bin/startup.sh
 
-  ```
+```
 
 5. 出现错误，因为我是先安装了 tomcat，所以报了 Java 环境变量的错误，之后安装了 jdk 错误消失
    Neither the JAVA_HOME nor the JRE_HOME environment variable is defined
@@ -89,10 +88,10 @@ java -version
 
 8. 访问 127.0.0.1:8080
 
-  ```bash
-  curl 127.0.0.1:8080
-  # 报错，连接失败failed connected tomcat
-  ```
+```bash
+curl 127.0.0.1:8080
+# 报错，连接失败failed connected tomcat
+```
 
 > [原文：](http://www.cnblogs.com/rogear/p/7435074.html)在一个网站上看到说这个是因为环境变量的问题，tomcat 使用的环境变量是自己的或者是继承自当前用户的，所以在 Linux 里面即使你设置了 java_home 也不一定会用这个，所以要么你都继承 root 的环境变量，都统一起来确保你的系统里面的环境变量都是使用的同一个，要么就单独指定要使用的 jdk。tomcat 启动的时候需要盗用 setclasspath.sh。只要在 setclasspath.sh 声明环境变量就可以知道你这个 tomcat 使用哪个 jdk，打开 tomcat 的 bin 目录下面的 setclasspath.sh，添加上，路径自己修改，添加在开头就行
 

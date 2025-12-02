@@ -2,7 +2,7 @@
 title: Linux-部署 Java 应用程序
 date: 2017-9-17 18:50:38
 id: deploy-java-app-on-linux
-categories: ["Linux"]
+categories: ['Linux']
 tags:
   - Linux
   - Java
@@ -50,5 +50,5 @@ Class-Path: lib/gson-2.2.1.jar
 ## 部署应用
 
 1. 将 jar 上传到云主机
-2. 确认已安装 java 环境（{% post_link install-java-tomcat-on-linux %}）
+2. 确认已安装 java 环境（[Linux-Java 环境、Tomcat 服务器的安装](./0910-install-java-tomcat-on-linux.md)）
 3. 运行项目，使用`java -jar xxx.jar`
