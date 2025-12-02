@@ -124,9 +124,8 @@ const renderToc = (list?: ITocItem[], level = 0) => {
                   : 'opacity-0',
               ]}
               title={item.text}
-            >
-              {item.text}
-            </span>
+              v-html={item.text}
+            />
           </a>
           {renderToc(item.children, level + 1)}
         </li>

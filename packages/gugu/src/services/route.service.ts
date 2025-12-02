@@ -48,6 +48,10 @@ export class RouteService implements IServiceCreated {
             data: {
               article: it,
             },
+            meta: {
+              frontmatter: it.frontmatter,
+              toc: it.toc,
+            },
           };
         });
     });
@@ -62,6 +66,10 @@ export class RouteService implements IServiceCreated {
             template: 'article',
             data: {
               article: it,
+            },
+            meta: {
+              frontmatter: it.frontmatter,
+              toc: it.toc,
             },
           };
         },

@@ -1,6 +1,7 @@
+<% const { articles, current, total } = it %>
 <template>
   <div>
-    <%- include('./cmn/articles.ejs', { articles }) %>
+    <%~ include('./cmn/articles', { articles }) %>
 
     <Pagination
       :current="<%= current %>"
@@ -25,7 +26,5 @@
     title: `第 <%= current %> 页`,
   });
 
-  const metaMap = JSON.parse(
-    '<%- JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter }]))) %>',
-  );
+  const metaMap = <%= JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter }]))) %>;
 </script>

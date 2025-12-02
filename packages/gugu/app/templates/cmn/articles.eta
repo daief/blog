@@ -1,21 +1,22 @@
+<% const { articles } = it %>
 <div class="space-y-12 mb-8">
   <% articles.forEach(article => { %>
   <article>
     <h1 class="text-xl font-bold transition-300 text-accent">
       <router-link
-        :to="'/post/<%- article.frontmatter.id %>#more'"
+        :to="'/post/<%= article.frontmatter.id %>#more'"
         class="post-title foreground-link text-accent"
       >
-        <%- article.frontmatter.title %>
+        <%= article.frontmatter.title %>
       </router-link>
     </h1>
 
     <PostMetaInfo
       class="my-3"
-      :meta="metaMap['<%- article.frontmatter.id %>']"
+      :meta="metaMap['<%= article.frontmatter.id %>']"
     />
 
-    <Markdown> <%- article.excerpt %> </Markdown>
+    <Markdown> <%= article.excerpt %> </Markdown>
   </article>
   <% }) %>
 </div>

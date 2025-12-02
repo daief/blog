@@ -1,8 +1,12 @@
 {
   "editor.formatOnSave": true,
   "emmet.includeLanguages": {
-    "ejs": "html"
+    "eta": "html"
   },
+  "files.associations": {
+    "*.eta": "html"
+  },
+  "html.validate.scripts": false,
   "liveServer.settings.root": "/dist",
   "markdown.copyFiles.destination": {
     "**/*.md": "${documentDirName}/${documentBaseName}/${fileName}"

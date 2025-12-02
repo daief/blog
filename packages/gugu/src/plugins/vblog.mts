@@ -1,7 +1,7 @@
 import { type Plugin, type ViteDevServer } from 'vite';
 import { getService } from '../services/accessor.ts';
 import { RouteService } from '../services/route.service.ts';
-import ejs from 'ejs';
+import { Eta } from 'eta';
 import { FileService } from '../services/file.service.ts';
 import { watch } from '@vue/reactivity';
 import { type IRawRoute } from '../../types/index.mts';
@@ -11,10 +11,6 @@ import * as path from 'node:path';
 import { ConfigService } from '../services/config.service.ts';
 
 const logger = createLogger('[plugin:vblog]');
-
-const renderFileTpl = (file: string, env: any) => {
-  return ejs.renderFile(file, env, { filename: file });
-};
 
 /**
  * 虚拟模块插件
@@ -30,6 +26,14 @@ export const createVBlogPlugin = () => {
 
   const vIdPrefix = 'vblog:';
   const vRoutesId = 'vblog:routes';
+
+  const eta = new Eta({
+    cache: !configService.IsDev,
+    cacheFilepaths: !configService.IsDev,
+    autoEscape: false,
+    views: fileService.resolveApp(`templates`),
+    // tags: ["'<%", "%>'"],
+  });
 
   const getRoutesCode = () => {
     const routes = routeService.allRoutes.value;
@@ -76,24 +80,28 @@ export const createVBlogPlugin = () => {
       if (id === vRoutesId) {
         const code = getRoutesCode();
         // for debug
-        // fs.writeFile(path.join(debugDir, 'routes.js'), code, 'utf-8');
+        configService.IsDev &&
+          fs.writeFile(path.join(debugDir, 'routes.js'), code, 'utf-8');
         return code;
       }
 
       const target = routeService.allRoutesMap.value.get(id);
       if (target) {
         const tplPath = fileService.resolveApp(
-          `templates/${target.template}.tpl.ejs`,
+          `templates/${target.template}.tpl.eta`,
         );
         this.addWatchFile(tplPath);
-
-        const code = await renderFileTpl(tplPath, target.data);
+        // const code = await renderFileTpl(tplPath, target.data);
+        const code = eta.render(`./${target.template}.tpl.eta`, target.data, {
+          filepath: tplPath,
+        });
         // for debug
-        // await fs.writeFile(
-        //   path.join(debugDir, id.replace(/vm:/g, '')),
-        //   code,
-        //   'utf-8',
-        // );
+        configService.IsDev &&
+          (await fs.writeFile(
+            path.join(debugDir, id.replace(/vm:/g, '')),
+            code,
+            'utf-8',
+          ));
         return {
           code,
         };

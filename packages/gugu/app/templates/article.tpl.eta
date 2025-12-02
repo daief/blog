@@ -1,17 +1,18 @@
+<% const { article } = it %>
 <template>
   <div class="relative">
     <article>
       <header>
         <h1 class="text-foreground text-3xl font-bold mb-4">
-          <%- article.frontmatter.title %>
+          <%= article.frontmatter.title %>
         </h1>
 
         <PostMetaInfo :meta="meta" />
       </header>
       <Markdown class="mt-6">
-        <%- article.excerpt %>
+        <%= article.excerpt %>
         <a href="#more" class="hidden"></a>
-        <%- article.more %>
+        <%= article.more %>
       </Markdown>
     </article>
     <aside
@@ -48,12 +49,14 @@
   });
 
   usePageTitle({
-    title: `<%- article.frontmatter.title %>`,
-    description: `<%- article.frontmatter.description || '' %>`,
+    title: `<%= article.frontmatter.title %>`,
+    description: `<%= article.frontmatter.description || '' %>`,
   });
 
-  const meta = JSON.parse('<%- JSON.stringify({ ...article.frontmatter }) %>');
-  const toc = JSON.parse('<%- JSON.stringify(article.toc) %>');
+  const { meta, toc } = {
+    meta: <%= JSON.stringify({ ...article.frontmatter }) %>,
+    toc: <%= JSON.stringify(article.toc) %>,
+  };
 </script>
 
 <style scoped>
