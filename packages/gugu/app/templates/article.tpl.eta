@@ -25,20 +25,25 @@
       v-if="toc.length"
       :class="[
         // mobile
-        'fixed z-20 top-0 w-full h-full right-0 overscroll-contain bg-[#00000080]',
+        appState.showIndexSidebar ? 'bg-[#00000080]' : 'pointer-events-none',
+        'fixed z-20 top-0 w-full h-full left-0 overscroll-contain transition-300',
         // lg
-        'lg:absolute lg:w-auto lg:bg-transparent lg:left-[calc(100%+clamp(6px,17.1875vw-176px,50px))] lg:right-auto'
+        'lg:pointer-events-auto',
+        'lg:absolute lg:w-auto lg:bg-transparent lg:left-[calc(100%+clamp(6px,17.1875vw-176px,50px))]'
       ]"
+      @click="hideIndexSidebar"
     >
       <nav
         :class="[
           // normal
-          'overflow-y-auto text-foreground overscroll-contain bg-background ml-auto',
+          'overflow-y-auto text-foreground overscroll-contain bg-background',
           // mobile
-          'w-72 max-w-4/5 h-full py-8 px-4 rounded-tl-lg rounded-bl-lg',
+          'w-74 max-w-4/5 h-full py-8 px-6 rounded-tl-xl rounded-bl-xl',
+          'absolute top-0 transition-300 right-0',
+          appState.showIndexSidebar ? 'translate-x-0' : 'translate-x-full',
           // >=lg
           'lg:p-0 lg:max-w-44 xl:max-w-50 lg:h-auto lg:max-h-[calc(100vh-130px)] lg:rounded-none',
-          'lg:sticky lg:top-10 lg:bg-transparent lg:ml-0'
+          'lg:sticky lg:top-10 lg:right-auto lg:translate-x-0 lg:bg-transparent lg:ml-0'
         ]"
       >
         <h2 class="mb-2 font-bold lg:hidden">TABLE OF CONTENTS</h2>
@@ -62,6 +67,7 @@
   import { usePageTitle } from '@app/composables/use-page-title';
   import Comment from '@app/components/comment.vue';
   import Toc from '@app/components/toc.vue';
+  import { useAppState } from '@app/composables/use-app-state';
 
   defineOptions({
     name: 'Article',
@@ -76,6 +82,11 @@
     meta: <%= JSON.stringify({ ...article.frontmatter }) %>,
     toc: <%= JSON.stringify(article.toc) %>,
   };
+
+  const { appState, hideIndexSidebar } = useAppState();
+  if (!import.meta.env.SSR) {
+    window.xxx = appState
+  }
 </script>
 
 <style scoped>
