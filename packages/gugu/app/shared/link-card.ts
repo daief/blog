@@ -1,9 +1,11 @@
 export async function getPageAttributesByUrl(url = '') {
-  const res = await fetch(
+  const resp: { contents: string } | null = await fetch(
     `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-  );
-  const resp = await res.json();
-  let content = resp.contents;
+  )
+    .then((res) => res.json())
+    .catch(() => null);
+  let content = resp?.contents;
+  if (!content) return null;
 
   const template = document.createElement('template');
   template.innerHTML = content;
