@@ -2,6 +2,7 @@
 title: 简历
 date: 2019-11-10 22:31:53
 comments: false
+draft: true
 ---
 
 ## 联系方式

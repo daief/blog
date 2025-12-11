@@ -2,6 +2,7 @@
 title: 简历
 date: 2024-05-11 23:03:04
 comments: false
+draft: true
 ---
 
 <!--

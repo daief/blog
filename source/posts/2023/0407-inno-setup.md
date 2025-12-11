@@ -1,11 +1,8 @@
 ---
 title: Inno Setup
 date: 2023-04-07 11:28:06
-categories: ['桌面开发']
 id: inno-setup
-keywords:
-  - Inno Setup
-  - ISS
+description: Inno Setup 初学者的整理文档，覆盖了 ISS 脚本中的大部分 Section。
 ---
 
 最近工作上遇到了 Inno Setup，这对于我来说是个新东西，看不懂，那么就学一下吧。
