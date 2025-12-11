@@ -11,6 +11,8 @@ import V404 from '@app/views/404.vue';
 import './styles/main.css';
 import { registerGoogleAnalytics } from './exts/ga';
 import { registerNProgress } from './exts/nprogress';
+import { registerBusuanzi } from './exts/busuanzi';
+import { useAppState } from './composables/use-app-state';
 
 export const createApp = ViteSSG(
   App as any,
@@ -54,5 +56,6 @@ export const createApp = ViteSSG(
 
     registerGoogleAnalytics(router);
     registerNProgress(router);
+    registerBusuanzi({ router, appState: useAppState() });
   },
 );

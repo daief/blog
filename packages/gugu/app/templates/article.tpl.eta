@@ -83,10 +83,7 @@
     toc: <%= JSON.stringify(article.toc) %>,
   };
 
-  const { appState, hideIndexSidebar } = useAppState();
-  if (!import.meta.env.SSR) {
-    window.xxx = appState
-  }
+  const { appState } = useAppState();
 </script>
 
 <style scoped>
