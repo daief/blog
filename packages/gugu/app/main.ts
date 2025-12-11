@@ -33,14 +33,14 @@ export const createApp = ViteSSG(
       },
     ],
     scrollBehavior(to, _from, savedPosition) {
+      if (savedPosition) {
+        return savedPosition;
+      }
+
       if (to.hash) {
         return {
           el: to.hash,
         };
-      }
-
-      if (savedPosition) {
-        return savedPosition;
       }
 
       return { top: 0 };

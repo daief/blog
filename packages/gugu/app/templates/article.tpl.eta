@@ -11,7 +11,7 @@
       </header>
       <Markdown class="mt-6">
         <%= article.excerpt %>
-        <a href="#more" class="hidden"></a>
+        <a id="more" href="#more" class="block"></a>
         <%= article.more %>
       </Markdown>
     </article>
