@@ -6,7 +6,7 @@ const appState = reactive({
   busuanzi: null as null | IBusuanziData,
 });
 
-export function useAppState() {
+export function useAppStore() {
   const hideIndexSidebar = () => {
     appState.showIndexSidebar = false;
   };
@@ -22,4 +22,4 @@ export function useAppState() {
   };
 }
 
-export type IAppState = ReturnType<typeof useAppState>;
+export type IAppSore = ReturnType<typeof useAppStore>;

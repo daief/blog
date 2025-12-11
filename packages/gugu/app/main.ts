@@ -12,7 +12,7 @@ import './styles/main.css';
 import { registerGoogleAnalytics } from './exts/ga';
 import { registerNProgress } from './exts/nprogress';
 import { registerBusuanzi } from './exts/busuanzi';
-import { useAppState } from './composables/use-app-state';
+import { useAppStore } from './composables/use-app-store';
 
 export const createApp = ViteSSG(
   App as any,
@@ -56,6 +56,6 @@ export const createApp = ViteSSG(
 
     registerGoogleAnalytics(router);
     registerNProgress(router);
-    registerBusuanzi({ router, appState: useAppState() });
+    registerBusuanzi({ router, appState: useAppStore() });
   },
 );

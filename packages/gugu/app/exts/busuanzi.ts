@@ -1,5 +1,5 @@
 import { jsonp } from '@app/app-cmn/jsonp';
-import { type IAppState } from '@app/composables/use-app-state';
+import { type IAppSore } from '@app/composables/use-app-store';
 import { type Router } from 'vue-router';
 
 export interface IBusuanziData {
@@ -22,7 +22,7 @@ export async function registerBusuanzi({
   appState,
 }: {
   router: Router;
-  appState: IAppState;
+  appState: IAppSore;
 }) {
   if (import.meta.env.SSR) return;
 

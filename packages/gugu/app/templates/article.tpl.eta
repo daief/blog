@@ -67,7 +67,7 @@
   import { usePageTitle } from '@app/composables/use-page-title';
   import Comment from '@app/components/comment.vue';
   import Toc from '@app/components/toc.vue';
-  import { useAppState } from '@app/composables/use-app-state';
+  import { useAppStore } from '@app/composables/use-app-store';
 
   defineOptions({
     name: 'Article',
@@ -83,7 +83,7 @@
     toc: <%= JSON.stringify(article.toc) %>,
   };
 
-  const { appState } = useAppState();
+  const { appState } = useAppStore();
 </script>
 
 <style scoped>
