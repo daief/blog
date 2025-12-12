@@ -11,7 +11,7 @@
     <Pagination
       :current="<%= current %>"
       :total="<%= total %>"
-      pattern="/tags/<%= tag %>/:page"
+      pattern="/tags/<%= tag %>/:page/"
     />
   </div>
 </template>

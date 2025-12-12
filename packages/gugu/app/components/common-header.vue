@@ -94,12 +94,12 @@ const rawlist: Array<{
   },
   {
     title: '标签',
-    href: '/tags',
+    href: '/tags/',
     match: [/^\/tags\//],
   },
   {
     title: '关于',
-    href: '/about',
+    href: '/about/',
   },
 ];
 

@@ -240,9 +240,10 @@ export class MarkdownService {
         '/' +
         normalizePath(
           path.relative(this.fileService.resolveSource(), filepath),
-        ).replace(/\.md$/, '');
+        ).replace(/\.md$/, '') +
+        '/';
     } else if (isArticle && rest.id) {
-      slug = `/post/${rest.id}`;
+      slug = `/post/${rest.id}/`;
     }
 
     return {

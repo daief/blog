@@ -6,7 +6,7 @@
     <Pagination
       :current="<%= current %>"
       :total="<%= total %>"
-      pattern="/page/:page"
+      pattern="/page/:page/"
     />
   </div>
 </template>

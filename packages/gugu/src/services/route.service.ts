@@ -3,7 +3,8 @@ import { injectService, IServiceCreated } from './accessor.ts';
 import { MarkdownService } from './markdown.service.ts';
 import { computed, type ComputedRef } from '@vue/reactivity';
 
-const getVid = (str: string) => 'vm:' + str.replace(/\//g, '_') + '.vue';
+const getVid = (str: string) =>
+  'vm:' + decodeURIComponent(str.replace(/\//g, '_')) + '.vue';
 
 export class RouteService implements IServiceCreated {
   @injectService(() => MarkdownService)
@@ -23,7 +24,7 @@ export class RouteService implements IServiceCreated {
       const articlePaginations =
         this.markdownService.dataSource.getArticlePaginations();
       const arr = articlePaginations.map<IRawRoute>((articles, i) => {
-        const path = `/page/${i + 1}`;
+        const path = `/page/${i + 1}/`;
         return {
           vid: getVid(path),
           path,
@@ -78,7 +79,7 @@ export class RouteService implements IServiceCreated {
 
     this.tagsRoute = computed(() => {
       const tags = this.markdownService.dataSource.getTags();
-      const path = '/tags';
+      const path = '/tags/';
       return {
         vid: getVid(path),
         path: path,
@@ -93,7 +94,7 @@ export class RouteService implements IServiceCreated {
         const tagPaginations =
           this.markdownService.dataSource.getTagPaginations(tagItem.tag);
         const arr = tagPaginations.map<IRawRoute>((articles, i) => {
-          const path = `/tags/${tagItem.tag}/${i + 1}`;
+          const path = `/tags/${encodeURIComponent(tagItem.tag)}/${i + 1}/`;
           return {
             vid: getVid(path),
             path,
@@ -107,7 +108,7 @@ export class RouteService implements IServiceCreated {
           };
         });
         const indexRoute = { ...arr[0] };
-        indexRoute.path = '/tags';
+        indexRoute.path = '/tags/';
         return [indexRoute, ...arr];
       });
     });

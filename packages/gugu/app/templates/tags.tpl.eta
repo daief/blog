@@ -11,7 +11,7 @@
       >
         <router-link
           class="foreground-link relative pe-2 text-lg underline decoration-dashed group-hover:-top-0.5 group-hover:text-accent focus-visible:p-1 focus-visible:no-underline"
-          to="/tags/<%= tag.tag %>/1"
+          to="/tags/<%= encodeURIComponent(tag.tag) %>/1/"
         >
           <i-mdi-pound class="-me-5 opacity-80" />
           &nbsp;&nbsp;&nbsp;
