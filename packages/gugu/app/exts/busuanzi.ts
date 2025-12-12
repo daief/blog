@@ -35,6 +35,8 @@ export async function registerBusuanzi({
     });
   };
 
+  await router.isReady();
+
   track();
 
   router.afterEach((to, from) => {
