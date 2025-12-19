@@ -1,4 +1,3 @@
-# hexo robots.txt
 User-agent: *
 
 Disallow: /assets
@@ -9,7 +8,6 @@ Allow: /
 Allow: /archives/
 Allow: /tags/
 Allow: /post/
-Allow: /daisyui-vue/
 
 Sitemap: https://daief.tech/sitemap.xml
 Sitemap: https://daief.tech/baidusitemap.xml
