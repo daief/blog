@@ -27,16 +27,6 @@ export default defineConfig((env) => {
       server: {
         host: '0.0.0.0',
       },
-      // @ts-ignore
-      ssgOptions: {
-        dirStyle: 'nested',
-        htmlFileName: (filename) => {
-          if (filename === '404/index.html') {
-            return '404.html';
-          }
-          return;
-        },
-      } satisfies import('vite-ssg').ViteSSGOptions,
     },
   );
 });

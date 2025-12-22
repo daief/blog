@@ -56,7 +56,7 @@ const render = () => {
       meta.tags.map((tag) => (
         <router-link
           class="inline-flex items-center foreground-link"
-          to={`/tags/${tag}/1`}
+          to={`/tags/${encodeURIComponent(tag)}/1/`}
         >
           <i-mdi-pound class="block select-none mr-0.5 text-foreground" />
           {tag}

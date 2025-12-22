@@ -80,5 +80,17 @@ export const extendConfig = async (
     __BLOG_CONFIG__: JSON.stringify(blogConfig),
   };
 
+  // @ts-ignore
+  viteConfig.ssgOptions = {
+    dirStyle: 'nested',
+    htmlFileName: (filename) => {
+      if (filename === '404/index.html') {
+        return '404.html';
+      }
+      // output file static routes
+      return decodeURIComponent(filename);
+    },
+  } satisfies import('vite-ssg').ViteSSGOptions;
+
   return viteConfig;
 };

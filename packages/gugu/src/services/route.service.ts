@@ -90,11 +90,13 @@ export class RouteService implements IServiceCreated {
 
     this.tagPaginationRoutes = computed(() => {
       const tags = this.markdownService.dataSource.getTags();
-      return tags.flatMap((tagItem) => {
+
+      const handleTags = (tagItem: { tag: string; posts: number }) => {
         const tagPaginations =
           this.markdownService.dataSource.getTagPaginations(tagItem.tag);
+        const basePath = `/tags/${encodeURIComponent(tagItem.tag)}/`;
         const arr = tagPaginations.map<IRawRoute>((articles, i) => {
-          const path = `/tags/${encodeURIComponent(tagItem.tag)}/${i + 1}/`;
+          const path = `${basePath}${i + 1}/`;
           return {
             vid: getVid(path),
             path,
@@ -108,9 +110,11 @@ export class RouteService implements IServiceCreated {
           };
         });
         const indexRoute = { ...arr[0] };
-        indexRoute.path = '/tags/';
+        indexRoute.path = basePath;
         return [indexRoute, ...arr];
-      });
+      };
+
+      return tags.flatMap(handleTags);
     });
 
     this.allRoutes = computed(() => {
