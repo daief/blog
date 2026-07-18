@@ -17,8 +17,8 @@
   <div
     v-else
     :class="[
-      'fixed z-30 right-4 bottom-5 transition-300',
-      'lg:right-7 lg:bottom-7',
+      'desktop-floating-action fixed z-30 right-4 bottom-5 transition-300',
+      'lg:bottom-7',
       isVisible || hasToc
         ? 'opacity-100 translate-y-0'
         : 'pointer-events-none opacity-0 translate-y-3',
@@ -120,6 +120,7 @@ onUnmounted(() => {
     var(--muted) var(--scroll-progress)
   );
   border-radius: 9999px;
+  cursor: pointer;
   height: 2.75rem;
   justify-content: center;
   padding: 0.1875rem;
@@ -147,10 +148,20 @@ onUnmounted(() => {
 }
 
 .toc-action {
+  cursor: pointer;
   display: none;
 }
 
+:global(html:not([data-theme='dark'])) .toc-action {
+  border-color: color-mix(in srgb, var(--foreground) 20%, var(--background));
+}
+
 @media (min-width: 1024px) {
+  .desktop-floating-action {
+    left: calc(50% + 20rem + clamp(6px, 17.1875vw - 176px, 50px));
+    right: auto;
+  }
+
   .toc-action {
     align-items: center;
     color: var(--foreground);
@@ -163,6 +174,24 @@ onUnmounted(() => {
 
   .toc-action:hover {
     color: var(--accent);
+  }
+}
+
+@media (min-width: 1280px) {
+  .desktop-floating-action {
+    left: calc(50% + 23rem + clamp(6px, 17.1875vw - 176px, 50px));
+  }
+}
+
+@media (min-width: 1536px) {
+  .desktop-floating-action {
+    left: calc(50% + 29rem + clamp(6px, 17.1875vw - 176px, 50px));
+  }
+}
+
+@media (min-width: 1920px) {
+  .desktop-floating-action {
+    left: calc(50% + 32.75rem + clamp(6px, 17.1875vw - 176px, 50px));
   }
 }
 

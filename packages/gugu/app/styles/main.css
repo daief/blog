@@ -10,7 +10,7 @@ html[data-theme='light'] {
   --foreground: #282728;
   --accent: #006cac;
   --muted: #e6e6e6;
-  --border: #ece9e9;
+  --border: #d3d0d0;
 
   --accent-hover: color-mix(in srgb, var(--accent) 80%, white);
   --accent-active: color-mix(in srgb, var(--accent) 80%, black);
