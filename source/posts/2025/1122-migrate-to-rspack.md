@@ -4,7 +4,7 @@ id: migrate-to-rspack
 date: 2025-11-22 21:58:16
 tags:
   - Rspack
-description:
+description: 记录将 Webpack 4/5 项目迁移至 Rspack 的实践，包括构建性能改善、兼容性评估与 SWC/Babel 生态问题处理。
 draft: false
 ---
 
