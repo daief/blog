@@ -1,5 +1,6 @@
 ---
 title: 也许有用的 Web 调试技能
+description: 汇总 Chrome DevTools、移动端调试、抓包代理等 Web 开发中常用的排查与调试技巧。
 date: 2019-11-03 00:37:13
 id: some-web-debugging-skills
 categories: ['前端']
@@ -10,7 +11,6 @@ keywords:
   - webview
   - web debugging skills
   - Chrome
-description:
 ---
 
 记录那些年，我们都在用的调试方法。第一部分主要是一些 Chrome 开发者工具的使用记录；剩余部分是一些其他的调试手段，包括移动端调试、代理内容的介绍。了解 Chrome 开发者的同学，可以跳过第一部分。

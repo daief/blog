@@ -1,5 +1,6 @@
 ---
 title: 基于 React Hooks 的小型状态管理
+description: 使用 React Hooks 与发布订阅模式实现轻量级组件状态共享方案，并分析其使用方式。
 date: 2021-12-26 18:20:42
 id: react-state-management-based-on-react-hooks
 categories: ['前端', 'React']
@@ -9,7 +10,6 @@ keywords:
   - react state management
   - shared-state
   - hooks
-description:
 ---
 
 一年又又又要过去了，在这 2021 年的尾巴，来写写 React 的状态管理。

@@ -1,5 +1,6 @@
 ---
 title: TS transformer 的使用
+description: 介绍 TypeScript transformer 的 before、after 与 afterDeclarations 阶段，以及在编译工具中的配置方式。
 date: 2020-01-26 13:07:08
 id: usage-of-ts-transformer
 categories: ['前端', 'TypeScript']
@@ -9,7 +10,6 @@ keywords:
   - TypeScript
   - custom transformer
   - before, after, afterDeclarations
-description:
 ---
 
 `TS transformer` 简单来讲就像[babel 插件](https://babeljs.io/docs/en/plugins/)一样，只不过作用于 TypeScript 的编译过程。

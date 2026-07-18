@@ -1,5 +1,6 @@
 ---
 title: 微信网页开发踩坑记录
+description: 记录微信网页开发中 iOS 软键盘、页面滚动和浏览器兼容性等常见问题及处理方式。
 date: 2019-09-07 14:51:32
 id: troubles-with-web-developing-in-weixin
 categories: ['前端']
@@ -9,7 +10,6 @@ keywords:
   - wx
   - 踩坑
   - 前端
-description:
 ---
 
 如标题所示，本文用于记录在微信中开发页面时所遇到的坑。

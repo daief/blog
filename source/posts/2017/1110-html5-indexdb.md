@@ -1,11 +1,11 @@
 ---
 title: IndexedDB的简单使用
+description: 介绍 IndexedDB 的异步事务模型，以及在浏览器端创建、查询和缓存结构化数据的基本用法。
 date: 2017-11-10 23:19:49
 id: html5-indexdb
 categories: ["前端","JavaScript"]
 tags:
   - JavaScript
-description:
 ---
 
 使用 IndexedDB 在前端对数据进行缓存，简单记录用法。

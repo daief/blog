@@ -1,5 +1,6 @@
 ---
 title: 简单学习 antd 的 build 步骤
+description: 通过分析 antd 的构建脚本与产物目录，了解组件库生成 CommonJS、ESM 和发布 npm 包的流程。
 date: 2018-09-17 21:07:46
 id: learn-how-antd-build-a-npm-lib
 categories: ['前端']
@@ -9,7 +10,6 @@ tags:
   - gulp
   - antd-tools
 keywords:
-description:
 ---
 
 想到去学习 antd 的打包步骤是因为自己学习制作 npm 模块时遇到了疑惑。查看`antd`（v3.9.2）的包，我们可以在目录下找到`dist/`、`lib/`、`es/`这三个目录，而且在`package.json`中指定的入口是`lib/`（`"main": "lib/index.js"`）。然而我只会使用`webpack`打包出一个`dist/`目录，于是查看了 antd 的相关内容进行了学习。

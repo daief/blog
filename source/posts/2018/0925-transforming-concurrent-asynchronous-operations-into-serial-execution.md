@@ -1,5 +1,6 @@
 ---
 title: 将并发的异步操作转化为串行执行
+description: 使用 Promise 队列将并发异步调用按顺序串行执行，避免共享回调场景下请求结果丢失。
 date: 2018-09-25 22:46:20
 id: transforming-concurrent-asynchronous-operations-into-serial-execution
 categories: ["前端", "JavaScript"]

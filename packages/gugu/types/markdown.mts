@@ -10,6 +10,7 @@ export interface IMarkdown {
     modified?: Date;
     tags: string[];
     description?: string | null;
+    image?: string;
     comments?: boolean;
     draft: boolean;
   };

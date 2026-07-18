@@ -1,12 +1,12 @@
 ---
 title: Linux-部署 Java 应用程序
+description: 记录将 Java 应用打包为 JAR、上传至 CentOS，并通过脚本启动和管理服务的流程。
 date: 2017-9-17 18:50:38
 id: deploy-java-app-on-linux
 categories: ['Linux']
 tags:
   - Linux
   - Java
-description:
 ---
 
 CentOS 云主机上部署 java 应用程序。

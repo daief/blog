@@ -122,6 +122,38 @@ export const createVBlogPlugin = () => {
         type: 'asset',
         source: xml,
       });
+
+      const toAbsoluteUrl = (routePath: string) =>
+        new URL(routePath, configService.blogConfig.url).toString();
+      const pageLinks = routeService.pageRoutes.value
+        .map(
+          (route) =>
+            `- [${route.data.article.frontmatter.title}](${toAbsoluteUrl(route.path)})`,
+        )
+        .join('\n');
+      const articleLinks = routeService.articleRoutes.value
+        .map(
+          (route) =>
+            `- [${route.data.article.frontmatter.title}](${toAbsoluteUrl(route.path)})`,
+        )
+        .join('\n');
+      const llms = [
+        `# ${configService.blogConfig.title}`,
+        '',
+        `> ${configService.blogConfig.description || ''}`,
+        '',
+        '## Key pages',
+        pageLinks,
+        '',
+        '## Articles',
+        articleLinks,
+        '',
+      ].join('\n');
+      this.emitFile({
+        fileName: 'llms.txt',
+        type: 'asset',
+        source: llms,
+      });
     },
   };
 

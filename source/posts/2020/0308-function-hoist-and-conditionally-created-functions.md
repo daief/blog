@@ -1,5 +1,6 @@
 ---
 title: 函数提升 & 有条件地创建函数
+description: 从一道 JavaScript 题目出发，分析函数提升与条件语句中函数声明在浏览器里的执行差异。
 date: 2020-03-08 15:54:52
 id: function-hoist-and-conditionally-created-functions
 categories: ['前端', 'JavaScript']

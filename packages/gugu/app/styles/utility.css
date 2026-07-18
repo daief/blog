@@ -2,6 +2,18 @@
   @apply max-w-2xl xl:max-w-3xl;
 }
 
+@media (min-width: 1536px) {
+  .max-w-app {
+    max-width: 60rem;
+  }
+}
+
+@media (min-width: 1920px) {
+  .max-w-app {
+    max-width: 67.5rem;
+  }
+}
+
 @utility foreground-link {
   @apply text-foreground underline-offset-6 decoration-dashed hover:underline hover:text-accent-hover active:text-accent-active;
 }

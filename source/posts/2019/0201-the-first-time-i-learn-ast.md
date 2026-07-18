@@ -1,5 +1,6 @@
 ---
 title: 初识 AST
+description: 通过分析 react-hot-loader 的 Babel 插件并尝试编写 TypeScript transformer，了解 AST 的遍历、转换与工程应用。
 date: 2019-02-01 15:58:47
 id: the-first-time-i-learn-ast
 categories: ["前端"]

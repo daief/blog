@@ -1,5 +1,6 @@
 ---
 title: 简单的前端脚手架
+description: 使用 Node.js 交互、模板复制与配置替换，从零实现一个可生成初始项目的简单前端脚手架。
 date: 2018-08-31 22:53:34
 id: a-simple-cli
 categories: ['前端', 'JavaScript']
@@ -8,7 +9,6 @@ tags:
   - Node.js
   - CLI
 keywords:
-description:
 ---
 
 从零搭建一个简单的脚手架工具，像`vue-cli`一样，一个命令就能变出一个完整结构的初始项目。流行的脚手架工具有很多实用的功能，这里要说的是最基本的一项：通过一个命令快速创建出初始项目。

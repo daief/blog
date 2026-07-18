@@ -1,5 +1,6 @@
 ---
 title: 博客框架 —— gugu
+description: 记录将 Hexo 博客替换为自研 gugu 框架的过程，以及 Vue 3、Vite、SSG 等技术选型与实现。
 date: 2021-07-25 22:18:00
 id: site-engine-gugu
 categories: ['前端']
@@ -10,7 +11,6 @@ tags:
 keywords:
   - 博客框架
   - gugu
-description:
 ---
 
 很久之就一直想把博客改成单页的，而中间发生了不少咕咕咕（~~懂得都懂，不懂的我也不用再说了 🐶~~）的事情，别说改造了，连文都没更新。在咕了大半年之后，终于完成了大改造，将原来使用的 [Hexo](https://hexo.io/) 替换成了个人实现的博客框架 [gugu](https://github.com/daief/blog/tree/master/packages/gugu)。

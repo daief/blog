@@ -1,5 +1,6 @@
 ---
 title: Git Subtree 的使用
+description: 对比 Git subtree 与 submodule 的适用场景，并记录使用 subtree 复用和同步跨仓库代码的经验。
 date: 2021-08-15 21:07:02
 id: git-subtree
 categories: ['Git']
@@ -7,7 +8,6 @@ tags:
   - Git
 keywords:
   - Git Subtree
-description:
 ---
 
 git 的 `subtree` 是一种复用源代码的方式，可以让多个仓库引用某个仓库的代码，也可以将仓库中的某个目录拆分成一个子仓库以供其他仓库使用。

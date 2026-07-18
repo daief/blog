@@ -22,6 +22,7 @@ import CommonHeader from '@app/components/common-header.vue';
 import BackToTop from '@app/components/back-to-top.vue';
 import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import { useHead } from '@unhead/vue';
 
 const route = useRoute();
 
@@ -34,4 +35,31 @@ const currentYear = new Date().getFullYear();
 const year = blogConfig.since
   ? `${blogConfig.since}-${currentYear}`
   : currentYear;
+
+useHead({
+  script: [
+    {
+      key: 'website-schema',
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'WebSite',
+            name: blogConfig.title,
+            url: blogConfig.url,
+            description: blogConfig.description,
+            inLanguage: 'zh-CN',
+          },
+          {
+            '@type': 'Person',
+            name: blogConfig.author,
+            url: new URL('/about/', blogConfig.url).toString(),
+            image: blogConfig.avatar,
+          },
+        ],
+      }),
+    },
+  ],
+});
 </script>

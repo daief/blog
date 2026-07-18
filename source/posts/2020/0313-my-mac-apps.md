@@ -1,11 +1,11 @@
 ---
 title: 我的 Mac 应用
+description: 记录个人日常使用的效率、开发、网络与系统辅助类 Mac 应用清单。
 date: 2020-03-13 14:26:11
 id: my-mac-apps
 categories: ['生活']
 tags:
 keywords:
-description:
 ---
 
 记一下自用的简易 Mac 应用清单：

@@ -1,5 +1,6 @@
 ---
 title: 我的 2019
+description: 回顾 2019 年的工作变化、技术学习、生活与个人成长。
 id: year-end-summary-2019
 date: 2019-12-29 15:17:00
 categories: '生活'

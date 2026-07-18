@@ -7,6 +7,7 @@ import { computed, onMounted, ref } from 'vue';
 import { type ITocItem } from '../../types/markdown.mjs';
 import { useEventListener } from '@vueuse/core';
 import { throttle } from 'lodash-es';
+import { useAppStore } from '@app/composables/use-app-store';
 
 defineOptions({
   name: 'Toc',
@@ -26,6 +27,7 @@ const tocMap = computed(() => {
 });
 
 const active = ref<ITocItem | null>(null);
+const { hideIndexSidebar } = useAppStore();
 
 const actives = computed(() => {
   const list: ITocItem[] = [];
@@ -108,6 +110,7 @@ const renderToc = (list?: ITocItem[], level = 0) => {
             <a
               key={item.id}
               href={`#${item.id}`}
+              onClick={hideIndexSidebar}
               class={[
                 'group/item text-foreground flex flex-nowrap items-center mb-1.5',
               ]}

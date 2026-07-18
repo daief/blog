@@ -1,12 +1,12 @@
 ---
 title: Linux-安装、部署 Node.js
+description: 在 CentOS 上安装 Node.js、配置环境变量并使用 Node 运行和部署应用的实践记录。
 date: 2017-9-17 19:34:55
 id: install-nodejs-on-linux
 categories: ["Linux"]
 tags:
   - Linux
   - Node.js
-description:
 ---
 
 CentOS 云主机上安装 Node.js，部署 node 应用。

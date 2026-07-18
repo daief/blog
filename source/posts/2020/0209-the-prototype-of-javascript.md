@@ -1,5 +1,6 @@
 ---
 title: JavaScript 原型相关
+description: 系统梳理 JavaScript 中 prototype、__proto__ 与原型链的概念和对象关系。
 date: 2020-02-09 10:41:22
 id: the-prototype-of-javascript
 categories: ['前端', 'JavaScript']
@@ -8,7 +9,6 @@ tags:
 keywords:
   - javascript
   - prototype chain
-description:
 ---
 
 一直以来没有系统地去学习过原型相关的知识概念，虽然平时直接使用不多，但时常会看到，有必要搞明白一点。

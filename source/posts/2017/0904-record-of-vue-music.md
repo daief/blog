@@ -1,5 +1,6 @@
 ---
 title: vue-music记录
+description: 使用 Vue 2 全家桶和 NeteaseCloudMusicApi 仿制网易云音乐 PC 版单页应用的开发记录。
 date: 2017-9-4 19:39:02
 id: record-of-vue-music
 categories: ['前端']
@@ -7,7 +8,6 @@ tags:
   - JavaScript
   - TypeScript
   - Vue
-description:
 ---
 
 使用 Vue（2.x）全家桶，仿造网易云音乐 pc 网页版制作的一个单页应用，接口使用[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)。

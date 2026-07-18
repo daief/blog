@@ -1,5 +1,6 @@
 ---
 title: 前端错误捕获以及ajax监听
+description: 梳理前端 JavaScript 异常、资源加载错误与 Ajax 请求错误的捕获方式，并记录日志采集方案的实现思路。
 id: catch-js-and-ajax-exception
 date: 2017-12-20 20:44:10
 categories: ["前端", "JavaScript"]

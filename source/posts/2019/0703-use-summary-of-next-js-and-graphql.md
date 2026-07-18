@@ -1,5 +1,6 @@
 ---
 title: Next.js、GraphQL 使用小结
+description: 结合多个示例梳理 Next.js 与 GraphQL 的使用方式，并记录 SSR 项目开发中的常见问题。
 date: 2019-07-03 19:11:51
 id: use-summary-of-next-js-and-graphql
 categories: ['前端']
@@ -10,7 +11,6 @@ keywords:
   - 'Next.js'
   - SSR
   - GraphQL
-description:
 ---
 
 近段时间里使用 [Next.js](https://github.com/zeit/next.js) 搭建了两个后台，同时还使用了 GraphQL。期间匆匆忙忙，而且项目都是另一个前端老哥搭建的。所以，自己又抽空从头开始搭建了几个 demo，回顾一下知识，同时整理了一下当时遇见的问题、梳理下其中缘由。

@@ -11,6 +11,10 @@ export function useAppStore() {
     appState.showIndexSidebar = false;
   };
 
+  const toggleIndexSidebar = () => {
+    appState.showIndexSidebar = !appState.showIndexSidebar;
+  };
+
   const setBusuanzi = (data: IBusuanziData | null) => {
     appState.busuanzi = data;
   };
@@ -18,6 +22,7 @@ export function useAppStore() {
   return {
     appState,
     hideIndexSidebar,
+    toggleIndexSidebar,
     setBusuanzi,
   };
 }

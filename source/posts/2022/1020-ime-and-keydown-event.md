@@ -1,5 +1,6 @@
 ---
 title: 输入法与 keydown 事件
+description: 处理输入法文本合成期间的 Enter 键事件，避免搜索框等输入场景误触发提交。
 date: 2022-10-20 17:01:39
 categories: ['前端']
 id: ime-and-keydown-event

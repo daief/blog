@@ -1,12 +1,12 @@
 ---
 title: '[译] 前端编程中 10 条你需要了解的原则'
+description: 翻译并整理适用于不同框架和团队规模的 JavaScript 项目管理、架构与协作原则。
 date: 2018-09-01 14:44:29
 id: 10-things-you-will-eventually-learn-about-javascript-projects
 categories: "翻译"
 tags:
   - "翻译"
 keywords:
-description:
 ---
 
 > 原文：[10 things you will eventually learn about javascript projects](https://blog.usejournal.com/10-things-you-will-eventually-learn-about-javascript-projects-efd7646b958a)

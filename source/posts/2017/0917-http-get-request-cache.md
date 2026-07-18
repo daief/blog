@@ -1,12 +1,12 @@
 ---
 title: ajax请求缓存
+description: 说明浏览器与 Ajax GET 请求的缓存行为，以及通过为 URL 添加时间戳避免读取缓存的方法。
 date: 2017-9-17 19:41:45
 id: http-get-request-cache
 categories: "前端"
 keywords:
   - ajax-get
   - cache
-description:
 ---
 
 浏览器的 GET 请求默认会有缓存，包括 ajax 的 GET 请求。

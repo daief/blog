@@ -1,5 +1,6 @@
 ---
 title: 记一次单页应用的加载优化
+description: 分析 React 单页应用从资源下载到首次有效绘制的过程，并记录拆包、缓存与加载性能优化思路。
 date: 2018-12-25 23:54:23
 id: try-to-improve-spa-load-performance
 categories: "前端"
@@ -7,7 +8,6 @@ tags:
   - SPA
   - performance
 keywords:
-description:
 ---
 
 如今的前端页面越来越丰富了，承载着各种功能。而随之增长的则是相应的代码量，加上三方 SDK 的接入以及单页应用（SPA）的特性，一次页面访问会出现慢的感觉，是时候来关注页面的加载优化了。

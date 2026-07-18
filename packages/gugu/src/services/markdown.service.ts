@@ -256,6 +256,7 @@ export class MarkdownService {
       toc,
       frontmatter: {
         ...rest,
+        description: rest.description?.trim() || '',
         tags: ensureArray(tags),
         sort: Number.isFinite(sort) ? sort : 0,
         comments: rest.comments ?? isArticle,

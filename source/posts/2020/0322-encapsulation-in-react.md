@@ -1,5 +1,6 @@
 ---
 title: React 中的一些封装
+description: 结合倒计时示例比较 HOC、Render Props 与 React Hooks 三种组件逻辑复用和封装方式。
 date: 2020-03-22 21:06:34
 id: encapsulation-in-react
 categories: ['前端', 'React']
@@ -10,7 +11,6 @@ keywords:
   - hoc
   - hooks
   - render props
-description:
 ---
 
 结合资料以及一直以来的开发情况，总结记录一下 React 中的封装方式，具体是以下三种：

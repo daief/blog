@@ -1,5 +1,6 @@
 ---
 title: 编译 Vue 单文件组件至 JS 文件
+description: 探索将 Vue 单文件组件编译为 CommonJS 或 ESM JavaScript，以支持组件库发布和按需引用。
 date: 2019-11-28 17:34:26
 id: compile-vue-file-to-js-file
 categories: ['前端']
@@ -9,7 +10,6 @@ keywords:
   - vue
   - vue component compiler
   - npm module
-description:
 ---
 
 在开发 Vue 的组件库时，该如何将 `vue` 文件转换为 `commonjs` 或是 `ES Module` 规范的 `js` 文件，最后提供给他方使用？

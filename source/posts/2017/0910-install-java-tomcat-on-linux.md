@@ -1,12 +1,12 @@
 ---
 title: Linux-Java 环境、Tomcat 服务器的安装
+description: 在 CentOS 云主机上安装 JDK、配置 Java 环境变量并部署 Tomcat 服务器的操作记录。
 date: 2017-9-10 21:56:44
 id: install-java-tomcat-on-linux
 tags:
   - Linux
   - JDK
   - Tomcat
-description:
 ---
 
 CentOS 云主机上安装 Java 环境和 Tomcat 服务器。

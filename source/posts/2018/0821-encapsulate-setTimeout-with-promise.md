@@ -1,5 +1,6 @@
 ---
 title: 使用promise封装setTimeout
+description: 用 Promise 封装 setTimeout，实现可链式调用、可取消或延迟执行的异步工具函数。
 date: 2018-08-21 22:17:59
 id: encapsulate-setTimeout-with-promise
 categories: ["前端","JavaScript"]
@@ -7,7 +8,6 @@ tags:
   - JavaScript
   - Promise
 keywords:
-description:
 ---
 
 使用 Promise 对 setTimeout 进行封装，从而支持链式的调用。

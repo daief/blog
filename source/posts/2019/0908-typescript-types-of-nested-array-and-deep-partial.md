@@ -1,5 +1,6 @@
 ---
 title: TypeScript 之嵌套数组与深度可选类型
+description: 编写 TypeScript 泛型类型以描述无限嵌套数组和递归 DeepPartial 深度可选对象。
 date: 2019-09-08 19:22:56
 id: typescript-types-of-nested-array-and-deep-partial
 categories: ['前端', 'TypeScript']
@@ -11,7 +12,6 @@ keywords:
   - 深度可选
   - deep-array
   - deep-partial
-description:
 ---
 
 ## 嵌套数组类型

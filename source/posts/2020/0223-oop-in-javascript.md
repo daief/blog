@@ -1,5 +1,6 @@
 ---
 title: JavaScript 中的面向对象
+description: 从工厂模式、构造函数和原型等原生机制出发，理解 JavaScript 面向对象与 class 语法糖的基础。
 date: 2020-02-23 13:19:07
 id: oop-in-javascript
 categories: ['前端', 'JavaScript']
@@ -9,7 +10,6 @@ keywords:
   - javascript
   - oop
   - object oriented programming
-description:
 ---
 
 在 JavaScript 中没有类的概念，因此它的对象与基于类的语言中的对象不同。

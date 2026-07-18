@@ -1,11 +1,11 @@
 ---
 title: JS变量提升
+description: 通过示例说明 JavaScript 中函数声明和 var 声明的变量提升规则，以及作用域带来的影响。
 date: 2017-12-11 22:26:18
 id: js-variable-promotion
 categories: ["前端","JavaScript"]
 tags:
   - JavaScript
-description:
 ---
 
 变量提升即将变量声明提升到它所在作用域的最开始的部分，ES6 之前 JS 只有全局作用域和函数作用域，ES6 加入了块级作用域，用一对花括号{}包裹的部分。变量提升会将函数声明和部分变量声明提升到作用域顶端。例子如下：

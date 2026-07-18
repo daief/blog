@@ -1,5 +1,6 @@
 ---
 title: 进一步认识 SSH 和 SSH config
+description: 介绍 SSH、密钥认证与 SSH config 的常用配置，并说明 Git 多账号和主机连接的管理方式。
 date: 2022-12-22 10:53:04
 categories: ['Linux']
 tags:

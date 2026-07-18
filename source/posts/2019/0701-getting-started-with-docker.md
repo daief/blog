@@ -1,5 +1,6 @@
 ---
 title: Docker 入门笔记
+description: 从镜像与容器的概念出发，记录 Docker 常用命令、Dockerfile 与容器化部署的入门实践。
 date: 2019-07-01 19:52:55
 id: getting-started-with-docker
 categories: ["DevOps", "Docker"]
@@ -7,7 +8,6 @@ tags:
   - Docker
 keywords:
   - Docker
-description:
 ---
 
 本文是学习 Docker 时的初学者记录，内容是关于 Docker 基本命令的使用。如果您对此已经熟悉，大可略过本文。

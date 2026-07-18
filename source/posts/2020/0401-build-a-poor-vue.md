@@ -1,5 +1,6 @@
 ---
 title: 学写一个乞丐版 Vue
+description: 通过实现响应式、指令和事件绑定等核心能力，学习 Vue 2 的基本原理并编写简化版 Vue。
 id: build-a-poor-vue
 date: 2020-04-02 13:03:54
 categories: ['前端', 'Vue']
@@ -7,7 +8,6 @@ tags:
   - Vue
 keywords:
   - Vue
-description:
 ---
 
 ~~没有钱了，肯定要学啊，不学没有钱用。~~

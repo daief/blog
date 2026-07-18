@@ -1,5 +1,6 @@
 ---
 title: 用 TypeScript 来写 Vue！
+description: 介绍在 Vue 2 项目中使用 TypeScript 编写组件时的写法、类型约束与 JavaScript 方案差异。
 date: 2019-02-12 17:25:59
 id: happy-vue-with-typescript
 categories: ["前端", "TypeScript"]
@@ -9,7 +10,6 @@ tags:
 keywords:
   - Vue
   - TypeScript
-description:
 ---
 
 本文不说明 webpack 的配置，简单介绍如何使用 TypeScript 来书写 Vue，阅读本文应同时对 TypeScript 和 Vue 有一定的了解。

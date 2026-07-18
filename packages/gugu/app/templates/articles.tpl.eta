@@ -23,7 +23,7 @@
   });
 
   usePageTitle({
-    title: `第 <%= current %> 页`,
+    title: <%= current === 1 ? "''" : "`第 " + current + " 页`" %>,
   });
 
   const metaMap = <%= JSON.stringify(Object.fromEntries(articles.map((article) => [article.frontmatter.id, { ...article.frontmatter }]))) %>;

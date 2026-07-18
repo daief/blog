@@ -1,12 +1,12 @@
 ---
 title: Node.js 学习搭建
+description: 从安装 Node.js 和 npm 开始，记录使用原生模块搭建简单 Web 服务的学习过程。
 date: 2017-10-04
 id: learn-nodejs
 categories: ['Node.js']
 tags:
   - JavaScript
   - Node.js
-description:
 ---
 
 听说 Node.js 是开启 JavaScript 后端开发之旅的技术，学习一下服务器的搭建过程。

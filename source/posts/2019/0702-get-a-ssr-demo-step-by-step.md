@@ -1,5 +1,6 @@
 ---
 title: 从零搭建 SSR
+description: 从客户端渲染、服务端渲染与同构概念出发，使用 React 和 Express 分步骤搭建 SSR 示例。
 date: 2019-07-02 17:10:37
 id: get-a-ssr-demo-step-by-step
 tags:
@@ -8,7 +9,6 @@ keywords:
   - SSR
   - SPA
   - React
-description:
 ---
 
 在上一季度中接触并使用了 Next.js，实践了一把 SSR。期间遇见了不少问题，详情可见：[Next.js、GraphQL 使用小结](./0703-use-summary-of-next-js-and-graphql.md)。

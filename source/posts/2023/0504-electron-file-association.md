@@ -1,5 +1,6 @@
 ---
 title: Electron 实现文件关联
+description: 记录 Electron 应用在 Windows 和 macOS 上实现文件扩展名关联、打开文件与卸载清理的方案。
 id: electron-file-association
 date: 2023-05-04 11:45:57
 tags:

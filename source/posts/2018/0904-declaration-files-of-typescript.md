@@ -1,5 +1,6 @@
 ---
 title: TypeScript 中的声明文件
+description: 说明 TypeScript 声明文件的作用、常见存放方式，以及第三方库与自定义模块的类型声明处理。
 date: 2018-09-04 21:10:44
 id: declaration-files-of-typescript
 categories: ['前端', 'TypeScript']
@@ -7,7 +8,6 @@ tags:
   - TypeScript
   - declaration-files
 keywords:
-description:
 ---
 
 学习 TypeScript 稍微有一段时间了，每次写都会碰到有关声明文件的问题，目前为止暂未完全搞清楚，在此记录一些相关问题，以后碰到能够迅速解决。

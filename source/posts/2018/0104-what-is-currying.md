@@ -1,5 +1,6 @@
 ---
 title: 认识柯里化（currying）
+description: 从概念、实现到应用场景，简单理解如何把多参数函数转换为连续单参数调用的柯里化。
 date: 2018-1-4 22:29:17
 categories: ['前端', 'JavaScript']
 id: what-is-currying

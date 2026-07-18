@@ -1,5 +1,6 @@
 ---
 title: package.json 中依赖包的版本控制
+description: 解读 package.json 中语义化版本、^ 与 ~ 等版本范围写法对依赖升级和锁定的影响。
 date: 2018-09-16 16:51:33
 id: version-control-of-dependencies-in-package-json
 categories: ['Node.js', 'npm']
@@ -8,7 +9,6 @@ tags:
   - package.json
   - 语义化版本
 keywords:
-description:
 ---
 
 在`package.json`中对依赖包的版本使用`^`、`~`等时需要注意的地方。

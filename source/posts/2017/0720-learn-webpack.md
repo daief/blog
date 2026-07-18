@@ -1,12 +1,12 @@
 ---
 title: webpack学习
+description: 从安装、开发服务器到 loader 配置，记录 Webpack 打包 JavaScript、样式与图片资源的入门实践。
 date: 2017-7-20 16:52:48
 id: learn-webpack
 categories: ['前端']
 tags:
   - JavaScript
   - webpack
-description:
 ---
 
 > webpack 是近期最火的一款模块加载器兼打包工具，它能把各种资源，例如 JS（含 JSX）、coffee、样式（含 less/sass）、图片等都作为模块来使用和处理。

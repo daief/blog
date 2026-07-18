@@ -1,11 +1,11 @@
 ---
 title: JS监听一个变量的变化
+description: 使用 Object.defineProperty 的 getter 与 setter 监听 JavaScript 变量变化，并说明其数组等场景的限制。
 date: 2017-11-22 16:18:10
 id: js-watch-variable-change
 categories: ["前端","JavaScript"]
 tags:
   - JavaScript
-description:
 ---
 
 js 监听一个值的变化，当值变化之后能够触发一些操作。

@@ -1,5 +1,6 @@
 ---
 title: 使用 prismjs 自定义 Hexo 代码高亮
+description: 通过扩展 Hexo 的 Markdown 渲染流程接入 PrismJS，改善 TypeScript 等语言的代码高亮效果。
 date: 2020-03-23 16:50:24
 id: hexo-custom-code-highlight-by-prismjs
 categories: ['前端', 'Hexo']
@@ -10,7 +11,6 @@ keywords:
   - hexo
   - code highlight
   - prismjs
-description:
 ---
 
 一直就想优化一下 Hexo 的代码高亮部分来着，对 `ts`、`tsx` 部分的支持一直不太好；也许直接更新 Next 就能直接解决，但博客部分已经魔改了不少，本着这个原则就继续魔改下去好了。

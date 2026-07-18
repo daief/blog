@@ -1,5 +1,6 @@
 ---
 title: 自定义 webpack loader 来实现简单的站点生成器
+description: 编写自定义 Webpack loader 解析 Markdown 和代码块，构建可展示交互示例的文档站点生成器。
 date: 2020-01-11 15:05:40
 id: build-a-site-generator-by-a-custom-webpack-loader
 categories: ['前端']
@@ -11,7 +12,6 @@ keywords:
   - site generator
   - antd
   - documentation
-description:
 ---
 
 本篇内容实际上在公司内部分享时有过讲解，通过编写一个自定义的 webpack loader，实现方便快速地构建一个文档类型的网站。现在重新实现了一下，并将这个部分的内容与 `jugg` 进行了结合，故自己再次整理一遍。

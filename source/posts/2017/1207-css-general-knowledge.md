@@ -1,11 +1,11 @@
 ---
 title: CSS小知识
+description: 汇总 pointer-events 等容易遗忘但实用的 CSS 属性、行为与使用技巧。
 date: 2017-12-7 16:52:48
 id: css-general-knowledge
 categories: ["前端","CSS"]
 tags:
   - CSS
-description:
 ---
 
 记录 CSS 一些有用、易忘的知识。

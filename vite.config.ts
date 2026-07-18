@@ -7,6 +7,8 @@ export default defineConfig((env) => {
       mode: env.mode,
       title: `Daief's Blog`,
       url: 'https://daief.tech',
+      description:
+        'Daief 的个人技术博客，记录前端开发、工程化与 Web 技术实践，也分享学习与生活随笔。',
       author: 'daief',
       avatar: 'https://avatars.githubusercontent.com/u/19222089?v=4',
       since: 2017,
