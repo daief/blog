@@ -1,5 +1,13 @@
 <template>
-  <header>
+  <header
+    :class="[
+      'sticky top-0 z-40 transition-[transform,background-color,backdrop-filter] duration-200 ease-out motion-reduce:transition-none',
+      isHeaderVisible ? 'translate-y-0' : '-translate-y-full',
+      isFloating
+        ? 'bg-background/60 backdrop-blur-md border-b border-border/60'
+        : 'bg-transparent',
+    ]"
+  >
     <div
       id="nav-container"
       class="max-w-app mx-auto text-foreground sm:bg-transparent"
@@ -53,7 +61,7 @@
                   'flex justify-center items-center h-full px-4 py-3 font-medium hover:text-accent sm:px-2 sm:py-1',
                   item.active ? 'nav-active' : '',
                 ]"
-                @click="isExpand = false"
+                @click="closeExpand"
                 >{{ item.title }}</ALink
               >
             </li>
@@ -69,14 +77,14 @@
       </div>
     </div>
     <div class="mx-auto max-w-app px-4">
-      <hr class="border-border" aria-hidden="true" />
+      <hr v-show="!isFloating" class="border-border" aria-hidden="true" />
     </div>
   </header>
 </template>
 <script setup lang="ts">
 import ThemeSwitch from './theme-switch.vue';
 import ALink from './a-link.vue';
-import { computed, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 const route = useRoute();
@@ -117,10 +125,55 @@ const navList = computed(() => {
 
 const title = __BLOG_CONFIG__.title;
 const isExpand = ref(false);
+const isFloating = ref(false);
+const isHeaderVisible = ref(true);
+const lastScrollY = ref(0);
+const scrollThreshold = 8;
+
+const updateHeaderState = () => {
+  const scrollY = Math.max(window.scrollY, 0);
+  isFloating.value = scrollY > 0;
+
+  if (scrollY === 0) {
+    isHeaderVisible.value = true;
+    lastScrollY.value = 0;
+    return;
+  }
+
+  if (isExpand.value) {
+    isHeaderVisible.value = true;
+    lastScrollY.value = scrollY;
+    return;
+  }
+
+  const scrollDelta = scrollY - lastScrollY.value;
+  if (Math.abs(scrollDelta) < scrollThreshold) return;
+
+  isHeaderVisible.value = scrollDelta < 0;
+  lastScrollY.value = scrollY;
+};
 
 const toggleExpand = () => {
   isExpand.value = !isExpand.value;
+  if (isExpand.value) {
+    isHeaderVisible.value = true;
+  }
+  lastScrollY.value = window.scrollY;
 };
+
+const closeExpand = () => {
+  isExpand.value = false;
+  lastScrollY.value = window.scrollY;
+};
+
+onMounted(() => {
+  updateHeaderState();
+  window.addEventListener('scroll', updateHeaderState, { passive: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', updateHeaderState);
+});
 </script>
 
 <style lang="css" scoped>
