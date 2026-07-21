@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "module": "nodenext",
-    "moduleResolution": "nodenext",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@app/*": ["./app/*"]
+    },
     "lib": ["DOM", "ESNext"],
-    "allowSyntheticDefaultImports": false,
-    "importsNotUsedAsValues": "remove",
     // "experimentalDecorators": true,
     // "emitDecoratorMetadata": true,
     "jsx": "preserve",

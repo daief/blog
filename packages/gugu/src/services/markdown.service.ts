@@ -8,7 +8,7 @@ import * as glob from 'glob';
 import * as path from 'path';
 import { FileService } from './file.service.ts';
 import { normalizePath } from 'vite';
-import * as fm from 'front-matter';
+import fm from 'front-matter';
 import { ensureArray } from '../utils/misc.mts';
 import { ref, computed } from '@vue/reactivity';
 import { ConfigService } from './config.service.ts';
@@ -190,7 +190,7 @@ export class MarkdownService {
             sizeType === 'more' ? undefined : 2,
           );
 
-    const matterResult = fm.default<any>(fileContent);
+    const matterResult = fm<any>(fileContent);
     const frontmatter = matterResult.attributes as Omit<
       IMarkdown['frontmatter'],
       'tags'

@@ -125,13 +125,28 @@ export const createVBlogPlugin = () => {
 
       const toAbsoluteUrl = (routePath: string) =>
         new URL(routePath, configService.blogConfig.url).toString();
+      const isPublicRoute = (route: IRawRoute) => {
+        const filepath = route.data.article?.filepath;
+        if (!filepath) return false;
+
+        const relativePath = path.relative(
+          fileService.resolveSource('public'),
+          filepath,
+        );
+        return (
+          relativePath === '' ||
+          (!relativePath.startsWith('..') && !path.isAbsolute(relativePath))
+        );
+      };
       const pageLinks = routeService.pageRoutes.value
+        .filter((route) => !isPublicRoute(route))
         .map(
           (route) =>
             `- [${route.data.article.frontmatter.title}](${toAbsoluteUrl(route.path)})`,
         )
         .join('\n');
       const articleLinks = routeService.articleRoutes.value
+        .filter((route) => !isPublicRoute(route))
         .map(
           (route) =>
             `- [${route.data.article.frontmatter.title}](${toAbsoluteUrl(route.path)})`,

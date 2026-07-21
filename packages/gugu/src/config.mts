@@ -1,7 +1,6 @@
 import { type UserConfig } from 'vite';
 import vuePlugin from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-import VueMacros from 'vue-macros/vite';
 import tailwindcss from '@tailwindcss/vite';
 
 import IconsResolver from 'unplugin-icons/resolver';
@@ -35,12 +34,8 @@ export const extendConfig = async (
   viteConfig.publicDir = fileService.resolveSource('public');
   viteConfig.plugins = [
     tailwindcss(),
-    VueMacros({
-      plugins: {
-        vue: vuePlugin(),
-        vueJsx: vueJsx({}),
-      },
-    }),
+    vuePlugin(),
+    vueJsx({}),
     createMdPlugin(),
     createVBlogPlugin(),
 
