@@ -1,7 +1,7 @@
 <template>
   <header
     :class="[
-      'sticky top-0 z-40 transition-[transform,background-color,backdrop-filter] duration-200 ease-out motion-reduce:transition-none',
+      'sticky top-0 z-50 transition-[transform,background-color,backdrop-filter] duration-200 ease-out motion-reduce:transition-none',
       isHeaderVisible ? 'translate-y-0' : '-translate-y-full',
       isFloating
         ? 'bg-background/60 backdrop-blur-md border-b border-border/60'
