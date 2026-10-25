@@ -37,13 +37,15 @@
     "unplugin-icons": "^23.0.1",
     "unplugin-vue-components": "^32.1.0",
     "vfonts": "^0.1.0",
-    "vite": "^8.1.5",
-    "vite-ssg": "^28.3.0",
     "vue": "^3.5.40",
     "vue-router": "^5.2.0"
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "optionalDependencies": {
+    "vite": "^8",
+    "vite-ssg": "^28"
   },
   "devDependencies": {
     "@types/fs-extra": "^11.0.4",
