@@ -13,6 +13,7 @@ export interface IMarkdown {
     image?: string;
     comments?: boolean;
     draft: boolean;
+    ai?: boolean;
   };
   /** 解析后的摘要 */
   excerpt: string;

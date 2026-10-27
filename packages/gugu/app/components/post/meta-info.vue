@@ -37,6 +37,18 @@ const render = () => {
     );
   }
 
+  if (meta.ai === true) {
+    nodes.push(
+      <span
+        class="inline-flex items-center gap-1 whitespace-nowrap rounded-full border border-accent/25 bg-accent/8 px-2 py-0.5 text-xs font-medium text-accent"
+        title="本文由 AI 主导编写"
+      >
+        <i-mdi-auto-fix class="block" aria-hidden="true" />
+        AI
+      </span>,
+    );
+  }
+
   if (meta.modified || meta.date) {
     nodes.push(
       <div class="inline-flex items-center gap-x-0.5 whitespace-nowrap">
